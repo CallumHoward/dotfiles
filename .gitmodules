@@ -1,0 +1,15 @@
+[submodule ".oh-my-zsh/custom/plugins/auto-fu"]
+	path = .oh-my-zsh/custom/plugins/auto-fu
+	url = https://github.com/hchbaw/auto-fu.zsh
+[submodule ".oh-my-zsh/custom/plugins/history-search-multi-word"]
+	path = .oh-my-zsh/custom/plugins/history-search-multi-word
+	url = git@github.com:psprint/history-search-multi-word.git
+[submodule ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting.git"]
+	path = .oh-my-zsh/custom/plugins/zsh-syntax-highlighting.git
+	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule ".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+	path = .oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = git://github.com/zsh-users/zsh-autosuggestions
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = git://github.com/CallumHoward/nvim

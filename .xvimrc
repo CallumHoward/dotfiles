@@ -1,0 +1,5 @@
+"configuration file for XVim plugin for Xcode
+inoremap kj <Esc>
+inoremap <C-e> <C-o>$
+set clipboard=unnamed    "share clipboard with system
+
