@@ -7,8 +7,6 @@ set mouse=a
 source ~/.vim/colors/neodark.vim
 hi Comment cterm=none
 
-language en_AU
-
 inoremap kj <Esc>
 set number          " enable line numbers
 set list            " display hidden characters
