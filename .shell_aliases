@@ -5,8 +5,8 @@ alias title="printf '\033]0;%s\007'"
 alias e="ef"
 alias c="cf"
 
-alias ranger="ranger-cd"
-alias ra="ranger"
+#alias ranger="ranger-cd"
+alias ra="ranger-cd"
 
 alias ip="ipython"
 alias pti="ptipython"
