@@ -21,7 +21,9 @@ HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
 # gitsome completion
-autoload bashcompinit
-bashcompinit
-source ~/.gitsome/gh_complete.sh
+if [ -d .gitsome ]; then
+    autoload bashcompinit
+    bashcompinit
+    source ~/.gitsome/gh_complete.sh
+fi
 
