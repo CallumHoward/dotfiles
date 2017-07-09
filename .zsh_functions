@@ -1,0 +1,53 @@
+# vim: set ft=zsh
+
+mkcd() { mkdir -p "$@" && cd "$@"; }
+
+ranger-cd() {
+    tempfile=$(mktemp /tmp/${tempfoo}.XXXXXX)
+    ranger --choosedir="$tempfile" "${@:-$(pwd)}" < $TTY
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
+
+function auto-ls-after-cd() {
+  emulate -L zsh
+  # Only in response to a user-initiated `cd`, not indirectly (eg. via another function).
+  if [ "$ZSH_EVAL_CONTEXT" = "toplevel:shfunc" ]; then
+      # Only if there are less then 50 items in the directory
+      if (( `ls | wc -l` < 50 )); then ~/.cargo/bin/exa --group-directories-first -x; fi
+  fi
+}
+add-zsh-hook chpwd auto-ls-after-cd
+
+edit-fzf() {
+    local result=`skg`
+    local filename=`echo $result | cut -f1 -d:`
+    local linenum=`echo $result | cut -f2 -d:`
+    $EDITOR $filename +$linenum
+}
+
+# cf - fuzzy cd
+cf() {
+    if [ "$1" != "" ]; then cd $1; fi
+    local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | sk`
+    if [ "$dir" != "" ]; then cd $dir; fi
+    # ls after cd, but only if there are less then 50 items in the directory
+    if (( `ls | wc -l` < 50 )); then exa --group-directories-first -x; fi
+}
+
+# ef - fuzzy edit
+ef() {
+    if [ -d "$1" ]; then
+        ranger-cd "$1"
+    elif [ "$1" != "" ]; then
+        rifle "$1";
+    else
+        local target=(`fd | sk -m`)
+        if [ "$target" != "" ]; then rifle "${target[@]}"; fi
+    fi
+}
+
+Terminal() { tmux attach 2> /dev/null || tmux new }
