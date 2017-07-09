@@ -13,7 +13,7 @@
     vimdiff = difftool
     dt = difftool
 [pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): .*$'
+    #diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): .*$'
 [diff]
     tool = vimdiff
 [difftool]
@@ -34,7 +34,7 @@
     smudge = git lfs smudge %f
     required = true
 [core]
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    #pager = diff-so-fancy | less --tabs=4 -RFX
 [color "diff"]
     meta = 15
     commit = 83
