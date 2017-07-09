@@ -1,0 +1,18 @@
+# youtube-dl user config
+
+--format 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio'
+#--output '~/Downloads/%(title)s-%(id)s.%(ext)s'
+--merge-output-format mp4
+--prefer-ffmpeg
+#--postprocessor-args '-threads N'
+
+--embed-subs
+--embed-thumbnail
+#--add-metadata
+
+--console-title
+--exec 'tput bel'
+
+--mark-watched
+--geo-bypass
+
