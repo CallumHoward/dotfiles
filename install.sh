@@ -21,8 +21,9 @@ declare -a files=(
 
 if [ "${PWD##*/}" == "dotfiles" ]; then
     for i in "${files[@]}"; do
-        #if `ls ~/$i`; then mv ~/$i ~/$i.old; fi
-        ln -sv "`pwd`/$i" ~/"$i"
+        if [ "`ls ~/$i 2> /dev/null`" == "" ]; then
+            ln -sv "`pwd`/$i" ~/"$i"
+        fi
     done
 else
     echo "$0: run this script from inside the dotfiles directory"
