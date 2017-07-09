@@ -3,13 +3,20 @@
 declare -a files=(
     '.config'
     '.gitconfig'
-    #'.gvimrc'
-    #'.oh-my-zsh'
     '.tmux.conf'
+
     '.vim'
     '.vimrc'
+    #'.gvimrc'
     #'.xvimrc'
+
     #'.zshrc'
+    #'.oh-my-zsh'
+    '.shell_aliases'
+    '.shell_exports'
+    #'.zsh_keybindings'
+    #'.zsh_styles'
+    #'.zsh_functions'
 )
 
 if [ "${PWD##*/}" == "dotfiles" ]; then

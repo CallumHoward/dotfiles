@@ -1,0 +1,106 @@
+# vim: set ft=sh
+
+alias title="printf '\033]0;%s\007'"
+#alias Terminal="tmux attach 2> /dev/null || tmux new"
+alias e="ef"
+alias c="cf"
+
+alias ranger="ranger-cd"
+alias ra="ranger"
+
+alias ip="ipython"
+alias pti="ptipython"
+alias bpython2="python -m bpython.cli"
+alias bp="bpython2"
+
+alias v="vim"
+alias vv="vim -u NONE"
+alias nview="nvim -R"
+
+alias htop="sudo htop"
+alias goto=". goto"
+alias su="sudo su"
+
+alias m="make"
+alias mc="make clean"
+alias :q="exit"
+alias t="tree"
+
+alias open.="open ."
+alias o="open ."
+
+alias yt="youtube-dl"
+alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"
+alias y="yt"
+alias yi="y --ignore-config"
+
+alias bell="tput bel"
+alias b="bell"
+alias fb="fg;b"
+alias bu="brew update && brew upgrade;b"
+
+alias s.="s ."
+alias a="git add"
+alias s="git sb"
+alias gdd="git difftool"
+alias gg="git grep -i -n --heading --break"
+alias lg="git lg"
+alias clo="git clone"
+alias gclo="gcl"
+alias git="hub"
+alias git="nocorrect git"
+alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
+
+alias rg="rg -S \
+    --colors 'path:fg:green' \
+    --colors 'path:style:nobold' \
+    --colors 'line:fg:yellow' \
+    --colors 'line:style:nobold' \
+    --colors 'match:fg:black' \
+    --colors 'match:bg:yellow' \
+    --colors 'match:style:nobold'"
+# \
+#    -g '!Library/' \
+#    -g '!Downloads/' \
+#    -g '!Pictures/' \
+#    -g '!Music/'"
+
+alias skag="sk -i -c 'ag --color \"{}\"'"
+alias skg="sk -i -c 'rg --line-number --color=always \"{}\" -S \
+    --colors 'path:fg:green' \
+    --colors 'path:style:nobold' \
+    --colors 'line:fg:yellow' \
+    --colors 'line:style:nobold' \
+    --colors 'match:fg:black' \
+    --colors 'match:bg:yellow' \
+    --colors 'match:style:nobold''"
+
+if [ "`basename $SHELL`" = "zsh" ]; then
+    alias cd.="nocorrect cd ."
+    alias cd..="nocorrect cd .."
+    alias cd...="nocorrect cd ..."
+    alias cd....="nocorrect cd ...."
+    alias cd.....="nocorrect cd ....."
+    alias mv="nocorrect mv"
+    alias cp="nocorrect cp"
+    alias mkdir="nocorrect mkdir"
+else
+    alias cd.="cd ."
+    alias cd..="cd .."
+    alias cd...="cd ..."
+    alias cd....="cd ...."
+    alias cd.....="cd ....."
+fi
+
+if which nvim > /dev/null 2>&1; then
+    alias vim="nvim"
+fi
+
+if which exa > /dev/null 2>&1; then
+    alias ls="exa"
+    alias tree="exa --tree"
+fi
+
+if which gcal > /dev/null 2>&1; then
+    alias cal="gcal"
+fi
