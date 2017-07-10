@@ -7,8 +7,20 @@ ZSH_THEME="ys"
 # Enable command auto-correction.
 ENABLE_CORRECTION="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(git vi-mode history-substring-search zsh-autosuggestions virtualenv zsh-syntax-highlighting history-search-multi-word docker cabal aws meteor npm pip)
+# Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
+plugins=( \
+    docker \
+    git \
+    history-search-multi-word \
+    history-substring-search \
+    meteor \
+    npm \
+    pip \
+    vi-mode \
+    virtualenv \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.shell_aliases
