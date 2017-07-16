@@ -12,7 +12,7 @@ zmodload zsh/terminfo
 bindkey -M viins '^a'       beginning-of-line
 bindkey -M viins '^e'       end-of-line
 bindkey -M viins '^k'       kill-line
-#bindkey -M viins '^r'       history-incremental-pattern-search-backward
+bindkey -M viins '^r'       history-search-multi-word
 bindkey -M viins '^s'       history-incremental-pattern-search-forward
 bindkey -M viins '^p'       history-substring-search-up #up-line-or-history
 bindkey -M viins '^n'       history-substring-search-down #down-line-or-history
