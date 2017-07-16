@@ -14,6 +14,7 @@ plugins=( \
     history-search-multi-word \
     history-substring-search \
     meteor \
+    mosh \
     npm \
     pip \
     vi-mode \
