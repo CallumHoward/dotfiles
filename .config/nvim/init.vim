@@ -96,7 +96,7 @@ set linebreak       " wrap long lines at characters in 'breakat'
 set breakindent     " wrapped text is indented
 set briopt=sbr,shift:8,min:20
 let &showbreak='↳ '
-let &breakat=' ^I,{'
+let &breakat=' ,{'
 
 set pumheight=5     " maximum number of items in completion popup
 
@@ -182,8 +182,8 @@ nnoremap <silent> z[ :<C-u>silent! normal! zc<CR>zkzo[zzz
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
 " substitution mappings
-nnoremap <leader>; :%s/;$/ {}
-xnoremap <leader>; :s/;$/ {}
+nnoremap <leader>; :%s/;$/ {\r\r}\r<CR>
+xnoremap <leader>; :s/;$/ {\r\r}\r<CR>
 nnoremap <leader><Space> :%s/\s\+$//e<CR>
 nnoremap <leader>s :%s///g<Left><Left>
 xnoremap <leader>s :s///g<Left><Left>
