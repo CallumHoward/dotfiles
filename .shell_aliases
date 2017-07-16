@@ -47,7 +47,6 @@ alias gg="git grep -i -n --heading --break"
 alias lg="git lg"
 alias clo="git clone"
 alias gclo="gcl"
-alias git="hub"
 alias git="nocorrect git"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
 
@@ -103,4 +102,8 @@ fi
 
 if which gcal > /dev/null 2>&1; then
     alias cal="gcal"
+fi
+
+if which hub > /dev/null 2>&1; then
+    alias git="hub"
 fi
