@@ -1,7 +1,7 @@
 # vim: set ft=sh
 
 alias title="printf '\033]0;%s\007'"
-#alias Terminal="tmux attach 2> /dev/null || tmux new"
+alias T="Terminal"
 alias e="ef"
 alias c="cf"
 
