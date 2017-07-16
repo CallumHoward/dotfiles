@@ -93,7 +93,7 @@ else
 fi
 
 if which nvim > /dev/null 2>&1; then
-    alias vim="~/neovim/build/bin/nvim"
+    alias vim="nvim"
 fi
 
 if which exa > /dev/null 2>&1; then
