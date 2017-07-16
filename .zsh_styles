@@ -29,5 +29,8 @@ HSMW_HIGHLIGHT_STYLES[single-quoted-argument]='fg=red'
 HSMW_HIGHLIGHT_STYLES[double-quoted-argument]='fg=red'
 HSMW_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=white'
 HSMW_HIGHLIGHT_STYLES[comment]='fg=white'
-zstyle ":history-search-multi-word" highlight-color "fg=yellow,underline,bg=8"   # Color with which to highlight matched, searched text
-zstyle ":plugin:history-search-multi-word" active "none"   # Effect on active history entry. Try: standout, bold, bg=blue
+# Color with which to highlight matched, searched text
+zstyle ":history-search-multi-word" highlight-color "fg=yellow,underline,bg=8"
+# Effect on active history entry. Try: standout, bold, bg=blue
+zstyle ":plugin:history-search-multi-word" active "none"
+
