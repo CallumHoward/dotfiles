@@ -1,4 +1,4 @@
-set nocp
+set nocompatible
 filetype plugin indent on
 
 syntax on
@@ -65,7 +65,7 @@ nnoremap <silent> # :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR
 nnoremap <silent> * :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>
 nnoremap <silent> g# :let @/ = expand('<cword>')\|set hlsearch<CR>w?<CR>
 nnoremap <silent> g* :let @/ = expand('<cword>')\|set hlsearch<CR>
-nnoremap <silent> <Esc> :noh<CR>
+autocmd CursorHold * nnoremap <silent> <Esc> :noh<CR><Esc>
 
 " unimpaired quickfix mappings
 nnoremap <silent> <leader>q :cw<CR>
@@ -106,12 +106,12 @@ xnoremap <leader>s :s///g<Left><Left>
 xnoremap . :normal .<CR>
 
 " relative number configuration
-autocmd FocusLost,InsertEnter,WinLeave ?* if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nornu | endif
-autocmd FocusGained,InsertLeave,WinEnter,BufRead ?* if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nu rnu | endif
+autocmd FocusLost,InsertEnter,WinLeave * if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nornu | endif
+autocmd FocusGained,InsertLeave,WinEnter,BufRead * if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nu rnu | endif
 
 " cursorline configuration
-autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave :setl nocul | endif
-autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter :setl cul | endif
+autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave * setl nocul
+autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter * setl cul
 
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
