@@ -178,13 +178,13 @@ nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
 nnoremap <silent> z[ :<C-u>silent! normal! zc<CR>zkzo[zzz
 
 " insert closing curly brace
-"inoremap {<CR> {<CR>}<Esc>O
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
 " substitution mappings
 nnoremap <leader>; :%s/;$/ {\r\r}\r<CR>
 xnoremap <leader>; :s/;$/ {\r\r}\r<CR>
 nnoremap <leader><Space> :%s/\s\+$//e<CR>
+xnoremap <leader><Space> :s/\s\+$//e<CR>
 nnoremap <leader>s :%s///g<Left><Left>
 xnoremap <leader>s :s///g<Left><Left>
 
@@ -198,12 +198,12 @@ xnoremap . :normal .<CR>
 command Bd bp\|bd #
 
 " relative number configuration
-autocmd FocusLost,InsertEnter,WinLeave ?* if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nornu | endif
-autocmd FocusGained,InsertLeave,WinEnter,BufRead ?* if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nu rnu | endif
+autocmd FocusLost,InsertEnter,WinLeave * if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nornu | endif
+autocmd FocusGained,InsertLeave,WinEnter,BufRead * if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nu rnu | endif
 
 " cursorline configuration
-autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave :setl nocul | endif
-autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter :setl cul | endif
+autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave * setl nocul
+autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter * setl cul
 
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
@@ -241,13 +241,6 @@ endfunction
 
 " jump to the previous cursor position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-" shared clipboard (too slow)
-"augroup sharedclipb
-"    au!
-"    autocmd FocusLost * wshada
-"    autocmd FocusGained * sleep 1 | rshada
-"augroup END
 
 " use Ag/Rg for grep if available
 if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m|
@@ -423,7 +416,6 @@ let g:hardtime_ignore_quickfix = 1
 let g:hardtime_allow_different_key = 1
 let g:hardtime_maxcount = 2
 let g:hardtime_showmsg = 1
-
 let g:list_of_normal_keys = ["h", "j", "k", "l"]
 let g:list_of_visual_keys = ["h", "j", "k", "l"]
 let g:list_of_insert_keys = []
