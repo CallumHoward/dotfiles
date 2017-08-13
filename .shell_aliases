@@ -5,17 +5,27 @@ alias T="Terminal"
 alias e="ef"
 alias c="cf"
 
+alias rp="rsync -ahvz --progress;b"
+alias rv="rsync -ahvz --progress --remove-source-files;b"
+alias iina="open -a iina"
+
+alias ssh="env TERM=screen-256color ssh"
+
 #alias ranger="ranger-cd"
 alias ra="ranger-cd"
 
 alias ip="ipython"
 alias pti="ptipython"
-alias bpython2="python -m bpython.cli"
-alias bp="bpython2"
+alias bp2="python2 -m bpython.cli"
+alias bp3="python3 -m bpython.cli"
+alias bp="bp3"
+alias p2="python2"
+alias p3="python3"
+alias p="p3"
 
 alias v="vim"
 alias vv="vim -u NONE"
-alias nview="nvim -R"
+alias view="vim -R"
 
 alias htop="sudo htop"
 alias goto=". goto"
@@ -91,8 +101,14 @@ else
     alias cd.....="cd ....."
 fi
 
+if which sn > /dev/null 2>&1; then
+    alias ds="sn sort -n 10 | head -9 | sed 's/\.\///'"
+else
+    alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
+fi
+
 if which nvim > /dev/null 2>&1; then
-    alias vim="nvim"
+    alias vim="nocorrect env TERM=tmux-256color nvim"
 fi
 
 if which exa > /dev/null 2>&1; then
