@@ -8,10 +8,10 @@ ZSH_THEME="ys"
 ENABLE_CORRECTION="true"
 
 # Set term which supports italics
-infocmp tmux-256color >& /dev/null;
-if [ $? -eq 0 ]; then
-    export TERM=tmux-256color
-fi
+#infocmp tmux-256color >& /dev/null;
+#if [ $? -eq 0 ]; then
+#    export TERM=tmux-256color
+#fi
 
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
 plugins=( \
