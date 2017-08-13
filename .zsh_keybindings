@@ -33,6 +33,21 @@ bindkey -M viins '\ef'      forward-word      # Alt-f
 bindkey -M viins '\eb'      backward-word     # Alt-b
 bindkey -M viins '\ed'      kill-word         # Alt-d
 
+bindkey -M viins "^[."      insert-last-word
+bindkey -M viins "^[0"      digit-argument
+bindkey -M viins "^[1"      digit-argument
+bindkey -M viins "^[2"      digit-argument
+bindkey -M viins "^[3"      digit-argument
+bindkey -M viins "^[4"      digit-argument
+bindkey -M viins "^[5"      digit-argument
+bindkey -M viins "^[6"      digit-argument
+bindkey -M viins "^[7"      digit-argument
+bindkey -M viins "^[8"      digit-argument
+bindkey -M viins "^[9"      digit-argument
+
+bindkey -M viins "^[[1;3C"  forward-word
+bindkey -M viins "^[[1;3D"  backward-word
+
 # VI MODE KEYBINDINGS (cmd mode)
 bindkey -M vicmd 'k'        history-substring-search-up
 bindkey -M vicmd 'j'        history-substring-search-down
