@@ -33,7 +33,11 @@ set smartcase       " don't ignore case if capital is used
 set path+=**        " recursive filepath completion
 set wildignorecase  " ignore case in commandline filename completion
 set undofile        " undo persists after closing file
-"set backup          " backup files
+set undodir=~/.vim/undo//,/tmp
+set backup          " backup files
+set backupdir=~/.vim/backup//,/tmp
+set noswapfile
+set dir=~/.vim/swap//,/tmp
 
 set splitright      " puts new vsplit windows to the right of the current
 set splitbelow      " puts new split windows to the bottom of the current
