@@ -147,10 +147,10 @@ nnoremap <expr> k v:count > 5 ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 tnoremap <C-A>o <C-\><C-N><C-W><C-W>
 
 " prevent jump after searching word under cursor with # and *, clear with Escape
-nnoremap <silent> # :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>
-nnoremap <silent> * :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>
-nnoremap <silent> g# :let @/ = expand('<cword>')\|set hlsearch<CR>w?<CR>
-nnoremap <silent> g* :let @/ = expand('<cword>')\|set hlsearch<CR>
+nnoremap <silent> # :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
+nnoremap <silent> * :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
+nnoremap <silent> g# :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
+nnoremap <silent> g* :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
 nnoremap <silent> <Esc> :noh<CR>
 
 " unimpaired quickfix mappings
@@ -177,14 +177,21 @@ nnoremap <silent> ]B :blast<CR>
 nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
 nnoremap <silent> z[ :<C-u>silent! normal! zc<CR>zkzo[zzz
 
+" resync folds
+nnoremap <leader>f :set fdm=syntax<CR>
+
 " insert closing curly brace
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
-" substitution mappings
-nnoremap <leader>; :%s/;$/ {\r\r}\r<CR>
-xnoremap <leader>; :s/;$/ {\r\r}\r<CR>
-nnoremap <leader><Space> :%s/\s\+$//e<CR>
-xnoremap <leader><Space> :s/\s\+$//e<CR>
+" convert c-style prototypes to functions
+nnoremap <leader>; :%s/;$/ {\r\r}\r<CR>:noh<CR>
+xnoremap <leader>; :s/;$/ {\r\r}\r<CR>:noh<CR>
+
+" remove whitespace
+nnoremap <silent> <leader><Space> :%s/\s\+$//e<CR>:noh<CR>
+xnoremap <silent> <leader><Space> :s/\s\+$//e<CR>:noh<CR>
+
+" global substitution on last used search pattern
 nnoremap <leader>s :%s///g<Left><Left>
 xnoremap <leader>s :s///g<Left><Left>
 
@@ -278,6 +285,7 @@ if !exists('g:deoplete#omni#input_patterns') | let g:deoplete#omni#input_pattern
 "let g:deoplete#auto_complete_start_length = 0
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3'
 
 " gutentags config
 let g:gutentags_cache_dir = '~/.local/share/nvim/tags/'
