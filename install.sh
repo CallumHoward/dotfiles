@@ -34,5 +34,6 @@ echo -n "Install oh-my-zsh [Y/n]? "
 read answer
 if echo "$answer" | grep -viq "^n" ;then
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    rm -rf ~/.oh-my-zsh/custom
     ln -fs `pwd`/.oh-my-zsh/custom ~/.oh-my-zsh/custom
 fi
