@@ -1,8 +1,8 @@
 # vim: set ft=zsh
 
-mkcd() { mkdir -p "$@" && cd "$@"; }
+function mkcd() { mkdir -p "$@" && cd "$@"; }
 
-ranger-cd() {
+function ranger-cd() {
     tempfile=$(mktemp /tmp/${tempfoo}.XXXXXX)
     ranger --choosedir="$tempfile" "${@:-$(pwd)}" < $TTY
     test -f "$tempfile" &&
@@ -24,7 +24,7 @@ function auto-ls-after-cd() {
 }
 add-zsh-hook chpwd auto-ls-after-cd
 
-edit-fzf() {
+function edit-fzf() {
     local result=`skg`
     local filename=`echo $result | cut -f1 -d:`
     local linenum=`echo $result | cut -f2 -d:`
@@ -32,8 +32,8 @@ edit-fzf() {
 }
 
 # cf - fuzzy cd
-cf() {
-    local bin=~/.cargo/bin/exa
+function cf() {
+    local bin=`which exa`
     if ! [ -x $bin ]; then bin = ls; fi
     if [ "$1" != "" ]; then cd $1; fi
     local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | sk`
@@ -43,7 +43,7 @@ cf() {
 }
 
 # ef - fuzzy edit
-ef() {
+function ef() {
     if [ -d "$1" ]; then
         ranger-cd "$1"
     elif [ "$1" != "" ]; then
@@ -54,4 +54,8 @@ ef() {
     fi
 }
 
-Terminal() { tmux attach 2> /dev/null || tmux new }
+function pdftotext() {
+    pdftohtml -stdout "$1" | html2text
+}
+
+function Terminal() { tmux attach 2> /dev/null || tmux new }
