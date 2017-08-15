@@ -2,4 +2,8 @@
 inoremap kj <Esc>
 inoremap <C-e> <C-o>$
 set clipboard=unnamed    "share clipboard with system
-
+set ignorecase
+set expandtab
+set number
+set relativenumber
+set incsearch
