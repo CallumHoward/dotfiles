@@ -79,4 +79,37 @@ function o() {
     fi
 }
 
+function git_add() {
+    if [ "$#" -eq 0 ]; then
+        git add .
+    else
+        git add "$@"
+    fi
+
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function git_commit() {
+    git commit "$@"
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function git_reset() {
+    git reset -q "$@"
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function git_checkout() {
+    git checkout "$@"
+    if (( `git status -sb | wc -l` < 50 )); then
+        git status -sb
+    fi
+}
+
 function Terminal() { tmux attach 2> /dev/null || tmux new }
