@@ -58,4 +58,14 @@ function pdftotext() {
     pdftohtml -stdout "$1" | html2text
 }
 
+function sf() {
+    if [ -f ~/.box-name ]; then
+        local longhost=`hostname`
+        local shorthost=`cat ~/.box-name`
+        screenfetch -E | sed "s/"$longhost"/"$shorthost"/"
+    else
+        screenfetch -E
+    fi
+}
+
 function Terminal() { tmux attach 2> /dev/null || tmux new }
