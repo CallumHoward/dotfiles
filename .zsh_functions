@@ -68,4 +68,15 @@ function sf() {
     fi
 }
 
+# open applications, directories and files on macOS
+function o() {
+    if [ "$#" -eq 0 ]; then
+        open .
+    elif [ -d /Applications/"$1".app ]; then
+        open -a $1
+    else
+        open $1
+    fi
+}
+
 function Terminal() { tmux attach 2> /dev/null || tmux new }
