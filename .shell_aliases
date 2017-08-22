@@ -36,10 +36,6 @@ alias mc="make clean"
 alias :q="exit"
 alias t="tree"
 
-alias open.="open ."
-alias o="open ."
-alias oa="open -a"
-
 alias yt="youtube-dl"
 alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"
 alias y="yt"
