@@ -28,6 +28,13 @@ PATH=$PATH:~/.cabal/bin
 export GOPATH=$HOME/golang
 PATH=$PATH:$GOPATH/bin
 
+# linuxbrew
+if [[ -d /home/linuxbrew/.linuxbrew/ ]]; then
+    export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+    export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+    export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+fi
+
 export ASAN_SYMBOLIZER_PATH="/usr/local/opt/llvm/bin/llvm-symbolizer"
 
 export FZF_DEFAULT_COMMAND=' \
