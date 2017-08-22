@@ -25,7 +25,7 @@ alias p="p3"
 
 alias v="vim"
 alias vv="vim -u NONE"
-alias view="vim -R"
+alias view="$EDITOR -R"
 
 alias htop="sudo htop"
 alias goto=". goto"
@@ -35,6 +35,9 @@ alias m="make"
 alias mc="make clean"
 alias :q="exit"
 alias t="tree"
+
+alias cp="cp -i"
+alias mv="mv -i"
 
 alias yt="youtube-dl"
 alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"

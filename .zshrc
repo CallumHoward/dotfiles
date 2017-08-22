@@ -30,8 +30,9 @@ plugins=( \
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.shell_aliases
 source ~/.shell_exports
+source ~/.shell_aliases
+source ~/.zsh_aliases
 source ~/.zsh_keybindings
 source ~/.zsh_styles
 source ~/.zsh_functions
