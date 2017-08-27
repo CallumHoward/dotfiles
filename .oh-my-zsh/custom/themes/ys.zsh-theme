@@ -11,19 +11,38 @@ function box_name {
     [ -f ~/.box-name ] && cat ~/.box-name || echo $HOST
 }
 
+YS_PWD_PROMPT_PREFIX1="%{$fg[yellow]%}"
+YS_PWD_PROMPT_PREFIX2="%{$fg_bold[yellow]%}"
+YS_PWD_PROMPT_SUFFIX="%{$reset_color%}"
+
 # Directory info.
 local current_dir='$(ys_cd_info)'
+#ys_cd_info() {
+#    if [[ $COLUMNS -lt 80 ]]; then
+#        echo -n '%1~'
+#    elif [[ $COLUMNS -lt 100 ]]; then
+#        echo -n '%(5~|%-2~/.../%2~|%3~)'
+#    elif [[ $COLUMNS -lt 120 ]]; then
+#        echo -n '%(6~|%-3~/.../%2~|%5~)'
+#    else
+#        echo -n '%~'
+#    fi
+#}
 ys_cd_info() {
-    if [[ $COLUMNS -lt 80 ]]; then
-        echo -n '%1~'
-    elif [[ $COLUMNS -lt 100 ]]; then
-        echo -n '%(5~|%-2~/.../%2~|%3~)'
-    elif [[ $COLUMNS -lt 120 ]]; then
-        echo -n '%(6~|%-3~/.../%2~|%5~)'
-    else
-        echo -n '%~'
+    local basename=$(basename $PWD)
+    local dirname="$(dirname $PWD | sed "s%^$HOME%\~%")/"
+    if [[ $HOME = $PWD ]]; then
+        dirname=""
+        basename="~"
     fi
+
+    if [[ $COLUMNS -gt 90 ]]; then
+        echo -n "${YS_PWD_PROMPT_PREFIX1}${dirname}"
+    fi
+
+    echo -n "${YS_PWD_PROMPT_PREFIX2}${basename}${YS_PWD_PROMPT_SUFFIX}"
 }
+
 
 # VCS
 YS_VCS_PROMPT_PREFIX1=" %{$fg[white]%}on%{$reset_color%} "
@@ -56,6 +75,23 @@ ys_hg_prompt_info() {
     fi
 }
 
+YS_VENV_PROMPT_PREFIX1=" %{$fg[white]%}using%{$reset_color%} "
+YS_VENV_PROMPT_PREFIX2="%{$fg_bold[magenta]%}"
+YS_VENV_PROMPT_SUFFIX="%{$reset_color%}"
+
+# Python virtualenv info
+local virtualenv_info='$(ys_virtualenv_prompt_info)'
+ys_virtualenv_prompt_info() {
+    local environment_str=""
+    # Add virtualenv name if active
+    if [ -n "${VIRTUAL_ENV}" ]; then
+        local virtualenv_ref=$(basename $VIRTUAL_ENV)
+        environment_str="${YS_VENV_PROMPT_PREFIX2}${virtualenv_ref}${YS_VENV_PROMPT_SUFFIX}"
+        echo -n "${YS_VENV_PROMPT_PREFIX1}${environment_str}"
+    fi
+}
+
+# Box info
 local box_info='$(ys_box_info)'
 ys_box_info() {
     if [[ "$COLUMNS" -lt 80 ]]; then
@@ -71,7 +107,8 @@ PROMPT="
 %{$fg[cyan]%}%n \
 ${box_info}\
 %{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+${current_dir}\
+${virtualenv_info}\
 ${hg_info}\
 ${git_info}
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
@@ -83,7 +120,8 @@ PROMPT="
 %{$fg[white]%}at \
 %{$fg[green]%}$(box_name) \
 %{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+${current_dir}\
+${virtualenv_info}\
 ${hg_info}\
 ${git_info}
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
