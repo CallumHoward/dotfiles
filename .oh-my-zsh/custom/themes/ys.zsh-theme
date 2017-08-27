@@ -29,18 +29,24 @@ local current_dir='$(ys_cd_info)'
 #    fi
 #}
 ys_cd_info() {
-    local basename=$(basename $PWD)
-    local dirname="$(dirname $PWD | sed "s%^$HOME%\~%")/"
-    if [[ $HOME = $PWD ]]; then
-        dirname=""
-        basename="~"
+    local base=$(basename $PWD)
+    local dir="$(dirname $PWD | sed "s%^$HOME%\~%")/"
+
+    if [[ $PWD = "/" ]]; then
+        dir=""
+        base="/"
+    elif [[ "$dir" = "//" ]]; then
+        dir="/"
+    elif [[ "$PWD" = "$HOME" ]]; then
+        dir=""
+        base="~"
     fi
 
-    if [[ $COLUMNS -gt 90 ]]; then
-        echo -n "${YS_PWD_PROMPT_PREFIX1}${dirname}"
+    if [[ $COLUMNS -gt 90 && dir != base ]]; then
+        echo -n "${YS_PWD_PROMPT_PREFIX1}${dir}"
     fi
 
-    echo -n "${YS_PWD_PROMPT_PREFIX2}${basename}${YS_PWD_PROMPT_SUFFIX}"
+    echo -n "${YS_PWD_PROMPT_PREFIX2}${base}${YS_PWD_PROMPT_SUFFIX}"
 }
 
 
