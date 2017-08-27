@@ -195,6 +195,11 @@ xnoremap <silent> <leader><Space> :s/\s\+$//e<CR>:noh<CR>
 nnoremap <leader>s :%s///g<Left><Left>
 xnoremap <leader>s :s///g<Left><Left>
 
+" restrict search to comment
+"nnoremap <leader>c ?\v(//|#).*\zs
+nnoremap <leader>c ?//.*\zs
+xnoremap <leader>c ?//.*\zs
+
 " gina mappings
 nnoremap <silent> <leader>b :Gina browse : --scheme=blame<CR>
 
@@ -369,7 +374,14 @@ let g:clang_format#style_options = {
 let g:chromatica#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
 
 " neomake config
-"autocmd! BufWritePost * if &ft == 'rust' | Neomake! cargo | else | Neomake | endif
+autocmd! BufWritePost * if &ft == 'cpp' && (isdirectory('xcode') || isdirectory('../xcode')) |
+            \     Neomake xcode |
+            \ elseif &ft == 'rust' && (filereadable('cargo.toml') || filereadable('../cargo.toml')) |
+            \     Neomake cargo |
+            \ else |
+            \     Neomake |
+            \ endif
+
 hi NeomakeError cterm=underline
 hi NeomakeWarning cterm=underline
 hi NeomakeInfo cterm=underline
@@ -391,6 +403,12 @@ let g:neomake_cpp_clangtidy_args = ['-checks=\*',
 let g:neomake_cpp_clang_args = ['-std=c++1y', '-Wextra', '-Weverything', '-pedantic', '-Wall', '-Wno-unused-parameter', '-Wno-c++98-compat', '-g',
             \'-I/usr/local/opt/boost/include', '-I~/Documents/Cinder.git/include', '-I~/range-v3/include']
 let g:neomake_haskell_enabled_makers = ['hlint', 'ghcmod']
+let g:neomake_cpp_xcode_maker = {
+            \ 'exe': 'xcwrapper',
+            \ 'flags': ['-configuration Debug', '-quiet'],
+            \ 'append_file': 0,
+            \ 'errorformat': '%f:%l:%c:%.%#\ error:\ %m,%f:%l:%c:%.%#\ warning:\ %m,%-G%.%#',
+            \ }
 
 " deoplete-clang config
 let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
