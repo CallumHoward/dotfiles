@@ -31,6 +31,10 @@ alias htop="sudo htop"
 alias goto=". goto"
 alias su="sudo su"
 
+alias pg="ping google.com"
+alias pgh="ping github.com"
+alias ipscan="arp -a | sed 's/ at.*$//' | sed 's/\.gateway//' | sed 's/[\(\)]//g' | grep -v '^\?' | column -t"
+
 alias m="make"
 alias mc="make clean"
 alias :q="exit"
