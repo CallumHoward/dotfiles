@@ -105,6 +105,13 @@ function cm() {
     fi
 }
 
+function cv() {
+    git commit -v "$@"
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
 function git_reset() {
     git reset -q "$@"
     if (( `git status -s | wc -l` < 50 )); then
