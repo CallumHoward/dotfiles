@@ -17,6 +17,7 @@ PATH=$PATH:/Library/TeX/texbin
 
 # clang
 PATH=$PATH:/usr/local/opt/llvm/bin
+export ASAN_SYMBOLIZER_PATH="/usr/local/opt/llvm/bin/llvm-symbolizer"
 
 # rust cargo
 PATH=$PATH:~/.cargo/bin
@@ -28,7 +29,22 @@ PATH=$PATH:~/.cabal/bin
 export GOPATH=$HOME/golang
 PATH=$PATH:$GOPATH/bin
 
-export ASAN_SYMBOLIZER_PATH="/usr/local/opt/llvm/bin/llvm-symbolizer"
+# ruby
+PATH=$PATH:/Users/callumhoward/.gem/ruby/2.0.0/bin
+
+# CUDA
+export PATH="/Developer/NVIDIA/CUDA-8.0/bin${PATH:+:${PATH}}"
+export DYLD_LIBRARY_PATH="/Developer/NVIDIA/CUDA-8.0/lib${DYLD_LIBRARY_PATH:+:${DYLD_LIBRARY_PATH}}"
+
+# cuDNN
+export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
+
+# Tensorflow
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib:/usr/local/cuda/extras/CUPTI/lib"
+export CUDA_HOME=/usr/local/cuda
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
+export PATH="$CUDA_HOME/bin:$PATH"
+
 
 export FZF_DEFAULT_COMMAND=' \
   (git ls-tree -r --name-only HEAD || \
