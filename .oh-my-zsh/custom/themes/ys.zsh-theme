@@ -107,6 +107,18 @@ ys_box_info() {
     fi
 }
 
+# Prompt Symbol
+local prompt_symbol='$(ys_prompt_symbol)'
+ys_prompt_symbol() {
+    if [[ -n "${HISTFILE}" ]]; then
+        echo -n "%{$terminfo[bold]$fg[red]%}"
+    else
+        echo -n "%{$terminfo[bold]$fg[magenta]%}"
+    fi
+
+    echo -n "$ %{$reset_color%}"
+}
+
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
@@ -117,7 +129,7 @@ ${current_dir}\
 ${virtualenv_info}\
 ${hg_info}\
 ${git_info}
-%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+${prompt_symbol}"
 
 if [[ "$USER" == "root" ]]; then
 PROMPT="
