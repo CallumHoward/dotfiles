@@ -25,9 +25,17 @@ if [ "${PWD##*/}" != "dotfiles" ]; then
     exit
 fi
 
+if [ -x $(whereis apt-get) ]; then
+    echo -n "Install: zsh ssh git tmux curl wget vim ranger [Y/n]? "
+    read answer
+    if echo "$answer" | grep -viq "^n" ; then
+        sudo apt-get install zsh ssh git tmux curl wget vim ranger cmake
+    fi
+fi
+
 echo -n "Install oh-my-zsh [Y/n]? "
 read answer
-if echo "$answer" | grep -viq "^n" ;then
+if echo "$answer" | grep -viq "^n" ; then
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     rm -rf ~/.oh-my-zsh/custom
     ln -fs `pwd`/.oh-my-zsh/custom ~/.oh-my-zsh/custom
