@@ -26,10 +26,10 @@ if [ "${PWD##*/}" != "dotfiles" ]; then
 fi
 
 if [ -x $(whereis apt-get) ]; then
-    echo -n "Install: zsh ssh git tmux curl wget vim ranger [Y/n]? "
+    echo -n "Install: zsh ssh git tmux curl wget vim ranger cmake htop [Y/n]? "
     read answer
     if echo "$answer" | grep -viq "^n" ; then
-        sudo apt-get install zsh ssh git tmux curl wget vim ranger cmake
+        sudo apt-get install zsh ssh git tmux curl wget vim ranger cmake htop
     fi
 fi
 
