@@ -16,7 +16,7 @@ function auto-ls-after-cd() {
     emulate -L zsh
     # Only in response to a user-initiated `cd`, not indirectly (eg. via another function).
     if [ "$ZSH_EVAL_CONTEXT" = "toplevel:shfunc" ]; then
-        local bin=~/.cargo/bin/exa
+        local bin=$(which exa)
         if ! [ -x $bin ]; then bin=ls; fi
         # Only if there are less then 50 items in the directory
         if (( `ls | wc -l` < 50 )); then $bin --group-directories-first -x; fi
@@ -127,3 +127,6 @@ function git_checkout() {
 }
 
 function Terminal() { tmux attach 2> /dev/null || tmux new }
+
+# Make zsh know about hosts already accessed by SSH
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
