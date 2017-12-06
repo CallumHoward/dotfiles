@@ -60,8 +60,8 @@ alias ipscan="arp -a | sed 's/ at.*$//' | sed 's/\.gateway//' | sed 's/[\(\)]//g
 
 alias m="make"
 alias mc="make clean"
-alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
-alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
+alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
+alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
 alias xc=xcd
 alias :q="exit"
 alias t="tree -L2 *"
@@ -96,8 +96,10 @@ alias gclo="gcl"
 alias push="git push"
 alias pull="git pull"
 alias stash="git stash"
-alias git="nocorrect git"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
+
+alias show_desktop_icons="defaults write com.apple.finder CreateDesktop true; killall Finder"
+alias hide_desktop_icons="defaults write com.apple.finder CreateDesktop false; killall Finder"
 
 alias rg="rg -S \
     --colors 'path:fg:green' \
@@ -132,6 +134,12 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias mv="nocorrect mv"
     alias cp="nocorrect cp"
     alias mkdir="nocorrect mkdir"
+    alias git="nocorrect git"
+
+    if which nvim > /dev/null 2>&1; then
+        alias vim="nocorrect env TERM=tmux-256color nvim"
+    fi
+
 else
     alias cd.="cd ."
     alias cd..="cd .."
@@ -146,8 +154,8 @@ else
     alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
 fi
 
-if which nvim > /dev/null 2>&1; then
-    alias vim="nocorrect env TERM=tmux-256color nvim"
+if which jq > /dev/null 2>&1; then
+    alias jq="python -m json.tool"
 fi
 
 if which exa > /dev/null 2>&1; then
