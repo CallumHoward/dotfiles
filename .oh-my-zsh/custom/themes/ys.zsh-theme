@@ -17,37 +17,56 @@ YS_PWD_PROMPT_SUFFIX="%{$reset_color%}"
 
 # Directory info.
 local current_dir='$(ys_cd_info)'
-#ys_cd_info() {
-#    if [[ $COLUMNS -lt 80 ]]; then
-#        echo -n '%1~'
-#    elif [[ $COLUMNS -lt 100 ]]; then
-#        echo -n '%(5~|%-2~/.../%2~|%3~)'
-#    elif [[ $COLUMNS -lt 120 ]]; then
-#        echo -n '%(6~|%-3~/.../%2~|%5~)'
-#    else
-#        echo -n '%~'
-#    fi
-#}
+
 ys_cd_info() {
-    local base=$(basename $PWD)
-    local dir="$(dirname $PWD | sed "s%^$HOME%\~%")/"
+    local shortpath
 
-    if [[ $PWD = "/" ]]; then
-        dir=""
-        base="/"
-    elif [[ "$dir" = "//" ]]; then
-        dir="/"
-    elif [[ "$PWD" = "$HOME" ]]; then
-        dir=""
-        base="~"
+    if [[ $COLUMNS -lt 80 ]]; then
+        shortpath='%1~'
+    elif [[ $COLUMNS -lt 100 ]]; then
+        shortpath='%(5~|%-2~/.../%2~|%3~)'
+    elif [[ $COLUMNS -lt 120 ]]; then
+        shortpath='%(6~|%-3~/.../%2~|%5~)'
+    else
+        local base=$(basename $PWD)
+        local dir="$(dirname $PWD | sed "s%^$HOME%\~%")/"
+
+        if [[ $PWD = "/" ]]; then
+            dir=""
+            base="/"
+        elif [[ "$dir" = "//" ]]; then
+            dir="/"
+        elif [[ "$PWD" = "$HOME" ]]; then
+            dir=""
+            base="~"
+        fi
+
+        shortpath="${dir}${YS_PWD_PROMPT_PREFIX2}${base}"
     fi
 
-    if [[ $COLUMNS -gt 90 && dir != base ]]; then
-        echo -n "${YS_PWD_PROMPT_PREFIX1}${dir}"
-    fi
-
-    echo -n "${YS_PWD_PROMPT_PREFIX2}${base}${YS_PWD_PROMPT_SUFFIX}"
+    echo -n "${YS_PWD_PROMPT_PREFIX1}${shortpath}${YS_PWD_PROMPT_SUFFIX}"
 }
+
+#ys_cd_info() {
+#    local base=$(basename $PWD)
+#    local dir="$(dirname $PWD | sed "s%^$HOME%\~%")/"
+#
+#    if [[ $PWD = "/" ]]; then
+#        dir=""
+#        base="/"
+#    elif [[ "$dir" = "//" ]]; then
+#        dir="/"
+#    elif [[ "$PWD" = "$HOME" ]]; then
+#        dir=""
+#        base="~"
+#    fi
+#
+#    if [[ $COLUMNS -gt 90 && dir != base ]]; then
+#        echo -n "${YS_PWD_PROMPT_PREFIX1}${dir}"
+#    fi
+#
+#    echo -n "${YS_PWD_PROMPT_PREFIX2}${base}${YS_PWD_PROMPT_SUFFIX}"
+#}
 
 
 # VCS
