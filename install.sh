@@ -14,6 +14,7 @@ declare -a files=(
     #'.oh-my-zsh'
     '.shell_aliases'
     '.shell_exports'
+    '.zsh_aliases'
     '.zsh_keybindings'
     '.zsh_styles'
     '.zsh_functions'
