@@ -68,6 +68,7 @@ alias t="tree -L2 *"
 
 alias cp="cp -i"
 alias mv="mv -i"
+alias gdb="gdb -q"
 
 alias yt="youtube-dl"
 alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"
@@ -78,6 +79,7 @@ alias bell="tput bel"
 alias b="bell"
 alias fb="fg;b"
 alias bu="brew update && brew upgrade;b"
+alias j="jobs"
 
 alias s.="s ."
 alias s="git sb"
@@ -89,7 +91,8 @@ alias gd.="git diff ."
 alias gdd="git difftool"
 alias gg="git grep -i -n --heading --break"
 alias lg="git lg"
-alias clo="git clone --recursive"
+alias clo="git clone --recursive -j4"
+alias gsm="git submodule update --init --recursive"
 alias gco="git_checkout"
 alias co="gco"
 alias gclo="gcl"
@@ -97,6 +100,7 @@ alias push="git push"
 alias pull="git pull"
 alias stash="git stash"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
+alias snatch="zorn"
 
 alias show_desktop_icons="defaults write com.apple.finder CreateDesktop true; killall Finder"
 alias hide_desktop_icons="defaults write com.apple.finder CreateDesktop false; killall Finder"
@@ -131,8 +135,8 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias cd...="nocorrect cd ..."
     alias cd....="nocorrect cd ...."
     alias cd.....="nocorrect cd ....."
-    alias mv="nocorrect mv"
-    alias cp="nocorrect cp"
+    alias mv="nocorrect mv -i"
+    alias cp="nocorrect cp -i"
     alias mkdir="nocorrect mkdir"
     alias git="nocorrect git"
 
@@ -146,6 +150,8 @@ else
     alias cd...="cd ..."
     alias cd....="cd ...."
     alias cd.....="cd ....."
+    alias mv="mv -i"
+    alias cp="cp -i"
 fi
 
 if which sn > /dev/null 2>&1; then

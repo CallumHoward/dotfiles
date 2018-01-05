@@ -68,6 +68,11 @@ function sf() {
     fi
 }
 
+# ring bell after given command
+function bo() {
+    $@;tput bel;
+}
+
 # open applications, directories and files on macOS
 function o() {
     if [ "$#" -eq 0 ]; then

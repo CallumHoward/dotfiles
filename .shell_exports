@@ -20,7 +20,7 @@ PATH=$PATH:/usr/local/opt/llvm/bin
 export ASAN_SYMBOLIZER_PATH="/usr/local/opt/llvm/bin/llvm-symbolizer"
 
 # rust cargo
-PATH=$PATH:~/.cargo/bin
+PATH="$PATH:$HOME/.cargo/bin"
 
 # haskell cabal
 PATH=$PATH:~/.cabal/bin
