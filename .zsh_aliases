@@ -24,3 +24,8 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias -s 7z="als"
 fi
 
+alias m="bo make"
+alias zorn="bo zorn"
+alias ssh="bo ssh"
+alias brew="bo brew"
+alias hub="bo hub"
