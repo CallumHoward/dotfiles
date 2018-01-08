@@ -104,7 +104,7 @@ function git_commit() {
 }
 
 function cm() {
-    git commit -m "$@"
+    git commit -m "'$*'"
     if (( `git status -s | wc -l` < 50 )); then
         git status -s
     fi
