@@ -188,8 +188,12 @@ nnoremap <leader>3 :set foldnestmax=2<CR>
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
 " convert c-style prototypes to functions
-nnoremap <leader>; :%s/;$/ {\r\r}\r<CR>:noh<CR>
-xnoremap <leader>; :s/;$/ {\r\r}\r<CR>:noh<CR>
+nnoremap <leader>; :keeppatterns %s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
+xnoremap <leader>; :s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
+
+" add function prototype for function under cursor
+nnoremap <silent> <leader>p yy:keeppatterns ?^#include\><CR>jp:keeppatterns s/\s{$/;<CR>:silent! keeppatterns s/^void\>.*(\zs\ze)/void<CR>:noh<CR><C-O>
+xnoremap <silent> <leader>p y:keeppatterns ?^#include\><CR>jp:keeppatterns s/\s{$/;<CR>:silent! keeppatterns s/^void\>.*(\zs\ze)/void<CR>:noh<CR><C-O>
 
 " remove trailing whitespace
 nnoremap <silent> <leader><Space> :keeppatterns %s/\s\+$//e<CR><C-O>
