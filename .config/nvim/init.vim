@@ -208,6 +208,9 @@ xnoremap <leader>s :s///g<Left><Left>
 nnoremap <leader>c ?//.*\zs
 xnoremap <leader>c ?//.*\zs
 
+" convert search pattern to match whole word only
+nnoremap <leader>w /\<<C-R>/\><CR><C-O>
+
 " gina mappings
 nnoremap <silent> <leader>b :Gina browse : --scheme=blame<CR>
 
