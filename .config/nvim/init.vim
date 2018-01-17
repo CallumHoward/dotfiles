@@ -117,6 +117,7 @@ set foldcolumn=0                " visual representation of folds
 set foldmethod=syntax
 set foldnestmax=1
 set nofoldenable
+set foldopen-=block
 
 " disable foldcolumn for diffs
 autocmd FilterWritePre * if &diff | set fdc=0 | endif
