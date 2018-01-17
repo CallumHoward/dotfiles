@@ -7,7 +7,7 @@ alias c="cf"
 
 alias rp="rsync -ahvz --progress;b"
 alias rv="rsync -ahvz --progress --remove-source-files;b"
-alias iina="open -a iina"
+#alias iina="open -a iina"
 alias spotify="open -a spotify"
 alias slack="open -a slack"
 alias safari="open -a safari"
