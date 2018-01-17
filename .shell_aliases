@@ -48,6 +48,7 @@ alias p="p3"
 alias v="vim"
 alias vv="vim -u NONE"
 alias view="$EDITOR -R"
+alias vs="code"
 
 alias htop="sudo htop"
 alias vtop="vtop --theme brew"
