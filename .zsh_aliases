@@ -1,5 +1,6 @@
 # vim: set ft=zsh
 
+# Zsh suffix aliases
 if [ "`basename $SHELL`" = "zsh" ]; then
     local _text_fts=(log conf md yaml inl asc txt TXT tex)
     local _source_fts=(cpp cxx cc c hh hpp h java)
@@ -24,8 +25,42 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias -s 7z="als"
 fi
 
+
+# Sound bell after these commands
 alias m="bo make"
 alias zorn="bo zorn"
 alias ssh="bo ssh"
 alias brew="bo brew"
 alias hub="bo hub"
+
+
+# Automatically Expanding Global Aliases (tab key to expand)
+# references: http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
+globalias() {
+  if [[ $LBUFFER =~ '[A-Z0-9]+$' ]]; then
+    zle _expand_alias
+    zle expand-word
+  fi
+  zle expand-or-complete
+}
+zle -N globalias
+bindkey "^I" globalias                 # tab key to expand globalalias
+
+# http://www.zzapper.co.uk/zshtips.html
+alias -g ND='*(/om[1])'           # newest directory
+alias -g NF='*(.om[1])'           # newest file
+alias -g V='| vim -R -'
+alias -g L='| $PAGER'
+alias -g WC='| wc -l'
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g NE='2> /dev/null'
+alias -g NO='&>|/dev/null'
+alias -g DN='> /dev/null 2>&1'
+
+alias -g SR='| sort -nr'
+alias -g CC='gcc -Wall -Werror -std=c11 -g -o *.c(.om[1]:r) *.c(.om[1])'
+alias -g CPP='g++ -Wall -Wextra -pedantic -std=c++17 -g -o *.cpp(.om[1]:r) *.cpp(.om[1])'
+alias -g CT='clang-tidy -checks=\* -extra-arg=-std=c++17 *.cpp(.om[1])'
+alias -g A='./*(.om[1])'
