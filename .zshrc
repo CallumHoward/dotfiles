@@ -25,6 +25,7 @@ plugins=( \
     pip \
     vi-mode \
     virtualenv \
+    fasd \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
 )
