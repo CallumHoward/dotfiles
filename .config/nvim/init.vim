@@ -21,6 +21,7 @@ call dein#add('Shougo/deoplete.nvim',
 call dein#add('wellle/tmux-complete.vim',
             \ {'on_event': s:ces})                  " tmux window completion source
 call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+call dein#add('Shougo/neco-syntax')
 call dein#add('zchee/deoplete-jedi')                " can't be lazy
 call dein#add('artur-shaik/vim-javacomplete2',      {'on_ft': 'java'})
 call dein#add('zchee/deoplete-clang')               " can't be lazy
@@ -45,6 +46,9 @@ call dein#add('tpope/vim-abolish')                  " deal with word variants
 "call dein#add('yuttie/comfortable-motion.vim')
 call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
 call dein#add('~/git/vim-foldfunctions')            " only fold functions
+call dein#add('junegunn/goyo.vim')                  " focus mode
+call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
+call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
 
 " keybindings
 call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
@@ -213,6 +217,11 @@ xnoremap <leader>c ?//.*\zs
 nnoremap <leader>w /\<<C-R>/\><CR><C-O>
 
 " gina mappings
+nnoremap <leader>a :GitGutterStageHunk<CR>
+nnoremap <leader>gs :Gina status<CR>
+nnoremap <leader>gc :Gina commit<CR>
+nnoremap <leader>gp :Gina push<CR>
+nnoremap <leader>g :Gina 
 nnoremap <silent> <leader>b :Gina browse : --scheme=blame<CR>
 
 " xcode mappings
@@ -234,6 +243,16 @@ autocmd FocusGained,InsertLeave,WinEnter,BufRead * if &ma && &ft !~ 'markdown\|t
 " cursorline configuration
 autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave * setl nocul
 autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter * setl cul
+
+augroup TerminalConfig
+    au!
+    autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
+
+" ranger.vim config
+let g:ranger_replace_netrw = 1          " open ranger when vim open a directory
+let g:NERDTreeHijackNetrw = 0
+cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'rg')<CR>
 
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
@@ -426,7 +445,8 @@ let g:neomake_c_clangtidy_args = ['-extra-arg=-std=c99', '-checks=\*']
 let g:neomake_c_clang_args = ['-std=c99', '-Wextra', '-Weverything', '-pedantic', '-Wall', '-Wno-unused-parameter', '-g']
 let g:neomake_cpp_enabled_makers = ['clang', 'clangtidy']
 let g:neomake_cpp_clangtidy_args = ['-checks=\*',
-            \'-extra-arg=-std=c++14 -I/usr/local/opt/boost/include -I~/range-v3/include -I~/Documents/Cinder.git/include']
+            \'-extra-arg=-std=c++14']
+" -I/usr/local/opt/boost/include -I~/range-v3/include -I~/Documents/Cinder.git/include']
 let g:neomake_cpp_clang_args = ['-std=c++1y', '-Wextra', '-Weverything', '-pedantic', '-Wall', '-Wno-unused-parameter', '-Wno-c++98-compat', '-g',
             \'-I/usr/local/opt/boost/include', '-I~/Documents/Cinder.git/include', '-I~/range-v3/include']
 let g:neomake_haskell_enabled_makers = ['hlint', 'ghcmod']
@@ -473,3 +493,11 @@ let g:hardtime_showmsg = 1
 let g:list_of_normal_keys = ["h", "j", "k", "l"]
 let g:list_of_visual_keys = ["h", "j", "k", "l"]
 let g:list_of_insert_keys = []
+
+" goyo config
+function! s:goyo_enter()
+  set nonu nornu
+  HardTimeOff
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
