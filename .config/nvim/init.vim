@@ -248,6 +248,7 @@ augroup TerminalConfig
     au!
     autocmd TermOpen * setlocal nonumber norelativenumber
 augroup END
+tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
 
 " ranger.vim config
 let g:ranger_replace_netrw = 1          " open ranger when vim open a directory
