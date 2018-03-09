@@ -7,14 +7,36 @@ alias c="cf"
 
 alias rp="rsync -ahvz --progress;b"
 alias rv="rsync -ahvz --progress --remove-source-files;b"
-alias iina="open -a iina"
+#alias iina="open -a iina"
+alias spotify="open -a spotify"
+alias slack="open -a slack"
+alias safari="open -a safari"
+alias docker="open -a docker"
+alias xcode="open -a xcode"
+#alias dash="open -a dash"
+alias notes="open -a notes"
+alias wavebox="open -a wavebox"
+alias eclipse="open -a eclipse"
+alias processing="open -a processing"
+alias keycastr="open -a keycastr"
+alias filezilla="open -a filezilla"
+alias wireshark="open -a wireshark"
+alias vlc="open -a vlc"
+alias harvest="open -a harvest"
+alias haskell="open -a haskell"
+alias handbrake="open -a handbrake"
+alias hyper="open -a hyper"
+alias activity="open -a activity\ monitor"
+alias chrome="open -a google\ chrome"
+alias k="open -a Keychain\ Access"
 
 alias ssh="env TERM=screen-256color ssh"
 
 #alias ranger="ranger-cd"
 alias ra="ranger-cd"
 
-alias ip="ipython"
+alias ip3="ipython3"
+alias ip="ip3"
 alias pti="ptipython"
 alias bp2="python2 -m bpython.cli"
 alias bp3="python3 -m bpython.cli"
@@ -25,19 +47,29 @@ alias p="p3"
 
 alias v="vim"
 alias vv="vim -u NONE"
-alias view="vim -R"
+alias view="$EDITOR -R"
+alias vs="code"
 
 alias htop="sudo htop"
+alias vtop="vtop --theme brew"
 alias goto=". goto"
 alias su="sudo su"
 
+alias pg="ping google.com"
+alias pgh="ping github.com"
+alias ipscan="arp -a | sed 's/ at.*$//' | sed 's/\.gateway//' | sed 's/[\(\)]//g' | grep -v '^\?' | column -t"
+
 alias m="make"
 alias mc="make clean"
+alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
+alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
+alias xc=xcd
 alias :q="exit"
-alias t="tree"
+alias t="tree -L2 *"
 
-alias open.="open ."
-alias o="open ."
+alias cp="cp -i"
+alias mv="mv -i"
+alias gdb="gdb -q"
 
 alias yt="youtube-dl"
 alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"
@@ -48,17 +80,34 @@ alias bell="tput bel"
 alias b="bell"
 alias fb="fg;b"
 alias bu="brew update && brew upgrade;b"
+alias j="jobs"
 
 alias s.="s ."
-alias a="git add"
 alias s="git sb"
+alias a="git_add"
+alias ga="echo 'use a'"
+alias gc="echo 'use cm'"
+alias grs="git_reset"
+alias gd.="git diff ."
 alias gdd="git difftool"
 alias gg="git grep -i -n --heading --break"
 alias lg="git lg"
-alias clo="git clone"
+alias clo="git clone --recursive -j4"
+alias gsm="git submodule update --init --recursive"
+alias gco="git_checkout"
+alias co="gco"
 alias gclo="gcl"
-alias git="nocorrect git"
+alias push="git push"
+alias pull="git pull"
+alias stash="git stash"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
+alias snatch="zou"
+alias translate="trans"
+alias dict="trans -d"
+alias powershell="pwsh"
+
+alias show_desktop_icons="defaults write com.apple.finder CreateDesktop true; killall Finder"
+alias hide_desktop_icons="defaults write com.apple.finder CreateDesktop false; killall Finder"
 
 alias rg="rg -S \
     --colors 'path:fg:green' \
@@ -90,15 +139,23 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias cd...="nocorrect cd ..."
     alias cd....="nocorrect cd ...."
     alias cd.....="nocorrect cd ....."
-    alias mv="nocorrect mv"
-    alias cp="nocorrect cp"
+    alias mv="nocorrect mv -i"
+    alias cp="nocorrect cp -i"
     alias mkdir="nocorrect mkdir"
+    alias git="nocorrect git"
+
+    if which nvim > /dev/null 2>&1; then
+        alias vim="nocorrect env TERM=tmux-256color nvim"
+    fi
+
 else
     alias cd.="cd ."
     alias cd..="cd .."
     alias cd...="cd ..."
     alias cd....="cd ...."
     alias cd.....="cd ....."
+    alias mv="mv -i"
+    alias cp="cp -i"
 fi
 
 if which sn > /dev/null 2>&1; then
@@ -107,8 +164,8 @@ else
     alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
 fi
 
-if which nvim > /dev/null 2>&1; then
-    alias vim="nocorrect env TERM=tmux-256color nvim"
+if which jq > /dev/null 2>&1; then
+    alias jq="python -m json.tool"
 fi
 
 if which exa > /dev/null 2>&1; then

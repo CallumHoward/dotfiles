@@ -1,0 +1,12 @@
+inoremap kj <Esc>
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
+set ignorecase
+set expandtab
+set number
+set relativenumber
+set incsearch
+
+set shiftwidth=4    " spaces to shift when re-indenting
+set tabstop=4       " number of spaces to insert when tab is pressed
+set softtabstop=4   " backspace deletes indent
