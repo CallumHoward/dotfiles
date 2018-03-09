@@ -1,8 +1,8 @@
 # vim: set ft=zsh
 
-mkcd() { mkdir -p "$@" && cd "$@"; }
+function mkcd() { mkdir -p "$@" && cd "$@"; }
 
-ranger-cd() {
+function ranger-cd() {
     tempfile=$(mktemp /tmp/${tempfoo}.XXXXXX)
     ranger --choosedir="$tempfile" "${@:-$(pwd)}" < $TTY
     test -f "$tempfile" &&
@@ -16,7 +16,7 @@ function auto-ls-after-cd() {
     emulate -L zsh
     # Only in response to a user-initiated `cd`, not indirectly (eg. via another function).
     if [ "$ZSH_EVAL_CONTEXT" = "toplevel:shfunc" ]; then
-        local bin=~/.cargo/bin/exa
+        local bin=$(which exa)
         if ! [ -x $bin ]; then bin=ls; fi
         # Only if there are less then 50 items in the directory
         if (( `ls | wc -l` < 50 )); then $bin --group-directories-first -x; fi
@@ -24,7 +24,7 @@ function auto-ls-after-cd() {
 }
 add-zsh-hook chpwd auto-ls-after-cd
 
-edit-fzf() {
+function edit-fzf() {
     local result=`skg`
     local filename=`echo $result | cut -f1 -d:`
     local linenum=`echo $result | cut -f2 -d:`
@@ -32,8 +32,8 @@ edit-fzf() {
 }
 
 # cf - fuzzy cd
-cf() {
-    local bin=~/.cargo/bin/exa
+function cf() {
+    local bin=`which exa`
     if ! [ -x $bin ]; then bin = ls; fi
     if [ "$1" != "" ]; then cd $1; fi
     local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | sk`
@@ -43,7 +43,7 @@ cf() {
 }
 
 # ef - fuzzy edit
-ef() {
+function ef() {
     if [ -d "$1" ]; then
         ranger-cd "$1"
     elif [ "$1" != "" ]; then
@@ -54,4 +54,84 @@ ef() {
     fi
 }
 
-Terminal() { tmux attach 2> /dev/null || tmux new }
+function pdftotext() {
+    pdftohtml -stdout "$1" | html2text
+}
+
+function sf() {
+    if [ -f ~/.box-name ]; then
+        local longhost=`hostname`
+        local shorthost=`cat ~/.box-name`
+        screenfetch -E | sed "s/"$longhost"/"$shorthost"/"
+    else
+        screenfetch -E
+    fi
+}
+
+# ring bell after given command
+function bo() {
+    $@;tput bel;
+}
+
+# open applications, directories and files on macOS
+function o() {
+    if [ "$#" -eq 0 ]; then
+        open .
+    elif [ -d /Applications/"$1".app ]; then
+        open -a $1
+    else
+        open $1
+    fi
+}
+
+function git_add() {
+    if [ "$#" -eq 0 ]; then
+        git add .
+    else
+        git add "$@"
+    fi
+
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function git_commit() {
+    git commit "$@"
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function cm() {
+    git commit -m "$*"
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function cv() {
+    git commit -v "$@"
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function git_reset() {
+    git reset -q "$@"
+    if (( `git status -s | wc -l` < 50 )); then
+        git status -s
+    fi
+}
+
+function git_checkout() {
+    git checkout "$@"
+    if (( `git status -sb | wc -l` < 50 )); then
+        git status -sb
+    fi
+}
+
+function Terminal() { tmux attach 2> /dev/null || tmux new }
+
+# Make zsh know about hosts already accessed by SSH
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'

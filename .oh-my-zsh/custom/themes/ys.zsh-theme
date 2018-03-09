@@ -11,19 +11,63 @@ function box_name {
     [ -f ~/.box-name ] && cat ~/.box-name || echo $HOST
 }
 
+YS_PWD_PROMPT_PREFIX1="%{$fg[yellow]%}"
+YS_PWD_PROMPT_PREFIX2="%{$fg_bold[yellow]%}"
+YS_PWD_PROMPT_SUFFIX="%{$reset_color%}"
+
 # Directory info.
 local current_dir='$(ys_cd_info)'
+
 ys_cd_info() {
+    local shortpath
+
     if [[ $COLUMNS -lt 80 ]]; then
-        echo -n '%1~'
+        shortpath='%1~'
     elif [[ $COLUMNS -lt 100 ]]; then
-        echo -n '%(5~|%-2~/.../%2~|%3~)'
+        shortpath='%(5~|%-2~/.../%2~|%3~)'
     elif [[ $COLUMNS -lt 120 ]]; then
-        echo -n '%(6~|%-3~/.../%2~|%5~)'
+        shortpath='%(6~|%-3~/.../%2~|%5~)'
     else
-        echo -n '%~'
+        local base=$(basename $PWD)
+        local dir="$(dirname $PWD | sed "s%^$HOME%\~%")/"
+
+        if [[ $PWD = "/" ]]; then
+            dir=""
+            base="/"
+        elif [[ "$dir" = "//" ]]; then
+            dir="/"
+        elif [[ "$PWD" = "$HOME" ]]; then
+            dir=""
+            base="~"
+        fi
+
+        shortpath="${dir}${YS_PWD_PROMPT_PREFIX2}${base}"
     fi
+
+    echo -n "${YS_PWD_PROMPT_PREFIX1}${shortpath}${YS_PWD_PROMPT_SUFFIX}"
 }
+
+#ys_cd_info() {
+#    local base=$(basename $PWD)
+#    local dir="$(dirname $PWD | sed "s%^$HOME%\~%")/"
+#
+#    if [[ $PWD = "/" ]]; then
+#        dir=""
+#        base="/"
+#    elif [[ "$dir" = "//" ]]; then
+#        dir="/"
+#    elif [[ "$PWD" = "$HOME" ]]; then
+#        dir=""
+#        base="~"
+#    fi
+#
+#    if [[ $COLUMNS -gt 90 && dir != base ]]; then
+#        echo -n "${YS_PWD_PROMPT_PREFIX1}${dir}"
+#    fi
+#
+#    echo -n "${YS_PWD_PROMPT_PREFIX2}${base}${YS_PWD_PROMPT_SUFFIX}"
+#}
+
 
 # VCS
 YS_VCS_PROMPT_PREFIX1=" %{$fg[white]%}on%{$reset_color%} "
@@ -56,6 +100,23 @@ ys_hg_prompt_info() {
     fi
 }
 
+YS_VENV_PROMPT_PREFIX1=" %{$fg[white]%}using%{$reset_color%} "
+YS_VENV_PROMPT_PREFIX2="%{$fg_bold[magenta]%}"
+YS_VENV_PROMPT_SUFFIX="%{$reset_color%}"
+
+# Python virtualenv info
+local virtualenv_info='$(ys_virtualenv_prompt_info)'
+ys_virtualenv_prompt_info() {
+    local environment_str=""
+    # Add virtualenv name if active
+    if [ -n "${VIRTUAL_ENV}" ]; then
+        local virtualenv_ref=$(basename $VIRTUAL_ENV)
+        environment_str="${YS_VENV_PROMPT_PREFIX2}${virtualenv_ref}${YS_VENV_PROMPT_SUFFIX}"
+        echo -n "${YS_VENV_PROMPT_PREFIX1}${environment_str}"
+    fi
+}
+
+# Box info
 local box_info='$(ys_box_info)'
 ys_box_info() {
     if [[ "$COLUMNS" -lt 80 ]]; then
@@ -65,25 +126,39 @@ ys_box_info() {
     fi
 }
 
+# Prompt Symbol
+local prompt_symbol='$(ys_prompt_symbol)'
+ys_prompt_symbol() {
+    if [[ -n "${HISTFILE}" ]]; then
+        echo -n "%{$terminfo[bold]$fg[red]%}"
+    else
+        echo -n "%{$terminfo[bold]$fg[magenta]%}"
+    fi
+
+    echo -n "$ %{$reset_color%}"
+}
+
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
 %{$fg[cyan]%}%n \
 ${box_info}\
 %{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+${current_dir}\
+${virtualenv_info}\
 ${hg_info}\
 ${git_info}
-%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+${prompt_symbol}"
 
 if [[ "$USER" == "root" ]]; then
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%{$bg[yellow]%}%{$fg[cyan]%}%n%{$reset_color%} \
+%{$bg[cyan]%}%{$fg[black]%}%n%{$reset_color%} \
 %{$fg[white]%}at \
 %{$fg[green]%}$(box_name) \
 %{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+${current_dir}\
+${virtualenv_info}\
 ${hg_info}\
 ${git_info}
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"

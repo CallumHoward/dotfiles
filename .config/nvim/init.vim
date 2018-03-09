@@ -21,6 +21,7 @@ call dein#add('Shougo/deoplete.nvim',
 call dein#add('wellle/tmux-complete.vim',
             \ {'on_event': s:ces})                  " tmux window completion source
 call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+call dein#add('Shougo/neco-syntax')
 call dein#add('zchee/deoplete-jedi')                " can't be lazy
 call dein#add('artur-shaik/vim-javacomplete2',      {'on_ft': 'java'})
 call dein#add('zchee/deoplete-clang')               " can't be lazy
@@ -44,7 +45,10 @@ call dein#add('tpope/vim-abolish')                  " deal with word variants
 "call dein#add('cloudhead/neovim-fuzzy')
 "call dein#add('yuttie/comfortable-motion.vim')
 call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
-call dein#add('dahu/LearnVim')
+call dein#add('~/git/vim-foldfunctions')            " only fold functions
+call dein#add('junegunn/goyo.vim')                  " focus mode
+call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
+call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
 
 " keybindings
 call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
@@ -61,9 +65,9 @@ call dein#add('rust-lang/rust.vim')
 call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
 call dein#add('wavded/vim-stylus')                  " can't be lazy
 call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
-"call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
 call dein#add('tikhomirov/vim-glsl')
-call dein#add('arakashic/chromatica.nvim')   " can't be lazy
+call dein#add('arakashic/chromatica.nvim')          " can't be lazy
+"call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight = 1
 
@@ -80,44 +84,44 @@ set mouse=a
 language en_AU
 
 inoremap kj <Esc>
-set number          " enable line numbers
-set list            " display hidden characters
-set shortmess+=I    " disable splash screen message
+set number                      " enable line numbers
+set list                        " display hidden characters
+set shortmess+=I                " disable splash screen message
 set noshowcmd
 set noruler
 
-set expandtab       " expand tabs to spaces
-set shiftwidth=4    " spaces to shift when re-indenting
-set tabstop=4       " number of spaces to insert when tab is pressed
-set softtabstop=4   " backspace deletes indent
-set smartindent     " indent based on filetype
-"set nowrap          " don't wrap text
-set linebreak       " wrap long lines at characters in 'breakat'
-set breakindent     " wrapped text is indented
-set briopt=sbr,shift:8,min:20
+set expandtab                   " expand tabs to spaces
+set shiftwidth=4                " spaces to shift when re-indenting
+set tabstop=4                   " number of spaces to insert when tab is pressed
+set softtabstop=4               " backspace deletes indent
+set smartindent                 " indent based on filetype
+set linebreak                   " wrap long lines at characters in 'breakat'
+set breakindent                 " wrapped text is indented
+set briopt=sbr,shift:8,min:20   " config for breakindent
 let &showbreak='↳ '
 let &breakat=' ,{'
 
-set pumheight=5     " maximum number of items in completion popup
+set pumheight=5                 " maximum number of items in completion popup
 
-set ignorecase      " for search patterns
-set smartcase       " don't ignore case if capital is used
+set ignorecase                  " for search patterns
+set smartcase                   " don't ignore case if capital is used
 
-set path+=**        " recursive filepath completion
-set wildignorecase  " ignore case in commandline filename completion
-set undofile        " undo persists after closing file
-"set backup          " backup files
+set path+=**                    " recursive filepath completion
+set wildmode=list:longest,full  " show options if completion is ambiguous
+set wildignorecase              " ignore case in commandline filename completion
+set undofile                    " undo persists after closing file
 
-set splitright      " puts new vsplit windows to the right of the current
-set splitbelow      " puts new split windows to the bottom of the current
+set splitright                  " puts new vsplit windows to the right of the current
+set splitbelow                  " puts new split windows to the bottom of the current
 
-set icm=nosplit     " live preview for substitution
+set icm=nosplit                 " live preview for substitution
 
-set fcs=fold:-      " verticle split is just bg color
-set foldcolumn=0    " visual representation of folds
+set fcs=fold:-                  " verticle split is just bg color
+set foldcolumn=0                " visual representation of folds
 set foldmethod=syntax
 set foldnestmax=1
 set nofoldenable
+set foldopen-=block
 
 " disable foldcolumn for diffs
 autocmd FilterWritePre * if &diff | set fdc=0 | endif
@@ -178,25 +182,53 @@ nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
 nnoremap <silent> z[ :<C-u>silent! normal! zc<CR>zkzo[zzz
 
 " resync folds
-nnoremap <leader>f :set fdm=syntax<CR>
+nnoremap <leader>f :set foldmethod=syntax<CR>
+
+" quickly set foldlevel
+nnoremap <leader>1 :set foldnestmax=1<CR>
+nnoremap <leader>2 :set foldnestmax=2<CR>
+nnoremap <leader>3 :set foldnestmax=2<CR>
 
 " insert closing curly brace
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
 " convert c-style prototypes to functions
-nnoremap <leader>; :%s/;$/ {\r\r}\r<CR>:noh<CR>
-xnoremap <leader>; :s/;$/ {\r\r}\r<CR>:noh<CR>
+nnoremap <leader>; :keeppatterns %s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
+xnoremap <leader>; :s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
 
-" remove whitespace
-nnoremap <silent> <leader><Space> :%s/\s\+$//e<CR>:noh<CR>
-xnoremap <silent> <leader><Space> :s/\s\+$//e<CR>:noh<CR>
+" add function prototype for function under cursor
+nnoremap <silent> <leader>p yy:keeppatterns ?^#include\><CR>jp:keeppatterns s/\s*{$/;<CR>:silent! keeppatterns s/(\zs\ze);/void<CR>:noh<CR><C-O>
+xnoremap <silent> <leader>p y:keeppatterns ?^#include\><CR>jp:keeppatterns s/\s*{$/;<CR>:silent! keeppatterns s/(\zs\ze);/void<CR>:noh<CR><C-O>
+
+" remove trailing whitespace
+nnoremap <silent> <leader><Space> :keeppatterns %s/\s\+$//e<CR><C-O>
+xnoremap <silent> <leader><Space> :keeppatterns s/\s\+$//e<CR><C-O>
 
 " global substitution on last used search pattern
 nnoremap <leader>s :%s///g<Left><Left>
 xnoremap <leader>s :s///g<Left><Left>
 
+" restrict search to comment
+"nnoremap <leader>c ?\v(//|#).*\zs
+nnoremap <leader>c ?//.*\zs
+xnoremap <leader>c ?//.*\zs
+
+" convert search pattern to match whole word only
+nnoremap <leader>w /\<<C-R>/\><CR><C-O>
+
 " gina mappings
+nnoremap <leader>a :GitGutterStageHunk<CR>
+nnoremap <leader>gs :Gina status<CR>
+nnoremap <leader>gc :Gina commit<CR>
+nnoremap <leader>gp :Gina push<CR>
+nnoremap <leader>g :Gina 
 nnoremap <silent> <leader>b :Gina browse : --scheme=blame<CR>
+
+" xcode mappings
+"nnoremap <silent> <leader>r :wa <bar> silent exec "!xcoderun.sh ".getcwd()."/xcode/ ".fnamemodify(getcwd(), ':t').".xcodeproj &" <bar> redraw!<CR>
+"nnoremap <silent> <leader>x :wa <bar> silent exec "!xcodeopen.sh ".getcwd()."/xcode/ ".fnamemodify(getcwd(), ':t').".xcodeproj ".line('.')." ".@%." &" <bar> redraw!<CR>
+nnoremap <silent> <leader>r :wa <bar> silent exec "!xcoderun.sh ".getcwd()."/xcode/ AudioClassifier.xcodeproj &" <bar> redraw!<CR>
+nnoremap <silent> <leader>x :wa <bar> silent exec "!xcodeopen.sh ".getcwd()."/xcode/ AudioClassifier.xcodeproj ".line('.')." ".@%." &" <bar> redraw!<CR>
 
 " dot command works on ranges
 xnoremap . :normal .<CR>
@@ -211,6 +243,17 @@ autocmd FocusGained,InsertLeave,WinEnter,BufRead * if &ma && &ft !~ 'markdown\|t
 " cursorline configuration
 autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave * setl nocul
 autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter * setl cul
+
+augroup TerminalConfig
+    au!
+    autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
+tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
+
+" ranger.vim config
+let g:ranger_replace_netrw = 1          " open ranger when vim open a directory
+let g:NERDTreeHijackNetrw = 0
+cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'rg')<CR>
 
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
@@ -254,6 +297,7 @@ if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:
 elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor | endif
 com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
 com! -nargs=+ -complete=file -bar Ag sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
+cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
 
 " grep for word under cursor
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
@@ -298,9 +342,16 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior
 let g:neosnippet#expand_word_boundary = 1
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable()
+            \ ? "\<Plug>(neosnippet_expand)" : pumvisible()
+            \ ? "\<C-n>" : neosnippet#jumpable()
+            \ ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable()
+            \ ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 xmap <TAB> <Plug>(neosnippet_expand_target)
+
+" complete and close popup if visible else: break undo
+inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "<C-g>u<CR>"
 
 " conceal neosnippet markers
 set conceallevel=2
@@ -308,6 +359,7 @@ set concealcursor=niv
 
 " allow automatic function signature expansion
 let g:neosnippet#enable_completed_snippet=1
+let g:neosnippet#enable_optional_arguments=0
 
 " vim-closetag config
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.jsx,*.md"
@@ -336,7 +388,7 @@ let g:gitgutter_sign_removed =  '.'
 let g:gitgutter_sign_removed_first_line =  '˙'
 let g:gitgutter_sign_modified_removed = '│'
 let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_map_keys = 0
+"let g:gitgutter_map_keys = 0
 
 " signature config
 let g:SignatureMap = {'Leader' : 'm'}   " disable extra mappings
@@ -369,7 +421,14 @@ let g:clang_format#style_options = {
 let g:chromatica#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
 
 " neomake config
-"autocmd! BufWritePost * if &ft == 'rust' | Neomake! cargo | else | Neomake | endif
+autocmd! BufWritePost * if &ft == 'cpp' && (isdirectory('xcode') || isdirectory('../xcode')) |
+            \     Neomake xcode |
+            \ elseif &ft == 'rust' && (filereadable('cargo.toml') || filereadable('../cargo.toml')) |
+            \     Neomake cargo |
+            \ else |
+            \     Neomake |
+            \ endif
+
 hi NeomakeError cterm=underline
 hi NeomakeWarning cterm=underline
 hi NeomakeInfo cterm=underline
@@ -387,10 +446,18 @@ let g:neomake_c_clangtidy_args = ['-extra-arg=-std=c99', '-checks=\*']
 let g:neomake_c_clang_args = ['-std=c99', '-Wextra', '-Weverything', '-pedantic', '-Wall', '-Wno-unused-parameter', '-g']
 let g:neomake_cpp_enabled_makers = ['clang', 'clangtidy']
 let g:neomake_cpp_clangtidy_args = ['-checks=\*',
-            \'-extra-arg=-std=c++14 -I/usr/local/opt/boost/include -I~/range-v3/include -I~/Documents/Cinder.git/include']
+            \'-extra-arg=-std=c++14']
+" -I/usr/local/opt/boost/include -I~/range-v3/include -I~/Documents/Cinder.git/include']
 let g:neomake_cpp_clang_args = ['-std=c++1y', '-Wextra', '-Weverything', '-pedantic', '-Wall', '-Wno-unused-parameter', '-Wno-c++98-compat', '-g',
             \'-I/usr/local/opt/boost/include', '-I~/Documents/Cinder.git/include', '-I~/range-v3/include']
 let g:neomake_haskell_enabled_makers = ['hlint', 'ghcmod']
+let g:neomake_cpp_xcode_maker = {
+            \ 'exe': 'xcwrapper',
+            \ 'flags': ['-configuration Debug', '-quiet'],
+            \ 'append_file': 0,
+            \ 'errorformat': '%f:%l:%c:%.%#\ error:\ %m,%f:%l:%c:%.%#\ warning:\ %m,%-G%.%#',
+            \ }
+let g:neomake_python_enabled_makers = ['pep8', 'python']
 
 " deoplete-clang config
 let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
@@ -427,3 +494,11 @@ let g:hardtime_showmsg = 1
 let g:list_of_normal_keys = ["h", "j", "k", "l"]
 let g:list_of_visual_keys = ["h", "j", "k", "l"]
 let g:list_of_insert_keys = []
+
+" goyo config
+function! s:goyo_enter()
+  set nonu nornu
+  HardTimeOff
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
