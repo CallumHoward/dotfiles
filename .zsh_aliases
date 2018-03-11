@@ -23,12 +23,14 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias -s tar="als"
     alias -s rar="als"
     alias -s 7z="als"
+
+    alias -s git="clo"
 fi
 
 
 # Sound bell after these commands
 alias m="bo make"
-alias zorn="bo zorn"
+alias zou="bo zou"
 alias ssh="bo ssh"
 alias brew="bo brew"
 alias hub="bo hub"
@@ -61,6 +63,6 @@ alias -g DN='> /dev/null 2>&1'
 
 alias -g SR='| sort -nr'
 alias -g CC='gcc -Wall -Werror -std=c11 -g -o *.c(.om[1]:r) *.c(.om[1])'
-alias -g CPP='g++ -Wall -Wextra -pedantic -std=c++17 -g -o *.cpp(.om[1]:r) *.cpp(.om[1])'
+alias -g CPP='g++ -Wall -Wextra -pedantic -std=c++1z -g -o *.cpp(.om[1]:r) *.cpp(.om[1])'
 alias -g CT='clang-tidy -checks=\* -extra-arg=-std=c++17 *.cpp(.om[1])'
 alias -g A='./*(.om[1])'
