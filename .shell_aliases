@@ -29,6 +29,8 @@ alias hyper="open -a hyper"
 alias activity="open -a activity\ monitor"
 alias chrome="open -a google\ chrome"
 alias k="open -a Keychain\ Access"
+alias oo="o"
+alias d="fasd_cd -d"
 
 alias ssh="env TERM=screen-256color ssh"
 
