@@ -2,8 +2,9 @@
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-if which nvim > /dev/null 2>&1; then
+if [ -x "$(which nvim)" ]; then
     export EDITOR=nvim
+    #export MANPAGER="nvim +set\ filetype=man +Goyo -"
 else
     export EDITOR=vim
 fi
