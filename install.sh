@@ -33,6 +33,7 @@ if [ -x $(which apt-get) ]; then
         sudo apt-get install zsh ssh git tmux curl wget vim ranger cmake htop
     fi
 fi
+echo "Finished installing packages"
 
 echo -n "Install oh-my-zsh [Y/n]? "
 read answer
@@ -42,10 +43,16 @@ if echo "$answer" | grep -viq "^n" ; then
     ln -fs `pwd`/.oh-my-zsh/custom ~/.oh-my-zsh/custom
     rm ~/.zshrc
 fi
+echo "Finished installing oh-my-zsh"
 
+echo "Creating symlinks for dotfiles"
 for i in "${files[@]}"; do
     if [ "`ls ~/$i 2> /dev/null`" == "" ]; then
         ln -sv "`pwd`/$i" ~/"$i"
     fi
 done
+echo "Finished creating symlinks"
 
+echo "Installing tmux-256color terminfo"
+tic tmux-256color.ti
+echo "Finished installing tmux-256color terminfo"
