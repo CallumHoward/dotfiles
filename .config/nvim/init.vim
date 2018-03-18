@@ -47,8 +47,10 @@ call dein#add('tpope/vim-abolish')                  " deal with word variants
 call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
 call dein#add('~/git/vim-foldfunctions')            " only fold functions
 call dein#add('junegunn/goyo.vim')                  " focus mode
+call dein#add('junegunn/limelight.vim')             " focus mode
 call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
 call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
+call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
 
 " keybindings
 call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
@@ -66,7 +68,7 @@ call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
 call dein#add('wavded/vim-stylus')                  " can't be lazy
 call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
 call dein#add('tikhomirov/vim-glsl')
-call dein#add('arakashic/chromatica.nvim')          " can't be lazy
+"call dein#add('arakashic/chromatica.nvim')          " can't be lazy
 "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight = 1
@@ -216,6 +218,17 @@ xnoremap <leader>c ?//.*\zs
 " convert search pattern to match whole word only
 nnoremap <leader>w /\<<C-R>/\><CR><C-O>
 
+" toggle diff
+function! ToggleDiff()
+    if &diff
+        windo diffoff
+    else
+        windo diffthis
+    endif
+endfunction
+
+nnoremap <leader>d :call ToggleDiff()<CR>
+
 " gina mappings
 nnoremap <leader>a :GitGutterStageHunk<CR>
 nnoremap <leader>gs :Gina status<CR>
@@ -253,7 +266,9 @@ tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
 " ranger.vim config
 let g:ranger_replace_netrw = 1          " open ranger when vim open a directory
 let g:NERDTreeHijackNetrw = 0
-cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'rg')<CR>
+cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'ra')<CR>
+cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<CR>
+cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<CR>
 
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
@@ -333,6 +348,18 @@ let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3'
 
 " gutentags config
 let g:gutentags_cache_dir = '~/.local/share/nvim/tags/'
+
+" cscope
+set cscopetag  " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+set csto=0  " check cscope for definition of a symbol before checking ctags
+set cscopeverbose " show msg when any other cscope db added
+
+"" add the database pointed to by environment variable 
+"if $CSCOPE_DB != "" | cs add $CSCOPE_DB | endif
+
+"" add any cscope database in current directory
+"if filereadable("cscope.out") | cs add cscope.out | endif
+
 
 " neosnippet key-mappings
 nmap <C-k>     i<Plug>(neosnippet_expand_or_jump)
@@ -491,14 +518,31 @@ let g:hardtime_ignore_quickfix = 1
 let g:hardtime_allow_different_key = 1
 let g:hardtime_maxcount = 2
 let g:hardtime_showmsg = 1
+let g:hardtime_ignore_buffer_patterns = ["man"]
 let g:list_of_normal_keys = ["h", "j", "k", "l"]
 let g:list_of_visual_keys = ["h", "j", "k", "l"]
 let g:list_of_insert_keys = []
 
 " goyo config
 function! s:goyo_enter()
-  set nonu nornu
-  HardTimeOff
+    set nonu nornu
+    HardTimeOff
+    Limelight
+endfunction
+
+function! s:goyo_leave()
+    if &ft == 'man' | q | endif
+    set nu rnu
+    HardTimeOn
+    Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" limelight config
+let g:limelight_conceal_ctermfg = 4
+let g:limelight_conceal_guifg = '#80a0ff'
+
+" manpager
+hi link manFooter Title
