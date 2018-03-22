@@ -25,6 +25,8 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias -s 7z="als"
 
     alias -s git="clo"
+
+    alias -s exe="mono"
 fi
 
 
