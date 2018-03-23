@@ -266,6 +266,7 @@ tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
 " ranger.vim config
 let g:ranger_replace_netrw = 1          " open ranger when vim open a directory
 let g:NERDTreeHijackNetrw = 0
+let g:ranger_map_keys = 0
 cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'ra')<CR>
 cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<CR>
 cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<CR>
