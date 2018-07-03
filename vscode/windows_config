@@ -1,0 +1,94 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.cursorStyle": "block",
+    //"editor.fontFamily": "'Inconsolata'",
+    "editor.fontSize": 16,
+    "editor.cursorBlinking": "solid",
+    "editor.lineNumbers": "relative",
+    "editor.codeLens": false,
+    //"vim.disableAnnoyingNeovimMessage": true,
+    //"vim.enableNeovim": true,
+    //"vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.hlsearch": true,
+    "vim.foldfix": true,
+    "vim.cursorStylePerMode": {
+        "normal": "block",
+        "insert": "line-thin",
+        "replace": "underline"
+    },
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "k",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<Esc>"
+            ],
+            "after": [
+                "<Esc>"
+            ],
+            "commands": [
+                {
+                    "command": ":nohl",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-e>": false,
+        "<C-f>": false,
+        "<C-j>": false,
+    },
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/usr/local/bin/python3",
+    "C_Cpp.intelliSenseEngine": "Default",
+    "rust-client.channel": "nightly-2017-10-24",
+    "editor.minimap.enabled": true,
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.renderCharacters": false,
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.visible": true,
+    "editor.renderWhitespace": "none",
+    "gitlens.gitExplorer.files.layout": "auto",
+    "workbench.startupEditor": "newUntitledFile",
+    "jupyter.appendResults": false,
+    "window.zoomLevel": 0,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+    "workbench.colorTheme": "Iceberg",
+    "window.newWindowDimensions": "maximized",
+    "window.menuBarVisibility": "toggle",
+    "window.restoreFullscreen": true,
+    // Cmder
+    //"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    //"terminal.integrated.shellArgs.windows": ["/K", "C:\\cmder\\vscode.bat"],
+    // Git Bash
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    
+    "gitlens.keymap": "alternate",
+    "editor.renderControlCharacters": true,
+    // Command Prompt
+    //"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    // PowerShell
+    //"terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPower= Shell\\v1.0\\powershell.exe"
+}

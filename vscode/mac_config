@@ -1,0 +1,86 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.cursorStyle": "block",
+    //"editor.fontFamily": "'Office Code Pro'",
+    "editor.fontFamily": "'Inconsolata'",
+    "editor.fontSize": 14,
+    "editor.cursorBlinking": "solid",
+    "editor.lineNumbers": "relative",
+    "editor.codeLens": false,
+    "editor.wordWrap": "on",
+    
+    //"vim.disableAnnoyingNeovimMessage": true,
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.hlsearch": true,
+    "vim.foldfix": true,
+    "vim.cursorStylePerMode" : {
+        "normal": "block",
+        "insert": "line-thin",
+        "replace": "underline"
+    },
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["k", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before":["<Esc>"],
+            "after":["<Esc>"],
+            "commands": [
+                {
+                    "command": ":nohl",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-e>": false,
+        "<C-f>": false
+    },
+
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/usr/local/bin/python3",
+
+    "C_Cpp.intelliSenseEngine": "Default",
+
+    "rust-client.channel": "nightly",
+
+    "editor.minimap.enabled": true,
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.renderCharacters":false,
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.visible": true,
+    "editor.renderWhitespace": "none",
+    "gitlens.gitExplorer.files.layout": "auto",
+    "workbench.startupEditor": "newUntitledFile",
+    "jupyter.appendResults": false,
+    "window.zoomLevel": 0,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+    "workbench.colorTheme": "Iceberg",
+
+    //"sourcetrail.startServerAtStartup": true,
+
+    //"window.newWindowDimensions": "maximized",
+    "window.restoreFullscreen": true,
+    "window.newWindowDimensions": "fullscreen",
+    "gitlens.keymap": "alternate",
+    "editor.renderControlCharacters": false,
+    "gitlens.historyExplorer.enabled": true,
+    "cmake-tools-helper.cmake_download_path": "/Users/callumhoward/.vscode/extensions/maddouri.cmake-tools-helper-0.2.1/cmake_download",
+}
