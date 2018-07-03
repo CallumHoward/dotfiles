@@ -32,27 +32,32 @@ call dein#add('neomake/neomake')
 "            \ {'on_event': ['BufWritePre', 'FocusLost', 'CursorHold']})
 call dein#add('airblade/vim-gitgutter')             " line git status
 call dein#add('kshenoy/vim-signature')              " marks in signs column
-call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
-call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
 call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
-call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
-call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
-call dein#add('valloric/MatchTagAlways',            {'on_ft': 'html'})
-call dein#add('alvan/vim-closetag',                 {'on_ft': 'html'})
-call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
-call dein#add('lotabout/skim.vim',                  {'depends': 'skim'})
+call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
+call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})
 call dein#add('tpope/vim-abolish')                  " deal with word variants
 "call dein#add('cloudhead/neovim-fuzzy')
 "call dein#add('yuttie/comfortable-motion.vim')
 call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
 call dein#add('~/git/vim-foldfunctions')            " only fold functions
-call dein#add('junegunn/goyo.vim')                  " focus mode
+call dein#add('junegunn/goyo.vim', {'on_cmd': 'Goyo'})  " focus mode
 call dein#add('junegunn/limelight.vim')             " focus mode
-call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
 call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
+
+" wrap external tools
+call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
+call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
+call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
+call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
+call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
+call dein#add('lotabout/skim.vim',                  {'depends': 'skim'})
 call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
+call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
+call dein#add('tpope/vim-tbone')                    " send text to tmux pane
+call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
 
 " keybindings
+call dein#add('tpope/vim-surround.git', {'on_event': s:ces})
 call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
 call dein#add('takac/vim-hardtime')                 " disable rapid hjkl repeat
 
@@ -68,6 +73,8 @@ call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
 call dein#add('wavded/vim-stylus')                  " can't be lazy
 call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
 call dein#add('tikhomirov/vim-glsl')
+call dein#add('pangloss/vim-javascript')            " can't be lazy
+call dein#add('mxw/vim-jsx')                        " can't be lazy
 "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
 "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
 let g:cpp_experimental_template_highlight = 1
@@ -86,6 +93,8 @@ set mouse=a
 language en_AU
 
 inoremap kj <Esc>
+xnoremap kj <Esc>
+snoremap kj <Esc>
 set number                      " enable line numbers
 set list                        " display hidden characters
 set shortmess+=I                " disable splash screen message
@@ -198,6 +207,10 @@ inoremap <expr> {<Enter> <SID>CloseBracket()
 nnoremap <leader>; :keeppatterns %s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
 xnoremap <leader>; :s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
 
+" jump to #includes and add a new include prepolulated with word under cursor
+nnoremap <leader>i m`"1yiw:keepjumps keeppatterns ?^#include<CR>o#include <<C-R>1><Esc>hvi><C-G>
+nnoremap <leader>I m`"1yiw:keepjumps keeppatterns ?^#include<CR>o#include "<C-R>1.h"<Esc>hvi"<C-G>
+
 " add function prototype for function under cursor
 nnoremap <silent> <leader>p yy:keeppatterns ?^#include\><CR>jp:keeppatterns s/\s*{$/;<CR>:silent! keeppatterns s/(\zs\ze);/void<CR>:noh<CR><C-O>
 xnoremap <silent> <leader>p y:keeppatterns ?^#include\><CR>jp:keeppatterns s/\s*{$/;<CR>:silent! keeppatterns s/(\zs\ze);/void<CR>:noh<CR><C-O>
@@ -217,6 +230,14 @@ xnoremap <leader>c ?//.*\zs
 
 " convert search pattern to match whole word only
 nnoremap <leader>w /\<<C-R>/\><CR><C-O>
+"TODO add the inverse
+
+" add word under cursor to search pattern
+nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
+
+" go to alternate file
+nnoremap <leader>e :e %<.
+nnoremap <leader>E :vs %<.
 
 " toggle diff
 function! ToggleDiff()
@@ -228,6 +249,9 @@ function! ToggleDiff()
 endfunction
 
 nnoremap <leader>d :call ToggleDiff()<CR>
+
+nnoremap <leader>t V:Twrite last<CR>
+xnoremap <leader>t :Twrite last<CR>
 
 " gina mappings
 nnoremap <leader>a :GitGutterStageHunk<CR>
@@ -269,7 +293,7 @@ let g:NERDTreeHijackNetrw = 0
 let g:ranger_map_keys = 0
 cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'ra')<CR>
 cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<CR>
-cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<CR>
+cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \| Ranger' : 'tra')<CR>
 
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
@@ -317,7 +341,7 @@ cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
 
 " grep for word under cursor
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
-nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
+"nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 
 " MRU command-line completion
 function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
@@ -391,6 +415,8 @@ let g:neosnippet#enable_optional_arguments=0
 
 " vim-closetag config
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.jsx,*.md"
+let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,javascript.jsx'
+let g:closetag_emptyTags_caseSensitive = 1
 
 function! s:CloseBracket()
     let line = getline('.')
@@ -403,6 +429,18 @@ function! s:CloseBracket()
         return "{\<Enter>}\<Esc>O"
     endif
 endfunction
+
+" vim match tag always config
+let g:mta_filetypes = {
+            \'javascript.jsx': 1,
+            \'html' : 1,
+            \'xhtml' : 1,
+            \'xml' : 1,
+            \'jinja' : 1,
+            \'django' : 1,
+            \'htmldjango' : 1,
+            \'eruby': 1
+            \}
 
 " gitgutter config
 set updatetime=500
@@ -485,6 +523,8 @@ let g:neomake_cpp_xcode_maker = {
             \ 'append_file': 0,
             \ 'errorformat': '%f:%l:%c:%.%#\ error:\ %m,%f:%l:%c:%.%#\ warning:\ %m,%-G%.%#',
             \ }
+let g:neomake_python_pep8_exe = 'python3'
+let g:neomake_python_python_exe = 'python3'
 let g:neomake_python_enabled_makers = ['pep8', 'python']
 
 " deoplete-clang config
