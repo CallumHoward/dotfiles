@@ -1,6 +1,6 @@
 # vim: set ft=zsh
 
-function mkcd() { mkdir -p "$@" && cd "$@"; }
+function mkcd() { nocorrect mkdir -p "$@" && nocorrect cd "$@"; }
 
 function ranger-cd() {
     tempfile=$(mktemp /tmp/${tempfoo}.XXXXXX)
