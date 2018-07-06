@@ -2,13 +2,6 @@
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-if [ -x "$(which nvim)" ]; then
-    export EDITOR=nvim
-    #export MANPAGER="nvim +set\ filetype=man +Goyo -"
-else
-    export EDITOR=vim
-fi
-
 PATH=/usr/local/bin:$PATH
 PATH=/usr/local/sbin:$PATH
 PATH=$PATH:~/.local/bin
@@ -31,13 +24,25 @@ export GOPATH=$HOME/golang
 PATH=$PATH:$GOPATH/bin
 
 # linuxbrew
+if [[ -d /scratch/callumh/.linuxbrew/bin/ ]]; then
+    PATH="$PATH:/scratch/callumh/.linuxbrew/bin"
+    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+fi
+
 if [[ -d /home/linuxbrew/.linuxbrew/ ]]; then
     export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
     export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
     export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 fi
 
-export ASAN_SYMBOLIZER_PATH="/usr/local/opt/llvm/bin/llvm-symbolizer"
+if [[ -d $HOME/.linuxbrew/bin/ ]]; then
+    PATH="$HOME/.linuxbrew/bin:$PATH"
+    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+fi
+
+#export ASAN_SYMBOLIZER_PATH="/usr/local/opt/llvm/bin/llvm-symbolizer"
 
 # ruby
 PATH=$PATH:/Users/callumhoward/.gem/ruby/2.0.0/bin
@@ -55,6 +60,12 @@ export CUDA_HOME=/usr/local/cuda
 export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
 export PATH="$CUDA_HOME/bin:$PATH"
 
+if [ -x "$(which nvim)" ]; then
+    export EDITOR=nvim
+    #export MANPAGER="nvim +set\ filetype=man +Goyo -"
+else
+    export EDITOR=vim
+fi
 
 export FZF_DEFAULT_COMMAND=' \
   (git ls-tree -r --name-only HEAD || \

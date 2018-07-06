@@ -1,5 +1,6 @@
 # Path to oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH_DISABLE_COMPFIX="true"
+export ZSH=/scratch/callumh/.oh-my-zsh
 
 # Set name of the theme to load. Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="ys"
@@ -19,12 +20,12 @@ plugins=( \
     git \
     history-search-multi-word \
     history-substring-search \
-    meteor \
-    mosh \
-    npm \
+    #meteor \
+    #mosh \
+    #npm \
     pip \
     vi-mode \
-    virtualenv \
+    #virtualenv \
     fasd \
     zsh-autosuggestions \
     zsh-syntax-highlighting \

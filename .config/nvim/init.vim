@@ -1,6 +1,6 @@
 " ==== dein Scripts ====
-set runtimepath^=/Users/callumhoward/.dein/repos/github.com/Shougo/dein.vim
-call dein#begin(expand('/Users/callumhoward/.dein/'))
+set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
+call dein#begin(expand('~/.cache/dein'))
 
 " Add or remove plugins here:
 call dein#add('Shougo/dein.vim')                    " plugin manager
@@ -16,8 +16,8 @@ call dein#add('~/neosnippet-snippets',
             \ {'on_event': s:ces})                  " snippet collection
 call dein#add('Shougo/echodoc.vim',
             \ {'on_event': s:ces})                  " function signatures in status
-call dein#add('Shougo/deoplete.nvim',
-            \ {'on_event': s:ces})                  " auto popup completion
+"call dein#add('Shougo/deoplete.nvim',
+"            \ {'on_event': s:ces})                  " auto popup completion
 call dein#add('wellle/tmux-complete.vim',
             \ {'on_event': s:ces})                  " tmux window completion source
 call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
@@ -39,7 +39,7 @@ call dein#add('tpope/vim-abolish')                  " deal with word variants
 "call dein#add('cloudhead/neovim-fuzzy')
 "call dein#add('yuttie/comfortable-motion.vim')
 call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
-call dein#add('~/git/vim-foldfunctions')            " only fold functions
+"call dein#add('~/git/vim-foldfunctions')            " only fold functions
 call dein#add('junegunn/goyo.vim', {'on_cmd': 'Goyo'})  " focus mode
 call dein#add('junegunn/limelight.vim')             " focus mode
 call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
@@ -82,7 +82,7 @@ let g:cpp_class_scope_highlight = 1
 
 call dein#end()
 filetype plugin indent on
-let g:dein#install_log_filename = '/Users/callumhoward/.dein/dein_install.log'
+"let g:dein#install_log_filename = '/Users/callumhoward/.dein/dein_install.log'
 " ==== end dein Scripts ====
 
 " base configuration
@@ -337,7 +337,9 @@ if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:
 elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor | endif
 com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
 com! -nargs=+ -complete=file -bar Ag sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
+com! -nargs=+ -complete=file -bar Gg sil! Gina grep <args>|redr!|let @/="<args>"|set hls
 cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
+cabbrev gg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gg' : 'gg')<CR>
 
 " grep for word under cursor
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>

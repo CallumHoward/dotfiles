@@ -29,6 +29,7 @@ alias hyper="open -a hyper"
 alias activity="open -a activity\ monitor"
 alias chrome="open -a google\ chrome"
 alias k="open -a Keychain\ Access"
+alias o="xdg-open ."
 alias oo="o"
 alias d="fasd_cd -d"
 
@@ -49,12 +50,13 @@ alias p="p3"
 
 alias v="vim"
 alias vv="vim -u NONE"
+alias vi="/usr/bin/vim"
 alias view="$EDITOR -R"
 alias vs="code"
 alias v.="v ."
 alias vd="v -d"
 
-alias htop="sudo htop"
+#alias htop="sudo htop"
 alias vtop="vtop --theme brew"
 alias goto=". goto"
 alias su="sudo su"
@@ -149,9 +151,9 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias mkdir="nocorrect mkdir"
     alias git="nocorrect git"
 
-    if which nvim > /dev/null 2>&1; then
-        alias vim="nocorrect env TERM=tmux-256color nvim"
-    fi
+if which nvim > /dev/null 2>&1; then
+    alias vim="nocorrect env TERM=tmux-256color nvim"
+fi
 
 else
     alias cd.="cd ."
