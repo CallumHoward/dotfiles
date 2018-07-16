@@ -8,4 +8,4 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
-alias T="tmux attach 2>&1 /dev/null || tmux new"
+alias T="tmux attach || tmux new"
