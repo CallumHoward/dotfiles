@@ -37,3 +37,4 @@ zstyle ":history-search-multi-word" highlight-color "fg=yellow,underline,bg=8"
 # Effect on active history entry. Try: standout, bold, bg=blue
 zstyle ":plugin:history-search-multi-word" active "none"
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=237'
