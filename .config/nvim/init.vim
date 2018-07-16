@@ -332,14 +332,27 @@ endfunction
 " jump to the previous cursor position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+function! Ggrep(arg)
+    let s:temp=&grepprg
+    setlocal grepprg=git\ grep\ --ignore-case\ --no-color\ -n\ $*
+    silent execute ':grep '.a:arg
+    setlocal grepprg=git\ --no-pager\ submodule\ --quiet\ foreach\ 'git\ grep\ --full-name\ -n\ --ignore-case\ --no-color\ $*\ ;true'
+    silent execute ':grepadd '.a:arg
+    silent cwin
+    redraw!
+    setlocal grepprg=s:temp
+endfunction
+
+command! -nargs=1 -complete=buffer Gg call Ggrep(<q-args>)|let @/="<args>"|set hls
+cabbrev gg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gg' : 'gg')<CR>
+
 " use Ag/Rg for grep if available
 if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m|
 elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor | endif
 com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
 com! -nargs=+ -complete=file -bar Ag sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
-com! -nargs=+ -complete=file -bar Gg sil! Gina grep <args>|redr!|let @/="<args>"|set hls
 cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
-cabbrev gg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gg' : 'gg')<CR>
+cabbrev ag <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ag' : 'ag')<CR>
 
 " grep for word under cursor
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
@@ -527,7 +540,8 @@ let g:neomake_cpp_xcode_maker = {
             \ }
 let g:neomake_python_pep8_exe = 'python3'
 let g:neomake_python_python_exe = 'python3'
-let g:neomake_python_enabled_makers = ['pep8', 'python']
+"let g:neomake_python_enabled_makers = ['pep8', 'python']
+let g:neomake_python_enabled_makers = []
 
 " deoplete-clang config
 let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
