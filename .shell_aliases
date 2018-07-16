@@ -6,7 +6,7 @@ alias e="ef"
 alias c="cf"
 
 alias rp="rsync -ahvz --progress;b"
-alias rv="rsync -ahvz --progress --remove-source-files;b"
+#alias rv="rsync -ahvz --progress --remove-source-files;b"
 #alias iina="open -a iina"
 alias spotify="open -a spotify"
 alias slack="open -a slack"
@@ -83,7 +83,7 @@ alias y="yt"
 alias yi="y --ignore-config"
 
 alias bell="tput bel"
-alias b="bell"
+#alias b="bell"
 alias fb="fg;b"
 alias bu="brew update && brew upgrade && brew cleanup;b"
 alias j="jobs"
@@ -96,6 +96,7 @@ alias gc="echo 'use cm'"
 alias grs="git_reset"
 alias gd.="git diff ."
 alias gdd="git difftool"
+alias gdv="nvim +Gina\ diff\|set\ nonu\ nornu"
 alias gg="git grep -i -n --heading --break"
 alias lg="git lg"
 alias clo="git clone --recursive -j4"
@@ -187,3 +188,13 @@ fi
 if which hub > /dev/null 2>&1; then
     alias git="hub"
 fi
+
+if which xclip > /dev/null 2>&1; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
+
+alias b='rez build --build-target RelWithDebInfo --install -- -- -j 16'
+
+# Load default aliases.
+#source ${AL_SHARED_ENV}/alias
