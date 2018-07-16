@@ -19,7 +19,7 @@ function auto-ls-after-cd() {
         local bin=$(which exa)
         if ! [ -x $bin ]; then bin=ls; fi
         # Only if there are less then 50 items in the directory
-        if (( `ls | wc -l` < 50 )); then $bin --group-directories-first -x; fi
+        if (( `ls | wc -l` < 50 )); then $bin --group-directories-first -x --color=tty; fi
     fi
 }
 add-zsh-hook chpwd auto-ls-after-cd
