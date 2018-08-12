@@ -378,6 +378,7 @@ let g:gutentags_cache_dir = '~/.local/share/nvim/tags/'
 set cscopetag  " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
 set csto=0  " check cscope for definition of a symbol before checking ctags
 set cscopeverbose " show msg when any other cscope db added
+set cscopequickfix=s-,c-,d-,i-,t-,e-,a-  " show cscope results in quickfix
 
 "" add the database pointed to by environment variable 
 "if $CSCOPE_DB != "" | cs add $CSCOPE_DB | endif
