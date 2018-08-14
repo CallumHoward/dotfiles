@@ -38,6 +38,8 @@ source ~/.zsh_aliases
 source ~/.zsh_keybindings
 source ~/.zsh_styles
 source ~/.zsh_functions
+source ~/.al_aliases
+
 
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
@@ -49,3 +51,8 @@ if [ -d .gitsome ]; then
     source ~/.gitsome/gh_complete.sh
 fi
 
+precmd() {
+    if [ -n $TMUX ]; then
+        echo -ne "\e]1;$PWD\a"
+    fi
+}

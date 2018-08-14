@@ -61,7 +61,7 @@ export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
 export PATH="$CUDA_HOME/bin:$PATH"
 
 if [ -x "$(which nvim)" ]; then
-    export EDITOR=nvim
+    export EDITOR="nvim"
     #export MANPAGER="nvim +set\ filetype=man +Goyo -"
 else
     export EDITOR=vim
@@ -72,6 +72,13 @@ export FZF_DEFAULT_COMMAND=' \
    find . -path "*/\.*" -prune -o -type f -print -o -type l -print | \
       sed s/^..//) 2> /dev/null'
 
+export FZF_DEFAULT_OPTS='--reverse'
+
 export SKIM_DEFAULT_OPTIONS='--reverse --ansi \
     --color=current_bg:0,matched:3,info:11,spinner:15,cursor:0,prompt:6,selected:1'
 
+export PROMPT_COMMAND='echo -ne "\033]0;$PWD\007"'
+
+export PYTHONPATH="$PYTHONPATH:/scratch/callumh/local/share/python"
+export PYTHONPATH="$PYTHONPATH:/film/tools/packages/mayaDevKit/2019.0.b94.1/CentOS-6.9_thru_8/maya/lib/python2.7/site-packages"
+export PATH="$PATH:$PYTHONPATH"

@@ -1,3 +1,5 @@
+let $PYTHONPATH=''
+let $TERM='tmux-256color'
 " ==== dein Scripts ====
 set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.cache/dein'))
@@ -16,8 +18,8 @@ call dein#add('~/neosnippet-snippets',
             \ {'on_event': s:ces})                  " snippet collection
 call dein#add('Shougo/echodoc.vim',
             \ {'on_event': s:ces})                  " function signatures in status
-"call dein#add('Shougo/deoplete.nvim',
-"            \ {'on_event': s:ces})                  " auto popup completion
+call dein#add('Shougo/deoplete.nvim',
+            \ {'on_event': s:ces})                  " auto popup completion
 call dein#add('wellle/tmux-complete.vim',
             \ {'on_event': s:ces})                  " tmux window completion source
 call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
@@ -51,10 +53,11 @@ call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
 call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
 call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
 call dein#add('lotabout/skim.vim',                  {'depends': 'skim'})
-call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
+"call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
 call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
 call dein#add('tpope/vim-tbone')                    " send text to tmux pane
 call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
+call dein#add('yamahigashi/sendtomaya.vim')
 
 " keybindings
 call dein#add('tpope/vim-surround.git', {'on_event': s:ces})
@@ -75,6 +78,7 @@ call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
 call dein#add('tikhomirov/vim-glsl')
 call dein#add('pangloss/vim-javascript')            " can't be lazy
 call dein#add('mxw/vim-jsx')                        " can't be lazy
+call dein#add('~/git/vim-log-syntax')
 "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
 "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
 let g:cpp_experimental_template_highlight = 1
@@ -90,7 +94,7 @@ if exists("neovim_dot_app") | colo OceanicNext | else | colo neodark | endif
 syntax on
 set mouse=a
 
-language en_AU
+"language en_AU
 
 inoremap kj <Esc>
 xnoremap kj <Esc>
@@ -152,6 +156,9 @@ autocmd BufWritePost * if &diff == 1 | diffupdate | endif
 " set files with .tem extension as C++ Template files
 autocmd BufNewFile,BufFilePre,BufRead *.tem setlocal filetype=cpp
 
+" set files with .gss extension as yaml syntax
+autocmd BufNewFile,BufFilePre,BufRead *.gss setlocal filetype=yaml
+
 "set lazyredraw
 "autocmd VimResized,FocusGained * redraw
 
@@ -198,7 +205,7 @@ nnoremap <leader>f :set foldmethod=syntax<CR>
 " quickly set foldlevel
 nnoremap <leader>1 :set foldnestmax=1<CR>
 nnoremap <leader>2 :set foldnestmax=2<CR>
-nnoremap <leader>3 :set foldnestmax=2<CR>
+nnoremap <leader>3 :set foldnestmax=3<CR>
 
 " insert closing curly brace
 inoremap <expr> {<Enter> <SID>CloseBracket()
@@ -246,12 +253,23 @@ function! ToggleDiff()
     else
         windo diffthis
     endif
+    wincmd w
 endfunction
 
 nnoremap <leader>d :call ToggleDiff()<CR>
 
-nnoremap <leader>t V:Twrite last<CR>
-xnoremap <leader>t :Twrite last<CR>
+"function TwriteWrapper()
+"    let target = a:0 ? a:1 : get(g:, 'tbone_write_pane', '')
+"    if empty(target)
+"        norm :Twrite 
+"    else
+"        :Twrite<CR>
+"    endif
+"endfunction
+
+let g:tbone_write_pane='bottom-right'
+nnoremap <leader>t V:Twrite<CR>
+xnoremap <leader>t :Twrite<CR>
 
 " gina mappings
 nnoremap <leader>a :GitGutterStageHunk<CR>
@@ -348,7 +366,7 @@ cabbrev gg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gg' : 'gg')<CR>
 
 " use Ag/Rg for grep if available
 if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m|
-elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor | endif
+elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor\ --ignore\ build | endif
 com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
 com! -nargs=+ -complete=file -bar Ag sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
 cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
@@ -384,7 +402,7 @@ if !exists('g:deoplete#omni#input_patterns') | let g:deoplete#omni#input_pattern
 "let g:deoplete#auto_complete_start_length = 0
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3'
+"let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3'
 
 " gutentags config
 let g:gutentags_cache_dir = '~/.local/share/nvim/tags/'
@@ -470,12 +488,13 @@ let g:gitgutter_sign_removed_first_line =  '˙'
 let g:gitgutter_sign_modified_removed = '│'
 let g:gitgutter_override_sign_column_highlight = 0
 "let g:gitgutter_map_keys = 0
+let g:gitgutter_diff_args = '-w'
 
 " signature config
 let g:SignatureMap = {'Leader' : 'm'}   " disable extra mappings
 let g:SignatureMarkTextHLDynamic = 1    " keep gitgutter highlight color
 let g:SignatureForceMarkPlacement = 1   " use :delm x to delete mark x
-let g:SignatureMarkTextHL = 'ErrorMsg'
+"let g:SignatureMarkTextHL = 'Directory'
 
 " vim-clang-format config
 let g:clang_format#command = '/usr/local/opt/llvm/bin/clang-format'
@@ -538,10 +557,10 @@ let g:neomake_cpp_xcode_maker = {
             \ 'append_file': 0,
             \ 'errorformat': '%f:%l:%c:%.%#\ error:\ %m,%f:%l:%c:%.%#\ warning:\ %m,%-G%.%#',
             \ }
-let g:neomake_python_pep8_exe = 'python3'
-let g:neomake_python_python_exe = 'python3'
-"let g:neomake_python_enabled_makers = ['pep8', 'python']
-let g:neomake_python_enabled_makers = []
+let g:neomake_python_pep8_exe = 'python2'
+let g:neomake_python_python_exe = 'python2'
+let g:neomake_python_enabled_makers = ['pep8', 'python']
+"let g:neomake_python_enabled_makers = []
 
 " deoplete-clang config
 let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'

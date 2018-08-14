@@ -39,14 +39,15 @@ alias ssh="env TERM=screen-256color ssh"
 alias ra="ranger-cd"
 
 alias ip3="ipython3"
-alias ip="ip3"
+alias ip2="ipython"
+alias ip="ip2"
 alias pti="ptipython"
 alias bp2="python2 -m bpython.cli"
 alias bp3="python3 -m bpython.cli"
-alias bp="bp3"
+alias bp="bp2"
 alias p2="python2"
 alias p3="python3"
-alias p="p3"
+alias p="p2"
 
 alias v="vim"
 alias vv="vim -u NONE"
@@ -153,7 +154,7 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias git="nocorrect git"
 
 if which nvim > /dev/null 2>&1; then
-    alias vim="nocorrect env TERM=tmux-256color nvim"
+    alias vim="nocorrect env TERM=tmux-256color PYTHONPATH='' nvim"
 fi
 
 else
@@ -187,6 +188,10 @@ fi
 
 if which hub > /dev/null 2>&1; then
     alias git="hub"
+fi
+
+if ! which fd > /dev/null 2>&1; then
+    alias fd="find . -name"
 fi
 
 if which xclip > /dev/null 2>&1; then

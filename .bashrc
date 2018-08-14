@@ -1,5 +1,5 @@
 
-if [[ $TMUX ]]; then
+if [[ $TMUX ]] && ! [[ $REZ_USED ]]; then
     SHELL="zsh" zsh
     exit
 fi
