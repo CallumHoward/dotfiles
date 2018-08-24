@@ -41,6 +41,8 @@ source ~/.zsh_functions
 source ~/.al_aliases
 
 
+setopt complete_aliases
+
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 

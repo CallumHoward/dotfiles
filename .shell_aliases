@@ -92,8 +92,9 @@ alias j="jobs"
 alias s.="s ."
 alias s="git sb"
 alias a="git_add"
-alias ga="echo 'use a'"
-alias gc="echo 'use cm'"
+alias ga="git_add"
+alias gc="git_commit"
+alias gcv="git_commit -v"
 alias grs="git_reset"
 alias gd.="git diff ."
 alias gdd="git difftool"
@@ -110,10 +111,27 @@ alias push="git push"
 alias pull="git pull"
 alias stash="git stash"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
+
 alias snatch="zou"
 alias translate="trans"
 alias dict="trans -d"
 alias powershell="pwsh"
+
+if [ "`basename $SHELL`" = "zsh" ]; then
+    compdef _git s=git-status
+    compdef _git a=git-add
+    compdef _git ga=git-add
+    compdef _git gc=git-commit
+    compdef _git grs=git-reset
+    compdef _git gd=git-diff
+    compdef _git stash=git-stash
+    compdef _git co=git-checkout
+    compdef _git gco=git-checkout
+    compdef _git lg=git-log
+    compdef _git ba=git-branch
+    compdef _git push=git-push
+    compdef _git pull=git-pull
+fi
 
 alias show_desktop_icons="defaults write com.apple.finder CreateDesktop true; killall Finder"
 alias hide_desktop_icons="defaults write com.apple.finder CreateDesktop false; killall Finder"
@@ -142,6 +160,10 @@ alias skg="sk -i -c 'rg --line-number --color=always \"{}\" -S \
     --colors 'match:bg:yellow' \
     --colors 'match:style:nobold''"
 
+if which nvim > /dev/null 2>&1; then
+    alias vim="nocorrect env TERM=tmux-256color PYTHONPATH='' nvim"
+fi
+
 if [ "`basename $SHELL`" = "zsh" ]; then
     alias cd.="nocorrect cd ."
     alias cd..="nocorrect cd .."
@@ -152,11 +174,6 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias cp="nocorrect cp -i"
     alias mkdir="nocorrect mkdir"
     alias git="nocorrect git"
-
-if which nvim > /dev/null 2>&1; then
-    alias vim="nocorrect env TERM=tmux-256color PYTHONPATH='' nvim"
-fi
-
 else
     alias cd.="cd ."
     alias cd..="cd .."
