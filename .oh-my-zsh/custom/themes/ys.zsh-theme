@@ -106,8 +106,20 @@ ys_hg_prompt_info() {
 }
 
 YS_VENV_PROMPT_PREFIX1=" %{$fg[white]%}using%{$reset_color%} "
-YS_VENV_PROMPT_PREFIX2="%{$fg_bold[magenta]%}"
+YS_VENV_PROMPT_PREFIX2="%{$fg[magenta]%}"
 YS_VENV_PROMPT_SUFFIX="%{$reset_color%}"
+
+# Rez env info
+local rezenv_info='$(ys_rezenv_prompt_info)'
+ys_rezenv_prompt_info() {
+    local environment_str=""
+    # Add rezenv name if active
+    if [ -n "${AL_LAUNCHER_PRESET}" ]; then
+        local rezenv_ref=$(basename $AL_LAUNCHER_PRESET | cut -d':' -f1)
+        environment_str="${YS_VENV_PROMPT_PREFIX2}${rezenv_ref}${YS_VENV_PROMPT_SUFFIX}"
+        echo -n "${YS_VENV_PROMPT_PREFIX1}${environment_str}"
+    fi
+}
 
 # Python virtualenv info
 local virtualenv_info='$(ys_virtualenv_prompt_info)'
@@ -151,6 +163,7 @@ ${box_info}\
 %{$fg[white]%}in \
 ${current_dir}\
 ${virtualenv_info}\
+${rezenv_info}\
 ${hg_info}\
 ${git_info}
 ${prompt_symbol}"
@@ -164,6 +177,7 @@ PROMPT="
 %{$fg[white]%}in \
 ${current_dir}\
 ${virtualenv_info}\
+${rezenv_info}\
 ${hg_info}\
 ${git_info}
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
