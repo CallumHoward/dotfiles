@@ -4,4 +4,4 @@ setlocal nolist
 setlocal nonumber
 setlocal norelativenumber
 setlocal nocursorline
-setlocal spell
+"setlocal spell
