@@ -8,7 +8,7 @@
 
 # Machine name.
 function box_name {
-    [ -f ~/.box-name ] && cat ~/.box-name || echo $HOST
+    [ -f ~/.box-name ] && cat ~/.box-name || printf '%s\n' $HOST
 }
 
 YS_PWD_PROMPT_PREFIX1="%{$fg[yellow]%}"
@@ -28,23 +28,15 @@ ys_cd_info() {
     elif [[ $COLUMNS -lt 120 ]]; then
         shortpath='%(6~|%-3~/.../%2~|%5~)'
     else
-        local base=$(basename $PWD)
-        local dir="$(dirname $PWD | sed "s%^$HOME%\~%")/"
-
-        if [[ $PWD = "/" ]]; then
-            dir=""
-            base="/"
-        elif [[ "$dir" = "//" ]]; then
-            dir="/"
-        elif [[ "$PWD" = "$HOME" ]]; then
-            dir=""
-            base="~"
+        local vcsroot=${"$(git rev-parse --show-toplevel 2>/dev/null)"%[[:space:]][[:cntrl:]]}
+        if ! [[ "$vcsroot" == "$PWD" ]]; then
+            shortpath=${"${PWD}"#"${vcsroot%/*}/"}
+        else
+            shortpath=${${PWD}/"$HOME"/"~"}
         fi
-
-        shortpath="${dir}${YS_PWD_PROMPT_PREFIX2}${base}"
     fi
 
-    echo -n "${YS_PWD_PROMPT_PREFIX1}${shortpath}${YS_PWD_PROMPT_SUFFIX}"
+    printf "%s%s%s" ${YS_PWD_PROMPT_PREFIX1} ${shortpath} ${YS_PWD_PROMPT_SUFFIX}
 }
 
 #ys_cd_info() {
@@ -62,10 +54,10 @@ ys_cd_info() {
 #    fi
 #
 #    if [[ $COLUMNS -gt 90 && dir != base ]]; then
-#        echo -n "${YS_PWD_PROMPT_PREFIX1}${dir}"
+#        printf "%s%s" ${YS_PWD_PROMPT_PREFIX1} ${dir}
 #    fi
 #
-#    echo -n "${YS_PWD_PROMPT_PREFIX2}${base}${YS_PWD_PROMPT_SUFFIX}"
+#    printf "%s%s%s" ${YS_PWD_PROMPT_PREFIX2} ${base} ${YS_PWD_PROMPT_SUFFIX}
 #}
 
 
@@ -85,20 +77,20 @@ ZSH_THEME_GIT_PROMPT_DIRTY="$YS_VCS_PROMPT_DIRTY"
 ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
 
 # HG info
-local hg_info='$(ys_hg_prompt_info)'
-ys_hg_prompt_info() {
-    # make sure this is a hg dir
-    if [ -d '.hg' ]; then
-        echo -n "${YS_VCS_PROMPT_PREFIX1}hg${YS_VCS_PROMPT_PREFIX2}"
-        echo -n $(hg branch 2>/dev/null)
-        if [ -n "$(hg status 2>/dev/null)" ]; then
-            echo -n "$YS_VCS_PROMPT_DIRTY"
-        else
-            echo -n "$YS_VCS_PROMPT_CLEAN"
-        fi
-        echo -n "$YS_VCS_PROMPT_SUFFIX"
-    fi
-}
+#local hg_info='$(ys_hg_prompt_info)'
+#ys_hg_prompt_info() {
+#    # make sure this is a hg dir
+#    if [ -d '.hg' ]; then
+#        printf "%shg%s" ${YS_VCS_PROMPT_PREFIX1} ${YS_VCS_PROMPT_PREFIX2}
+#        printf "%s" $(hg branch 2>/dev/null)
+#        if [ -n "$(hg status 2>/dev/null)" ]; then
+#            printf "%s" $YS_VCS_PROMPT_DIRTY
+#        else
+#            printf "%s" $YS_VCS_PROMPT_CLEAN
+#        fi
+#        printf "%s" $YS_VCS_PROMPT_SUFFIX
+#    fi
+#}
 
 YS_VENV_PROMPT_PREFIX1=" %{$fg[white]%}using%{$reset_color%} "
 YS_VENV_PROMPT_PREFIX2="%{$fg_bold[magenta]%}"
@@ -112,41 +104,48 @@ ys_virtualenv_prompt_info() {
     if [ -n "${VIRTUAL_ENV}" ]; then
         local virtualenv_ref=$(basename $VIRTUAL_ENV)
         environment_str="${YS_VENV_PROMPT_PREFIX2}${virtualenv_ref}${YS_VENV_PROMPT_SUFFIX}"
-        echo -n "${YS_VENV_PROMPT_PREFIX1}${environment_str}"
+        printf "%s%s" ${YS_VENV_PROMPT_PREFIX1} ${environment_str}
     fi
 }
 
 # Box info
 local box_info='$(ys_box_info)'
 ys_box_info() {
-    if [[ "$COLUMNS" -lt 80 ]]; then
-        echo -n ""
-    else
-        echo -n "%{$fg[white]%}at %{$fg[green]%}$(box_name) "
+    if ! [[ "$COLUMNS" -lt 80 ]]; then
+        printf "%%{%s%%}at %%{%s%%}%s " $fg[white] $fg[green] $(box_name)
     fi
+}
+
+# shell nested level
+local nest_level='$(ys_nest_level)'
+ys_nest_level() {
+    if [[ -n "$TMUX" ]]; then
+        local LVL=$(($SHLVL - 1))
+    else
+        local LVL=$SHLVL
+    fi
+    printf '#%.0s' {1..$LVL}
 }
 
 # Prompt Symbol
 local prompt_symbol='$(ys_prompt_symbol)'
 ys_prompt_symbol() {
     if [[ -n "${HISTFILE}" ]]; then
-        echo -n "%{$terminfo[bold]$fg[red]%}"
+        printf "%%{%s%s%%}" $terminfo[bold] $fg[red]
     else
-        echo -n "%{$terminfo[bold]$fg[magenta]%}"
+        printf "%%{%s%s%%}" $terminfo[bold] $fg[magenta]
     fi
-
-    echo -n "$ %{$reset_color%}"
+    printf "$ %%{%s%%}" $reset_color
 }
 
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
 PROMPT="
-%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
+%{$terminfo[bold]$fg[blue]%}${nest_level}%{$reset_color%} \
 %{$fg[cyan]%}%n \
 ${box_info}\
 %{$fg[white]%}in \
 ${current_dir}\
 ${virtualenv_info}\
-${hg_info}\
 ${git_info}
 ${prompt_symbol}"
 
@@ -159,7 +158,6 @@ PROMPT="
 %{$fg[white]%}in \
 ${current_dir}\
 ${virtualenv_info}\
-${hg_info}\
 ${git_info}
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
 fi
