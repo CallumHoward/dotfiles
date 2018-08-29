@@ -16,12 +16,14 @@ function! ToggleDiff()
     else
         windo diffthis
     endif
+    wincmd w
 endfunction
 
 nnoremap <leader>d :call ToggleDiff()<CR>
 
-nnoremap <leader>t V:Twrite last<CR>
-xnoremap <leader>t :Twrite last<CR>
+let g:tbone_write_pane='bottom-right'
+nnoremap <leader>t V:Twrite<CR>
+xnoremap <leader>t :Twrite<CR>
 
 " gina mappings
 nnoremap <leader>a :GitGutterStageHunk<CR>
@@ -83,7 +85,7 @@ nnoremap <leader>f :set foldmethod=syntax<CR>
 " quickly set foldlevel
 nnoremap <leader>1 :set foldnestmax=1<CR>
 nnoremap <leader>2 :set foldnestmax=2<CR>
-nnoremap <leader>3 :set foldnestmax=2<CR>
+nnoremap <leader>3 :set foldnestmax=3<CR>
 
 " insert closing curly brace
 inoremap <expr> {<Enter> <SID>CloseBracket()
@@ -152,12 +154,28 @@ cabbrev vf <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert sf' : 'vf')<CR>
 cabbrev vsf <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert sf' : 'vsf')<CR>
 cabbrev ef <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'fin' : 'ef')<CR>
 
+" wrap git grep
+function! Ggrep(arg)
+    let s:temp=&grepprg
+    setlocal grepprg=git\ grep\ --ignore-case\ --no-color\ -n\ $*
+    silent execute ':grep '.a:arg
+    setlocal grepprg=git\ --no-pager\ submodule\ --quiet\ foreach\ 'git\ grep\ --full-name\ -n\ --ignore-case\ --no-color\ $*\ ;true'
+    silent execute ':grepadd '.a:arg
+    silent cwin
+    redraw!
+    setlocal grepprg=s:temp
+endfunction
+
+command! -nargs=1 -complete=buffer Gg call Ggrep(<q-args>)|let @/="<args>"|set hls
+cabbrev gg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gg' : 'gg')<CR>
+
 " use Ag/Rg for grep if available
 if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m|
-elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor | endif
+elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor\ --ignore\ build | endif
 com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
 com! -nargs=+ -complete=file -bar Ag sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
 cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
+cabbrev ag <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ag' : 'ag')<CR>
 
 " MRU command-line completion
 function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
