@@ -182,10 +182,9 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias mkdir="nocorrect mkdir"
     alias git="nocorrect git"
 
-    if which nvim > /dev/null 2>&1; then
+    if command -v nvim > /dev/null 2>&1; then
         alias vim="nocorrect env TERM=tmux-256color nvim"
     fi
-
 else
     alias cd.="cd ."
     alias cd..="cd .."
