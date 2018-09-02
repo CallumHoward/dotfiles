@@ -7,28 +7,38 @@ alias c="cf"
 
 alias rp="rsync -ahvz --progress;b"
 alias rv="rsync -ahvz --progress --remove-source-files;b"
-#alias iina="open -a iina"
-alias spotify="open -a spotify"
-alias slack="open -a slack"
-alias safari="open -a safari"
-alias docker="open -a docker"
-alias xcode="open -a xcode"
-#alias dash="open -a dash"
-alias notes="open -a notes"
-alias wavebox="open -a wavebox"
-alias eclipse="open -a eclipse"
-alias processing="open -a processing"
-alias keycastr="open -a keycastr"
-alias filezilla="open -a filezilla"
-alias wireshark="open -a wireshark"
-alias vlc="open -a vlc"
-alias harvest="open -a harvest"
-alias haskell="open -a haskell"
-alias handbrake="open -a handbrake"
-alias hyper="open -a hyper"
-alias activity="open -a activity\ monitor"
-alias chrome="open -a google\ chrome"
-alias k="open -a Keychain\ Access"
+
+if [[ "$OSTYPE" =~ "darwin" ]]; then
+    #alias iina="open -a iina"
+    alias spotify="open -a spotify"
+    alias slack="open -a slack"
+    alias safari="open -a safari"
+    alias docker="open -a docker"
+    alias xcode="open -a xcode"
+    #alias dash="open -a dash"
+    alias notes="open -a notes"
+    alias wavebox="open -a wavebox"
+    alias eclipse="open -a eclipse"
+    alias processing="open -a processing"
+    alias keycastr="open -a keycastr"
+    alias filezilla="open -a filezilla"
+    alias wireshark="open -a wireshark"
+    alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+    alias harvest="open -a harvest"
+    alias haskell="open -a haskell"
+    alias handbrake="open -a handbrake"
+    alias hyper="open -a hyper"
+    alias activity="open -a activity\ monitor"
+    alias chrome="open -a google\ chrome"
+    alias k="open -a Keychain\ Access"
+
+    alias htop="sudo htop"
+
+    alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
+    alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
+    alias xc=xcd
+fi
+
 alias oo="o"
 alias d="fasd_cd -d"
 
@@ -54,7 +64,6 @@ alias vs="code"
 alias v.="v ."
 alias vd="v -d"
 
-alias htop="sudo htop"
 alias vtop="vtop --theme brew"
 alias goto=". goto"
 alias su="sudo su"
@@ -65,9 +74,6 @@ alias ipscan="arp -a | sed 's/ at.*$//' | sed 's/\.gateway//' | sed 's/[\(\)]//g
 
 alias m="make"
 alias mc="make clean"
-alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
-alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
-alias xc=xcd
 alias :q="exit"
 alias t="tree -L2 *"
 
