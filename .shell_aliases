@@ -189,25 +189,34 @@ else
     alias cp="cp -i"
 fi
 
-if which sn > /dev/null 2>&1; then
+if command -v sn > /dev/null 2>&1; then
     alias ds="sn sort -n 10 | head -9 | sed 's/\.\///'"
 else
     alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
 fi
 
-if which jq > /dev/null 2>&1; then
+if command -v jq > /dev/null 2>&1; then
     alias jq="python -m json.tool"
 fi
 
-if which exa > /dev/null 2>&1; then
+if command -v exa > /dev/null 2>&1; then
     alias ls="exa"
     alias tree="exa --tree"
 fi
 
-if which gcal > /dev/null 2>&1; then
+if command -v gcal > /dev/null 2>&1; then
     alias cal="gcal"
 fi
 
-if which hub > /dev/null 2>&1; then
+if command -v hub > /dev/null 2>&1; then
     alias git="hub"
+fi
+
+if ! command -v fd > /dev/null 2>&1; then
+    alias fd="find . -iname"
+fi
+
+if command -v xclip > /dev/null 2>&1; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
 fi
