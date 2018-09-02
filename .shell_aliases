@@ -87,13 +87,17 @@ alias bu="brew update && brew upgrade && brew cleanup;b"
 alias j="jobs"
 
 alias s.="s ."
+alias g="git"
 alias s="git sb"
 alias a="git_add"
-alias ga="echo 'use a'"
-alias gc="echo 'use cm'"
+alias ga="git_add"
+alias gc="git_commit"
+alias gcv="git_commit -v"
 alias grs="git_reset"
+alias gd="git diff"
 alias gd.="git diff ."
 alias gdd="git difftool"
+alias gdv="nvim +Gina\ diff\|set\ nonu\ nornu"
 alias gg="git grep -i -n --heading --break"
 alias lg="git lg"
 alias clo="git clone --recursive -j4"
@@ -105,11 +109,33 @@ alias ba="git branch -a"
 alias push="git push"
 alias pull="git pull"
 alias stash="git stash"
+alias show="git show"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
+
 alias snatch="zou"
 alias translate="trans"
 alias dict="trans -d"
 alias powershell="pwsh"
+
+if [ "`basename $SHELL`" = "zsh" ]; then
+    # if using with hub:
+    # https://github.com/robbyrussell/oh-my-zsh/issues/1727#issuecomment-22366771
+    # brew uninstall --force git && brew install git --without-completions
+    compdef _git s=git-status
+    compdef _git a=git-add
+    compdef _git ga=git-add
+    compdef _git gc=git-commit
+    compdef _git grs=git-reset
+    compdef _git gd=git-diff
+    compdef _git stash=git-stash
+    compdef _git co=git-checkout
+    compdef _git gco=git-checkout
+    compdef _git lg=git-log
+    compdef _git ba=git-branch
+    compdef _git push=git-push
+    compdef _git pull=git-pull
+    compdef _git show=git-show
+fi
 
 alias show_desktop_icons="defaults write com.apple.finder CreateDesktop true; killall Finder"
 alias hide_desktop_icons="defaults write com.apple.finder CreateDesktop false; killall Finder"
