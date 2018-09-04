@@ -112,7 +112,10 @@ ys_virtualenv_prompt_info() {
 local box_info='$(ys_box_info)'
 ys_box_info() {
     if ! [[ "$COLUMNS" -lt 80 ]]; then
-        printf "%%{%s%%}at %%{%s%%}%s " $fg[white] $fg[green] $(box_name)
+        if ! [[ -n "$BOX_NAME" ]]; then
+            BOX_NAME=$(box_name)  # cache box name to avoid reading from disk
+        fi
+        printf "%%{%s%%}at %%{%s%%}%s " $fg[white] $fg[green] $BOX_NAME
     fi
 }
 
