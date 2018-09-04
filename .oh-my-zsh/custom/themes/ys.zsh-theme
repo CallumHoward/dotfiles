@@ -143,7 +143,7 @@ ys_prompt_symbol() {
 
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
 PROMPT="
-%{$terminfo[bold]$fg[blue]%}${nest_level}%{$reset_color%} \
+%{$terminfo[bold]$fg[blue]%}${nest_level}%(1j.%j.)%{$reset_color%} \
 %{$fg[cyan]%}%n \
 ${box_info}\
 %{$fg[white]%}in \
