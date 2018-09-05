@@ -15,24 +15,29 @@ YS_PWD_PROMPT_PREFIX1="%{$fg[yellow]%}"
 YS_PWD_PROMPT_PREFIX2="%{$fg_bold[yellow]%}"
 YS_PWD_PROMPT_SUFFIX="%{$reset_color%}"
 
+# vcs_info config
+zstyle ':vcs_info:git*' formats "%r/%S"
+
 # Directory info.
 local current_dir='$(ys_cd_info)'
-
 ys_cd_info() {
     local shortpath
 
     if [[ $COLUMNS -lt 80 ]]; then
-        shortpath='%1~'
+        shortpath="${YS_PWD_PROMPT_PREFIX2}%1~"
     elif [[ $COLUMNS -lt 100 ]]; then
-        shortpath='%(5~|%-2~/.../%2~|%3~)'
+        shortpath="%(5~|%-2~/.../%2~|%3~)"
     elif [[ $COLUMNS -lt 120 ]]; then
-        shortpath='%(6~|%-3~/.../%2~|%5~)'
+        shortpath="%(6~|%-3~/.../%2~|%5~)"
     else
-        local vcsroot=${"$(git rev-parse --show-toplevel 2>/dev/null)"%[[:space:]][[:cntrl:]]}
-        if ! [[ "$vcsroot" == "$PWD" ]]; then
-            shortpath=${"${PWD}"#"${vcsroot%/*}/"}
+        if [[ "${vcs_info_msg_0_}" != "" ]] && [[ "${vcs_info_msg_0_%/.}" != "${PWD##*/}" ]]; then
+            shortpath="${vcs_info_msg_0_%/.}"
         else
             shortpath=${${PWD}/"$HOME"/"~"}
+        fi
+
+        if [[ "$shortpath" =~ "/" ]]; then
+            shortpath="${shortpath%/*}/${YS_PWD_PROMPT_PREFIX2}${shortpath##*/}"
         fi
     fi
 
