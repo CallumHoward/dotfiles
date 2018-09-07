@@ -3,8 +3,8 @@
 " Callum Howard
 
 " ==== dein Scripts ====
-set runtimepath^=~/.dein/repos/github.com/Shougo/dein.vim
-call dein#begin(expand('~/.dein/'))
+set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
+call dein#begin(expand('~/.cache/dein'))
 
 " Add or remove plugins here:
 call dein#add('Shougo/dein.vim')                    " plugin manager
@@ -79,8 +79,7 @@ call dein#add('mxw/vim-jsx')                        " can't be lazy
 
 call dein#end()
 filetype plugin indent on
-let g:dein#install_log_filename = '~/.dein/dein_install.log'
-
+let g:dein#install_log_filename = '~/.cache/dein/dein_install.log'
 " ==== end dein Scripts ====
 
 " netrw filebrowser config
