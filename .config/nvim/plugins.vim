@@ -25,6 +25,10 @@ call dein#add('zchee/deoplete-jedi')                " can't be lazy
 "call dein#add('artur-shaik/vim-javacomplete2',      {'on_ft': 'java'})
 call dein#add('zchee/deoplete-clang')               " can't be lazy
 "call dein#add('carlitux/deoplete-ternjs', {'on_ft': 'javascript'})
+call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'next',
+    \ 'build': 'bash install.sh',
+    \ })
 
 " feature plugins
 call dein#add('neomake/neomake')
@@ -257,6 +261,43 @@ let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.d
 let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
 let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++14', 'objc': 'c11', 'objcpp': 'c++1z'}
 let g:deoplete#sources#clang#flags = ['-I/usr/local/opt/boost/include', '-I~/Documents/Cinder.git/include', '-I~/range-v3/include']
+
+" language server
+let g:LanguageClient_serverCommands = {
+            \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+            \ 'python': ['/scratch/callumh/.linuxbrew/bin/pyls'],
+            \ }
+
+let g:LanguageClient_diagnosticsDisplay = {
+            \     1: {
+            \         "name": "Error",
+            \         "texthl": "ALEError",
+            \         "signText": "-!",
+            \         "signTexthl": "NeomakeErrorSign",
+            \     },
+            \     2: {
+            \         "name": "Warning",
+            \         "texthl": "ALEWarning",
+            \         "signText": "-!",
+            \         "signTexthl": "NeomakeWarningSign",
+            \     },
+            \     3: {
+            \         "name": "Information",
+            \         "texthl": "ALEInfo",
+            \         "signText": "-i",
+            \         "signTexthl": "NeomakeInfoSign",
+            \     },
+            \     4: {
+            \         "name": "Hint",
+            \         "texthl": "ALEInfo",
+            \         "signText": "->",
+            \         "signTexthl": "NeomakeMessageSign",
+            \     },
+            \ }
+
+nnoremap <leader>x :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 
 " echodoc config
 let g:echodoc_enable_at_startup = 1
