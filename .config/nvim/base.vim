@@ -62,7 +62,32 @@ autocmd FilterWritePre * if &diff | set fdc=0 | endif
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " set title for tmux
-autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
+if exists('$TMUX')
+    autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
+endif
+
+if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
+    function! SetTerminalTitle() abort
+        if bufname('%') != '' && bufname('%') !~ '^term'
+            let titleString = 'file://'.expand('%:p:gs/\ /%20/')
+        else
+            let titleString = 'file://'.expand(getcwd())
+            return
+        endif
+
+        " this is the format Terminal.app expects when setting the proxy icon
+        if exists('$TMUX')
+            let args = 'Ptmux;]7;'.titleString.'\\'
+        else
+            let args = ']7;'.titleString.''
+        endif
+
+        let cmd = 'call chansend(2, "'.args.'")'
+        execute cmd
+    endfunction
+
+    autocmd WinEnter,BufWinEnter,FocusGained * call SetTerminalTitle()
+endif
 
 " check for and load file changes
 autocmd WinEnter,BufWinEnter,FocusGained * checktime
