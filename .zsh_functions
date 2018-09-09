@@ -75,12 +75,17 @@ function bo() {
 
 # open applications, directories and files on macOS
 function o() {
+    local bin="open"
+    if command -v xdg-open > /dev/null 2>&1; then
+        bin="xdg-open"
+    fi
+
     if [ "$#" -eq 0 ]; then
-        open .
+        $bin .
     elif [ -d /Applications/"$1".app ]; then
-        open -a $1
+        $bin -a $1
     else
-        open $1
+        $bin $1
     fi
 }
 
