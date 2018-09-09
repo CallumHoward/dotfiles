@@ -57,6 +57,12 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " set title for tmux
 autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
 
+set title
+set t_ts=]6;
+set t_fs=
+set titlestring=%{bufname('%')==''?'':'file://'.hostname().expand('%:p:gs/\ /%20/')}
+set titlelen=0
+
 " check for and load file changes
 autocmd WinEnter,BufWinEnter,FocusGained * checktime
 
