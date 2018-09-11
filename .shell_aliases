@@ -125,6 +125,7 @@ alias snatch="zou"
 alias translate="trans"
 alias dict="trans -d"
 alias powershell="pwsh"
+alias ncdu="ncdu --color dark"
 
 if [ "`basename $SHELL`" = "zsh" ]; then
     # if using with hub:
