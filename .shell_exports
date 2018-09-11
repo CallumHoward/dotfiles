@@ -55,12 +55,14 @@ export CUDA_HOME=/usr/local/cuda
 export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
 export PATH="$CUDA_HOME/bin:$PATH"
 
-
+# FZF
+export FZF_DEFAULT_OPTS='--reverse'
 export FZF_DEFAULT_COMMAND=' \
   (git ls-tree -r --name-only HEAD || \
    find . -path "*/\.*" -prune -o -type f -print -o -type l -print | \
       sed s/^..//) 2> /dev/null'
 
+# skim
 export SKIM_DEFAULT_OPTIONS='--reverse --ansi \
     --color=current_bg:0,matched:3,info:11,spinner:15,cursor:0,prompt:6,selected:1'
 
