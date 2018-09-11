@@ -181,12 +181,16 @@ alias skg="sk -i -c 'rg --line-number --color=always \"{}\" -S \
 if [ "`basename $SHELL`" = "zsh" ]; then
     alias cd.="nocorrect cd ."
     alias cd..="nocorrect cd .."
-    alias cd...="nocorrect cd ..."
-    alias cd....="nocorrect cd ...."
-    alias cd.....="nocorrect cd ....."
-    alias mv="nocorrect mv -i"
-    alias cp="nocorrect cp -i"
-    alias mkdir="nocorrect mkdir"
+    alias cd...="nocorrect cd ../.."
+    alias cd....="nocorrect cd ../../.."
+    alias cd.....="nocorrect cd ../../../.."
+    alias ..="nocorrect cd .."
+    alias ...="nocorrect cd ../.."
+    alias ....="nocorrect cd ../../.."
+    alias .....="nocorrect cd ../../../.."
+    alias mv="nocorrect mv -iv"
+    alias cp="nocorrect cp -iv"
+    alias mkdir="nocorrect mkdir -pv"
     alias git="nocorrect git"
 
     if command -v nvim > /dev/null 2>&1; then
@@ -198,8 +202,13 @@ else
     alias cd...="cd ..."
     alias cd....="cd ...."
     alias cd.....="cd ....."
-    alias mv="mv -i"
-    alias cp="cp -i"
+    alias ..="cd .."
+    alias ...="cd ..."
+    alias ....="cd ...."
+    alias .....="cd ....."
+    alias mv="mv -iv"
+    alias cp="cp -iv"
+    alias mkdir="mkdir -pv"
 fi
 
 if command -v sn > /dev/null 2>&1; then
