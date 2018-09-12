@@ -1,33 +1,31 @@
 # vim: set ft=zsh
 
 # Zsh suffix aliases
-if [ "`basename $SHELL`" = "zsh" ]; then
-    local _text_fts=(log conf md yaml inl asc txt TXT tex)
-    local _source_fts=(cpp cxx cc c hh hpp h java)
-    local _web_source_fts=(htm html xhtml xml json js jsx css scss)
-    local _editor_fts=($_text_fts $_source_fts $_web_source_fts)
+local _text_fts=(log conf md yaml inl asc txt TXT tex)
+local _source_fts=(cpp cxx cc c hh hpp h java)
+local _web_source_fts=(htm html xhtml xml json js jsx css scss)
+local _editor_fts=($_text_fts $_source_fts $_web_source_fts)
 
-    for ft in $_editor_fts; do
-        alias -s $ft=$EDITOR
-    done
+for ft in $_editor_fts; do
+    alias -s $ft=$EDITOR
+done
 
-    alias -s com="w3m"
-    alias -s org="w3m"
-    alias -s net="w3m"
+alias -s com="w3m"
+alias -s org="w3m"
+alias -s net="w3m"
 
-    # open aliases, see .zsh_functions
-    alias -s xcodeproj="o"
-    alias -s pdf="o"
+# open aliases, see .zsh_functions
+alias -s xcodeproj="o"
+alias -s pdf="o"
 
-    alias -s zip="als"
-    alias -s tar="als"
-    alias -s rar="als"
-    alias -s 7z="als"
+alias -s zip="als"
+alias -s tar="als"
+alias -s rar="als"
+alias -s 7z="als"
 
-    alias -s git="clo"
+alias -s git="clo"
 
-    alias -s exe="mono"
-fi
+alias -s exe="mono"
 
 
 # Sound bell after these commands
