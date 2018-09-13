@@ -41,6 +41,11 @@ source ~/.zsh_functions
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
+# git info for prompt
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git #svn
+add-zsh-hook precmd vcs_info
+
 # gitsome completion
 if [ -d .gitsome ]; then
     autoload bashcompinit
