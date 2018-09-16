@@ -16,6 +16,7 @@ ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=brightwhite,bold,underline'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=red'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=red'
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=white'
+ZSH_HIGHLIGHT_STYLES[comment]='fg=blue'
 
 # history-search-multi-word configuration
 typeset -gA HSMW_HIGHLIGHT_STYLES
@@ -37,3 +38,6 @@ zstyle ":history-search-multi-word" highlight-color "fg=yellow,underline,bg=8"
 # Effect on active history entry. Try: standout, bold, bg=blue
 zstyle ":plugin:history-search-multi-word" active "none"
 
+if ! [[ $OSTYPE =~ "darwin" ]]; then
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=237'
+fi
