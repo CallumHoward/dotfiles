@@ -15,19 +15,20 @@ ENABLE_CORRECTION="true"
 
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
 plugins=( \
-    docker \
-    git \
-    history-search-multi-word \
-    history-substring-search \
-    meteor \
-    mosh \
-    npm \
+    #docker \
+    #meteor \
+    #mosh \
+    #npm \
+    #vi-mode \
+    zsh-vim-mode \
+    proxy-title \
     pip \
-    vi-mode \
-    virtualenv \
     fasd \
+    history-substring-search \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
+    zsh-system-clipboard \
+    history-search-multi-word \
 )
 
 source $ZSH/oh-my-zsh.sh
