@@ -41,7 +41,7 @@ call dein#add('tpope/vim-abolish')                  " deal with word variants
 "call dein#add('cloudhead/neovim-fuzzy')
 "call dein#add('yuttie/comfortable-motion.vim')
 call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
-call dein#add('~/git/vim-foldfunctions')            " only fold functions
+call dein#add('chrisjohnson/vim-foldfunctions')            " only fold functions
 call dein#add('junegunn/goyo.vim', {'on_cmd': 'Goyo'})  " focus mode
 call dein#add('junegunn/limelight.vim')             " focus mode
 call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
@@ -57,6 +57,8 @@ call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
 call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
 call dein#add('tpope/vim-tbone')                    " send text to tmux pane
 call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
+"call dein#add('yamahigashi/sendtomaya.vim')
+call dein#add('romainl/vim-devdocs')
 
 " keybindings
 call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
@@ -183,6 +185,7 @@ let g:gitgutter_sign_removed =  '.'
 let g:gitgutter_sign_removed_first_line =  '˙'
 let g:gitgutter_sign_modified_removed = '│'
 let g:gitgutter_override_sign_column_highlight = 0
+"let g:gitgutter_diff_args = '-w'
 "let g:gitgutter_map_keys = 0
 
 " signature config
