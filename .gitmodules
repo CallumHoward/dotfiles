@@ -13,3 +13,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git://github.com/CallumHoward/nvim
+[submodule ".oh-my-zsh/custom/plugins/zsh-system-clipboard"]
+	path = .oh-my-zsh/custom/plugins/zsh-system-clipboard
+	url = https://github.com/kutsan/zsh-system-clipboard.git
