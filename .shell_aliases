@@ -133,6 +133,8 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     # if using with hub:
     # https://github.com/robbyrussell/oh-my-zsh/issues/1727#issuecomment-22366771
     # brew uninstall --force git && brew install git --without-completions
+    # as of September 2018, formula needs to be pinned.
+    # https://stackoverflow.com/a/17757092
     compdef _git s=git-status
     compdef _git a=git-add
     compdef _git ga=git-add

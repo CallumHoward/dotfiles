@@ -39,6 +39,10 @@ source ~/.zsh_keybindings
 source ~/.zsh_styles
 source ~/.zsh_functions
 
+bindkey -M viins 'kj' vi-cmd-mode
+
+setopt complete_aliases
+
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
