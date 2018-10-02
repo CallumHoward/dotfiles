@@ -14,19 +14,20 @@ ENABLE_CORRECTION="true"
 #fi
 
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
+# NOTE load autosuggestions after syntax highlighting
 plugins=( \
     #docker \
     #meteor \
     #mosh \
     #npm \
     #vi-mode \
-    zsh-vim-mode \
     proxy-title \
     pip \
     fasd \
     history-substring-search \
-    zsh-autosuggestions \
     zsh-syntax-highlighting \
+    zsh-autosuggestions \
+    #zsh-vim-mode \
     zsh-system-clipboard \
     history-search-multi-word \
 )
