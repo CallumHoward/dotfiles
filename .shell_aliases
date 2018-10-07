@@ -238,3 +238,9 @@ if command -v xclip > /dev/null 2>&1; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
 fi
+
+if command -v browsh > /dev/null 2>&1; then
+    alias browse="browsh --startup-url"
+elif command -v w3m > /dev/null 2>&1; then
+    alias browse="w3m"
+fi
