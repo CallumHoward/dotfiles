@@ -15,8 +15,9 @@ ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=14,bold'
 ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=brightwhite,bold,underline'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=red'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=red'
-ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=white'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[comment]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=white'
 
 # history-search-multi-word configuration
 typeset -gA HSMW_HIGHLIGHT_STYLES
@@ -40,4 +41,6 @@ zstyle ":plugin:history-search-multi-word" active "none"
 
 if ! [[ $OSTYPE =~ "darwin" ]]; then
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=237'
+else
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=12'
 fi
