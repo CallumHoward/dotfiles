@@ -36,7 +36,7 @@ function cf() {
     local bin=`which exa`
     if ! [ -x $bin ]; then bin = ls; fi
     if [ "$1" != "" ]; then cd $1; fi
-    local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | sk`
+    local dir=`walker 2>/dev/null | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | sk`
     if [ "$dir" != "" ]; then cd $dir; fi
     # ls after cd, but only if there are less then 50 items in the directory
     if (( `ls | wc -l` < 50 )); then $bin --group-directories-first -x; fi
