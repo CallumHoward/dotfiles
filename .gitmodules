@@ -7,3 +7,6 @@
 [submodule ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule ".oh-my-zsh/custom/plugins/history-search-multi-word"]
+	path = .oh-my-zsh/custom/plugins/history-search-multi-word
+	url = https://github.com/zdharma/history-search-multi-word.git
