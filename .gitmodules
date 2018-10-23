@@ -10,3 +10,6 @@
 [submodule ".oh-my-zsh/custom/plugins/history-search-multi-word"]
 	path = .oh-my-zsh/custom/plugins/history-search-multi-word
 	url = https://github.com/zdharma/history-search-multi-word.git
+[submodule ".oh-my-zsh/custom/plugins/auto-fu"]
+	path = .oh-my-zsh/custom/plugins/auto-fu
+	url = https://github.com/hchbaw/auto-fu.zsh.git
