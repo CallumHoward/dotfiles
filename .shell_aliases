@@ -79,6 +79,7 @@ alias t="tree -L2 *"
 
 alias cp="cp -i"
 alias mv="mv -i"
+alias rm="rm -v"
 alias gdb="gdb -q"
 
 alias yt="youtube-dl"
