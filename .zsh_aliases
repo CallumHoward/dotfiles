@@ -60,6 +60,7 @@ alias -g G='| grep'
 alias -g NE='2> /dev/null'
 alias -g NO='&>|/dev/null'
 alias -g DN='> /dev/null 2>&1'
+alias -g DNA='> /dev/null 2>&1'
 alias -g MD='mv ~/Downloads/*(.om[1]) .; ls'
 
 alias -g SR='| sort -nr'
