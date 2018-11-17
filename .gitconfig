@@ -47,3 +47,5 @@
     oldHighlight = 160 52
     newNormal = 83
     newHighlight = 83 22
+[credential]
+    helper = cache --timeout=3600000
