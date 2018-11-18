@@ -41,10 +41,12 @@ call dein#add('tpope/vim-abolish')                  " deal with word variants
 "call dein#add('cloudhead/neovim-fuzzy')
 "call dein#add('yuttie/comfortable-motion.vim')
 call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
-call dein#add('chrisjohnson/vim-foldfunctions')            " only fold functions
+call dein#add('tmhedberg/SimpylFold')               " fold python classes and functions
+call dein#add('chrisjohnson/vim-foldfunctions')     " only fold functions
 call dein#add('junegunn/goyo.vim', {'on_cmd': 'Goyo'})  " focus mode
 call dein#add('junegunn/limelight.vim')             " focus mode
 call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
+call dein#add('wellle/targets.vim')                 " extended text objects
 
 " wrap external tools
 call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
@@ -52,7 +54,7 @@ call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
 call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
 call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
 call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
-call dein#add('lotabout/skim.vim',                  {'depends': 'skim'})
+call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
 call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
 call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
 call dein#add('tpope/vim-tbone')                    " send text to tmux pane
@@ -334,14 +336,14 @@ let g:list_of_insert_keys = []
 function! s:goyo_enter()
     set nonu nornu
     HardTimeOff
-    Limelight
+    "Limelight
 endfunction
 
 function! s:goyo_leave()
     if &ft == 'man' | q | endif
     set nu rnu
     HardTimeOn
-    Limelight!
+    "Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -354,3 +356,24 @@ let g:limelight_conceal_guifg = '#80a0ff'
 " cpp enhanced highlight conifg
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight = 1
+
+" FZF and Skim config
+autocmd! FileType fzf,skim
+autocmd  FileType fzf,skim set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+
+command! -bang -nargs=* RG
+  \ call fzf#vim#grep(
+  \   'rg --colors "path:fg:green" --colors "path:style:nobold" --colors "line:fg:yellow" --colors "line:style:nobold" --colors "match:fg:black" --colors "match:bg:yellow" --column --line-number --no-heading --color=always --colors "match:style:nobold" --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
