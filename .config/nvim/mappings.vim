@@ -144,6 +144,7 @@ endfunction
 
 nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
 cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.')<CR>
+cabbrev cdg Gina cd
 
 " grep for word under cursor
 nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
