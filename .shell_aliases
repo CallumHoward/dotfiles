@@ -174,7 +174,7 @@ alias rg="rg -S \
 #    -g '!Music/'"
 
 alias skag="sk -i -c 'ag --color \"{}\"'"
-alias skg="sk -i -c 'rg --line-number --color=always \"{}\" -S \
+alias skg="sk -i -c 'rg --glob=!tags --line-number --color=always \"{}\" -S \
     --colors 'path:fg:green' \
     --colors 'path:style:nobold' \
     --colors 'line:fg:yellow' \
