@@ -25,8 +25,11 @@ let g:tbone_write_pane='bottom-right'
 nnoremap <leader>t V:Twrite<CR>
 xnoremap <leader>t :Twrite<CR>
 
-" gina mappings
+" git mappings
 nnoremap <leader>a :GitGutterStageHunk<CR>
+nnoremap <leader>gu :GitGutterUndoHunk<CR>
+nnoremap <leader>ggm :let g:gitgutter_diff_base='master'<CR>
+nnoremap <leader>ggm :let g:gitgutter_diff_base=''<CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gp :Gina push<CR>
