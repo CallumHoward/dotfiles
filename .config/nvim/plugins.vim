@@ -357,6 +357,10 @@ let g:limelight_conceal_guifg = '#80a0ff'
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight = 1
 
+" SimpylFold config
+let g:SimpylFold_fold_docstring = 0
+let g:SimpylFold_fold_import = 0
+
 " FZF and Skim config
 autocmd! FileType fzf,skim
 autocmd  FileType fzf,skim set laststatus=0 noshowmode noruler
