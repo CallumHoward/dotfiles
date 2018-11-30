@@ -81,6 +81,7 @@ nnoremap <silent> ]B :blast<CR>
 " accordion expand traversal of folds
 nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
 nnoremap <silent> z[ :<C-u>silent! normal! zc<CR>zkzo[zzz
+nnoremap <silent> zV :<C-u>silent! normal! zM<CR>zv
 
 " resync folds
 nnoremap <leader>f :set foldmethod=syntax<CR>
