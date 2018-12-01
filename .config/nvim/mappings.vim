@@ -188,7 +188,7 @@ function! s:MRUComplete(ArgLead, CmdLine, CursorPos)
 endfunction
 
 " browse most recently opened files with :O or :o
-command! -nargs=? -complete=customlist,<sid>MRUComplete O if empty("<args>") | :browse oldfiles | else | :e <args> | endif
+com! -nargs=? -complete=customlist,<sid>MRUComplete O if empty("<args>")|bro o|else|e <args>|endif
 cabbrev o <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'O' : 'o')<CR>
 
 function! s:CloseBracket()
