@@ -4,6 +4,7 @@
 
 " add word under cursor to search pattern
 nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
+nnoremap <leader>/ /<C-R>/\\|
 
 " go to alternate file
 nnoremap <leader>e :e %<.
