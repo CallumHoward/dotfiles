@@ -47,6 +47,7 @@ call dein#add('junegunn/goyo.vim', {'on_cmd': 'Goyo'})  " focus mode
 call dein#add('junegunn/limelight.vim')             " focus mode
 call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
 call dein#add('wellle/targets.vim')                 " extended text objects
+call dein#add('michaeljsmith/vim-indent-object')    " indent text object
 
 " wrap external tools
 call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
