@@ -102,6 +102,7 @@ alias gc="git_commit"
 alias gcv="git_commit -v"
 alias grs="git_reset"
 alias grv="git remote -v"
+alias gmm="git merge master"
 alias gcd='cd "`git rev-parse --show-toplevel 2>/dev/null | head -1`"'
 alias cdg="gcd"
 alias gd="git diff"
