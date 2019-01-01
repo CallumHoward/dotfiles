@@ -29,8 +29,9 @@ xnoremap <leader>t :Twrite<CR>
 " git mappings
 nnoremap <leader>a :GitGutterStageHunk<CR>
 nnoremap <leader>gu :GitGutterUndoHunk<CR>
+nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
 nnoremap <leader>ggm :let g:gitgutter_diff_base='master'<CR>
-nnoremap <leader>ggm :let g:gitgutter_diff_base=''<CR>
+nnoremap <leader>ggh :let g:gitgutter_diff_base=''<CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gp :Gina push<CR>
