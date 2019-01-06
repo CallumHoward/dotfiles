@@ -35,6 +35,7 @@ set pumheight=5                 " maximum number of items in completion popup
 set ignorecase                  " for search patterns
 set smartcase                   " don't ignore case if capital is used
 
+set path+=~/.config/nvim        " always have config files in path
 set path+=**                    " recursive filepath completion
 set wildmode=list:longest,full  " show options if completion is ambiguous
 set wildignorecase              " ignore case in commandline filename completion
