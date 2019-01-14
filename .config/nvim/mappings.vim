@@ -38,6 +38,10 @@ nnoremap <leader>gp :Gina push<CR>
 nnoremap <leader>g :Gina 
 nnoremap <silent> <leader>b :Gina browse : --scheme=blame<CR>
 
+" move tabs
+nnoremap <silent>g> :tabm +1<CR>
+nnoremap <silent>g< :tabm -1<CR>
+
 " xcode mappings
 "nnoremap <silent> <leader>r :wa <bar> silent exec "!xcoderun.sh ".getcwd()."/xcode/ ".fnamemodify(getcwd(), ':t').".xcodeproj &" <bar> redraw!<CR>
 "nnoremap <silent> <leader>x :wa <bar> silent exec "!xcodeopen.sh ".getcwd()."/xcode/ ".fnamemodify(getcwd(), ':t').".xcodeproj ".line('.')." ".@%." &" <bar> redraw!<CR>
