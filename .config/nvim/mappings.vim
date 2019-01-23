@@ -104,6 +104,9 @@ nnoremap <leader>3 :set foldnestmax=3<CR>
 " insert closing curly brace
 inoremap <expr> {<Enter> <SID>CloseBracket()
 
+" readline-like delete to end of line
+imap <C-k> <C-o>D
+
 " convert c-style prototypes to functions
 nnoremap <leader>; :keeppatterns %s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
 xnoremap <leader>; :s/;$/ {\r\r}\r<CR>:noh<CR><C-O>
