@@ -365,8 +365,8 @@ let g:SimpylFold_fold_import = 0
 " FZF and Skim config
 autocmd! FileType fzf,skim
 autocmd  FileType fzf,skim set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+  \| autocmd BufLeave <buffer> set laststatus=2 "showmode ruler
+"let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
 command! -bang -nargs=* RG
   \ call fzf#vim#grep(
@@ -375,8 +375,13 @@ command! -bang -nargs=* RG
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-command! -bang -nargs=? -complete=dir Files
+command! -bang -nargs=? -complete=dir F
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! B :Buffers
+command! W :Windows
+command! T :Tags
+command! S :GitFiles?
 
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
