@@ -89,6 +89,27 @@ function o() {
     fi
 }
 
+function browse() {
+    local gitpath=`git rev-parse --show-prefix 2>/dev/null | head -1`
+    if [[ gitpath == '' ]]; then return; fi
+
+    local remote="origin"
+    if [ "$#" -ne 0 ]; then
+        remote="$1"
+    fi
+
+    local url=`git remote get-url $remote | head -1`
+    if [[ "$url" =~ "@" ]]; then
+        url="${url/':'//}"
+        url="${url/*\@/https://}"
+    fi
+
+    url="${url/".git"}"
+
+    local branch=`git rev-parse --abbrev-ref HEAD | head -1`
+    xdg-open "$url/tree/$branch/$gitpath" || open "$url/tree/$branch/$gitpath"
+}
+
 function git_add() {
     if [ "$#" -eq 0 ]; then
         git add .
