@@ -45,6 +45,13 @@ if echo "$answer" | grep -viq "^n" ; then
 fi
 echo "Finished installing oh-my-zsh"
 
+echo -n "Install Tmux Plugin Manager [Y/n]? "
+read answer
+if echo "$answer" | grep -viq "^n" ; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+echo "Finished installing Tmux Plugin Manager"
+
 echo "Creating symlinks for dotfiles"
 for i in "${files[@]}"; do
     if [ "`ls ~/$i 2> /dev/null`" == "" ]; then
