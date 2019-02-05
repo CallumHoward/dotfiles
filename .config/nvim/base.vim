@@ -53,6 +53,11 @@ set foldnestmax=1
 set nofoldenable
 set foldopen-=block
 
+set rulerformat=%=%P
+nnoremap <silent><ScrollWheelUp> :set ruler nornu<CR><ScrollWheelUp>
+nnoremap <silent><ScrollWheelDown> :set ruler nornu<CR><ScrollWheelDown>
+autocmd CursorHold * set noruler
+
 " diff config
 set diffopt+=iwhite "ignore whitespace
 
