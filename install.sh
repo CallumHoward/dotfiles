@@ -42,6 +42,7 @@ if echo "$answer" | grep -viq "^n" ; then
     rm -rf ~/.oh-my-zsh/custom
     ln -fs `pwd`/.oh-my-zsh/custom ~/.oh-my-zsh/custom
     rm ~/.zshrc
+    git submodule init && git submodule update
 fi
 echo "Finished installing oh-my-zsh"
 
