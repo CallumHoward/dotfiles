@@ -2,6 +2,9 @@
 " Vim mappings configuration
 " Callum Howard
 
+nnoremap ' `
+nnoremap ` '
+
 " add word under cursor to search pattern
 nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
 nnoremap <leader>/ /<C-R>/\\|
