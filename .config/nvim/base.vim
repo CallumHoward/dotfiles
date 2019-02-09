@@ -10,7 +10,7 @@ set mouse=a
 "language en_AU
 
 inoremap kj <Esc>
-xnoremap kj <Esc>
+"xnoremap kj <Esc>  " interferes with visual block mode
 snoremap kj <Esc>
 
 set number                      " enable line numbers
