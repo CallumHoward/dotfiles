@@ -5,6 +5,9 @@
 nnoremap ' `
 nnoremap ` '
 
+" select last pasted
+nnoremap <leader>gv `[v`]
+
 " add word under cursor to search pattern
 nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
 nnoremap <leader>/ /<C-R>/\\|
