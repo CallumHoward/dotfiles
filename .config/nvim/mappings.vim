@@ -5,6 +5,9 @@
 nnoremap ' `
 nnoremap ` '
 
+" toggle relative line numbers
+nnoremap <silent><Space> :setl rnu!<CR>
+
 " select last pasted
 nnoremap <leader>gv `[v`]
 
