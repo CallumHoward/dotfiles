@@ -318,9 +318,11 @@ let g:tagbar_iconchars = ['+', '-']
 let g:tagbar_compact = 1
 
 " poppy config
-au CursorMoved,CursorMovedI * call PoppyInit()
-let g:poppyhigh = ['Ignore']
-let g:poppy_point_enable = 1
+if dein#is_sourced('poppy.vim')
+    au CursorMoved,CursorMovedI * call PoppyInit()
+    let g:poppyhigh = ['Ignore']
+    let g:poppy_point_enable = 1
+endif
 
 " hardtime config
 let g:hardtime_default_on = 1
