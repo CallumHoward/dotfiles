@@ -316,6 +316,7 @@ autocmd InsertLeave * echo ""
 " tagbar config
 let g:tagbar_iconchars = ['+', '-']
 let g:tagbar_compact = 1
+nnoremap <leader><C-i> :TagbarToggle<CR>
 
 " poppy config
 if dein#is_sourced('poppy.vim')
