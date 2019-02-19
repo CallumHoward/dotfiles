@@ -93,7 +93,13 @@ function o() {
     fi
 }
 
-function browse() {
+function br() {
+    if command -v xdg-open > /dev/null 2>&1; then
+        bin="xdg-open"
+    elif command -v open > /dev/null 2>&1; then
+        bin="open"
+    fi
+
     local gitpath=`git rev-parse --show-prefix 2>/dev/null | head -1`
     if [[ gitpath == '' ]]; then return; fi
 
@@ -111,7 +117,7 @@ function browse() {
     url="${url/".git"}"
 
     local branch=`git rev-parse --abbrev-ref HEAD | head -1`
-    xdg-open "$url/tree/$branch/$gitpath" || open "$url/tree/$branch/$gitpath"
+    $bin "$url/tree/$branch/$gitpath"
 }
 
 function git_add() {
