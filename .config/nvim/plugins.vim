@@ -362,6 +362,9 @@ let g:limelight_conceal_guifg = '#80a0ff'
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_class_scope_highlight = 1
 
+" interestingwords config
+let g:interestingWordsTermColors = ['211', '81', '48', '141']
+
 " SimpylFold config
 let g:SimpylFold_fold_docstring = 0
 let g:SimpylFold_fold_import = 0
