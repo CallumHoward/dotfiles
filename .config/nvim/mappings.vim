@@ -66,10 +66,15 @@ nnoremap <expr> k v:count > 5 ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 " prevent jump after searching word under cursor with # and *, clear with Escape
 nnoremap <silent> # :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
-nnoremap <silent> * :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
+"nnoremap <silent> * :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
 nnoremap <silent> g# :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
 nnoremap <silent> g* :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
-nnoremap <silent> <Esc> :noh<CR>
+nnoremap <silent> <Esc> :noh<CR>:call UncolorAllWords()<CR>
+
+nnoremap <silent> * :call InterestingWords('n')<CR>
+vnoremap <silent> * :call InterestingWords('v')<CR>
+nnoremap <silent> n :call WordNavigation('forward')<CR>
+nnoremap <silent> N :call WordNavigation('backward')<CR>
 
 " unimpaired quickfix mappings
 nnoremap <silent> <leader>q :cw<CR>
