@@ -29,6 +29,7 @@ set breakindent                 " wrapped text is indented
 set briopt=sbr,shift:8,min:20   " config for breakindent
 let &showbreak='↳ '
 let &breakat=' ,{'
+set cpoptions+=n
 
 set pumheight=5                 " maximum number of items in completion popup
 
