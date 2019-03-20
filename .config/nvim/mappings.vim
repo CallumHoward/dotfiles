@@ -138,6 +138,8 @@ xnoremap <silent> <leader><Space> :keeppatterns s/\s\+$//e<CR><C-O>
 " global substitution on last used search pattern
 nnoremap <leader>s :%s///g<Left><Left>
 xnoremap <leader>s :s///g<Left><Left>
+nnoremap <leader>S :%Subvert/<C-R>///g<Left><Left>
+xnoremap <leader>S :Subvert/<C-R>///g<Left><Left>
 
 " restrict search to comment
 "nnoremap <leader>c ?\v(//|#).*\zs
