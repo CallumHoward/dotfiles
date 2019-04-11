@@ -189,6 +189,9 @@ cabbrev vf <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert sf' : 'vf')<CR>
 cabbrev vsf <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert sf' : 'vsf')<CR>
 cabbrev ef <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'fin' : 'ef')<CR>
 
+" local markings mapping
+nnoremap <leader>m :marks abcdefghijklmnopqrstuvwxyz<CR>:norm `
+
 " wrap git grep
 function! Ggrep(arg)
     let s:temp=&grepprg
