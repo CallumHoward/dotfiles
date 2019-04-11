@@ -47,7 +47,7 @@ set splitbelow                  " puts new split windows to the bottom of the cu
 
 set icm=nosplit                 " live preview for substitution
 
-set fcs=fold:-                  " verticle split is just bg color
+set fcs=fold:—                  " verticle split is just bg color
 set foldcolumn=0                " visual representation of folds
 set foldmethod=syntax
 set foldnestmax=1
