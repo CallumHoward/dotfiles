@@ -45,7 +45,12 @@ nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gp :Gina push<CR>
 nnoremap <leader>g :Gina 
-nnoremap <silent> <leader>b :Gina browse : --scheme=blame<CR>
+nnoremap <silent> <leader>gb V:Gina browse : --scheme=blame<CR>
+xnoremap <silent> <leader>gb :Gina browse : --scheme=blame<CR>
+nnoremap <silent> <leader>gx V:Gina browse :<CR>
+xnoremap <silent> <leader>gx :Gina browse :<CR>
+
+nnoremap <leader>b :echo "did you mean \\gb?"<CR>
 
 " move tabs
 nnoremap <silent>g> :tabm +1<CR>
@@ -143,8 +148,8 @@ xnoremap <leader>S :Subvert/<C-R>///g<Left><Left>
 
 " restrict search to comment
 "nnoremap <leader>c ?\v(//|#).*\zs
-nnoremap <leader>c ?//.*\zs
-xnoremap <leader>c ?//.*\zs
+"nnoremap <leader>c ?//.*\zs
+"xnoremap <leader>c ?//.*\zs
 
 " convert search pattern to match whole word only
 nnoremap <leader>w /\<<C-R>/\><CR><C-O>
