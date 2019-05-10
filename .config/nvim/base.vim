@@ -106,6 +106,9 @@ autocmd BufWritePost * if &diff == 1 | diffupdate | endif
 " set files with .tem extension as C++ Template files
 autocmd BufNewFile,BufFilePre,BufRead *.tem setlocal filetype=cpp
 
+" set files with .shader extension as glsl shader files
+autocmd BufNewFile,BufFilePre,BufRead *.shader setlocal filetype=glsl
+
 " relative number configuration
 autocmd FocusLost,InsertEnter,WinLeave * if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nornu | endif
 autocmd FocusGained,InsertLeave,WinEnter,BufRead * if &ma && &ft !~ 'markdown\|text' && &bt != 'nofile' | :setl nu rnu | endif
