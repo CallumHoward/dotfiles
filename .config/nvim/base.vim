@@ -54,6 +54,8 @@ set foldnestmax=1
 set nofoldenable
 set foldopen-=block
 
+set concealcursor=
+
 set rulerformat=%=%P
 nnoremap <silent><ScrollWheelUp> :setl ruler nornu<CR><ScrollWheelUp>
 nnoremap <silent><ScrollWheelDown> :setl ruler nornu<CR><ScrollWheelDown>
