@@ -4,90 +4,102 @@
 
 " ==== dein Scripts ====
 set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
-call dein#begin(expand('~/.cache/dein'))
 
-" Add or remove plugins here:
-call dein#add('Shougo/dein.vim')                    " plugin manager
-call dein#add('haya14busa/dein-command.vim')        " dein bindings
+if dein#load_state('~/.cache/dein')
+    call dein#begin('~/.cache/dein')
 
-" completion activation events
-let s:ces = ['InsertEnter', 'FocusLost', 'CursorHold']
+    " Add or remove plugins here:
+    call dein#add('Shougo/dein.vim')                    " plugin manager
+    call dein#add('haya14busa/dein-command.vim')        " dein bindings
+    call dein#add('wsdjeg/dein-ui.vim')                 " dein update ui
 
-" completion plugins
-call dein#add('Shougo/neosnippet.vim', {'on_event': s:ces})                  " snippet expansion
-call dein#add('~/neosnippet-snippets', {'on_event': s:ces})                  " snippet collection
-call dein#add('Shougo/echodoc.vim', {'on_event': s:ces})                  " function signatures in status
-call dein#add('Shougo/deoplete.nvim', {'on_event': s:ces})                  " auto popup completion
-call dein#add('wellle/tmux-complete.vim', {'on_event': s:ces})                  " tmux window completion source
-call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
-call dein#add('Shougo/neco-syntax')
-call dein#add('zchee/deoplete-jedi')                " can't be lazy
-"call dein#add('artur-shaik/vim-javacomplete2',      {'on_ft': 'java'})
-call dein#add('zchee/deoplete-clang')               " can't be lazy
-"call dein#add('carlitux/deoplete-ternjs', {'on_ft': 'javascript'})
-call dein#add('autozimu/LanguageClient-neovim', {
-    \ 'rev': 'next',
-    \ 'build': 'bash install.sh',
-    \ })
+    " completion activation events
+    let s:ces = ['InsertEnter', 'FocusLost', 'CursorHold']
 
-" feature plugins
-call dein#add('neomake/neomake')
-call dein#add('airblade/vim-gitgutter')             " line git status
-call dein#add('kshenoy/vim-signature')              " marks in signs column
-call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
-call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
-call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})
-call dein#add('tpope/vim-abolish')                  " deal with word variants
-"call dein#add('cloudhead/neovim-fuzzy')
-"call dein#add('yuttie/comfortable-motion.vim')
-call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
-call dein#add('tmhedberg/SimpylFold')               " fold python classes and functions
-call dein#add('chrisjohnson/vim-foldfunctions')     " only fold functions
-call dein#add('junegunn/goyo.vim', {'on_cmd': 'Goyo'})  " focus mode
-call dein#add('junegunn/limelight.vim')             " focus mode
-call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
-call dein#add('wellle/targets.vim')                 " extended text objects
-call dein#add('michaeljsmith/vim-indent-object')    " indent text object
-call dein#add('CallumHoward/vim-interestingwords')
+    " completion plugins
+    call dein#add('Shougo/neosnippet.vim', {'on_event': s:ces})                  " snippet expansion
+    call dein#add('~/neosnippet-snippets', {'on_event': s:ces})                  " snippet collection
+    call dein#add('Shougo/echodoc.vim', {'on_event': s:ces})                  " function signatures in status
+    "call dein#add('Shougo/deoplete.nvim', {'on_event': s:ces})                  " auto popup completion
+    call dein#add('wellle/tmux-complete.vim')                  " tmux window completion source
+    call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
+    call dein#add('Shougo/neco-syntax')
+    "call dein#add('zchee/deoplete-jedi')                " can't be lazy
+    "call dein#add('artur-shaik/vim-javacomplete2',      {'on_ft': 'java'})
+    "call dein#add('zchee/deoplete-clang')               " can't be lazy
+    "call dein#add('carlitux/deoplete-ternjs', {'on_ft': 'javascript'})
+    "call dein#add('autozimu/LanguageClient-neovim', {
+    "    \ 'rev': 'next',
+    "    \ 'build': 'bash install.sh',
+    "    \ })
+    call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
 
-" wrap external tools
-call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
-call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
-call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
-call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
-call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
-call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
-call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
-call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
-call dein#add('tpope/vim-tbone')                    " send text to tmux pane
-call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
-"call dein#add('yamahigashi/sendtomaya.vim')
-call dein#add('romainl/vim-devdocs')
+    " feature plugins
+    call dein#add('neomake/neomake')
+    call dein#add('airblade/vim-gitgutter')             " line git status
+    call dein#add('kshenoy/vim-signature')              " marks in signs column
+    call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
+    call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
+    call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})
+    call dein#add('tpope/vim-abolish')                  " deal with word variants
+    "call dein#add('cloudhead/neovim-fuzzy')
+    "call dein#add('yuttie/comfortable-motion.vim')
+    call dein#add('bounceme/poppy.vim')                 " rainbow parens (set to one level)
+    call dein#add('tmhedberg/SimpylFold')               " fold python classes and functions
+    call dein#add('chrisjohnson/vim-foldfunctions')     " only fold functions
+    call dein#add('junegunn/goyo.vim', {'on_cmd': 'Goyo'})  " focus mode
+    call dein#add('junegunn/limelight.vim')             " focus mode
+    call dein#add('rbgrouleff/bclose.vim')              " dependency for ranger.vim
+    call dein#add('wellle/targets.vim')                 " extended text objects
+    call dein#add('michaeljsmith/vim-indent-object')    " indent text object
+    call dein#add('CallumHoward/vim-interestingwords')  " multi keyword highlight
+    call dein#add('idbrii/vim-tagimposter')             " mappings can add to taglist
+    call dein#add('rhysd/git-messenger.vim', {
+                \   'lazy' : 1,
+                \   'on_cmd' : 'GitMessenger',
+                \   'on_map' : '<Plug>(git-messenger',
+                \ })
+    " wrap external tools
+    call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
+    call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
+    call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
+    call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
+    call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
+    call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
+    call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
+    call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
+    call dein#add('tpope/vim-tbone')                    " send text to tmux pane
+    call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
+    "call dein#add('yamahigashi/sendtomaya.vim')
+    call dein#add('romainl/vim-devdocs')
 
-" keybindings
-call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
-call dein#add('tpope/vim-repeat',                   {'on_event': s:ces})
-call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
-call dein#add('takac/vim-hardtime')                 " disable rapid hjkl repeat
+    " keybindings
+    call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
+    call dein#add('tpope/vim-repeat',                   {'on_event': s:ces})
+    call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
+    call dein#add('takac/vim-hardtime')                 " disable rapid hjkl repeat
 
-" colorschemes
-call dein#add('~/neodark')
-call dein#add('cocopon/iceberg.vim')
-call dein#add('mhartington/oceanic-next')
-call dein#add('w0ng/vim-hybrid')
+    " colorschemes
+    call dein#add('~/neodark')
+    call dein#add('cocopon/iceberg.vim')
+    call dein#add('mhartington/oceanic-next')
+    call dein#add('w0ng/vim-hybrid')
 
-" syntax plugins
-call dein#add('rust-lang/rust.vim')
-call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
-call dein#add('wavded/vim-stylus')                  " can't be lazy
-call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
-call dein#add('tikhomirov/vim-glsl')
-call dein#add('pangloss/vim-javascript')            " can't be lazy
-call dein#add('mxw/vim-jsx')                        " can't be lazy
-"call dein#add('arakashic/chromatica.nvim')          " can't be lazy
-"call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
+    " syntax plugins
+    call dein#add('rust-lang/rust.vim')
+    call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
+    call dein#add('wavded/vim-stylus')                  " can't be lazy
+    call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
+    call dein#add('tikhomirov/vim-glsl')
+    call dein#add('pangloss/vim-javascript')            " can't be lazy
+    call dein#add('mxw/vim-jsx')                        " can't be lazy
+    "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
+    "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
 
-call dein#end()
+    call dein#end()
+    call dein#save_state()
+endif
+
 filetype plugin indent on
 let g:dein#install_log_filename = '~/.cache/dein/dein_install.log'
 " ==== end dein Scripts ====
@@ -123,7 +135,7 @@ cabbrev spa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'sp \| Ranger' : 'spa')
 cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \| Ranger' : 'tra')<CR>
 
 " use deoplete completion
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 if !exists('g:deoplete#omni#input_patterns') | let g:deoplete#omni#input_patterns = {} | endif
 "let g:deoplete#sources._ = ['tag', 'member', 'file', 'omni', 'buffer', 'tmux-complete']
 "let g:deoplete#auto_complete_start_length = 0
@@ -140,18 +152,29 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
 " SuperTab like snippets behavior
 let g:neosnippet#expand_word_boundary = 1
 imap <expr><TAB> neosnippet#expandable()
             \ ? "\<Plug>(neosnippet_expand)" : pumvisible()
             \ ? "\<C-n>" : neosnippet#jumpable()
-            \ ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
+            \ ? "\<Plug>(neosnippet_jump)" : <SID>check_back_space()
+            \ ? "\<TAB>" : coc#refresh()
 smap <expr><TAB> neosnippet#expandable_or_jumpable()
             \ ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 xmap <TAB> <Plug>(neosnippet_expand_target)
 
 " complete and close popup if visible else: break undo
-inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "<C-g>u<CR>"
+"inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "<C-g>u<CR>"
+
+" Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " conceal neosnippet markers
 set conceallevel=2
@@ -232,14 +255,6 @@ autocmd! BufWritePost * if &ft == 'cpp' && (isdirectory('xcode') || isdirectory(
             \     Neomake |
             \ endif
 
-hi NeomakeError cterm=underline
-hi NeomakeWarning cterm=underline
-hi NeomakeInfo cterm=underline
-hi NeomakeMessage cterm=underline
-hi NeomakeErrorSign ctermfg=1 ctermbg=none
-hi NeomakeWarningSign ctermfg=9 ctermbg=none
-hi NeomakeInfoSign ctermfg=5 ctermbg=none
-hi NeomakeMessageSign ctermfg=5 ctermbg=none
 let g:neomake_error_sign = {'text': '-!', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_warning_sign = {'text': '-!', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_info_sign = {'text': '-i', 'texthl': 'NeomakeInfoSign'}
@@ -268,7 +283,12 @@ let g:neomake_python_enabled_makers = ['pep8', 'python']
 let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
 let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++14', 'objc': 'c11', 'objcpp': 'c++1z'}
-let g:deoplete#sources#clang#flags = ['-I/usr/local/opt/boost/include', '-I~/Documents/Cinder.git/include', '-I~/range-v3/include']
+let g:deoplete#sources#clang#flags = [
+        \ '-I/usr/local/opt/boost/include',
+        \ '-I~/Documents/Cinder.git/include',
+        \ '-I~/range-v3/include',
+        \ '-I/usr/local/Cellar/glew/2.1.0/include',
+        \ '-I/usr/local/Cellar/glfw/3.2.1/include']
 
 " language server
 let g:LanguageClient_serverCommands = {
@@ -303,9 +323,60 @@ let g:LanguageClient_diagnosticsDisplay = {
             \     },
             \ }
 
-nnoremap <leader>x :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <leader>x :call LanguageClient_contextMenu()<CR>
+"nnoremap <silent> gd :silent! TagImposterAnticipateJump \| call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
+" CoC config
+set hidden "if hidden is not set, TextEdit might fail.
+" mapping to jump to tag under cursor
+
+nmap <silent> gr #<Plug>(coc-references)
+nnoremap <silent> gd <C-]>
+nmap <silent> <C-]> :silent! TagImposterAnticipateJump<CR><Plug>(coc-definition)
+
+nmap <silent> <leader>cy <Plug>(coc-type-definition)
+nmap <silent> <leader>ci <Plug>(coc-implementation)
+nmap <silent> <leader>cr <Plug>(coc-rename)
+vmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>ca  <Plug>(coc-codeaction)
+nmap <leader>cx  <Plug>(coc-fix-current)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>cl :<C-u>CocList<CR>
+nnoremap <silent> <leader>cp :<C-u>CocListResume<CR>
+nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
+nnoremap <silent> <leader>cj :<C-u>CocNext<CR>
+nnoremap <silent> <leader>ck :<C-u>CocPrev<CR>
+nnoremap <silent> <leader>co :<C-u>CocList outline<CR>
+nnoremap <silent> <leader>cd  :<C-u>CocList diagnostics<CR>
+nnoremap <leader>c?  :nmap <leader>c<CR>
+nnoremap <leader>cc :CocCommand<CR>
+
+" Use `[C` and `]C` to navigate diagnostics
+nmap <silent> [C <Plug>(coc-diagnostic-prev)
+nmap <silent> ]C <Plug>(coc-diagnostic-next)
+
+command! -nargs=0 CFormat :call CocAction('format')
+command! -nargs=? CFold :call CocAction('fold', <f-args>)
+
+function! s:show_documentation()
+    if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
+
+augroup cocAuGroup
+    autocmd!
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd CursorHoldI * sil call CocActionAsync('showSignatureHelp')
+augroup end
 
 " echodoc config
 let g:echodoc_enable_at_startup = 1
