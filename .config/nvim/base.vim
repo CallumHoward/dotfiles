@@ -116,6 +116,7 @@ autocmd FocusGained,InsertLeave,WinEnter,BufRead * if &ma && &ft !~ 'markdown\|t
 " cursorline configuration
 autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave * setl nocul
 autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter * setl cul
+autocmd FocusGained,InsertLeave * SignatureRefresh
 
 "set lazyredraw
 "autocmd VimResized,FocusGained * redraw
