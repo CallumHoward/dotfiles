@@ -6,7 +6,7 @@ nnoremap ' `
 nnoremap ` '
 
 " toggle relative line numbers
-nnoremap <silent><Space> :setl rnu!<CR>
+nnoremap <silent><C-Space> :setl rnu!<CR>
 
 " select last pasted
 nnoremap <leader>gv `[v`]
@@ -109,6 +109,7 @@ nnoremap <silent>g< :tabm -1<CR>
 nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
 nnoremap <silent> z[ :<C-u>silent! normal! zc<CR>zkzo[zzz
 nnoremap <silent> zV :<C-u>silent! normal! zM<CR>zv
+nnoremap <silent> <Space> za
 
 " resync folds
 nnoremap <leader>f :set foldmethod=syntax<CR>
