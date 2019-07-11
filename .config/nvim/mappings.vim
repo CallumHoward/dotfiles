@@ -161,6 +161,10 @@ augroup TerminalConfig
     autocmd TermOpen * setlocal nonumber norelativenumber
 augroup END
 tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
+tnoremap <C-W><C-H> <C-\><C-N><C-W><C-H>
+tnoremap <C-W><C-J> <C-\><C-N><C-W><C-J>
+tnoremap <C-W><C-K> <C-\><C-N><C-W><C-K>
+tnoremap <C-W><C-L> <C-\><C-N><C-W><C-L>
 
 let g:netrw_is_open=0
 function! ToggleNetrw()
