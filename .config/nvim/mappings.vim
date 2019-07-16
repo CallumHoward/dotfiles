@@ -13,7 +13,7 @@ nnoremap <leader>gv `[v`]
 
 " add word under cursor to search pattern
 nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
-nnoremap <leader>/ /<C-R>/\\|
+nnoremap <leader>? /<C-R>/\\|
 
 " go to alternate file
 nnoremap <leader>e :e %<.
@@ -192,7 +192,7 @@ nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 "nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
 
 " open quickfix window for the last search
-nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:cope<CR>
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:cope<CR>
 
 " fuzzy command mappings
 cabbrev vf <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert sf' : 'vf')<CR>
