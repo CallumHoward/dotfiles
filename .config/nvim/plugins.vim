@@ -467,6 +467,8 @@ command! B :Buffers
 command! W :Windows
 command! T :Tags
 command! S :GitFiles?
+command! M :Marks
+command! L :Lines
 
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
