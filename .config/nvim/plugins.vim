@@ -296,39 +296,6 @@ let g:deoplete#sources#clang#flags = [
         \ '-I/usr/local/Cellar/glew/2.1.0/include',
         \ '-I/usr/local/Cellar/glfw/3.2.1/include']
 
-" language server
-let g:LanguageClient_serverCommands = {
-            \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-            \ 'python': ['/scratch/callumh/.linuxbrew/bin/pyls'],
-            \ }
-
-let g:LanguageClient_diagnosticsDisplay = {
-            \     1: {
-            \         "name": "Error",
-            \         "texthl": "ALEError",
-            \         "signText": "-!",
-            \         "signTexthl": "NeomakeErrorSign",
-            \     },
-            \     2: {
-            \         "name": "Warning",
-            \         "texthl": "ALEWarning",
-            \         "signText": "-!",
-            \         "signTexthl": "NeomakeWarningSign",
-            \     },
-            \     3: {
-            \         "name": "Information",
-            \         "texthl": "ALEInfo",
-            \         "signText": "-i",
-            \         "signTexthl": "NeomakeInfoSign",
-            \     },
-            \     4: {
-            \         "name": "Hint",
-            \         "texthl": "ALEInfo",
-            \         "signText": "->",
-            \         "signTexthl": "NeomakeMessageSign",
-            \     },
-            \ }
-
 "nnoremap <leader>x :call LanguageClient_contextMenu()<CR>
 "nnoremap <silent> gd :silent! TagImposterAnticipateJump \| call LanguageClient#textDocument_definition()<CR>
 "nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
