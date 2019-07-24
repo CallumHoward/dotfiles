@@ -56,8 +56,14 @@ echo "Finished installing Tmux Plugin Manager"
 echo "Creating symlinks for dotfiles"
 for i in "${files[@]}"; do
     if [ "`ls ~/$i 2> /dev/null`" == "" ]; then
-        ln -sv "`pwd`/$i" ~/"$i"
+        ln -sv "$PWD/$i" ~/"$i"
     fi
+done
+
+echo "Creating symlinks for scripts"
+mkdir -p "~/.local/bin"
+for i in scripts/*; do
+    ln -sv "$PWD/$i" ~/.local/bin/"${i##*/}"
 done
 echo "Finished creating symlinks"
 
