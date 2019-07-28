@@ -34,6 +34,8 @@ nnoremap <leader>d :call ToggleDiff()<CR>
 let g:tbone_write_pane='bottom-right'
 nnoremap <leader>t V:Twrite<CR>
 xnoremap <leader>t :Twrite<CR>
+nnoremap <leader><CR> V:Twrite<CR>:Tmux send-keys -t bottom Enter<CR>
+xnoremap <CR> :Twrite!<CR>:Tmux send-keys -t bottom Enter<CR>
 
 " git mappings
 nnoremap <leader>a :GitGutterStageHunk<CR>
