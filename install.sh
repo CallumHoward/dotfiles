@@ -26,7 +26,7 @@ if [ "${PWD##*/}" != "dotfiles" ]; then
     exit
 fi
 
-if [ -x $(which apt-get) ]; then
+if [ -x "$(which apt-get)" ]; then
     echo -n "Install: zsh ssh git tmux curl wget vim ranger cmake htop [Y/n]? "
     read answer
     if echo "$answer" | grep -viq "^n" ; then
