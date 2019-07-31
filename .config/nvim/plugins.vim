@@ -68,7 +68,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
     call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
     call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
-    call dein#add('tpope/vim-tbone')                    " send text to tmux pane
+    call dein#add('CallumHoward/vim-tbone')             " send text to tmux pane
     call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
     "call dein#add('yamahigashi/sendtomaya.vim')
     call dein#add('romainl/vim-devdocs')
