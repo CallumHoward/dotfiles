@@ -229,6 +229,10 @@ if command -v exa > /dev/null 2>&1; then
     alias tree="exa --tree"
 fi
 
+if command -v git-st > /dev/null 2>&1; then
+    alias s="git-st"
+fi
+
 if command -v gcal > /dev/null 2>&1; then
     alias cal="gcal"
 fi
