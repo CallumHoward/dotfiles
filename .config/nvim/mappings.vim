@@ -114,7 +114,7 @@ nnoremap <silent> zV :<C-u>silent! normal! zM<CR>zv
 nnoremap <silent> <Space> za
 
 " resync folds
-nnoremap <leader>f :set foldmethod=syntax<CR>
+nnoremap <leader>f :set foldmethod=expr<CR>
 
 " quickly set foldlevel
 nnoremap <leader>1 :set foldnestmax=1<CR>
