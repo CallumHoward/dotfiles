@@ -66,6 +66,5 @@ export FZF_DEFAULT_COMMAND=' \
       sed s/^..//) 2> /dev/null'
 
 # skim
-export SKIM_DEFAULT_OPTIONS='--reverse --ansi \
-    --color=current_bg:0,matched:3,info:11,spinner:15,cursor:0,prompt:6,selected:1'
+export SKIM_DEFAULT_OPTIONS='--reverse --ansi --color=current_bg:0,matched:3,info:11,spinner:15,cursor:0,prompt:6,selected:1'
 
