@@ -47,10 +47,12 @@ nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gp :Gina push<CR>
 nnoremap <leader>g :Gina 
-nnoremap <silent> <leader>gb V:Gina browse : --scheme=blame<CR>
-xnoremap <silent> <leader>gb :Gina browse : --scheme=blame<CR>
+nnoremap <silent> <leader>gB V:Gina browse : --scheme=blame<CR>
+xnoremap <silent> <leader>gB :Gina browse : --scheme=blame<CR>
 nnoremap <silent> <leader>gx V:Gina browse :<CR>
 xnoremap <silent> <leader>gx :Gina browse :<CR>
+nnoremap <silent> <leader>gb :GitMessenger<CR>
+xnoremap <silent> <leader>gb :GitMessenger<CR>
 
 nnoremap <leader>b :echo "did you mean \\gb?"<CR>
 
