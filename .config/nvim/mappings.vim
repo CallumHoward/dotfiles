@@ -238,6 +238,12 @@ endfunction
 com! -nargs=? -complete=customlist,<sid>MRUComplete O if empty("<args>")|bro o|else|e <args>|endif
 cabbrev o <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'O' : 'o')<CR>
 
+" map arrow keys for commandline Pmenu
+if &wildoptions =~# "pum"
+  cnoremap <expr> <up> pumvisible() ? '<left>' : '<up>'
+  cnoremap <expr> <down> pumvisible() ? '<right>' : '<down>'
+endif
+
 function! s:CloseBracket()
     let line = getline('.')
     if line =~# '^\s*\(struct\|class\|enum\) '
