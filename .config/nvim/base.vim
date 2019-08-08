@@ -39,7 +39,7 @@ set smartcase                   " don't ignore case if capital is used
 set path+=~/.config/nvim        " always have config files in path
 set path+=**                    " recursive filepath completion
 set undofile                    " undo persists after closing file
-set wildmode=list:longest,full  " show options if completion is ambiguous
+set wildmode=longest,full  " show options if completion is ambiguous
 set wildignorecase              " ignore case in commandline filename completion
 set wildoptions=pum,tagfile
 
