@@ -64,8 +64,10 @@ if dein#load_state('~/.cache/dein')
     call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
     call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
     call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
-    call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
-    call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
+    "call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
+    "call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
+    call dein#add('junegunn/fzf',                       { 'build': './install --all', 'merged': 0 })
+    call dein#add('junegunn/fzf.vim',                   { 'depends': 'fzf' })
     call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
     call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
     call dein#add('CallumHoward/vim-tbone')             " send text to tmux pane
