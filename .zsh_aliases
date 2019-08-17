@@ -2,7 +2,7 @@
 
 # Zsh suffix aliases
 local _text_fts=(log conf md yaml inl asc txt TXT tex)
-local _source_fts=(cpp cxx cc c hh hpp h java)
+local _source_fts=(cpp cxx cc c hh hpp h java pde)
 local _web_source_fts=(htm html xhtml xml json js jsx css scss)
 local _editor_fts=($_text_fts $_source_fts $_web_source_fts)
 
