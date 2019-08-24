@@ -1,0 +1,40 @@
+#!/bin/bash
+# © 2013 D MALAM
+# Terminal.app Set Title
+# Set the proxy icon for OSX's Terminal.app to files/directories.
+
+# Encode to % escaped url string
+urlEncode() {
+    local string="${1}"
+    local strlen=${#string}
+    local encoded=""
+    for (( pos=0 ; pos<strlen ; pos++ )); do
+     c=${string:$pos:1}
+     case "$c" in
+        [/-_.~a-zA-Z0-9] ) o="${c}" ;;
+        * ) printf -v o '%%%02x' "'$c"
+     esac
+     encoded+="${o}"
+    done
+    URL="file://$HOST${encoded}"
+}
+
+setIcon() {
+    case $TERM in
+         # TMUX escape to real shell
+         screen*|tmux*)
+             printf '\ePtmux;\e\e]%d;%s\a\e\\' $1 $2;;
+         *)
+             printf '\e]%d;%s\a' $1 $2;;
+     esac
+}
+
+# Check if directory
+if [[ -d "$1" ]]; then
+    urlEncode "$1"
+    setIcon 7 $URL          # 7 is for directories, and are saved for resume
+elif [[ -f "$1" ]]; then      # File
+    urlEncode "$1"
+    setIcon 6 $URL          # 6 is for files, and not saved for resume
+fi
+# Ignore all other input
