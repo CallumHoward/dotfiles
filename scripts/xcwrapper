@@ -1,0 +1,1 @@
+xcodebuild -project xcode/*.xcodeproj $@ 2>/dev/null
