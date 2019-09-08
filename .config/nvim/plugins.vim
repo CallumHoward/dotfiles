@@ -57,8 +57,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('rhysd/git-messenger.vim', {
                 \   'lazy' : 1,
                 \   'on_cmd' : 'GitMessenger',
-                \   'on_map' : '<Plug>(git-messenger',
+                \   'on_map' : '<Plug>(git-messenger)',
                 \ })
+
     " wrap external tools
     call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
     call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
