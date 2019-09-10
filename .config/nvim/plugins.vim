@@ -38,6 +38,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('neomake/neomake')
     call dein#add('airblade/vim-gitgutter')             " line git status
     call dein#add('kshenoy/vim-signature')              " marks in signs column
+    "call dein#add('liuchengxu/vista.vim')               " language server aware tags
     call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
     call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
     call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})
@@ -366,6 +367,9 @@ autocmd InsertLeave * echo ""
 let g:tagbar_iconchars = ['+', '-']
 let g:tagbar_compact = 1
 nnoremap <leader><C-i> :TagbarToggle<CR>
+
+" vista config
+let g:vista#renderer#enable_icon=0
 
 " poppy config
 if dein#is_sourced('poppy.vim')
