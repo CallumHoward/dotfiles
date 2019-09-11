@@ -1,12 +1,12 @@
 #!/bin/sh
 IFS=
-status="$(git -c color.status=always status -sb)"
+status="$(git -c color.status=always status -sb $1)"
 if [ $? -ne 0 ]
 then
     exit 1
 fi
 
-diff="$(git diff --color --stat HEAD 2> /dev/null | sed '$d; s/^ //' | cut -d '|' -f 2)"
+diff="$(git diff --color --stat HEAD $1 2> /dev/null | sed '$d; s/^ //' | cut -d '|' -f 2)"
 
 IFS=$'\n' status=($status)
 IFS=$'\n' diff=($diff)
