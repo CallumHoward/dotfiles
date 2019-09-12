@@ -95,7 +95,7 @@ alias j="jobs"
 
 alias s.="s ."
 alias g="git"
-alias s="git sb"
+alias sb="git sb"
 alias a="git_add"
 alias ga="git_add"
 alias gc="git_commit"
@@ -231,6 +231,8 @@ fi
 
 if command -v git-st > /dev/null 2>&1; then
     alias s="git-st"
+else
+    alias s="git sb"
 fi
 
 if command -v gcal > /dev/null 2>&1; then
