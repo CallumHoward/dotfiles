@@ -47,6 +47,8 @@ bindkey -M viins "^[9"      digit-argument
 
 bindkey -M viins "^[[1;3C"  forward-word
 bindkey -M viins "^[[1;3D"  backward-word
+bindkey -M viins "^[[H"     beginning-of-line
+bindkey -M viins "^[[F"     end-of-line
 
 # VI MODE KEYBINDINGS (cmd mode)
 bindkey -M vicmd 'k'        history-substring-search-up
