@@ -13,3 +13,6 @@
 [submodule ".oh-my-zsh/custom/plugins/auto-fu"]
 	path = .oh-my-zsh/custom/plugins/auto-fu
 	url = https://github.com/hchbaw/auto-fu.zsh.git
+[submodule ".oh-my-zsh/custom/themes/powerlevel10k"]
+	path = .oh-my-zsh/custom/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
