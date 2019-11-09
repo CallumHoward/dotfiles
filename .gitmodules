@@ -16,3 +16,6 @@
 [submodule ".oh-my-zsh/custom/themes/powerlevel10k"]
 	path = .oh-my-zsh/custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule ".oh-my-zsh/custom/plugins/zsh-prompt-benchmark"]
+	path = .oh-my-zsh/custom/plugins/zsh-prompt-benchmark
+	url = https://github.com/romkatv/zsh-prompt-benchmark.git
