@@ -9,7 +9,7 @@ function ranger-cd() {
     if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
         cd -- "$(cat "$tempfile")"
     fi
-    rm -f -- "$tempfile"
+    rm -f -- "$tempfile" > /dev/null 2>&1
 }
 
 function auto-ls-after-cd() {
