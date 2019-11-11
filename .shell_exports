@@ -1,7 +1,8 @@
 # vim: set ft=sh
 
 # allow ctrl-s for forward incremental search in interactive terminals
-[[ $- == *i* ]] && stty -ixon
+# found that this messes with p10k instant prompt
+#[[ $- == *i* ]] && stty -ixon
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 
