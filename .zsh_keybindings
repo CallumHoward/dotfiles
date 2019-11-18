@@ -3,6 +3,7 @@
 # Vi style keybindings
 bindkey -v
 bindkey -M viins 'kj' vi-cmd-mode
+bindkey -rM viins '^['      # unbind esc, use kj instead
 
 zmodload zsh/terminfo
 #bindkey '^[[A'      history-substring-search-up
