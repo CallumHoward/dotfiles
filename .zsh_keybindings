@@ -6,8 +6,6 @@ bindkey -M viins 'kj' vi-cmd-mode
 bindkey -rM viins '^['      # unbind esc, use kj instead
 
 zmodload zsh/terminfo
-#bindkey '^[[A'      history-substring-search-up
-#bindkey '^[[B'      history-substring-search-down
 
 # VI MODE KEYBINDINGS (ins mode)
 bindkey -M viins '^a'       beginning-of-line
