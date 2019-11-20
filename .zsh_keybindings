@@ -10,7 +10,7 @@ zmodload zsh/terminfo
 # VI MODE KEYBINDINGS (ins mode)
 bindkey -M viins '^a'       beginning-of-line
 bindkey -M viins '^e'       end-of-line
-bindkey -M viins '^k'       kill-line
+bindkey -M viins '^k'       vi-kill-eol
 bindkey -M viins '^r'       history-search-multi-word
 bindkey -M viins '^s'       history-incremental-pattern-search-forward
 bindkey -M viins '^p'       history-substring-search-up #up-line-or-history
@@ -19,15 +19,14 @@ bindkey -M viins '^f'       forward-char
 bindkey -M viins '^b'       backward-char
 bindkey -M viins '^y'       yank
 bindkey -M viins '^w'       backward-kill-word
+bindkey -M viins '\ew'      bash-backward-kill-word
 bindkey -M viins '^u'       backward-kill-line
 bindkey -M viins '^d'       delete-char
 bindkey -M viins '^h'       backward-delete-char
 bindkey -M viins '^?'       backward-delete-char
 bindkey -M viins '^_'       undo
+bindkey -M viins '^x^e'     edit-command-line
 bindkey -M viins '^x^r'     redisplay
-bindkey -M viins '\eOH'     beginning-of-line # Home
-bindkey -M viins '\eOF'     end-of-line       # End
-bindkey -M viins '\e[2~'    overwrite-mode    # Insert
 bindkey -M viins '\ef'      forward-word      # Alt-f
 bindkey -M viins '\eb'      backward-word     # Alt-b
 bindkey -M viins '\ed'      kill-word         # Alt-d
@@ -44,10 +43,12 @@ bindkey -M viins "^[7"      digit-argument
 bindkey -M viins "^[8"      digit-argument
 bindkey -M viins "^[9"      digit-argument
 
-bindkey -M viins "^[[1;3C"  forward-word
-bindkey -M viins "^[[1;3D"  backward-word
-bindkey -M viins "^[[H"     beginning-of-line
-bindkey -M viins "^[[F"     end-of-line
+bindkey -M viins '\eOH'     beginning-of-line # Home
+bindkey -M viins '\eOF'     end-of-line       # End
+bindkey -M viins '\e[2~'    overwrite-mode    # Insert
+bindkey -M viins '\e[5~'    history-beginning-search-backward # PageUp
+bindkey -M viins '\e[6~'    history-beginning-search-forward  # PageDown
+bindkey -M viins '\e[3;5~'  kill-word # ctrl-delete
 
 # VI MODE KEYBINDINGS (cmd mode)
 bindkey -M vicmd 'k'        history-substring-search-up
