@@ -53,24 +53,45 @@ bindkey -M viins '\e[3;5~'  kill-word # ctrl-delete
 # VI MODE KEYBINDINGS (cmd mode)
 bindkey -M vicmd 'k'        history-substring-search-up
 bindkey -M vicmd 'j'        history-substring-search-down
-bindkey -M vicmd '^a'       beginning-of-line
-bindkey -M vicmd '^e'       end-of-line
-bindkey -M vicmd '^k'       kill-line
-bindkey -M vicmd '^r'       history-incremental-pattern-search-backward
-bindkey -M vicmd '^s'       history-incremental-pattern-search-forward
-bindkey -M viins '^p'       history-substring-search-up #up-line-or-history
-bindkey -M viins '^n'       history-substring-search-down #down-line-or-history
-bindkey -M viins '^f'       forward-char
-bindkey -M viins '^b'       backward-char
-bindkey -M vicmd '^y'       yank
-bindkey -M vicmd '^w'       backward-kill-word
-bindkey -M vicmd '^u'       backward-kill-line
-bindkey -M viins '^d'       delete-char
 bindkey -M vicmd '/'        vi-history-search-forward
 bindkey -M vicmd '?'        vi-history-search-backward
+
+bindkey -M vicmd '\e[3~'    vi-delete-char # delete
+bindkey -M vicmd '\e[3;5~'  kill-word # ctrl-delete
+
+bindkey -M vicmd '^a'       beginning-of-line
+bindkey -M vicmd '^e'       end-of-line
+bindkey -M vicmd '^k'       kill-eol
+bindkey -M vicmd '^r'       history-incremental-pattern-search-backward
+bindkey -M vicmd '^s'       history-incremental-pattern-search-forward
+bindkey -M vicmd '^p'       history-substring-search-up #up-line-or-history
+bindkey -M vicmd '^n'       history-substring-search-down #down-line-or-history
+bindkey -M vicmd '^f'       forward-char
+bindkey -M vicmd '^b'       backward-char
+bindkey -M vicmd '^y'       yank
+bindkey -M vicmd '^w'       backward-kill-word
+bindkey -M viins '\ew'      bash-backward-kill-word
+bindkey -M vicmd '^u'       backward-kill-line
+bindkey -M vicmd '^d'       delete-char
 bindkey -M vicmd '^_'       undo
+bindkey -M vicmd '^x^e'     edit-command-line
 bindkey -M vicmd '\ef'      forward-word                      # Alt-f
 bindkey -M vicmd '\eb'      backward-word                     # Alt-b
 bindkey -M vicmd '\ed'      kill-word                         # Alt-d
+
+bindkey -M vicmd '\eOH'     beginning-of-line # Home
+bindkey -M vicmd '\eOF'     end-of-line       # End
 bindkey -M vicmd '\e[5~'    history-beginning-search-backward # PageUp
-bindkey -M vicmd '\e[6~'    history-beginning-search-forward  #
+bindkey -M vicmd '\e[6~'    history-beginning-search-forward  # PageDown
+
+bindkey -M vicmd "^[."      insert-last-word
+bindkey -M vicmd "^[0"      digit-argument
+bindkey -M vicmd "^[1"      digit-argument
+bindkey -M vicmd "^[2"      digit-argument
+bindkey -M vicmd "^[3"      digit-argument
+bindkey -M vicmd "^[4"      digit-argument
+bindkey -M vicmd "^[5"      digit-argument
+bindkey -M vicmd "^[6"      digit-argument
+bindkey -M vicmd "^[7"      digit-argument
+bindkey -M vicmd "^[8"      digit-argument
+bindkey -M vicmd "^[9"      digit-argument
