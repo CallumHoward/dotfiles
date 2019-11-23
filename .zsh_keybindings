@@ -15,6 +15,30 @@ function bash-backward-kill-word() {
 }
 zle -N bash-backward-kill-word
 
+# VI MODE KEYBINDINGS (ins mode)
+bindkey -M viins '^a'       beginning-of-line
+bindkey -M viins '^e'       end-of-line
+bindkey -M viins '^k'       vi-kill-eol
+bindkey -M viins '^r'       history-search-multi-word
+bindkey -M viins '^s'       history-incremental-pattern-search-forward
+bindkey -M viins '^p'       history-substring-search-up #up-line-or-history
+bindkey -M viins '^n'       history-substring-search-down #down-line-or-history
+bindkey -M viins '^f'       forward-char
+bindkey -M viins '^b'       backward-char
+bindkey -M viins '^y'       yank
+bindkey -M viins '^w'       backward-kill-word
+bindkey -M viins '\ew'      bash-backward-kill-word
+bindkey -M viins '^u'       backward-kill-line
+bindkey -M viins '^d'       delete-char
+bindkey -M viins '^h'       backward-delete-char
+bindkey -M viins '^?'       backward-delete-char
+bindkey -M viins '^_'       undo
+#bindkey -M viins '^x^e'     edit-command-line
+bindkey -M viins '^x^r'     redisplay
+bindkey -M viins '\ef'      forward-word      # Alt-f
+bindkey -M viins '\eb'      backward-word     # Alt-b
+bindkey -M viins '\ed'      kill-word         # Alt-d
+
 bindkey -M viins "^[."      insert-last-word
 bindkey -M viins "^[0"      digit-argument
 bindkey -M viins "^[1"      digit-argument
