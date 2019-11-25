@@ -59,14 +59,15 @@ HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
 # git info for prompt
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git #svn
-add-zsh-hook precmd vcs_info
+#autoload -Uz vcs_info
+#zstyle ':vcs_info:*' enable git #svn
+#add-zsh-hook precmd vcs_info
 
-# gitsome completion
-if [ -d .gitsome ]; then
-    autoload bashcompinit
-    bashcompinit
-    source ~/.gitsome/gh_complete.sh
-fi
+# zsh-autosuggestions config
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
