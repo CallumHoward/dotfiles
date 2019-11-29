@@ -26,12 +26,15 @@ ENABLE_CORRECTION="true"
 
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
 # NOTE load autosuggestions after syntax highlighting
+# NOTE load history-search-multi-word after zsh-vim-mode
 plugins=( \
     #docker \
     #meteor \
     #mosh \
     #npm \
     #vi-mode \
+    zsh-prompt-benchmark \
+    zsh-fzf-bindings \
     proxy-title \
     pip \
     fasd \
