@@ -8,8 +8,8 @@ fi
 # Path to oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# export ZSH_DISABLE_COMPFIX="true"
-DISABLE_MAGIC_FUNCTIONS="true"
+#export ZSH_DISABLE_COMPFIX="true"  # load insecure completions
+DISABLE_MAGIC_FUNCTIONS="true"  # disable url quote magic
 
 # Set name of the theme to load.
 ZSH_CUSTOM=~/dotfiles/.oh-my-zsh/custom
