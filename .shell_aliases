@@ -230,7 +230,7 @@ if command -v exa > /dev/null 2>&1; then
 fi
 
 if command -v git-st > /dev/null 2>&1; then
-    alias s="git-st"
+    alias s='git-st | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/"'
 else
     alias s="git sb"
 fi
