@@ -13,7 +13,7 @@
     vimdiff = difftool
     dt = difftool
 [pager]
-    #diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): .*$'
+    diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
 [diff]
     tool = vimdiff
 [difftool]
