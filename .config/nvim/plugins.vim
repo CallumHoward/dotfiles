@@ -95,8 +95,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('wavded/vim-stylus')                  " can't be lazy
     call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
     call dein#add('tikhomirov/vim-glsl')
-    call dein#add('pangloss/vim-javascript')            " can't be lazy
-    call dein#add('mxw/vim-jsx')                        " can't be lazy
+    call dein#add('yuezk/vim-js')                       " can't be lazy
+    call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
 
@@ -189,13 +189,14 @@ let g:neosnippet#enable_completed_snippet=1
 let g:neosnippet#enable_optional_arguments=0
 
 " vim-closetag config
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.jsx,*.md"
-let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,javascript.jsx'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.jsx,*.tsx,*.md"
+let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,javascript.jsx,javascript.tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 
 " vim match tag always config
 let g:mta_filetypes = {
             \'javascript.jsx': 1,
+            \'javascript.tsx': 1,
             \'html' : 1,
             \'xhtml' : 1,
             \'xml' : 1,
@@ -278,6 +279,7 @@ let g:neomake_cpp_clangtidy_args = ['-checks=\*', '-extra-arg=-std=c++1z',
 "let g:neomake_cpp_clang_exe = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++'
 let g:neomake_cpp_clang_args = ['-std=c++1z', '-Wextra', '-Weverything', '-pedantic', '-Wall', '-Wno-unused-parameter', '-Wno-c++98-compat', '-g',
             \'-I/usr/local/opt/boost/include', '-I~/Documents/Cinder.git/include', '-I~/range-v3/include']
+let g:neomake_javascript_enabled_makers = []
 let g:neomake_haskell_enabled_makers = ['hlint', 'ghcmod']
 let g:neomake_cpp_xcode_maker = {
             \ 'exe': 'xcwrapper',
@@ -334,6 +336,7 @@ nnoremap <leader>cc :CocCommand<CR>
 nmap <silent> [C <Plug>(coc-diagnostic-prev)
 nmap <silent> ]C <Plug>(coc-diagnostic-next)
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 CFormat :call CocAction('format')
 command! -nargs=? CFold :call CocAction('fold', <f-args>)
 
