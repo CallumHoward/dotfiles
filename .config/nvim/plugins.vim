@@ -290,6 +290,14 @@ let g:neomake_cpp_xcode_maker = {
 let g:neomake_python_pep8_exe = 'python3'
 let g:neomake_python_python_exe = 'python3'
 let g:neomake_python_enabled_makers = ['pep8', 'python']
+hi NeomakeError cterm=underline
+hi NeomakeWarning cterm=underline
+hi NeomakeInfo cterm=underline
+hi NeomakeMessage cterm=underline
+hi NeomakeErrorSign ctermfg=1 ctermbg=none
+hi NeomakeWarningSign ctermfg=9 ctermbg=none
+hi NeomakeInfoSign ctermfg=5 ctermbg=none
+hi NeomakeMessageSign ctermfg=5 ctermbg=none
 
 " deoplete-clang config
 let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
