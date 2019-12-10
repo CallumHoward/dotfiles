@@ -1,0 +1,34 @@
+{
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
+
+  "diagnostic.errorSign": "-!",
+  "diagnostic.warningSign": "-!",
+  "diagnostic.infoSign": "-i",
+  "diagnostic.hintSign": "-i",
+  "diagnostic.virtualText": false,
+  "diagnostic.messageTarget": "echo",
+  "diagnostic.virtualTextPrefix": " // ",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.enable": true,
+  "diagnostic.refreshAfterSave": true,
+
+  "coc.source.tmuxcomplete.enable": true,
+  "coc.source.tmuxcomplete.priority": 12,
+  "coc.source.syntax.priority": 10,
+
+  "python.jediEnabled": true,
+
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls"
+         }
+       }
+    }
+  }
+}
