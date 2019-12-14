@@ -17,6 +17,12 @@ PATH=/usr/local/bin:$PATH
 PATH=/usr/local/sbin:$PATH
 PATH=$PATH:~/.local/bin
 
+# pager options
+export LESS="-RFX"
+
+# title
+#export PROMPT_COMMAND='echo -ne "\033]0;$PWD\007"'
+
 # latex
 PATH=$PATH:/Library/TeX/texbin
 
