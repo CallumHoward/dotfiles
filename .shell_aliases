@@ -63,6 +63,8 @@ alias view="$EDITOR -R"
 alias vs="code"
 alias v.="v ."
 alias vd="v -d"
+alias F="v +F!"
+alias S="v '+GitFiles!?'"
 
 alias vtop="vtop --theme brew"
 alias goto=". goto"
