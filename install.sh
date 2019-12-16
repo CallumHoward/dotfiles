@@ -67,6 +67,11 @@ for i in scripts/*; do
 done
 echo "Finished creating symlinks"
 
+echo "Downloading diff-so-fancy"
+wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" -O ~/.local/bin/diff-so-fancy
+chmod +x ~/.local/bin/diff-so-fancy
+echo "Finished installing diff-so-fancy"
+
 echo "Installing tmux-256color terminfo"
 tic tmux-256color.ti
 echo "Finished installing tmux-256color terminfo"
