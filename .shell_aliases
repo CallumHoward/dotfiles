@@ -230,6 +230,8 @@ fi
 if command -v exa > /dev/null 2>&1; then
     alias ls="exa"
     alias tree="exa --tree"
+else
+    alias tree="tree -C"
 fi
 
 if command -v git-st > /dev/null 2>&1; then
