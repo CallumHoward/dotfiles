@@ -38,6 +38,7 @@ plugins=( \
     proxy-title \
     pip \
     fasd \
+    zsh-zbell \
     history-substring-search \
     zsh-syntax-highlighting \
     zsh-autosuggestions \
