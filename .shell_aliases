@@ -83,6 +83,7 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -v"
 alias gdb="gdb -q"
+alias gdp="gdb -p"
 
 alias yt="youtube-dl"
 alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"
