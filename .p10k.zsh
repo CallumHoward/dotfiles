@@ -35,6 +35,7 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
       # =========================[ Line #1 ]=========================
       # os_icon               # os identifier
+      newline
       nest_level
       context
       dir                     # current directory
@@ -155,7 +156,7 @@
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=true
 
   # Add an empty line before each prompt.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
 
   # Ruler, a.k.a. the horizontal line before each prompt. If you set it to true, you'll
   # probably want to set POWERLEVEL9K_PROMPT_ADD_NEWLINE=false above and
