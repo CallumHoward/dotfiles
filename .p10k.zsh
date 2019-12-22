@@ -820,7 +820,7 @@
 
   # shell nest level
   function prompt_nest_level() {
-    p10k segment -f 4 -t "$(ys_nest_level)%(1j.%j.)"
+    p10k segment -f 4 -t "%B$(ys_nest_level)%(1j.%j.)"
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
