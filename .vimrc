@@ -195,5 +195,5 @@ function! s:CloseBracket()
 endfunction
 
 " diff config
-set diffopt+=iwhite "ignore whitespace
+"set diffopt+=iwhite "ignore whitespace
 
