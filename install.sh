@@ -61,7 +61,7 @@ for i in "${files[@]}"; do
 done
 
 echo "Creating symlinks for scripts"
-mkdir -p "~/.local/bin"
+mkdir -p ~/.local/bin # don't quote this
 for i in scripts/*; do
     ln -sv "$PWD/$i" ~/.local/bin/"${i##*/}"
 done
