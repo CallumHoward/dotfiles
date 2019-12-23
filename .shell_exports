@@ -78,6 +78,8 @@ export SKIM_DEFAULT_OPTIONS='--reverse --ansi --color=current_bg:0,matched:3,inf
 
 # yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# kubernetes
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 # nvm
