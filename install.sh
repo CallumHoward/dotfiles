@@ -26,7 +26,21 @@ if [ "${PWD##*/}" != "dotfiles" ]; then
     exit
 fi
 
-if [ -x "$(which apt-get)" ]; then
+if ! [ -x "$(which brew)" ]; then
+    echo -n "Install Homebrew [Y/n]? "
+    if echo "$answer" | grep -viq "^n" ; then
+        if [[ "$OSTYPE" =~ "darwin" ]]; then
+            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+            brew install reattach-to-user-namespace
+        else
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        fi
+        echo -n "Install: tmux neovim ranger htop [Y/n]? "
+        if echo "$answer" | grep -viq "^n" ; then
+            brew install tmux neovim ranger htop
+        fi
+    fi
+elif [ -x "$(which apt-get)" ]; then
     echo -n "Install: zsh ssh git tmux curl wget vim ranger cmake htop [Y/n]? "
     read answer
     if echo "$answer" | grep -viq "^n" ; then
@@ -61,7 +75,7 @@ for i in "${files[@]}"; do
 done
 
 echo "Creating symlinks for scripts"
-mkdir -p "~/.local/bin"
+mkdir -p ~/.local/bin # don't quote this
 for i in scripts/*; do
     ln -sv "$PWD/$i" ~/.local/bin/"${i##*/}"
 done
