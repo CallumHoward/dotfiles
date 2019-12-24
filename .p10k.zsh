@@ -855,7 +855,7 @@
 
   # shell nest level instant placeholder
   function instant_prompt_nest_level() {
-    p10k segment -f 4 -t '#'
+    p10k segment -f 4 -t '%B#'
     #TODO incorperate exit status
   }
 
