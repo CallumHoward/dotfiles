@@ -527,7 +527,18 @@
   # Default context color.
   typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=6
   # Default context format: %n is username, %m is hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n%f at %2F%m'
+
+  # Set box name
+  function box_name {
+      if [ -f ~/.box-name ]; then
+          export BOX_NAME="$(cat ~/.box-name)"
+      else
+          export BOX_NAME="${HOST//.*}"
+      fi
+  }
+  box_name
+
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%n%f at %2F${BOX_NAME}"
 
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=13
