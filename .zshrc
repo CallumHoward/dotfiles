@@ -55,7 +55,8 @@ source ~/.zsh_keybindings
 source ~/.zsh_styles
 source ~/.zsh_functions
 
-bindkey -M viins 'kj' vi-cmd-mode
+# should be sourced after keybindings
+source $ZSH_CUSTOM/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 
 setopt complete_aliases
 
