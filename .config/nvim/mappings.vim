@@ -224,8 +224,8 @@ cabbrev gg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gg' : 'gg')<CR>
 " use Ag/Rg for grep if available
 if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m|
 elseif executable('ag') | set gp=ag\ --nogroup\ --nocolor\ --ignore\ build | endif
-com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
-com! -nargs=+ -complete=file -bar Ag sil! gr! <args>|cw|redr!|let @/="<args>"|set hls
+com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|botright cw|redr!|let @/="<args>"|set hls
+com! -nargs=+ -complete=file -bar Ag sil! gr! <args>|botright cw|redr!|let @/="<args>"|set hls
 cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
 cabbrev ag <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ag' : 'ag')<CR>
 
