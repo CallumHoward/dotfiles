@@ -105,6 +105,24 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
+" unimpaired tab mappings
+nnoremap <silent>]t gt
+nnoremap <silent>[t gT
+nnoremap <silent>]T :tabfirst<CR>
+nnoremap <silent>[T :tablast<CR>
+
+" tab navigation mappings
+nnoremap <silent><C-W>1 :tabn 1<CR>
+nnoremap <silent><C-W>2 :tabn 2<CR>
+nnoremap <silent><C-W>3 :tabn 3<CR>
+nnoremap <silent><C-W>4 :tabn 4<CR>
+nnoremap <silent><C-W>5 :tabn 5<CR>
+nnoremap <silent><C-W>6 :tabn 6<CR>
+nnoremap <silent><C-W>7 :tabn 7<CR>
+nnoremap <silent><C-W>8 :tabn 8<CR>
+nnoremap <silent><C-W>0 :tabfirst<CR>
+nnoremap <silent><C-W>9 :tablast<CR>
+
 " move tabs
 nnoremap <silent>g> :tabm +1<CR>
 nnoremap <silent>g< :tabm -1<CR>
