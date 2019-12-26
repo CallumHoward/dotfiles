@@ -85,6 +85,9 @@
       # proxy                 # system-wide http/https/ftp proxy
       # battery               # internal battery
       # example               # example user-defined segment (see prompt_example function below)
+      # =========================[ Line #3 ]=========================
+      newline
+      zsh-vim-mode
   )
 
   # Basic style options that define the overall look of your prompt. You probably don't want to
@@ -818,6 +821,10 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
+  }
+
+  function prompt_zsh-vim-mode() {
+    p10k segment -t "${MODE_INDICATOR_PROMPT}"
   }
 
   function ys_nest_level() {
