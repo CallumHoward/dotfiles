@@ -13,7 +13,8 @@ DISABLE_MAGIC_FUNCTIONS="true"  # disable url quote magic
 
 # Set name of the theme to load.
 ZSH_CUSTOM=~/dotfiles/.oh-my-zsh/custom
-ZSH_THEME="ys"
+#ZSH_THEME="ys"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -42,8 +43,7 @@ plugins=( \
     history-substring-search \
     zsh-syntax-highlighting \
     zsh-autosuggestions \
-    #zsh-vim-mode \
-    zsh-system-clipboard \
+    zsh-vim-mode \
     history-search-multi-word \
 )
 
@@ -58,6 +58,20 @@ source ~/.zsh_functions
 # should be sourced after keybindings
 source $ZSH_CUSTOM/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 
+# zsh-vim-mode config
+#MODE_CURSOR_VICMD="underline" # colour does not seem to work in macOS term
+#MODE_CURSOR_VIINS="bar"
+#MODE_CURSOR_SEARCH="underline"
+MODE_INDICATOR_VIINS='%B%K{2}%F{15} INSERT %f%k%b'
+MODE_INDICATOR_VICMD='%B%K{4}%F{15} NORMAL %f%k%v'
+MODE_INDICATOR_REPLACE='%B%K{1}%F{15} REPLACE %f%k%b'
+MODE_INDICATOR_SEARCH='%B%K{2}%F{15} SEARCH %f%k%b'
+MODE_INDICATOR_VISUAL='%B%K{9}%F{15} VISUAL %f%k%b'
+MODE_INDICATOR_VLINE='%B%K{9}%F{15} V-LINE %f%k%b'
+
+setopt transientrprompt
+
+# make the alias a distinct command for completion purposes
 setopt complete_aliases
 
 HISTSIZE=999999999
@@ -76,3 +90,5 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
