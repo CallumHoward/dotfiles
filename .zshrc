@@ -28,6 +28,7 @@ ENABLE_CORRECTION="true"
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
 # NOTE load autosuggestions after syntax highlighting
 # NOTE load history-search-multi-word after zsh-vim-mode
+# NOTE load history-substring-search after zsh-syntax-highlighting
 plugins=( \
     #docker \
     #meteor \
@@ -40,8 +41,9 @@ plugins=( \
     pip \
     fasd \
     zsh-zbell \
+    #zsh-syntax-highlighting \
     history-substring-search \
-    zsh-syntax-highlighting \
+    fast-syntax-highlighting
     zsh-autosuggestions \
     zsh-vim-mode \
     history-search-multi-word \
