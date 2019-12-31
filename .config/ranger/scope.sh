@@ -89,7 +89,9 @@ case "$extension" in
         try odt2txt "$path" && { dump | trim; exit 5; } || exit 1;;
     # Markdown
     md)
-        try safepipe highlight --syntax=markdown --out-format=${highlight_format} "$path" && { dump | trim; exit 5; };;
+        #try safepipe highlight --syntax=markdown --out-format=ansi "$path" && { dump | trim; exit 5; }
+        try safepipe glow -s dark "$path" && { dump | trim; exit 5; }
+        ;;
     # HTML Pages:
     htm|html|xhtml)
         #try w3m    -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
