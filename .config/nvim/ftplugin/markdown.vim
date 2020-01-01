@@ -4,7 +4,7 @@ setlocal nolist
 setlocal nonumber
 setlocal norelativenumber
 setlocal nocursorline
-setlocal spell
+setlocal nospell
 
 let g:markdown_fenced_languages = [
             \ 'bash=sh', 'c', 'cmake', 'cpp', 'cs', 'csharp=cs', 'css', 'diff',
