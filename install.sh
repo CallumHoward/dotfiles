@@ -79,6 +79,7 @@ mkdir -p ~/.local/bin # don't quote this
 for i in scripts/*; do
     ln -sv "$PWD/$i" ~/.local/bin/"${i##*/}"
 done
+ln -sv "$PWD/.config/ranger/scope.sh" ~/.local/bin/scope
 echo "Finished creating symlinks"
 
 echo "Downloading diff-so-fancy"
