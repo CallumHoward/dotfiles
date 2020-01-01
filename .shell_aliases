@@ -96,7 +96,6 @@ alias fb="fg;b"
 alias bu="brew update && brew upgrade && brew cleanup;b"
 alias j="jobs"
 
-alias s.="s ."
 alias g="git"
 alias sb="git sb"
 alias a="git_add"
@@ -132,7 +131,12 @@ alias push="git push"
 alias pull="git pull"
 alias stash="git stash"
 alias show="git show"
+alias sp="stash && pull && stash pop"
+alias sl="git sl"
+alias rl="git rl"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
+alias gu="gitup"
+#alias br="browse" #conflict
 
 alias snatch="zou"
 alias translate="trans"
@@ -237,6 +241,7 @@ fi
 
 if command -v git-st > /dev/null 2>&1; then
     alias s='git-st | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/"'
+    alias s.='git-st . | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/"'
 else
     alias s="git sb"
 fi
