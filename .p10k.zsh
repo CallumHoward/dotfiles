@@ -87,7 +87,7 @@
       # example               # example user-defined segment (see prompt_example function below)
       # =========================[ Line #3 ]=========================
       newline
-      zsh-vim-mode
+      vi_mode
   )
 
   # Basic style options that define the overall look of your prompt. You probably don't want to
@@ -202,13 +202,29 @@
   # Default prompt symbol.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='%B$'
   # Prompt symbol in command vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='%BN'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='%B$'
   # Prompt symbol in visual vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION='%BⅤ'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION='%B$'
   # Prompt symbol in overwrite vi mode.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIOWR_CONTENT_EXPANSION='%BR'
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=true
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIOWR_CONTENT_EXPANSION='%B$'
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=false
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
+
+  typeset -g POWERLEVEL9K_VI_INSERT_MODE_STRING='' #' %BINSERT%b '
+  typeset -g POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND=green
+  typeset -g POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND=15
+
+  typeset -g POWERLEVEL9K_VI_COMMAND_MODE_STRING=' %BNORMAL%b '
+  typeset -g POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND=blue
+  typeset -g POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND=15
+
+  typeset -g POWERLEVEL9K_VI_VISUAL_MODE_STRING=' %BVISUAL%b '
+  typeset -g POWERLEVEL9K_VI_MODE_VISUAL_BACKGROUND=9
+  typeset -g POWERLEVEL9K_VI_MODE_VISUAL_FOREGROUND=15
+
+  typeset -g POWERLEVEL9K_VI_OVERWRITE_MODE_STRING=' %BREPLACE%b '
+  typeset -g POWERLEVEL9K_VI_MODE_OVERWRITE_BACKGROUND=red
+  typeset -g POWERLEVEL9K_VI_MODE_OVERWRITE_FOREGROUND=15
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
