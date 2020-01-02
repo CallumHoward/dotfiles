@@ -70,6 +70,7 @@ export FZF_DEFAULT_OPTS='--reverse --color=bg+:0,hl:3,spinner:15,info:11,prompt:
 export FZF_PREVIEW_COMMAND='highlight -O ansi {} || cat {}'
 export FZF_DEFAULT_COMMAND=' \
   (git ls-tree -r --name-only HEAD || \
+   fd || \
    find . -path "*/\.*" -prune -o -type f -print -o -type l -print | \
       sed s/^..//) 2> /dev/null'
 
