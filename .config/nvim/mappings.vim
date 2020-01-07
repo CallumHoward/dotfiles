@@ -9,7 +9,7 @@ nnoremap ` '
 nnoremap <silent><C-Space> :setl rnu!<CR>
 
 " select last pasted
-nnoremap <leader>gv `[v`]
+nnoremap gV `[v`]
 
 " add word under cursor to search pattern
 nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
