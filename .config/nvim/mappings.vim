@@ -181,7 +181,21 @@ nnoremap <leader>w /\<<C-R>/\><CR><C-O>
 augroup TerminalConfig
     au!
     autocmd TermOpen * setlocal nonumber norelativenumber
+let g:previous_window = -1
+function SmartInsert()
+  if &buftype == 'terminal'
+    if g:previous_window != winnr()
+      startinsert
+    endif
+    let g:previous_window = winnr()
+  else
+    let g:previous_window = -1
+  endif
+endfunction
+
+au BufEnter * call SmartInsert()
 augroup END
+
 tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
 tnoremap <C-W><C-H> <C-\><C-N><C-W><C-H>
 tnoremap <C-W><C-J> <C-\><C-N><C-W><C-J>
