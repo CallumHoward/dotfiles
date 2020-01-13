@@ -19,6 +19,7 @@ declare -a files=(
     '.zsh_keybindings'
     '.zsh_styles'
     '.zsh_functions'
+    '.p10k.zsh'
 )
 
 if [ "${PWD##*/}" != "dotfiles" ]; then
@@ -90,3 +91,7 @@ echo "Finished installing diff-so-fancy"
 echo "Installing tmux-256color terminfo"
 tic tmux-256color.ti
 echo "Finished installing tmux-256color terminfo"
+
+echo "Setting Zsh fast-syntax-highlighting theme"
+zsh -c "fast-theme -t neodark-zsh.ini"
+echo "Finished setting Zsh fast-syntax-highlighting theme"
