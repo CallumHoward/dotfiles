@@ -278,7 +278,7 @@ endif
 
 function! s:CloseBracket()
     let line = getline('.')
-    if &ft =~# 'c\|cpp\|rust\|go' && line =~# '^\s*\(struct\|class\|enum\) '
+    if &ft =~# 'c\|cpp\|rust\|go\|python' && line =~# '^\s*\(struct\|class\|enum\) '
         return "{\<Enter>};\<Esc>O"
     elseif searchpair('(', '', ')', 'bmn', '', line('.'))
         " Probably inside a function call. Close it off.
