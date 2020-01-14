@@ -72,7 +72,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " set title for tmux
 if exists('$TMUX')
-    autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
+    "autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
+    autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window " ' . expand('%:t') . '"')
 endif
 
 if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
