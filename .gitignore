@@ -2,3 +2,4 @@
 .vim/
 backup
 .gitignore
+.DS_Store
