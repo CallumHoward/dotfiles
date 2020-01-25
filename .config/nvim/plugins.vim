@@ -404,14 +404,16 @@ let g:list_of_insert_keys = []
 " goyo config
 function! s:goyo_enter()
     set nonu nornu
-    HardTimeOff
+    Tmux set -g status off
+    "HardTimeOff
     "Limelight
 endfunction
 
 function! s:goyo_leave()
     if &ft == 'man' | q | endif
     set nu rnu
-    HardTimeOn
+    Tmux set -g status on
+    "HardTimeOn
     "Limelight!
 endfunction
 
