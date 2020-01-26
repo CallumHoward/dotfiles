@@ -92,6 +92,10 @@ case "$extension" in
         #try safepipe highlight --syntax=markdown --out-format=ansi "$path" && { dump | trim; exit 5; }
         try safepipe glow -s dark "$path" && { dump | trim; exit 5; }
         ;;
+    pde)
+        try safepipe highlight --syntax=java --out-format=ansi "$path" && { dump | trim; exit 5; };;
+    json)
+        try safepipe highlight --syntax=json --out-format=ansi "$path" && { dump | trim; exit 5; };;
     # HTML Pages:
     htm|html|xhtml)
         #try w3m    -dump "$path" && { dump | trim | fmt -s -w $width; exit 4; }
