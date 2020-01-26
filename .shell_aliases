@@ -32,7 +32,7 @@ if [[ "$OSTYPE" =~ "darwin" ]]; then
     alias chrome="open -a google\ chrome"
     alias k="open -a Keychain\ Access"
 
-    alias htop="sudo htop"
+    #alias htop="sudo htop"
 
     alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
     alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
