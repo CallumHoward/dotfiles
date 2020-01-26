@@ -31,7 +31,7 @@ function auto-ls-after-cd() {
     # Only in response to a user-initiated `cd`, not indirectly (eg. via another function).
     if [ "$ZSH_EVAL_CONTEXT" = "toplevel:shfunc" ]; then
         local bin=$(which exa)
-        if ! [ -x $bin ]; then
+        if ! [ -x "$bin" ]; then
             if [[ "$OSTYPE" =~ "darwin" ]]; then
                 bin=ls
             else
