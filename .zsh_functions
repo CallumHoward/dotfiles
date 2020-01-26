@@ -83,6 +83,10 @@ function pdftotext() {
     pdftohtml -stdout "$1" | html2text
 }
 
+function clo() {
+    git clone --recursive -j4 "$1" && cd *(/om[1])
+}
+
 function sf() {
     if [ -f ~/.box-name ]; then
         local longhost=`hostname`
