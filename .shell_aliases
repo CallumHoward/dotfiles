@@ -98,6 +98,7 @@ alias j="jobs"
 
 alias g="git"
 alias sb="git sb"
+alias ss="git sb | tail -n +2"
 alias a="git_add"
 alias ga="git_add"
 alias gc="git_commit"
