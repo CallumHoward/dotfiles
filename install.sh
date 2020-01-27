@@ -50,6 +50,8 @@ elif [ -x "$(which apt-get)" ]; then
 fi
 echo "Finished installing packages"
 
+git update-index --skip-worktree .local_rc
+
 echo -n "Install oh-my-zsh [Y/n]? "
 read answer
 if echo "$answer" | grep -viq "^n" ; then
