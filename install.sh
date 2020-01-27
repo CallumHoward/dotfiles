@@ -52,6 +52,14 @@ echo "Finished installing packages"
 
 git update-index --skip-worktree .local_rc
 
+echo -n "Install ranger-devicons [Y/n]? "
+read answer
+if echo "$answer" | grep -viq "^n" ; then
+    cd ~/.config/ranger/plugins/ranger_devicons
+    make install
+    cd -
+fi
+
 echo -n "Install oh-my-zsh [Y/n]? "
 read answer
 if echo "$answer" | grep -viq "^n" ; then
