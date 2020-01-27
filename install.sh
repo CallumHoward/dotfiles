@@ -103,5 +103,5 @@ tic tmux-256color.ti
 echo "Finished installing tmux-256color terminfo"
 
 echo "Setting Zsh fast-syntax-highlighting theme"
-zsh -c "fast-theme -t neodark-zsh.ini"
+zsh -c "fast-theme -t ./neodark-zsh.ini"
 echo "Finished setting Zsh fast-syntax-highlighting theme"
