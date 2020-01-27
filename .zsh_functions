@@ -31,7 +31,7 @@ function auto-ls-after-cd() {
     # Only in response to a user-initiated `cd`, not indirectly (eg. via another function).
     if [ "$ZSH_EVAL_CONTEXT" = "toplevel:shfunc" ]; then
         local bin=$(which exa)
-        if ! [ -x $bin ]; then
+        if ! [ -x "$bin" ]; then
             if [[ "$OSTYPE" =~ "darwin" ]]; then
                 bin=ls
             else
@@ -54,10 +54,14 @@ function edit-fzf() {
 
 # cf - fuzzy cd
 function cf() {
+    local bin=$(which sk)
+    if ! [ -x "$bin" ]; then
+        bin=$(which fzf)
+    fi
     if [ -d "$1" ]; then cd "$1"
     elif [[ "$1" == ,* ]]; then cd `fasd -ldR ${1#\,} | head -1`
     else
-        local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | sk`
+        local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | $bin`
         if [ "$dir" != "" ]; then cd $dir; fi
     fi
     # ls after cd, but only if there are less then 50 items in the directory
@@ -81,6 +85,10 @@ function ef() {
 
 function pdftotext() {
     pdftohtml -stdout "$1" | html2text
+}
+
+function clo() {
+    git clone --recursive -j4 "$1" && cd *(/om[1])
 }
 
 function sf() {

@@ -36,9 +36,9 @@ if ! [ -x "$(which brew)" ]; then
         else
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
         fi
-        echo -n "Install: tmux neovim ranger htop [Y/n]? "
+        echo -n "Install: tmux neovim ranger htop... [Y/n]? "
         if echo "$answer" | grep -viq "^n" ; then
-            brew install tmux neovim ranger htop
+            brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan
         fi
     fi
 elif [ -x "$(which apt-get)" ]; then
@@ -49,6 +49,16 @@ elif [ -x "$(which apt-get)" ]; then
     fi
 fi
 echo "Finished installing packages"
+
+git update-index --skip-worktree .local_rc
+
+echo -n "Install ranger-devicons [Y/n]? "
+read answer
+if echo "$answer" | grep -viq "^n" ; then
+    cd ~/.config/ranger/plugins/ranger_devicons
+    make install
+    cd -
+fi
 
 echo -n "Install oh-my-zsh [Y/n]? "
 read answer
@@ -93,5 +103,5 @@ tic tmux-256color.ti
 echo "Finished installing tmux-256color terminfo"
 
 echo "Setting Zsh fast-syntax-highlighting theme"
-zsh -c "fast-theme -t neodark-zsh.ini"
+zsh -c "fast-theme -t ./neodark-zsh.ini"
 echo "Finished setting Zsh fast-syntax-highlighting theme"

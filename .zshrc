@@ -56,6 +56,7 @@ source ~/.zsh_aliases
 source ~/.zsh_keybindings
 source ~/.zsh_styles
 source ~/.zsh_functions
+source ~/.local_rc
 
 # should be sourced after keybindings
 source $ZSH_CUSTOM/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
