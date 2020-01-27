@@ -54,10 +54,14 @@ function edit-fzf() {
 
 # cf - fuzzy cd
 function cf() {
+    local bin=$(which sk)
+    if ! [ -x "$bin" ]; then
+        bin=$(which fzf)
+    fi
     if [ -d "$1" ]; then cd "$1"
     elif [[ "$1" == ,* ]]; then cd `fasd -ldR ${1#\,} | head -1`
     else
-        local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | sk`
+        local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | $bin`
         if [ "$dir" != "" ]; then cd $dir; fi
     fi
     # ls after cd, but only if there are less then 50 items in the directory
