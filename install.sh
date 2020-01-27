@@ -36,9 +36,9 @@ if ! [ -x "$(which brew)" ]; then
         else
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
         fi
-        echo -n "Install: tmux neovim ranger htop [Y/n]? "
+        echo -n "Install: tmux neovim ranger htop... [Y/n]? "
         if echo "$answer" | grep -viq "^n" ; then
-            brew install tmux neovim ranger htop
+            brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan
         fi
     fi
 elif [ -x "$(which apt-get)" ]; then
