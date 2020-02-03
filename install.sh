@@ -12,6 +12,7 @@ declare -a files=(
     '.ideavimrc'
 
     '.zshrc'
+    '.local_rc'
     #'.oh-my-zsh'
     '.shell_aliases'
     '.shell_exports'
