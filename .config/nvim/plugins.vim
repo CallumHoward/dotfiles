@@ -65,7 +65,7 @@ if dein#load_state('~/.cache/dein')
     " wrap external tools
     call dein#add('ludovicchabant/vim-gutentags')       " automatic tagfile generation
     call dein#add('lambdalisue/gina.vim',               {'on_cmd': 'Gina'})
-    call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp']})
+    call dein#add('rhysd/vim-clang-format',             {'on_ft': ['c', 'cpp', 'arduino']})
     "call dein#add('alepez/vim-llvmcov',                 {'on_ft': ['c', 'cpp']})
     "call dein#add('lotabout/skim',                      {'build': './install --all', 'merged': 0})
     "call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
