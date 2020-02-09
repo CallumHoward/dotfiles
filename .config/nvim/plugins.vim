@@ -462,3 +462,72 @@ command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
   \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
+" Tabline config
+set tabline=%!MyTabLine()
+function MyTabLine()
+    let s = '' " complete tabline goes here
+    " loop through each tab page
+    for t in range(tabpagenr('$'))
+        " select the highlighting for the buffer names
+        if t + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+        " empty space
+        let s .= ' '
+        " set the tab page number (for mouse clicks)
+        let s .= '%' . (t + 1) . 'T'
+        " get buffer names and statuses
+        let n = ''  " temp string for buffer names while we loop and check buftype
+        let buflist = tabpagebuflist(t + 1)
+        let bufcounter = 0  " counter to avoid last seperator
+        " loop through each buffer in a tab
+        for bufnr in buflist
+            let winnr = tabpagewinnr(t + 1)
+            let ismainpage = bufcounter == winnr - 1
+            if exists('*WebDevIconsGetFileTypeSymbol')  " support for vim-devicons
+                let n .= WebDevIconsGetFileTypeSymbol(fnamemodify(bufname(bufnr), ':t'))
+                if ismainpage
+                    let n .= ' '
+                endif
+            else
+                let n .= '#'
+                if ismainpage
+                    let n .= ' '
+                endif
+            endif
+            if !ismainpage
+                " do nothing
+            elseif bufname(bufnr) == ''
+                let n .= '[No Name]'
+            else
+                let n .= fnamemodify(bufname(bufnr), ':t')
+            endif
+            " check and ++ tab's &modified count
+            if getbufvar(bufnr, "&modified")
+                let n .= ' +'
+            endif
+            " no final ' ' added...formatting looks better done later
+            if bufcounter < len(buflist) - 1
+                let n .= ' | '
+            endif
+            let bufcounter += 1
+        endfor
+        " add buffer names
+        let s .= n
+        " switch to no underlining and add final space to buffer list
+        let s .= ' %#TabLineFill# '
+        "let s .= ' '
+    endfor
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#TabLineFill#%T'
+    " right-align the label to close the current tab page
+    "if tabpagenr('$') > 1
+    "  let s .= '%=%#TabLine#%999XX'
+    "endif
+    return s
+endfunction
+
+set tabline=%!MyTabLine()
