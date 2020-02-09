@@ -547,17 +547,13 @@
   typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=6
   # Default context format: %n is username, %m is hostname.
 
-  # Set box name
-  function box_name {
-      if [ -f ~/.box-name ]; then
-          export BOX_NAME="$(cat ~/.box-name)"
-      else
-          export BOX_NAME="${HOST//.*}"
-      fi
-  }
-  box_name
+  if [[ -r ~/.box-name(#qN.) ]]; then
+    export BOX_NAME="$(<~/.box-name)"
+  else
+    export BOX_NAME="${HOST//.*}"
+  fi
 
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%n%f at %2F${BOX_NAME}"
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%n%f at %2F${BOX_NAME//\%/%%}"
 
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=13
@@ -839,24 +835,6 @@
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
   }
 
-  function prompt_zsh-vim-mode() {
-    p10k segment -t "${MODE_INDICATOR_PROMPT}"
-  }
-
-  function ys_nest_level() {
-    if [[ -n "$TMUX" ]]; then
-      local LVL=$(($SHLVL - 1))
-    else
-      local LVL=$SHLVL
-    fi
-    printf '#%.0s' {1..$LVL}
-  }
-
-  # shell nest level
-  function prompt_nest_level() {
-    p10k segment -f 4 -t "%B$(ys_nest_level)%(1j.%j.)"
-  }
-
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
   # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
@@ -876,10 +854,20 @@
     prompt_example
   }
 
+  function prompt_zsh-vim-mode() {
+    p10k segment -t "${MODE_INDICATOR_PROMPT}"
+  }
+
+  # shell nest level
+  function prompt_nest_level() {
+    # _my_lvl := $TMUX == "" ? $SHLVL : $((SHLVL-1))
+    local lvl='${${_my_lvl::=${${TMUX:+$((SHLVL-1))}:-$SHLVL}}+}'
+    p10k segment -f 4 -e -t $lvl'%B${(l:$_my_lvl::#:)}%(1j.%j.)'
+  }
+
   # shell nest level instant placeholder
   function instant_prompt_nest_level() {
-    p10k segment -f 4 -t '%B#'
-    #TODO incorperate exit status
+    prompt_nest_level
   }
 
   # User-defined prompt segments can be customized the same way as built-in segments.
