@@ -19,12 +19,9 @@
 [submodule ".oh-my-zsh/custom/plugins/zsh-prompt-benchmark"]
 	path = .oh-my-zsh/custom/plugins/zsh-prompt-benchmark
 	url = https://github.com/romkatv/zsh-prompt-benchmark.git
-[submodule "zsh-history-substring-search"]
-	path = zsh-history-substring-search
-	url = git@github.com:zsh-users/zsh-history-substring-search.git
 [submodule ".oh-my-zsh/custom/plugins/zsh-history-substring-search"]
 	path = .oh-my-zsh/custom/plugins/zsh-history-substring-search
-	url = git@github.com:zsh-users/zsh-history-substring-search.git
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
 [submodule ".oh-my-zsh/custom/plugins/fast-syntax-highlighting"]
 	path = .oh-my-zsh/custom/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting.git
