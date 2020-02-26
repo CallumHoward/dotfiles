@@ -22,6 +22,8 @@ bindkey -M viins '^r'       history-search-multi-word
 bindkey -M viins '^p'       history-beginning-search-backward
 bindkey -M viins '^n'       history-beginning-search-forward
 
+# alt-. for last argument, or alt-n alt-. for nth last argument of command
+# press repeatedly to apply to previous commands in history
 bindkey -M viins "^[."      insert-last-word
 bindkey -M viins "^[0"      digit-argument
 bindkey -M viins "^[1"      digit-argument
