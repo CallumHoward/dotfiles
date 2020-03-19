@@ -5,8 +5,10 @@ tell application "Spotify"
   if it is running then
     if player state is playing then
       set track_name_dirty to name of current track
-      set artist_name to artist of current track
-      set command_string to "echo \"" & track_name_dirty & "\" | perl -pne 's/\\s([\\(-]|ft\\.\\s).+$//'" as string
+      set artist_name_dirty to artist of current track
+      set command_string to "echo \"" & artist_name_dirty & "\" | perl -pne 's/(,|\\s[\\(-]|\\sft\\.\\s).+$//'" as string
+      set artist_name to do shell script command_string
+      set command_string to "echo \"" & track_name_dirty & "\" | perl -pne 's/(,|\\s[\\(-]|\\sft\\.\\s).+$//'" as string
       set track_name to do shell script command_string
 
       if artist_name > 0
