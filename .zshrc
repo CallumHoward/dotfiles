@@ -87,9 +87,13 @@ SAVEHIST=$HISTSIZE
 
 # zsh-autosuggestions config
 ZSH_AUTOSUGGEST_USE_ASYNC=1
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+#ZSH_AUTOSUGGEST_MANUAL_REBIND=1  # not sure what this does: https://github.com/zsh-users/zsh-autosuggestions/commit/937d6fc24145fdcd87e952a5e607c26d098c58b5
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+
+# ctrl-f alt-f to partially accept, right-arrow to fully accept
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(end-of-line vi-forward-char)
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char forward-word)
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
