@@ -42,6 +42,8 @@ fi
 alias oo="o"
 alias d="fasd_cd -d"
 
+alias lsdf="ls -d \.*"
+
 alias ssh="env TERM=screen-256color ssh"
 
 #alias ranger="ranger-cd"
