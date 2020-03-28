@@ -38,7 +38,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('neomake/neomake')
     call dein#add('airblade/vim-gitgutter')             " line git status
     call dein#add('kshenoy/vim-signature')              " marks in signs column
-    "call dein#add('liuchengxu/vista.vim')               " language server aware tags
+    call dein#add('liuchengxu/vista.vim')               " language server aware tags
     call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
     call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
     call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})

@@ -29,9 +29,11 @@ set breakindent                 " wrapped text is indented
 set briopt=sbr,shift:8,min:20   " config for breakindent
 let &showbreak='↳ '
 let &breakat=' ,{'
-set cpoptions+=n
+set cpoptions+=n                " showbreak in number column
 
 set pumheight=5                 " maximum number of items in completion popup
+"set pumblend=9                  " transparency
+"set winblend=9
 
 set ignorecase                  " for search patterns
 set smartcase                   " don't ignore case if capital is used
