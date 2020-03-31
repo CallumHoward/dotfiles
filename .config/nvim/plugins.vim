@@ -55,6 +55,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('michaeljsmith/vim-indent-object')    " indent text object
     call dein#add('CallumHoward/vim-interestingwords')  " multi keyword highlight
     call dein#add('idbrii/vim-tagimposter')             " mappings can add to taglist
+    call dein#add('ryanoasis/vim-devicons')
     call dein#add('joeytwiddle/sexy_scroller.vim')
     call dein#add('rhysd/git-messenger.vim', {
                 \   'lazy' : 1,
