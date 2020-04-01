@@ -39,8 +39,8 @@ function auto-ls-after-cd() {
             fi
         fi
 
-        # Only if there are less then 50 items in the directory
-        if (( `ls | wc -l` < 50 )); then $bin -x --color=auto; fi
+        # Only if there are less then $LINES items in the directory
+        if (( `ls | wc -l` < $LINES )); then $bin -x --color=auto; fi
     fi
 }
 add-zsh-hook chpwd auto-ls-after-cd
@@ -64,11 +64,11 @@ function cf() {
         local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | $bin`
         if [ "$dir" != "" ]; then cd $dir; fi
     fi
-    # ls after cd, but only if there are less then 50 items in the directory
+    # ls after cd, but only if there are less then $LINES items in the directory
     local bin=$(which exa)
     if ! [ -x $bin ]; then bin=ls; fi
-    # Only if there are less then 50 items in the directory
-    if (( `ls | wc -l` < 50 )); then $bin --group-directories-first -x --color=auto; fi
+    # Only if there are less then $LINES items in the directory
+    if (( `ls | wc -l` < $LINES )); then $bin --group-directories-first -x --color=auto; fi
 }
 
 # ef - fuzzy edit
@@ -156,43 +156,43 @@ function git_add() {
         git add "$@"
     fi
 
-    if (( `git status -s | wc -l` < 50 )); then
-        git status -s
+    if (( `git status -s | wc -l` < $LINES )); then
+        s | tail -n +2
     fi
 }
 
 function git_commit() {
     git commit "$@"
-    if (( `git status -s | wc -l` < 50 )); then
-        git status -s
+    if (( `git status -s | wc -l` < $LINES )); then
+        s | tail -n +2
     fi
 }
 
 function cm() {
     nocorrect git commit -m "$*"
-    if (( `git status -s | wc -l` < 50 )); then
-        git status -s
+    if (( `git status -s | wc -l` < $LINES )); then
+        s | tail -n +2
     fi
 }
 
 function cv() {
     git commit -v "$@"
-    if (( `git status -s | wc -l` < 50 )); then
-        git status -s
+    if (( `git status -s | wc -l` < $LINES )); then
+        s | tail -n +2
     fi
 }
 
 function git_reset() {
     git reset -q "$@"
-    if (( `git status -s | wc -l` < 50 )); then
-        git status -s
+    if (( `git status -s | wc -l` < $LINES )); then
+        s | tail -n +2
     fi
 }
 
 function git_checkout() {
     git checkout "$@"
-    if (( `git status -sb | wc -l` < 50 )); then
-        git status -sb
+    if (( `git status -sb | wc -l` < $LINES )); then
+        s
     fi
 }
 
