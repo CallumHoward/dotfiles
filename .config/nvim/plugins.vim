@@ -444,6 +444,10 @@ autocmd  FileType fzf,skim set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 "showmode ruler
 "let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
+" javascript config
+autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
+autocmd bufnewfile,bufread *.jsx set filetype=javascript.jsx
+
 command! -bang -nargs=* RG
   \ call fzf#vim#grep(
   \   'rg --colors "path:fg:green" --colors "path:style:nobold" --colors "line:fg:yellow" --colors "line:style:nobold" --colors "match:fg:black" --colors "match:bg:yellow" --column --line-number --no-heading --color=always --colors "match:style:nobold" --smart-case '.shellescape(<q-args>), 1,
