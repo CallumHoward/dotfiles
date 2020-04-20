@@ -57,6 +57,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('idbrii/vim-tagimposter')             " mappings can add to taglist
     call dein#add('ryanoasis/vim-devicons')
     call dein#add('joeytwiddle/sexy_scroller.vim')
+    call dein#add('Yggdroot/indentLine')
+    call dein#add('lukas-reineke/indent-blankline.nvim')
     call dein#add('rhysd/git-messenger.vim', {
                 \   'lazy' : 1,
                 \   'on_cmd' : 'GitMessenger',
@@ -538,3 +540,9 @@ function MyTabLine()
 endfunction
 
 set tabline=%!MyTabLine()
+
+" indent guides config
+let g:indentLine_char = '│'
+let g:indentLine_color_term = 232
+let g:indent_blankline_extra_indent_level = -1
+let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go']
