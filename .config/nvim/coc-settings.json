@@ -13,6 +13,8 @@
   "diagnostic.enable": true,
   "diagnostic.refreshAfterSave": true,
 
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript.tsx", "typescript", "javascript.jsx", "html"],
+
   "coc.source.tmuxcomplete.enable": true,
   "coc.source.tmuxcomplete.priority": 12,
   "coc.source.syntax.priority": 10,
