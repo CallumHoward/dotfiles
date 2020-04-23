@@ -169,6 +169,12 @@ xnoremap <leader>s :s///g<Left><Left>
 nnoremap <leader>S :%Subvert/<C-R>///g<Left><Left>
 xnoremap <leader>S :Subvert/<C-R>///g<Left><Left>
 
+" global mappings
+nnoremap <leader>gn :g//norm 
+nnoremap <leader>gd :g//d<CR>
+xnoremap <leader>gn :g//norm 
+xnoremap <leader>gd :g//d<CR>
+
 " restrict search to comment
 "nnoremap <leader>c ?\v(//|#).*\zs
 "nnoremap <leader>c ?//.*\zs
