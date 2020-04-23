@@ -84,6 +84,7 @@ nnoremap <silent> <Esc> :noh<CR>:call UncolorAllWords()<CR>
 
 nnoremap <silent> * :call InterestingWords('n')<CR>
 vnoremap <silent> * :call InterestingWords('v')<CR>
+vnoremap <silent> # :call InterestingWords('v')<CR>
 nnoremap <silent> n :call WordNavigation('forward')<CR>
 nnoremap <silent> N :call WordNavigation('backward')<CR>
 
