@@ -126,6 +126,10 @@ nnoremap <silent><C-W>8 :tabn 8<CR>
 nnoremap <silent><C-W>0 :tabfirst<CR>
 nnoremap <silent><C-W>9 :tablast<CR>
 
+" open new vertical split mappings
+nnoremap <silent><C-W><C-F> <C-W><C-V>gF
+nmap <silent><C-W><C-]> <C-W><C-V><C-]>
+
 " move tabs
 nnoremap <silent>g> :tabm +1<CR>
 nnoremap <silent>g< :tabm -1<CR>
