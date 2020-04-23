@@ -89,7 +89,7 @@ nnoremap <silent> n :call WordNavigation('forward')<CR>
 nnoremap <silent> N :call WordNavigation('backward')<CR>
 
 " unimpaired quickfix mappings
-nnoremap <silent> <leader>q :cw<CR>
+nnoremap <silent> <leader>q :cw<CR><C-W>J
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
 nnoremap <silent> [Q :cfirst<CR>
