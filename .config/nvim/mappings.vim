@@ -141,12 +141,15 @@ nnoremap <silent> zV :<C-u>silent! normal! zM<CR>zv
 nnoremap <silent> <Space> za
 
 " resync folds
-nnoremap <leader>f :set foldmethod=expr<CR>
+nnoremap <silent> <leader>f :set foldmethod=manual<CR>zE:call CocAction('fold')<CR>zvzz
+nnoremap <silent> <C-l> <C-l>:syntax sync fromstart<CR>
 
 " quickly set foldlevel
 nnoremap <leader>1 :set foldnestmax=1<CR>
 nnoremap <leader>2 :set foldnestmax=2<CR>
 nnoremap <leader>3 :set foldnestmax=3<CR>
+nnoremap <leader>4 :set foldnestmax=4<CR>
+nnoremap <leader>5 :set foldnestmax=5<CR>
 
 " insert closing curly brace
 inoremap <expr> {<Enter> <SID>CloseBracket()
