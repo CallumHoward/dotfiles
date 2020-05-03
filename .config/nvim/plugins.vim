@@ -84,6 +84,7 @@ if dein#load_state('~/.cache/dein')
     " keybindings
     call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
     call dein#add('tpope/vim-repeat',                   {'on_event': s:ces})
+    call dein#add('tpope/vim-commentary')               " for easy commenting
     call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
     call dein#add('takac/vim-hardtime')                 " disable rapid hjkl repeat
 
