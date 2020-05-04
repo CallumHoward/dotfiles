@@ -426,21 +426,6 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-" cmd2 config
-"nmap : :<F12>
-nmap / /<F12>
-nmap ? /<F12>
-cmap <F12> <Plug>(Cmd2Suggest)
-"cmap <expr> <Tab> Cmd2#ext#complete#InContext() ? "\<Plug>(Cmd2Complete)" : "\<Tab>"
-"set wildcharm=<Tab>
-let g:Cmd2_options = {
-      \ '_complete_ignorecase': 1,
-      \ '_complete_uniq_ignorecase': 0,
-      \ '_complete_fuzzy': 0,
-      \ }
-let g:Cmd2_cursor_blink = 0  " not working :(
-let g:Cmd2_buffer_cursor_show = 0
-
 " limelight config
 let g:limelight_conceal_ctermfg = 4
 let g:limelight_conceal_guifg = '#80a0ff'
