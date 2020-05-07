@@ -13,7 +13,6 @@ if [[ "$OSTYPE" =~ "darwin" ]]; then
     alias spotify="open -a spotify"
     alias slack="open -a slack"
     alias safari="open -a safari"
-    alias docker="open -a docker"
     alias xcode="open -a xcode"
     #alias dash="open -a dash"
     alias notes="open -a notes"
