@@ -31,3 +31,6 @@
 [submodule ".oh-my-zsh/custom/plugins/zsh-vim-mode"]
 	path = .oh-my-zsh/custom/plugins/zsh-vim-mode
 	url = https://github.com/softmoth/zsh-vim-mode.git
+[submodule ".oh-my-zsh/custom/plugins/zsh-autocomplete"]
+	path = .oh-my-zsh/custom/plugins/zsh-autocomplete
+	url = git@github.com:marlonrichert/zsh-autocomplete.git
