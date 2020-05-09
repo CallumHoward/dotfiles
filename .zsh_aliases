@@ -51,8 +51,8 @@ bindkey "^I" globalias                 # tab key to expand globalalias
 # http://www.zzapper.co.uk/zshtips.html
 alias -g ND='*(/om[1])'           # newest directory
 alias -g NF='*(.om[1])'           # newest file
-alias -g V='| vim -R -'
-alias -g L='| $PAGER'
+#alias -g V='| vim -R -'
+#alias -g L='| $PAGER'
 alias -g WC='| wc -l'
 alias -g H='| head'
 alias -g H1='| head -1'
