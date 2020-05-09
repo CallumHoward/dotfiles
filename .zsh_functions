@@ -38,6 +38,9 @@ function auto-ls-after-cd() {
         elif [[ "$OSTYPE" =~ "darwin" ]]; then
             bin=ls
             args=-G
+        elif [[ "$OSTYPE" =~ "linux-gnueabihf" ]]; then
+            bin=ls
+            args=--group-directories-first --color=tty
         else
             bin=ls
             args=--group-directories-first --color=auto
