@@ -31,16 +31,20 @@ function auto-ls-after-cd() {
     # Only in response to a user-initiated `cd`, not indirectly (eg. via another function).
     if [ "$ZSH_EVAL_CONTEXT" = "toplevel:shfunc" ]; then
         local bin=$(which exa)
-        if ! [ -x "$bin" ]; then
-            if [[ "$OSTYPE" =~ "darwin" ]]; then
-                bin=ls
-            else
-                bin=ls --group-directories-first
-            fi
+        local args
+        if [ -x $bin ]; then
+            bin=exa
+            args=--icons
+        elif [[ "$OSTYPE" =~ "darwin" ]]; then
+            bin=ls
+            args=-G
+        else
+            bin=ls
+            args=--group-directories-first --color=auto
         fi
 
         # Only if there are less then $LINES items in the directory
-        if (( `ls | wc -l` < $LINES )); then $bin -x --color=auto; fi
+        if (( `ls | wc -l` < $LINES )); then $bin -x $args; fi
     fi
 }
 add-zsh-hook chpwd auto-ls-after-cd
