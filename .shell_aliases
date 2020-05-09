@@ -242,7 +242,10 @@ fi
 
 function ls_wrapper() {
     local bin
-    local args=( -x )
+    local args=( )
+    if [[ ! "$@" =~ "-[A-Za-z]*l" ]]; then
+        args+=-x
+    fi
     if command -v exa > /dev/null 2>&1; then
         bin=exa
         args+=( --icons --group-directories-first )
@@ -256,7 +259,7 @@ function ls_wrapper() {
 
     # test for if in interactive shell
     if [[ -t 0 || -p /dev/stdin ]]; then
-        $bin "${args[@]}"
+        $bin "${args[@]}" $@
     fi
 }
 
