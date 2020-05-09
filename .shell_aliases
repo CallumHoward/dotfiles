@@ -268,7 +268,6 @@ else
 fi
 
 if command -v git-st > /dev/null 2>&1; then
-        if (( `ls | wc -l` < $LINES )); then ls_wrapper; fi
     alias s='(set -o pipefail && git-st 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
     alias s.='(set -o pipefail && git-st . 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
 else
