@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 IFS=
 status="$(git -c color.status=always status -sb $1)"
 if [ $? -ne 0 ]
