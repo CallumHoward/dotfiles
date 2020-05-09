@@ -240,14 +240,35 @@ if command -v jq > /dev/null 2>&1; then
     alias jq="python -m json.tool"
 fi
 
+function ls_wrapper() {
+    local bin
+    local args=( -x )
+    if command -v exa > /dev/null 2>&1; then
+        bin=exa
+        args+=( --icons --group-directories-first )
+    elif [[ "$OSTYPE" =~ "darwin" ]]; then
+        bin=ls
+        args+=-G
+    else
+        bin=ls
+        args+=( --group-directories-first --color=auto )
+    fi
+
+    # test for if in interactive shell
+    if [[ -t 0 || -p /dev/stdin ]]; then
+        $bin "${args[@]}"
+    fi
+}
+
+alias ls=ls_wrapper
 if command -v exa > /dev/null 2>&1; then
-    alias ls="exa --icons"
     alias tree="exa --tree --icons"
 else
     alias tree="tree -C"
 fi
 
 if command -v git-st > /dev/null 2>&1; then
+        if (( `ls | wc -l` < $LINES )); then ls_wrapper; fi
     alias s='(set -o pipefail && git-st 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
     alias s.='(set -o pipefail && git-st . 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
 else
