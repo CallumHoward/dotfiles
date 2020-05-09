@@ -33,4 +33,4 @@
 	url = https://github.com/softmoth/zsh-vim-mode.git
 [submodule ".oh-my-zsh/custom/plugins/zsh-autocomplete"]
 	path = .oh-my-zsh/custom/plugins/zsh-autocomplete
-	url = git@github.com:marlonrichert/zsh-autocomplete.git
+	url = https://github.com/marlonrichert/zsh-autocomplete.git
