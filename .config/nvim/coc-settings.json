@@ -13,6 +13,10 @@
   "diagnostic.enable": true,
   "diagnostic.refreshAfterSave": true,
 
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+
   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript.tsx", "typescript", "javascript.jsx", "html"],
 
   "coc.source.tmuxcomplete.enable": true,
