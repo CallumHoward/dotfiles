@@ -33,8 +33,9 @@
     smudge = git hawser smudge %f
     required = true
 [filter "lfs"]
-    clean = git lfs clean %f
-    smudge = git lfs smudge %f
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
     required = true
 [core]
     pager = diff-so-fancy | menos --tabs=4 -iFMRSX
