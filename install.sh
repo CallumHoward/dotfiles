@@ -97,6 +97,8 @@ echo "Finished creating symlinks"
 echo "Downloading diff-so-fancy"
 wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" -O ~/.local/bin/diff-so-fancy
 chmod +x ~/.local/bin/diff-so-fancy
+wget "https://raw.githubusercontent.com/wincent/wincent/master/aspects/dotfiles/files/.zsh/bin/menos" -O ~/.local/bin/menos
+chmod +x ~/.local/bin/menos
 echo "Finished installing diff-so-fancy"
 
 echo "Installing tmux-256color terminfo"
