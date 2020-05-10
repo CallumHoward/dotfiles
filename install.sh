@@ -3,6 +3,7 @@
 declare -a files=(
     '.config'
     '.gitconfig'
+    '.gitignore_global'
     '.tmux.conf'
 
     '.vim'
