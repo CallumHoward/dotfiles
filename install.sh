@@ -40,7 +40,7 @@ if ! [ -x "$(which brew)" ]; then
         fi
         echo -n "Install: tmux neovim ranger htop... [Y/n]? "
         if echo "$answer" | grep -viq "^n" ; then
-            brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan
+            brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan wget
         fi
     fi
 elif [ -x "$(which apt-get)" ]; then
