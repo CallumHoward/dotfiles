@@ -10,7 +10,7 @@ alias rv="rsync -ahvz --progress --remove-source-files;b"
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
     #alias iina="open -a iina"
-    alias spotify="open -a spotify"
+    #alias spotify="open -a spotify"
     alias slack="open -a slack"
     alias safari="open -a safari"
     alias xcode="open -a xcode"
