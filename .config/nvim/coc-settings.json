@@ -25,6 +25,19 @@
 
   "python.jediEnabled": true,
 
+  "tslint.jsEnable": true,
+  "tslint.run": "onSave",
+
+  "codeLens.enable": true,
+  "codeLens.separator":"  ",
+  "typescript.implementationsCodeLens.enable": false,
+  "typescript.referencesCodeLens.enable": false,
+  "javascript.implementationsCodeLens.enable": false,
+  "javascript.referencesCodeLens.enable": false,
+
+  // Display the 'calculating' decoration (not working?)
+  "importCost.showCalculatingDecoration": true,
+
   "languageserver": {
     "ccls": {
       "command": "ccls",
