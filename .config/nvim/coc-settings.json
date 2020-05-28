@@ -17,13 +17,26 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
 
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescript.tsx", "typescript", "javascript.jsx", "html"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
 
   "coc.source.tmuxcomplete.enable": true,
   "coc.source.tmuxcomplete.priority": 12,
   "coc.source.syntax.priority": 10,
 
   "python.jediEnabled": true,
+
+  "tslint.jsEnable": true,
+  "tslint.run": "onSave",
+
+  "codeLens.enable": true,
+  "codeLens.separator":"  ",
+  "typescript.implementationsCodeLens.enable": false,
+  "typescript.referencesCodeLens.enable": false,
+  "javascript.implementationsCodeLens.enable": false,
+  "javascript.referencesCodeLens.enable": false,
+
+  // Display the 'calculating' decoration (not working?)
+  "importCost.showCalculatingDecoration": true,
 
   "languageserver": {
     "ccls": {
