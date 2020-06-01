@@ -455,16 +455,67 @@ command! -bang -nargs=* RG
   \ call fzf#vim#grep(
   \   'rg --colors "path:fg:green" --colors "path:style:nobold" --colors "line:fg:yellow" --colors "line:style:nobold" --colors "match:fg:black" --colors "match:bg:yellow" --column --line-number --no-heading --color=always --colors "match:style:nobold" --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \           : fzf#vim#with_preview('right:50%', '?'),
   \   <bang>0)
 
-command! -bang -nargs=? -complete=dir F
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" Files + devicons
+function! Fzf_files_with_dev_icons(command, full)
+    let l:fzf_files_options = '--preview "scope {2..} 2>/dev/null || cat {2..} 2>/dev/null || CLICOLOR_FORCE=1 ls -G {2..} 2>/dev/null"'
+    function! s:edit_devicon_prepended_file(item)
+        let l:file_path = a:item[4:-1]
+        execute 'silent e' l:file_path
+    endfunction
+    if a:full == '1'
+        call fzf#run({
+                    \ 'source': a:command.' | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'window': 'enew' })
+    else
+        call fzf#run({
+                    \ 'source': a:command.' | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'down': '40%' })
+    endif
+endfunction
+
+function! Fzf_git_diff_files_with_dev_icons(full)
+    let l:fzf_files_options = '--ansi --preview "sh -c \"(git diff --color=always -- {3..} | sed 1,4d; scope {3..} 2>/dev/null || [[ $? -eq 1 ]] && cat {3..} 2>/dev/null)\""'
+    function! s:edit_devicon_prepended_file_diff(item)
+        echom a:item
+        let l:file_path = a:item[7:-1]
+        echom l:file_path
+        let l:first_diff_line_number = system("git diff -U0 ".l:file_path." | rg '^@@.*\+' -o | rg '[0-9]+' -o | head -1")
+        execute 'silent e' l:file_path
+        execute l:first_diff_line_number
+    endfunction
+    if a:full
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always status --short --untracked-files=all | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file_diff'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'window': 'enew' })
+    else
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always status --short --untracked-files=all | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file_diff'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'down': '40%' })
+    endif
+endfunction
+
+ " Open fzf Files " Open fzf Files
+command! F :call Fzf_files_with_dev_icons($FZF_DEFAULT_COMMAND, '0')
+command! F1 :call Fzf_files_with_dev_icons($FZF_DEFAULT_COMMAND, '1')
+command! S :call Fzf_git_diff_files_with_dev_icons('0')
+command! S1 :call Fzf_git_diff_files_with_dev_icons('1')
+command! GF :call Fzf_files_with_dev_icons("git ls-files \| uniq")
 
 command! B :Buffers
 command! W :Windows
 command! T :Tags
-command! S :GitFiles?
+"command! S :GitFiles?
 command! M :Marks
 command! L :Lines
 
