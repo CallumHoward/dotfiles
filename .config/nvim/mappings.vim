@@ -191,8 +191,9 @@ xnoremap <leader>gd :g//d<CR>
 "xnoremap <leader>c ?//.*\zs
 
 " convert search pattern to match whole word only
-nnoremap <leader>w /\<<C-R>/\><CR><C-O>
-"TODO add the inverse
+nnoremap <silent> <expr> <leader>w @/ =~# '^\\<.*\\>$'
+            \ ? ':let @/=substitute(@/, "\\\\<\\\|\\\\>", "", "g")<CR>:echo "/".@/<CR>'
+            \ : ':let @/="\\<<C-R>/\\>"<CR>:echo "/".@/<CR>'
 
 augroup TerminalConfig
     au!
