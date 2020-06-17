@@ -298,6 +298,8 @@ function! s:CloseBracket()
     let line = getline('.')
     if &ft =~# 'c\|cpp\|rust\|go\|python' && line =~# '^\s*\(struct\|class\|enum\) '
         return "{\<Enter>};\<Esc>O"
+    elseif &ft =~# 'javascript\|react\|javascriptreact\|typescript\|typescriptreact' && line =~# '^\s*\(var\|const\|let\) '
+        return "{\<Enter>};\<Esc>O"
     elseif searchpair('(', '', ')', 'bmn', '', line('.'))
         " Probably inside a function call. Close it off.
         return "{\<Enter>});\<Esc>O"
