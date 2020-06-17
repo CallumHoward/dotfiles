@@ -53,6 +53,7 @@ nnoremap <silent> <leader>gx V:Gina browse :<CR>
 xnoremap <silent> <leader>gx :Gina browse :<CR>
 nnoremap <silent> <leader>gb :GitMessenger<CR>
 xnoremap <silent> <leader>gb :GitMessenger<CR>
+nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
 nnoremap <leader>b :echo "did you mean \\gb?"<CR>
 
