@@ -37,7 +37,7 @@ xnoremap <leader>t :Twrite<CR>
 nnoremap <leader><CR> V:Twrite<CR>:Tmux send-keys -t bottom Enter<CR>
 xnoremap <CR> :Twrite!<CR>:Tmux send-keys -t bottom Enter<CR>
 
-" git mappings
+" git mappings (maintain trailing spaces)
 nnoremap <leader>a :GitGutterStageHunk<CR>
 nnoremap <leader>gu :GitGutterUndoHunk<CR>
 nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
