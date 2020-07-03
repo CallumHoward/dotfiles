@@ -73,6 +73,7 @@ alias -g DN='> /dev/null 2>&1'
 alias -g DNA='> /dev/null 2>&1 &'
 alias -g MD='mv ~/Downloads/*(.om[1]) .; ls'
 alias -g NO='--name-only'
+alias -g BF='`git branch | fzf`'
 
 alias -g SR='| sort -nr'
 alias -g CC='gcc -Wall -Werror -std=c11 -g -o *.c(.om[1]:r) *.c(.om[1])'
