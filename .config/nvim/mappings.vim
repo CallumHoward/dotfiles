@@ -112,8 +112,8 @@ nnoremap <silent> ]B :blast<CR>
 " unimpaired tab mappings
 nnoremap <silent>]t gt
 nnoremap <silent>[t gT
-nnoremap <silent>]T :tabfirst<CR>
-nnoremap <silent>[T :tablast<CR>
+nnoremap <silent>[T :tabfirst<CR>
+nnoremap <silent>]T :tablast<CR>
 
 " tab navigation mappings
 nnoremap <silent><C-W>1 :tabn 1<CR>
