@@ -57,6 +57,8 @@ nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
 nnoremap <leader>b :echo "did you mean \\gb?"<CR>
 
+nmap cst #V%o\sa<BS>
+
 " move tabs
 nnoremap <silent>g> :tabm +1<CR>
 nnoremap <silent>g< :tabm -1<CR>
