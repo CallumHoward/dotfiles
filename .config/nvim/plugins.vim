@@ -57,6 +57,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('idbrii/vim-tagimposter')             " mappings can add to taglist
     call dein#add('ryanoasis/vim-devicons')
     call dein#add('joeytwiddle/sexy_scroller.vim')
+    call dein#add('iamcco/markdown-preview.nvim', {
+                \ 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+                \ 'build': 'sh -c "cd app & yarn install"' })
     call dein#add('Yggdroot/indentLine')
     call dein#add('lukas-reineke/indent-blankline.nvim')
     call dein#add('rhysd/git-messenger.vim', {
