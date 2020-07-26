@@ -15,7 +15,7 @@ fi
 
 PATH=/usr/local/bin:$PATH
 PATH=/usr/local/sbin:$PATH
-PATH=$PATH:~/.local/bin
+PATH=~/.local/bin:$PATH
 
 # pager options
 export LESS="-RFX"
