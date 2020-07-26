@@ -64,7 +64,7 @@ autocmd CursorHold * set noruler
 
 " diff config
 set diffopt+=iwhite " ignore whitespace
-set diffopt+=algorithm:patience " use patience diff algorithm
+set diffopt+=algorithm:patience,indent-heuristic,internal " use patience diff algorithm
 
 " disable foldcolumn for diffs
 autocmd FilterWritePre * if &diff | set fdc=0 | endif

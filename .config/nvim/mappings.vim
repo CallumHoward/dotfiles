@@ -37,7 +37,7 @@ xnoremap <leader>t :Twrite<CR>
 nnoremap <leader><CR> V:Twrite<CR>:Tmux send-keys -t bottom Enter<CR>
 xnoremap <CR> :Twrite!<CR>:Tmux send-keys -t bottom Enter<CR>
 
-" git mappings
+" git mappings (maintain trailing spaces)
 nnoremap <leader>a :GitGutterStageHunk<CR>
 nnoremap <leader>gu :GitGutterUndoHunk<CR>
 nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
@@ -53,8 +53,11 @@ nnoremap <silent> <leader>gx V:Gina browse :<CR>
 xnoremap <silent> <leader>gx :Gina browse :<CR>
 nnoremap <silent> <leader>gb :GitMessenger<CR>
 xnoremap <silent> <leader>gb :GitMessenger<CR>
+nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
 nnoremap <leader>b :echo "did you mean \\gb?"<CR>
+
+nmap cst #V%o\sa<BS>
 
 " move tabs
 nnoremap <silent>g> :tabm +1<CR>
@@ -111,8 +114,8 @@ nnoremap <silent> ]B :blast<CR>
 " unimpaired tab mappings
 nnoremap <silent>]t gt
 nnoremap <silent>[t gT
-nnoremap <silent>]T :tabfirst<CR>
-nnoremap <silent>[T :tablast<CR>
+nnoremap <silent>[T :tabfirst<CR>
+nnoremap <silent>]T :tablast<CR>
 
 " tab navigation mappings
 nnoremap <silent><C-W>1 :tabn 1<CR>
