@@ -62,6 +62,7 @@ if dein#load_state('~/.cache/dein')
                 \ 'build': 'sh -c "cd app & yarn install"' })
     call dein#add('Yggdroot/indentLine')
     call dein#add('lukas-reineke/indent-blankline.nvim')
+    call dein#add('APZelos/blamer.nvim')
     call dein#add('rhysd/git-messenger.vim', {
                 \   'lazy' : 1,
                 \   'on_cmd' : 'GitMessenger',
@@ -409,6 +410,12 @@ let g:hardtime_ignore_buffer_patterns = ["man"]
 let g:list_of_normal_keys = ["h", "j", "k", "l"]
 let g:list_of_visual_keys = ["h", "j", "k", "l"]
 let g:list_of_insert_keys = []
+
+" blamer config
+let g:blamer_enabled = 1
+let g:blamer_show_in_visual_modes = 0
+let g:blamer_relative_time = 1
+let g:blamer_template = '<author> <author-time> • <summary>'  " hardcoded time to inlcude space
 
 " goyo config
 function! s:goyo_enter()
