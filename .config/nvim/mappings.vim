@@ -38,11 +38,25 @@ nnoremap <leader><CR> V:Twrite<CR>:Tmux send-keys -t bottom Enter<CR>
 xnoremap <CR> :Twrite!<CR>:Tmux send-keys -t bottom Enter<CR>
 
 " git mappings (maintain trailing spaces)
-nnoremap <leader>a :GitGutterStageHunk<CR>
-nnoremap <leader>gu :GitGutterUndoHunk<CR>
-nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
-nnoremap <leader>ggm :let g:gitgutter_diff_base='master'<CR>
-nnoremap <leader>ggh :let g:gitgutter_diff_base=''<CR>
+" nnoremap <leader>a :GitGutterStageHunk<CR>
+" nnoremap <leader>gu :GitGutterUndoHunk<CR>
+" nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
+" nnoremap <leader>ggm :let g:gitgutter_diff_base='master'<CR>
+" nnoremap <leader>ggh :let g:gitgutter_diff_base=''<CR>
+nmap [c <Plug>(coc-git-prevchunk)
+nmap ]c <Plug>(coc-git-nextchunk)
+nmap <leader>hp <Plug>(coc-git-chunkinfo)
+nmap <leader>a :CocCommand git.chunkStage<CR>
+nmap <leader>gu :CocCommand git.chunkUndo<CR>
+" create text object for git chunks
+omap ic <Plug>(coc-git-chunk-inner)
+xmap ic <Plug>(coc-git-chunk-inner)
+omap ac <Plug>(coc-git-chunk-outer)
+xmap ac <Plug>(coc-git-chunk-outer)
+nnoremap <leader>gg :call coc#config('git', {'diffRevision': 'HEAD~'})<Left><Left><Left>
+nnoremap <leader>ggm :call coc#config('git', {'diffRevision': 'master'})<CR>
+nnoremap <leader>ggh :call coc#config('git', {'diffRevision': 'HEAD'})<CR>
+nnoremap <leader>gf :CocCommand git.foldUnchanged<CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gp :Gina push<CR>
