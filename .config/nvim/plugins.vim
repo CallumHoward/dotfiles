@@ -110,6 +110,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('styled-components/vim-styled-components')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
+    call dein#add('masukomi/vim-markdown-folding')
 
     call dein#end()
     call dein#save_state()
@@ -399,6 +400,9 @@ if dein#is_sourced('poppy.vim')
     let g:poppyhigh = ['Ignore']
     let g:poppy_point_enable = 1
 endif
+
+" markdown preview config
+let g:mkdp_markdown_css = '~/dotfiles/github-markdown-css/github-markdown.css'
 
 " hardtime config
 let g:hardtime_default_on = 0
