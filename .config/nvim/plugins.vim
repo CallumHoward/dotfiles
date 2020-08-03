@@ -38,7 +38,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('neomake/neomake')
     call dein#add('airblade/vim-gitgutter')             " line git status
     call dein#add('kshenoy/vim-signature')              " marks in signs column
-    call dein#add('liuchengxu/vista.vim')               " language server aware tags
+    call dein#add('liuchengxu/vista.vim',                {'on_cmd': 'Vista'})               " language server aware tags
     call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
     call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
     call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})
@@ -389,10 +389,34 @@ autocmd InsertLeave * echo ""
 " tagbar config
 let g:tagbar_iconchars = ['+', '-']
 let g:tagbar_compact = 1
-nnoremap <leader><C-i> :TagbarToggle<CR>
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
+
+nnoremap <leader><C-i> :Vista!!<CR>
 
 " vista config
-let g:vista#renderer#enable_icon=0
+"let g:vista#renderer#enable_icon=0
+let g:vista_icon_indent = ["└ ", "│ "]
+let g:vista_default_executive = 'coc'
+let g:vista_sidebar_width = 45
+let g:vista#renderer#icons = {
+      \ 'field': '',
+      \ 'fields': '',
+      \ 'enumerator': 'הּ',
+      \ 'enum': 'הּ',
+      \ 'variable': '𝑣',
+      \}
 
 " poppy config
 if dein#is_sourced('poppy.vim')
