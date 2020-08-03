@@ -20,19 +20,10 @@ if dein#load_state('~/.cache/dein')
     call dein#add('Shougo/neosnippet.vim', {'on_event': s:ces})                  " snippet expansion
     call dein#add('~/neosnippet-snippets', {'on_event': s:ces})                  " snippet collection
     call dein#add('Shougo/echodoc.vim', {'on_event': s:ces})                  " function signatures in status
-    "call dein#add('Shougo/deoplete.nvim', {'on_event': s:ces})                  " auto popup completion
     call dein#add('wellle/tmux-complete.vim')                  " tmux window completion source
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Shougo/neco-syntax')
-    "call dein#add('zchee/deoplete-jedi')                " can't be lazy
-    "call dein#add('artur-shaik/vim-javacomplete2',      {'on_ft': 'java'})
-    "call dein#add('zchee/deoplete-clang')               " can't be lazy
-    "call dein#add('carlitux/deoplete-ternjs', {'on_ft': 'javascript'})
-    "call dein#add('autozimu/LanguageClient-neovim', {
-    "    \ 'rev': 'next',
-    "    \ 'build': 'bash install.sh',
-    "    \ })
-    call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
+    call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
 
     " feature plugins
     call dein#add('neomake/neomake')
@@ -175,18 +166,22 @@ function! s:check_back_space() abort
 endfunction
 
 " SuperTab like snippets behavior
-let g:neosnippet#expand_word_boundary = 1
-imap <expr><TAB> neosnippet#expandable()
-            \ ? "\<Plug>(neosnippet_expand)" : pumvisible()
-            \ ? "\<C-n>" : neosnippet#jumpable()
-            \ ? "\<Plug>(neosnippet_jump)" : <SID>check_back_space()
-            \ ? "\<TAB>" : coc#refresh()
-smap <expr><TAB> neosnippet#expandable_or_jumpable()
-            \ ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-xmap <TAB> <Plug>(neosnippet_expand_target)
+" let g:neosnippet#expand_word_boundary = 1
+" imap <expr><TAB> neosnippet#expandable()
+"             \ ? "\<Plug>(neosnippet_expand)" : pumvisible()
+"             \ ? "\<C-n>" : neosnippet#jumpable()
+"             \ ? "\<Plug>(neosnippet_jump)" : <SID>check_back_space()
+"             \ ? "\<TAB>" : coc#refresh()
+" smap <expr><TAB> neosnippet#expandable_or_jumpable()
+"             \ ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" xmap <TAB> <Plug>(neosnippet_expand_target)
 
-" complete and close popup if visible else: break undo
-"inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "<C-g>u<CR>"
+inoremap <silent><expr> <TAB> pumvisible()
+            \ ? coc#_select_confirm() : coc#expandableOrJumpable()
+            \ ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : <SID>check_back_space()
+            \ ? "\<TAB>" : coc#refresh()
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 
 " Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -327,19 +322,23 @@ let g:deoplete#sources#clang#flags = [
 "nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 
 " CoC config
+let g:coc_node_path = '/usr/local/bin/node'
 set hidden "if hidden is not set, TextEdit might fail.
 " mapping to jump to tag under cursor
 
 nmap <silent> gr #<Plug>(coc-references)
 nnoremap <silent> gd <C-]>
 nmap <silent> <C-]> :silent! TagImposterAnticipateJump<CR><Plug>(coc-definition)
+nmap <silent> <C-W>] :split<CR>:silent! TagImposterAnticipateJump<CR><Plug>(coc-definition)
+nmap <silent> <C-W><C-]> :split<CR>:silent! TagImposterAnticipateJump<CR><Plug>(coc-definition)
 
 nmap <silent> <leader>cy <Plug>(coc-type-definition)
 nmap <silent> <leader>ci <Plug>(coc-implementation)
 nmap <silent> <leader>cr <Plug>(coc-rename)
 vmap <leader>cf  <Plug>(coc-format-selected)
 nmap <leader>cf  <Plug>(coc-format-selected)
-nmap <leader>ca  <Plug>(coc-codeaction)
+nmap <leader>ca  <Plug>(coc-codeaction-line)
+nmap <leader>cA  <Plug>(coc-codeaction)
 nmap <leader>cx  <Plug>(coc-fix-current)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>cl :<C-u>CocList<CR>
@@ -348,7 +347,7 @@ nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
 nnoremap <silent> <leader>cj :<C-u>CocNext<CR>
 nnoremap <silent> <leader>ck :<C-u>CocPrev<CR>
 nnoremap <silent> <leader>co :<C-u>CocList outline<CR>
-nnoremap <silent> <leader>cd  :<C-u>CocList diagnostics<CR>
+nnoremap <silent> <leader>cd  :<C-u>CocList diagnostics --normal<CR>
 nnoremap <leader>c?  :nmap <leader>c<CR>
 nnoremap <leader>cc :CocCommand<CR>
 
@@ -356,9 +355,19 @@ nnoremap <leader>cc :CocCommand<CR>
 nmap <silent> [C <Plug>(coc-diagnostic-prev)
 nmap <silent> ]C <Plug>(coc-diagnostic-next)
 
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 CFormat :call CocAction('format')
-command! -nargs=? CFold :call CocAction('fold', <f-args>)
+command! -nargs=? CFold :call CocAction('fold', <f-args>) " args: comment, imports or region
+command! -nargs=0 CDiag :call CocAction('diagnosticPreview')
 
 function! s:show_documentation()
     if &filetype == 'vim'
@@ -376,6 +385,8 @@ augroup cocAuGroup
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHoldI * sil call CocActionAsync('showSignatureHelp')
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+    autocmd FocusGained * silent CocCommand git.refresh
 augroup end
 
 " echodoc config
