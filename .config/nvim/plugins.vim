@@ -27,7 +27,6 @@ if dein#load_state('~/.cache/dein')
 
     " feature plugins
     call dein#add('neomake/neomake')
-    call dein#add('airblade/vim-gitgutter')             " line git status
     call dein#add('kshenoy/vim-signature')              " marks in signs column
     call dein#add('liuchengxu/vista.vim',                {'on_cmd': 'Vista'})               " language server aware tags
     call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
