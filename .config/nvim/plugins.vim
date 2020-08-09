@@ -99,6 +99,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
     call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
     call dein#add('nguquen/vim-styled-components')
+    call dein#add('vim-scripts/SyntaxAttr.vim')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
     call dein#add('masukomi/vim-markdown-folding')
@@ -306,16 +307,7 @@ hi NeomakeWarningSign ctermfg=9 ctermbg=none
 hi NeomakeInfoSign ctermfg=5 ctermbg=none
 hi NeomakeMessageSign ctermfg=5 ctermbg=none
 
-" deoplete-clang config
-let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
-let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++14', 'objc': 'c11', 'objcpp': 'c++1z'}
-let g:deoplete#sources#clang#flags = [
-        \ '-I/usr/local/opt/boost/include',
-        \ '-I~/Documents/Cinder.git/include',
-        \ '-I~/range-v3/include',
-        \ '-I/usr/local/Cellar/glew/2.1.0/include',
-        \ '-I/usr/local/Cellar/glfw/3.2.1/include']
+command! SynAttr :call SyntaxAttr()
 
 "nnoremap <leader>x :call LanguageClient_contextMenu()<CR>
 "nnoremap <silent> gd :silent! TagImposterAnticipateJump \| call LanguageClient#textDocument_definition()<CR>
