@@ -215,10 +215,10 @@ let g:mta_filetypes = {
 
 " gitgutter config
 set updatetime=500
-hi GitGutterAdd ctermfg=2
-hi GitGutterChange ctermfg=3
-hi GitGutterDelete ctermfg=1 cterm=bold
-hi GitGutterChangeDelete ctermfg=1
+hi GitGutterAdd ctermfg=2 ctermbg=none
+hi GitGutterChange ctermfg=3 ctermbg=none
+hi GitGutterDelete ctermfg=1 cterm=bold ctermbg=none
+hi GitGutterChangeDelete ctermfg=1 ctermbg=none
 let g:gitgutter_sign_added = '│'
 let g:gitgutter_sign_modified = '│'
 let g:gitgutter_sign_removed =  '.'
