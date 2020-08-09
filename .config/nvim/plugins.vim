@@ -635,7 +635,7 @@ set tabline=%!MyTabLine()
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 232
 let g:indent_blankline_extra_indent_level = -1
-let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go']
+let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go', 'html.handlebars', 'scss']
 
 " treesitter
 luafile ~/.config/nvim/treesitter.lua
