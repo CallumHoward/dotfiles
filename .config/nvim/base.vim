@@ -139,7 +139,7 @@ autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 " jump to the previous cursor position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-let g:python3_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " manpager
 hi link manFooter Title
