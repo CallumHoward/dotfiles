@@ -98,7 +98,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('yuezk/vim-js')                       " can't be lazy
     call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
     call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
-    call dein#add('styled-components/vim-styled-components')
+    call dein#add('nguquen/vim-styled-components')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
     call dein#add('masukomi/vim-markdown-folding')
