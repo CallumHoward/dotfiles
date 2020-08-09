@@ -309,10 +309,6 @@ hi NeomakeMessageSign ctermfg=5 ctermbg=none
 
 command! SynAttr :call SyntaxAttr()
 
-"nnoremap <leader>x :call LanguageClient_contextMenu()<CR>
-"nnoremap <silent> gd :silent! TagImposterAnticipateJump \| call LanguageClient#textDocument_definition()<CR>
-"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-
 " CoC config
 let g:coc_node_path = '/usr/local/bin/node'
 set hidden "if hidden is not set, TextEdit might fail.
