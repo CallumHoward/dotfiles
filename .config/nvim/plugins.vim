@@ -103,6 +103,7 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
     call dein#add('masukomi/vim-markdown-folding')
+    call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
 
     call dein#end()
     call dein#save_state()
@@ -635,3 +636,6 @@ let g:indentLine_char = '│'
 let g:indentLine_color_term = 232
 let g:indent_blankline_extra_indent_level = -1
 let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go']
+
+" treesitter
+luafile ~/.config/nvim/treesitter.lua
