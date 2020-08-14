@@ -136,8 +136,9 @@ alias lgmb="lg master...HEAD"
 alias gdmbf='gdmb `gdmb --name-only | fzf -m`'
 alias gddmbf='gddmb `gdmb --name-only | fzf -m`'
 alias co="git_checkout"
-alias cof="ba | cut -c 3- | sed 's#remotes/[^/]*/##' | uniq | fzf --preview='{ git diff --color=always --stat master...{}; git diff --color=always master...{}; } | diff-so-fancy' | xargs git checkout"
-alias ba="git branch -a"
+alias cof="ba | grep -v master | fzf --preview='{ git diff --color=always --stat master...{}; git diff --color=always master...{}; } | diff-so-fancy' | xargs git checkout"
+alias ba="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
+alias baa="git branch -a"
 alias push="git push"
 alias pu="git push -u"
 alias pull="git pull"
