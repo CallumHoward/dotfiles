@@ -563,7 +563,7 @@
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=13
   # Context format when running with privileges: bold user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n%f at %2F%m'
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%n%f at %2F${BOX_NAME//\%/%%}"
 
   # Don't show context unless running with privileges or in SSH.
   # Tip: Remove the next line to always show context.
