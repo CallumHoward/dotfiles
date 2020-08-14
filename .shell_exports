@@ -6,7 +6,7 @@
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-if [ -x "$(which nvim)" ]; then
+if command -v nvim > /dev/null 2>&1; then
     export EDITOR=nvim
     #export MANPAGER="nvim +set\ filetype=man +Goyo -"
 else
