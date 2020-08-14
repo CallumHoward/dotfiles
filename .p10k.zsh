@@ -39,6 +39,9 @@
       nest_level
       context
       dir                     # current directory
+      #package_version
+      pyenv
+      nvm
       vcs                     # git status
       # =========================[ Line #2 ]=========================
       newline
@@ -593,11 +596,12 @@
 
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
-  typeset -g POWERLEVEL9K_PYENV_FOREGROUND=37
+  typeset -g POWERLEVEL9K_PYENV_FOREGROUND=5
   # Don't show the current Python version if it's the same as global.
   typeset -g POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=false
   # Custom icon.
   # typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_PYENV_PREFIX='%fusing %5Fp'
 
   ##########[ nodenv: node.js version from nodenv (https://github.com/nodenv/nodenv) ]##########
   # Nodenv color.
@@ -609,9 +613,10 @@
 
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.
-  typeset -g POWERLEVEL9K_NVM_FOREGROUND=70
+  typeset -g POWERLEVEL9K_NVM_FOREGROUND=5
   # Custom icon.
   # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_NVM_PREFIX='%fusing %5Fn'
 
   ############[ nodeenv: node.js environment (https://github.com/ekalinin/nodeenv) ]############
   # Nodeenv color.
@@ -625,11 +630,12 @@
 
   ##############################[ node_version: node.js version ]###############################
   # Node version color.
-  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=70
+  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=9
   # Show node version only when in a directory tree containing package.json.
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_NODE_VERSION_PREFIX='%fwith '
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
@@ -870,6 +876,19 @@
   # shell nest level instant placeholder
   function instant_prompt_nest_level() {
     prompt_nest_level
+  }
+
+  function get_package_version() {
+      [ -f "package.json" ] && \
+          command -v fx 2>&1 > /dev/null && \
+          fx package.json .version 2>/dev/null
+  }
+
+  function prompt_package_version() {
+      export version="$(get_package_version)"
+      if [[ "$version" != "" ]]; then
+          p10k segment -f 9 -t "v$version"
+      fi
   }
 
   # User-defined prompt segments can be customized the same way as built-in segments.
