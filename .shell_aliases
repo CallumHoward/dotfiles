@@ -158,6 +158,8 @@ alias dict="trans -d"
 alias powershell="pwsh"
 alias ncdu="ncdu --color dark"
 
+alias cdp='cd `fd "package." $PACKAGE_DIR | xargs -IFFF dirname FFF | fzf`'
+
 if [ ! $BASH ]; then
     # if using with hub:
     # https://github.com/robbyrussell/oh-my-zsh/issues/1727#issuecomment-22366771
