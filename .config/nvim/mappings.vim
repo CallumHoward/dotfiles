@@ -271,6 +271,7 @@ cabbrev ef <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'fin' : 'ef')<CR>
 
 " local markings mapping
 nnoremap <leader>m :marks abcdefghijklmnopqrstuvwxyz<CR>:norm `
+nnoremap <leader>M :marks ABCDEFGHIJKLMNOPQRSTUVWXYZ<CR>:norm `
 
 " visual at
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
