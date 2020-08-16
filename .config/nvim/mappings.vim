@@ -253,7 +253,8 @@ function! ToggleNetrw()
     endif
 endfunction
 
-nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
+"nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
+nnoremap <silent> <Leader>\ :CocCommand explorer --sources buffer+,file+ --width=45<CR>
 cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.')<CR>
 cabbrev cdg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gina cd' : 'cdg')<CR>
 
