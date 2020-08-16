@@ -272,6 +272,13 @@ cabbrev ef <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'fin' : 'ef')<CR>
 " local markings mapping
 nnoremap <leader>m :marks abcdefghijklmnopqrstuvwxyz<CR>:norm `
 
+" visual at
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
 " wrap git grep
 function! Ggrep(arg)
     let s:temp=&grepprg
