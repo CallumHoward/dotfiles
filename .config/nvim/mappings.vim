@@ -237,22 +237,7 @@ tnoremap <C-W><C-J> <C-\><C-N><C-W><C-J>
 tnoremap <C-W><C-K> <C-\><C-N><C-W><C-K>
 tnoremap <C-W><C-L> <C-\><C-N><C-W><C-L>
 
-let g:netrw_is_open=0
-function! ToggleNetrw()
-    if g:netrw_is_open
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:netrw_is_open=0
-    else
-        let g:netrw_is_open=1
-        silent Lexplore
-    endif
-endfunction
+nnoremap <silent> <Leader>\ :CocCommand explorer --toggle --sources=buffer+,file+<CR>
 
 "nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
 nnoremap <silent> <Leader>\ :CocCommand explorer --sources buffer+,file+ --width=45<CR>
