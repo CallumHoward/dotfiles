@@ -37,6 +37,7 @@
 
   // Display the 'calculating' decoration (not working?)
   "importCost.showCalculatingDecoration": true,
+  "tsserver.npm": "/usr/local/bin/npm",
 
   "languageserver": {
     "ccls": {
