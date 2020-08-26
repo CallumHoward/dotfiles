@@ -1,13 +1,13 @@
 require'nvim-treesitter.configs'.setup {
     highlight = {
-      enable = true,                    -- false will disable the whole extension
-      -- disable = { "c", "rust" },        -- list of language that will be disabled
+      enable = false,                    -- false will disable the whole extension
+      disable = { "typescript", "javascript" },        -- list of language that will be disabled
       custom_captures = {               -- mapping of user defined captures to highlight groups
         -- ["foo.bar"] = "Identifier"   -- highlight own capture @foo.bar with highlight group "Identifier", see :h nvim-treesitter-query-extensions
       },
     },
     incremental_selection = {
-      enable = true,
+      enable = false,
       disable = { "cpp", "lua" },
       keymaps = {                       -- mappings for incremental selection (visual mappings)
         init_selection = "gnn",         -- maps in normal mode to init the node/scope selection
