@@ -1,6 +1,8 @@
 {
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
+  "suggest.enablePreview": true,
+  "suggest.enablePreselect": true,
 
   "diagnostic.errorSign": "-!",
   "diagnostic.warningSign": "-!",
