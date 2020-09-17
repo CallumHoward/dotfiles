@@ -32,7 +32,7 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
 
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
+  "coc.preferences.formatOnSaveFiletypes": ["go", "css", "markdown", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
 
   "coc.source.tmuxcomplete.enable": true,
   "coc.source.tmuxcomplete.priority": 12,
@@ -43,7 +43,7 @@
   "tslint.jsEnable": true,
   "tslint.run": "onSave",
 
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "codeLens.separator":"  ",
   "typescript.implementationsCodeLens.enable": false,
   "typescript.referencesCodeLens.enable": false,
@@ -59,6 +59,9 @@
       "command": "ccls",
       "filetypes": ["c", "cpp", "objc", "objcpp"],
       "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "settings": {
+        "codeLens.enable": false
+      },
       "initializationOptions": {
          "cache": {
            "directory": "/tmp/ccls"
