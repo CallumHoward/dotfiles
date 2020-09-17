@@ -38,6 +38,7 @@ PATH=$PATH:~/.cabal/bin
 
 # golang
 export GOPATH=$HOME/golang
+export GOBIN=$GOPATH/bin
 PATH=$PATH:$GOPATH/bin
 
 # linuxbrew

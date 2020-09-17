@@ -234,7 +234,6 @@ let g:gitgutter_sign_modified_removed = '│'
 let g:SignatureMap = {'Leader' : 'm'}   " disable extra mappings
 let g:SignatureMarkTextHLDynamic = 1    " keep gitgutter highlight color
 let g:SignatureForceMarkPlacement = 1   " use :delm x to delete mark x
-let g:SignatureMarkTextHL = 'ErrorMsg'
 
 " vim-clang-format config
 let g:clang_format#command = '/usr/local/opt/llvm/bin/clang-format'
