@@ -30,7 +30,12 @@
 
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
+  "explorer.icon.enableVimDevicons": false,
   "explorer.previewAction.onHover": false,
+  "explorer.file.column.indent.indentLine": false,
+  "explorer.keyMappings": {
+      "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
+  },
 
   "coc.preferences.formatOnSaveFiletypes": ["go", "css", "markdown", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
 
