@@ -37,6 +37,12 @@
       "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
   },
 
+  "snippets.loadFromExtensions": false,
+  "snippets.extends": {
+      "typescript": ["javascript"],
+      "typescriptreact": ["typescript"]
+  },
+
   "coc.preferences.formatOnSaveFiletypes": ["go", "css", "markdown", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
 
   "coc.source.tmuxcomplete.enable": true,
