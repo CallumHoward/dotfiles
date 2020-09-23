@@ -14,6 +14,9 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.enable": true,
   "diagnostic.refreshAfterSave": true,
+
+  "refactor.openCommand": "tabe",
+
   "git.enableGutters": true,
   //"git.diffRevision": "HEAD",
   "git.changedSign.text": "│",
