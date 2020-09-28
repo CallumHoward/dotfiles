@@ -66,6 +66,7 @@ alias v.="v ."
 alias vd="v -d"
 alias F="v '+F1'"
 alias S="v '+S1'"
+alias MB="v '+MB1'"
 #alias S="v '+GitFiles!?'"
 #alias RG="v +RG!"  # see .zsh_functions
 
