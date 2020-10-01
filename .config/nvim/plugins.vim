@@ -103,7 +103,8 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
     call dein#add('masukomi/vim-markdown-folding')
-    call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
+    call dein#add('kchmck/vim-coffee-script')
+    "call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
 
     call dein#end()
     call dein#save_state()
