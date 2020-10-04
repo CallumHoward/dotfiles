@@ -161,7 +161,7 @@ nnoremap <silent> <Space> za
 
 " resync folds
 nnoremap <silent> <leader>f :set foldmethod=manual<CR>zE:call CocAction('fold')<CR>zvzz
-nnoremap <silent> <C-l> <C-l>:syntax sync fromstart<CR>
+nnoremap <silent> <C-l> <C-l>:syntax sync fromstart<CR>:IndentLinesEnable<CR>
 
 " quickly set foldlevel
 nnoremap <leader>1 :set foldnestmax=1<CR>
