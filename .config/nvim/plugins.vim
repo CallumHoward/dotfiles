@@ -74,7 +74,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('CallumHoward/vim-tbone')             " send text to tmux pane
     call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
     "call dein#add('yamahigashi/sendtomaya.vim')
-    call dein#add('romainl/vim-devdocs')
+    call dein#add('romainl/vim-devdocs',                {'on_cmd': 'DD'})
+    call dein#add('rizzatti/dash.vim')
 
     " keybindings
     call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
@@ -639,4 +640,4 @@ let g:indent_blankline_extra_indent_level = -1
 let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go', 'html.handlebars', 'scss']
 
 " treesitter
-luafile ~/.config/nvim/treesitter.lua
+"luafile ~/.config/nvim/treesitter.lua
