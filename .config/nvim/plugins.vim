@@ -30,8 +30,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('kshenoy/vim-signature')              " marks in signs column
     call dein#add('liuchengxu/vista.vim',                {'on_cmd': 'Vista'})               " language server aware tags
     call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
-    call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
-    call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})
+    call dein#add('valloric/MatchTagAlways') ",            {'on_ft': ['html', 'xml', 'jsx', 'tsx', 'javascriptreact']})
+    call dein#add('alvan/vim-closetag') ",                 {'on_ft': ['html', 'xml', 'jsx', 'tsx', 'javascriptreact']})
     call dein#add('tpope/vim-abolish')                  " deal with word variants
     "call dein#add('cloudhead/neovim-fuzzy')
     "call dein#add('yuttie/comfortable-motion.vim')
@@ -76,6 +76,7 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('yamahigashi/sendtomaya.vim')
     call dein#add('romainl/vim-devdocs',                {'on_cmd': 'DD'})
     call dein#add('rizzatti/dash.vim')
+    call dein#add('wfleming/vim-codeclimate')
 
     " keybindings
     call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
@@ -90,6 +91,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('cocopon/iceberg.vim')
     call dein#add('mhartington/oceanic-next')
     call dein#add('w0ng/vim-hybrid')
+    call dein#add('christianchiarulli/onedark.vim')
 
     " syntax plugins
     call dein#add('rust-lang/rust.vim')
@@ -104,6 +106,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('vim-scripts/SyntaxAttr.vim')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
+    call dein#add('mustache/vim-mustache-handlebars')
     call dein#add('masukomi/vim-markdown-folding')
     call dein#add('kchmck/vim-coffee-script')
     "call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
@@ -145,15 +148,6 @@ cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'ra')<CR>
 cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<CR>
 cabbrev spa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'sp \| Ranger' : 'spa')<CR>
 cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \| Ranger' : 'tra')<CR>
-
-" use deoplete completion
-let g:deoplete#enable_at_startup = 0
-if !exists('g:deoplete#omni#input_patterns') | let g:deoplete#omni#input_patterns = {} | endif
-"let g:deoplete#sources._ = ['tag', 'member', 'file', 'omni', 'buffer', 'tmux-complete']
-"let g:deoplete#auto_complete_start_length = 0
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3'
 
 " gutentags config
 let g:gutentags_cache_dir = '~/.local/share/nvim/tags/'
@@ -200,10 +194,18 @@ set concealcursor=niv
 let g:neosnippet#enable_completed_snippet=1
 let g:neosnippet#enable_optional_arguments=0
 
+" jsx and typescript config
+" by default .ts file are not identified as typescript and .tsx files are not
+" identified as typescript react file, so add following
+au BufNewFile,BufRead *.ts setlocal filetype=typescript
+au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx foldmethod=manual
+
 " vim-closetag config
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.jsx,*.tsx,*.md"
-let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,javascript.jsx,javascript.tsx'
+let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,javascript.jsx,javascript.tsx,typescript.tsx,javascriptreact'
 let g:closetag_emptyTags_caseSensitive = 1
+let g:vim_jsx_pretty_highlight_close_tag = 1
+let g:vim_jsx_pretty_colorful_config = 1
 
 " vim match tag always config
 let g:mta_filetypes = {
@@ -311,6 +313,9 @@ hi NeomakeInfoSign ctermfg=5 ctermbg=none
 hi NeomakeMessageSign ctermfg=5 ctermbg=none
 
 command! SynAttr :call SyntaxAttr()
+
+" Code climate config
+nmap <silent> <leader>cC :CodeClimateAnalyzeOpenFiles<CR>
 
 " CoC config
 let g:coc_node_path = '/usr/local/bin/node'
@@ -476,6 +481,7 @@ let g:cpp_class_scope_highlight = 1
 
 " interestingwords config
 let g:interestingWordsTermColors = ['211', '81', '48', '141']
+let g:interestingWordsRandomiseColors = 1
 
 " SimpylFold config
 let g:SimpylFold_fold_docstring = 0
@@ -545,12 +551,35 @@ function! Fzf_git_diff_files_with_dev_icons(full)
     endif
 endfunction
 
+function! Fzf_git_diff_merge_base_with_dev_icons(full)
+    let l:fzf_files_options = '--ansi --preview "sh -c \"(git diff --color=always master...HEAD -- {2..} | sed 1,4d; scope {2..} 2>/dev/null || [[ $? -eq 1 ]] && cat {2..} 2>/dev/null)\""'
+    function! s:edit_devicon_prepended_file(item)
+        let l:file_path = a:item[4:-1]
+        execute 'silent e' l:file_path
+    endfunction
+    if a:full
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always diff master...HEAD --name-only | sed \$d | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'window': 'enew' })
+    else
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always diff master...HEAD --name-only | sed \$d | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'down': '40%' })
+    endif
+endfunction
+
  " Open fzf Files " Open fzf Files
 command! F :call Fzf_files_with_dev_icons($FZF_DEFAULT_COMMAND, '0')
 command! F1 :call Fzf_files_with_dev_icons($FZF_DEFAULT_COMMAND, '1')
 command! S :call Fzf_git_diff_files_with_dev_icons('0')
 command! S1 :call Fzf_git_diff_files_with_dev_icons('1')
-command! GF :call Fzf_files_with_dev_icons("git ls-files \| uniq")
+command! GF :call Fzf_files_with_dev_icons("git ls-files \| uniq", '0')
+command! MB :call Fzf_git_diff_merge_base_with_dev_icons('0')
+command! MB1 :call Fzf_git_diff_merge_base_with_dev_icons('1')
 
 command! B :Buffers
 command! W :Windows
@@ -558,6 +587,7 @@ command! T :Tags
 "command! S :GitFiles?
 command! M :Marks
 command! L :Lines
+command! H :History
 
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
@@ -632,6 +662,10 @@ function MyTabLine()
 endfunction
 
 set tabline=%!MyTabLine()
+
+" vim-jsx-pretty config
+let g:vim_jsx_pretty_highlight_close_tag = 0
+let g:vim_jsx_pretty_colorful_config = 1
 
 " indent guides config
 let g:indentLine_char = '│'
