@@ -246,8 +246,9 @@ cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.
 cabbrev cdg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gina cd' : 'cdg')<CR>
 
 " grep for word under cursor
-nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
-"nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
+nmap <silent> <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cope<CR><C-W>J:sil redr!<CR>
+xmap <silent> <Leader># y/<C-R>"<CR>:sil! gr! '<C-R>"'<CR>:cope<CR><C-W>J:sil redr!<CR>
+"nmap <silent> <Leader>* #ccl<CR>:sil! gr! "\b<C-R><C-W>\b"<CR>:cope<CR><C-W>J:sil redr!<CR>
 
 " open quickfix window for the last search
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:cope<CR><C-W>J
