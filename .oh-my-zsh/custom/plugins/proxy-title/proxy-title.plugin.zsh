@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# © 2013 D MALAM
+
 # Terminal.app Set Title
 # Set the proxy icon for OSX's Terminal.app to files/directories.
 
