@@ -41,6 +41,8 @@ plugins=( \
     zsh-fzf-bindings \
     proxy-title \
     pip \
+    npm \
+    yarn \
     fasd \
     zsh-zbell \
     #zsh-syntax-highlighting \
