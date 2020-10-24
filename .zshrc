@@ -84,11 +84,6 @@ setopt complete_aliases
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
-# git info for prompt
-#autoload -Uz vcs_info
-#zstyle ':vcs_info:*' enable git #svn
-#add-zsh-hook precmd vcs_info
-
 # zsh-autosuggestions config
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 #ZSH_AUTOSUGGEST_MANUAL_REBIND=1  # not sure what this does: https://github.com/zsh-users/zsh-autosuggestions/commit/937d6fc24145fdcd87e952a5e607c26d098c58b5
