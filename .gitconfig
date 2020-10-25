@@ -16,13 +16,17 @@
     dt = difftool
 [pager]
     #diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
-    diff = diff-so-fancy | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
+    diff = diff-so-fancy | menos --tabs=5 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
+    #diff = delta --side-by-side --diff-so-fancy # | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
+[interactive]
+    #diffFilter = delta --color-only
 [diff]
     tool = vimdiff
+    algorithm = patience
+    indentHeuristic = true
 [difftool]
     prompt = false
 [difftool "vimdiff"]
-    #cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
     cmd = nvim -d $BASE $LOCAL
 [merge]
     tool = vimdiff
@@ -39,7 +43,16 @@
     required = true
 [core]
     pager = diff-so-fancy | menos --tabs=4 -iFMRSX
+    #pager = delta --diff-so-fancy # | menos --tabs=4 -iFMRSX
     excludesfile = ~/.gitignore_global
+[delta]
+    syntax-theme = zenburn
+    line-numbers = false
+    features = decorations
+    navigate = true
+[delta "decorations"]
+    file-style = bold white ul
+    file-decoration-style = bold white ul ol
 [color "diff"]
     meta = 15
     commit = 83
