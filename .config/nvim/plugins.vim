@@ -110,6 +110,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('masukomi/vim-markdown-folding')
     call dein#add('kchmck/vim-coffee-script')
     "call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
+    call dein#add('keith/swift.vim')
 
     call dein#end()
     call dein#save_state()
