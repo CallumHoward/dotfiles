@@ -40,7 +40,7 @@
       context
       dir                     # current directory
       #package_version
-      #package
+      package
       pyenv
       nvm
       vcs                     # git status
