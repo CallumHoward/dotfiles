@@ -99,9 +99,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('wavded/vim-stylus')                  " can't be lazy
     call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
     call dein#add('tikhomirov/vim-glsl')
-    call dein#add('yuezk/vim-js')                       " can't be lazy
-    call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
-    call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
+    " call dein#add('yuezk/vim-js')                       " can't be lazy
+    " call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
+    " call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
     call dein#add('nguquen/vim-styled-components')
     call dein#add('vim-scripts/SyntaxAttr.vim')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
@@ -198,8 +198,10 @@ let g:neosnippet#enable_optional_arguments=0
 " jsx and typescript config
 " by default .ts file are not identified as typescript and .tsx files are not
 " identified as typescript react file, so add following
-au BufNewFile,BufRead *.ts setlocal filetype=typescript
-au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx foldmethod=manual
+" au BufNewFile,BufRead *.ts setlocal filetype=typescript
+" au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx foldmethod=manual
+" au BufNewFile,BufRead *.tsx echom "hello foo bar"
+" au FileType typescriptreact setlocal filetype=typescript.tsx foldmethod=manual
 
 " vim-closetag config
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.jsx,*.tsx,*.md"
