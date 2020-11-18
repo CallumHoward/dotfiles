@@ -120,6 +120,28 @@ filetype plugin indent on
 let g:dein#install_log_filename = '~/.cache/dein/dein_install.log'
 " ==== end dein Scripts ====
 
+" coc plugins
+let g:coc_global_extensions = [
+            \ 'coc-browser',
+            \ 'coc-css',
+            \ 'coc-emmet',
+            \ 'coc-explorer',
+            \ 'coc-git',
+            \ 'coc-go',
+            \ 'coc-html',
+            \ 'coc-import-cost',
+            \ 'coc-json',
+            \ 'coc-neosnippet',
+            \ 'coc-prettier',
+            \ 'coc-python',
+            \ 'coc-snippets',
+            \ 'coc-sourcekit',
+            \ 'coc-spell-checker',
+            \ 'coc-styled-components',
+            \ 'coc-tsserver',
+            \ 'coc-yank',
+            \ ]
+
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
 let g:netrw_banner = 0                  " do not display info on the top of window
