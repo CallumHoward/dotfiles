@@ -361,6 +361,7 @@ nmap <leader>cf  <Plug>(coc-format-selected)
 nmap <leader>ca  <Plug>(coc-codeaction-line)
 nmap <leader>cA  <Plug>(coc-codeaction)
 nmap <leader>cx  <Plug>(coc-fix-current)
+nmap <silent> <leader>cd <Plug>(coc-diagnostic-info)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>cl :<C-u>CocList<CR>
 nnoremap <silent> <leader>cp :<C-u>CocListResume<CR>
@@ -368,7 +369,7 @@ nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
 nnoremap <silent> <leader>cj :<C-u>CocNext<CR>
 nnoremap <silent> <leader>ck :<C-u>CocPrev<CR>
 nnoremap <silent> <leader>co :<C-u>CocList outline<CR>
-nnoremap <silent> <leader>cd  :<C-u>CocList diagnostics --normal<CR>
+nnoremap <silent> <leader>cD :<C-u>CocList diagnostics --normal<CR>
 nnoremap <leader>c?  :nmap <leader>c<CR>
 nnoremap <leader>cc :CocCommand<CR>
 

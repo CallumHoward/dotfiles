@@ -9,12 +9,13 @@
   "diagnostic.infoSign": "-i",
   "diagnostic.hintSign": "-i",
   "diagnostic.virtualText": false,
-  "diagnostic.messageTarget": "echo",
+  //"diagnostic.messageTarget": "echo",
   "diagnostic.virtualTextPrefix": " // ",
   "diagnostic.checkCurrentLine": true,
   "diagnostic.enable": true,
-  "diagnostic.refreshAfterSave": true,
+  "diagnostic.refreshAfterSave": false,
   "diagnostic.enableHighlightLineNumber": false,
+  "diagnostic.enableMessage": "jump",
 
   "refactor.openCommand": "tabe",
 
