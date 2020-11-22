@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o noclobber -o noglob -o nounset -o pipefail
+set -o noclobber -o noglob -o pipefail
 IFS=$'\n'
 
 ## If the option `use_preview_script` is set to `true`,
