@@ -38,7 +38,7 @@
   "explorer.icon.enableVimDevicons": false,
   "explorer.previewAction.onHover": false,
   "explorer.file.column.indent.indentLine": false,
-  "explorer.keyMappings": {
+  "explorer.keyMappings.global": {
       "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
   },
 
