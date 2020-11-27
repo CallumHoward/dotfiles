@@ -67,8 +67,8 @@ export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
 export PATH="$CUDA_HOME/bin:$PATH"
 
 # FZF
-export FZF_DEFAULT_OPTS='--reverse --color=bg+:0,hl:3,spinner:15,info:11,prompt:7,hl+:3,pointer:6'
-export FZF_PREVIEW_COMMAND='highlight -O ansi {} || cat {}'
+export FZF_DEFAULT_OPTS='--reverse --color=bg+:0,hl:3,spinner:15,info:11,prompt:7,hl+:3,pointer:6 --bind=ctrl-j:preview-down,ctrl-k:preview-up'
+export FZF_PREVIEW_COMMAND='scope {}'
 export FZF_DEFAULT_COMMAND=' \
   (git ls-tree -r --name-only HEAD || \
    fd || \
