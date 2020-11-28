@@ -236,6 +236,8 @@ let g:vim_jsx_pretty_colorful_config = 1
 let g:mta_filetypes = {
             \'javascript.jsx': 1,
             \'javascript.tsx': 1,
+            \'typescriptreact': 1,
+            \'javascriptreact': 1,
             \'html' : 1,
             \'xhtml' : 1,
             \'xml' : 1,
