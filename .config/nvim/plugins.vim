@@ -532,6 +532,16 @@ command! -bang -nargs=* RG
   \           : fzf#vim#with_preview('right:50%', '?'),
   \   <bang>0)
 
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --colors "path:fg:green" --colors "path:style:nobold" --colors "line:fg:yellow" --colors "line:style:nobold" --colors "match:fg:black" --colors "match:bg:yellow" --column --line-number --no-heading --color=always --colors "match:style:nobold" --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RGG call RipgrepFzf(<q-args>, <bang>0)
+
 " Files + devicons
 function! Fzf_files_with_dev_icons(command, full)
     let l:fzf_files_options = '--preview "scope {2..} 2>/dev/null || cat {2..} 2>/dev/null || CLICOLOR_FORCE=1 ls -G {2..} 2>/dev/null"'
