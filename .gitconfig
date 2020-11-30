@@ -46,7 +46,7 @@
     #pager = delta --diff-so-fancy # | menos --tabs=4 -iFMRSX
     excludesfile = ~/.gitignore_global
 [delta]
-    syntax-theme = zenburn
+    syntax-theme = neodark
     line-numbers = false
     features = decorations
     navigate = true
