@@ -134,8 +134,8 @@ alias gsm="git submodule update --init --recursive"
 alias gdmb="gd master...HEAD"
 alias gddmb="gdd master...HEAD"
 alias lgmb="lg master...HEAD"
-alias gdmbf='gdmb `gdmb --name-only | fzf -m`'
-alias gddmbf='gddmb `gdmb --name-only | fzf -m`'
+alias gdmbf='gdmb `gdmb --name-only | fzf -m --preview "git diff --color=always master...HEAD {}"`'
+alias gddmbf='gddmb `gdmb --name-only | fzf -m --preview "git diff --color=always master...HEAD {}"`'
 alias co="git_checkout"
 alias cof="ba | grep -v master | fzf --preview='{ git diff --color=always --stat master...{}; git diff --color=always master...{}; } | diff-so-fancy' | xargs git checkout"
 alias ba="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
