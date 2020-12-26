@@ -37,3 +37,6 @@
 [submodule "github-markdown-css"]
 	path = github-markdown-css
 	url = https://github.com/sindresorhus/github-markdown-css.git
+[submodule ".oh-my-zsh/custom/plugins/zsh-proxy-title"]
+	path = .oh-my-zsh/custom/plugins/zsh-proxy-title
+	url = git@github.com:CallumHoward/zsh-proxy-title.git
