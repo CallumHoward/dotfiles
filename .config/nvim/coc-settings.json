@@ -48,7 +48,7 @@
       "typescriptreact": ["typescript"]
   },
 
-  "coc.preferences.formatOnSaveFiletypes": ["go", "css", "markdown", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
+  "coc.preferences.formatOnSaveFiletypes": ["go", "css", "markdown", "json", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
 
   "coc.source.tmuxcomplete.enable": true,
   "coc.source.tmuxcomplete.priority": 12,
