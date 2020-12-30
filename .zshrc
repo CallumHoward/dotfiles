@@ -39,7 +39,7 @@ plugins=( \
     #vi-mode \
     zsh-prompt-benchmark \
     zsh-fzf-bindings \
-    proxy-title \
+    zsh-proxy-title \
     pip \
     npm \
     yarn \
