@@ -90,7 +90,7 @@ alias gdb="gdb -q"
 alias gdp="gdb -p"
 
 alias yt="youtube-dl"
-alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"
+alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3 --embed-thumbnail"
 alias y="yt"
 alias yi="y --ignore-config"
 
