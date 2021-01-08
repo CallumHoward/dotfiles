@@ -99,6 +99,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tikhomirov/vim-glsl')
     call dein#add('yuezk/vim-js')                       " can't be lazy
     call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
+    call dein#add('dearrrfish/vim-applescript')
     " call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
     call dein#add('nguquen/vim-styled-components')
     call dein#add('vim-scripts/SyntaxAttr.vim')
