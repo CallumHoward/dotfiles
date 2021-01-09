@@ -626,6 +626,7 @@ command! T :Tags
 command! M :Marks
 command! L :Lines
 command! H :History
+command! RGB :Lines
 
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
