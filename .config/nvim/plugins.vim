@@ -101,7 +101,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
     call dein#add('dearrrfish/vim-applescript')
     " call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
-    call dein#add('nguquen/vim-styled-components')
+    " call dein#add('nguquen/vim-styled-components',      {'rev': 'f89ae45d598259fc62408ac8de8597624bb6cb46'})
     call dein#add('vim-scripts/SyntaxAttr.vim')
     "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
     "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
