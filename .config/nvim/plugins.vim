@@ -520,6 +520,7 @@ autocmd! FileType fzf,skim
 autocmd  FileType fzf,skim set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 "showmode ruler
 "let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+let g:fzf_layout = { 'down': '~50%' }
 
 " javascript config
 autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
