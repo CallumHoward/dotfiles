@@ -122,8 +122,8 @@ nnoremap <silent> [L :lfirst<CR>
 nnoremap <silent> ]L :llast<CR>
 
 " unimpaired buffer mappings
-nnoremap <silent> [b :BufSurfBack<CR>
-nnoremap <silent> ]b :BufSurfForward<CR>
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
