@@ -23,7 +23,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('wellle/tmux-complete.vim')                  " tmux window completion source
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Shougo/neco-syntax')
-    call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+    call dein#add('neoclide/coc.nvim', {'merged': 0, 'rev': 'release'})
 
     " feature plugins
     call dein#add('neomake/neomake')
