@@ -84,7 +84,6 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-commentary')               " for easy commenting
     call dein#add('tpope/vim-rsi', {'on_event': s:ces}) " enable readline key mappings
     call dein#add('takac/vim-hardtime')                 " disable rapid hjkl repeat
-    call dein#add('ton/vim-bufsurf')
 
     " colorschemes
     call dein#add('~/neodark')
