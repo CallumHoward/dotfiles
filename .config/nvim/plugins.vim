@@ -519,7 +519,8 @@ autocmd! FileType fzf,skim
 autocmd  FileType fzf,skim set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 "showmode ruler
 "let g:fzf_nvim_statusline = 0 " disable statusline overwriting
-let g:fzf_layout = { 'down': '~50%' }
+let g:fzf_layout = { 'down': '~60%' }
+let g:fzf_preview_use_dev_icons = 1
 
 " javascript config
 autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
@@ -560,7 +561,7 @@ function! Fzf_files_with_dev_icons(command, full)
                     \ 'source': a:command.' | devicon-lookup',
                     \ 'sink':   function('s:edit_devicon_prepended_file'),
                     \ 'options': '-m ' . l:fzf_files_options,
-                    \ 'down': '40%' })
+                    \ 'down': '60%' })
     endif
 endfunction
 
@@ -585,7 +586,7 @@ function! Fzf_git_diff_files_with_dev_icons(full)
                     \ 'source': 'git -c color.status=always status --short --untracked-files=all | devicon-lookup',
                     \ 'sink':   function('s:edit_devicon_prepended_file_diff'),
                     \ 'options': '-m ' . l:fzf_files_options,
-                    \ 'down': '40%' })
+                    \ 'down': '60%' })
     endif
 endfunction
 
@@ -606,7 +607,7 @@ function! Fzf_git_diff_merge_base_with_dev_icons(full)
                     \ 'source': 'git -c color.status=always diff master...HEAD --name-only | sed \$d | devicon-lookup',
                     \ 'sink':   function('s:edit_devicon_prepended_file'),
                     \ 'options': '-m ' . l:fzf_files_options,
-                    \ 'down': '40%' })
+                    \ 'down': '60%' })
     endif
 endfunction
 
