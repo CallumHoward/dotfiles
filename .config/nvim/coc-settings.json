@@ -13,14 +13,12 @@
   "diagnostic.virtualTextPrefix": " // ",
   "diagnostic.checkCurrentLine": true,
   "diagnostic.enable": true,
-  "diagnostic.refreshAfterSave": false,
   "diagnostic.enableHighlightLineNumber": false,
   "diagnostic.enableMessage": "jump",
 
   "refactor.openCommand": "tabe",
 
   "git.enableGutters": true,
-  //"git.diffRevision": "HEAD",
   "git.changedSign.text": "│",
   "git.addedSign.text": "│",
   "git.removedSign.text": ".",
@@ -39,16 +37,28 @@
   "explorer.previewAction.onHover": false,
   "explorer.file.column.indent.indentLine": false,
   "explorer.keyMappings.global": {
-      "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
+    "<cr>": ["expandable?", ["expanded?", "collapse", "expand"], "open"]
   },
 
   "snippets.loadFromExtensions": false,
   "snippets.extends": {
-      "typescript": ["javascript"],
-      "typescriptreact": ["typescript"]
+    "typescript": ["javascript"],
+    "typescriptreact": ["typescript"]
   },
 
-  "coc.preferences.formatOnSaveFiletypes": ["go", "css", "markdown", "json", "javascript", "typescriptreact", "typescript.tsx", "typescript", "javascript.jsx", "html"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "go",
+    "css",
+    "markdown",
+    "json",
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "html"
+  ],
 
   "coc.source.tmuxcomplete.enable": true,
   "coc.source.tmuxcomplete.priority": 12,
@@ -60,7 +70,7 @@
   "tslint.run": "onSave",
 
   "codeLens.enable": false,
-  "codeLens.separator":"  ",
+  "codeLens.separator": "  ",
   "typescript.implementationsCodeLens.enable": false,
   "typescript.referencesCodeLens.enable": false,
   "javascript.implementationsCodeLens.enable": false,
@@ -74,16 +84,21 @@
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
       "settings": {
         "codeLens.enable": false
       },
       "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
     }
-
   }
 }
