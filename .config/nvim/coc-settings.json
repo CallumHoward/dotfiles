@@ -62,12 +62,8 @@
 
   "coc.source.tmuxcomplete.enable": true,
   "coc.source.tmuxcomplete.priority": 12,
-  "coc.source.syntax.priority": 10,
 
   "python.jediEnabled": true,
-
-  "tslint.jsEnable": true,
-  "tslint.run": "onSave",
 
   "codeLens.enable": false,
   "codeLens.separator": "  ",
