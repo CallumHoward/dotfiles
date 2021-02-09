@@ -72,10 +72,18 @@ autocmd FilterWritePre * if &diff | set fdc=0 | endif
 " disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+function! GetTitle() abort
+    if tabpagenr('$') > 1
+        return fnamemodify(getcwd(), ':t')
+    else
+        return expand('%:t')
+    endif
+endfunction
+
 " set title for tmux
 if exists('$TMUX')
     "autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
-    autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window " ' . expand('%:t') . '"')
+    autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window " ' . GetTitle() . '"') " expand('%:t')
 endif
 
 if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
