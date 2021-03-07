@@ -363,7 +363,7 @@ nmap <leader>ca  <Plug>(coc-codeaction-line)
 nmap <leader>cA  <Plug>(coc-codeaction)
 nmap <leader>cx  <Plug>(coc-fix-current)
 nmap <silent> <leader>cd <Plug>(coc-diagnostic-info)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :mks! ~/sess/k_bak.vim<CR>:call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>cl :<C-u>CocList<CR>
 nnoremap <silent> <leader>cp :<C-u>CocListResume<CR>
 nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
