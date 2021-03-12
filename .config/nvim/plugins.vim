@@ -629,6 +629,10 @@ command! L :Lines
 command! H :History
 command! RGB :Lines
 
+let $BAT_THEME = 'neodark'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'neodark'
+let g:fzf_preview_fzf_color_option ='bg+:0,hl:3,spinner:15,info:11,prompt:7,hl+:3,pointer:6'
+
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
