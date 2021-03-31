@@ -65,7 +65,7 @@
 
   "python.jediEnabled": true,
 
-  "codeLens.enable": false,
+  "codeLens.enable": true, // needed for import cost
   "codeLens.separator": "  ",
   "typescript.implementationsCodeLens.enable": false,
   "typescript.referencesCodeLens.enable": false,
