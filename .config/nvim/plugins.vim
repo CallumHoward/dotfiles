@@ -119,6 +119,8 @@ filetype plugin indent on
 let g:dein#install_log_filename = '~/.cache/dein/dein_install.log'
 " ==== end dein Scripts ====
 
+runtime ftplugin/man.vim
+
 " coc plugins
 let g:coc_global_extensions = [
             \ 'coc-browser',
