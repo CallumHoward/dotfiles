@@ -65,7 +65,7 @@
 
   "python.jediEnabled": true,
 
-  "codeLens.enable": false,
+  "codeLens.enable": true, // needed for import cost
   "codeLens.separator": "  ",
   "typescript.implementationsCodeLens.enable": false,
   "typescript.referencesCodeLens.enable": false,
@@ -96,5 +96,33 @@
         }
       }
     }
-  }
+  },
+  "suggest.completionItemKindLabels": {
+    "class": "פּ",
+    "color": " ",
+    "constant": "𝐶",
+    "constructor": "",
+    "default": "»",
+    "enum": "練",
+    "enumMember": "",
+    "event": "",
+    "field": "",
+    "file": "",
+    "folder": "ﱮ",
+    "function": "",
+    "interface": "蘒",
+    "keyword": "",
+    "method": "",
+    "module": "",
+    "operator": "",
+    "property": " ",
+    "reference": "",
+    "snippet": "",
+    "struct": " ",
+    "text": "",
+    "typeParameter": "𝑇",
+    "unit": "塞",
+    "value": " ",
+    "variable": ""
+  },
 }

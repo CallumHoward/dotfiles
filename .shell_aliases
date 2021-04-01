@@ -272,6 +272,12 @@ function ls_wrapper() {
     fi
 }
 
+function cleanpipe() {
+    # usage: cleanpipe tcp:9999
+    lsof -i "$1"
+    lsof -t -i "$1" | xargs kill
+}
+
 alias ls=ls_wrapper
 if command -v exa > /dev/null 2>&1; then
     alias tree="exa --tree --icons"
