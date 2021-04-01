@@ -41,6 +41,7 @@
       dir                     # current directory
       #package_version
       package
+      telepresence_namespace
       pyenv
       nvm
       vcs                     # git status
@@ -911,6 +912,12 @@
           p10k segment -f 9 -t "v$version"
       fi
   }
+
+  function prompt_telepresence_namespace() {
+    p10k segment -f 5 -t "$TELEPRESENCE_CONTAINER_NAMESPACE"
+  }
+
+  typeset -g POWERLEVEL9K_TELEPRESENCE_NAMESPACE_PREFIX='%fto '
 
   # User-defined prompt segments can be customized the same way as built-in segments.
   # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=208
