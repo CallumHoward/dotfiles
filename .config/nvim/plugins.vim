@@ -96,23 +96,9 @@ if dein#load_state('~/.cache/dein')
     " call dein#add('christianchiarulli/onedark.vim')
 
     " syntax plugins
-    call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
-    call dein#add('wavded/vim-stylus')                  " can't be lazy
-    call dein#add('tikhomirov/vim-glsl')
-    call dein#add('yuezk/vim-js')                       " can't be lazy
-    call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
-    call dein#add('dearrrfish/vim-applescript')
-    " call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
-    " call dein#add('nguquen/vim-styled-components',      {'rev': 'f89ae45d598259fc62408ac8de8597624bb6cb46'})
     call dein#add('vim-scripts/SyntaxAttr.vim')
-    "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
-    "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
-    call dein#add('mustache/vim-mustache-handlebars')
     call dein#add('masukomi/vim-markdown-folding')
-    call dein#add('kchmck/vim-coffee-script')
-    "call dein#add('nvim-treesitter/nvim-treesitter', { 'merged': 0 })
-    call dein#add('keith/swift.vim')
-    call dein#add('ekalinin/Dockerfile.vim')
+    call dein#add('sheerun/vim-polyglot')
 
     call dein#end()
     call dein#save_state()
