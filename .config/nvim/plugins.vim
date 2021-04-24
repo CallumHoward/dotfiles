@@ -655,15 +655,25 @@ function MyTabLine()
             let s .= '%#TabLine#'
         endif
         " empty space
-        let s .= ' '
+        let s .= '    '
         " set the tab page number (for mouse clicks)
         let s .= '%' . (t + 1) . 'T'
         " get buffer names and statuses
         let n = ''  " temp string for buffer names while we loop and check buftype
         let buflist = tabpagebuflist(t + 1)
         let bufcounter = 0  " counter to avoid last seperator
+        let unlisted = 0
         " loop through each buffer in a tab
         for bufnr in buflist
+            if !buflisted(bufnr)
+                let unlisted += 1
+                continue
+            endif
+        endfor
+        for bufnr in buflist
+            if !buflisted(bufnr)
+                continue
+            endif
             let winnr = tabpagewinnr(t + 1)
             let ismainpage = bufcounter == winnr - 1
             if exists('*WebDevIconsGetFileTypeSymbol')  " support for vim-devicons
@@ -689,7 +699,7 @@ function MyTabLine()
                 let n .= ' +'
             endif
             " no final ' ' added...formatting looks better done later
-            if bufcounter < len(buflist) - 1
+            if bufcounter < len(buflist) - 1 - unlisted
                 let n .= ' | '
             endif
             let bufcounter += 1
@@ -697,7 +707,7 @@ function MyTabLine()
         " add buffer names
         let s .= n
         " switch to no underlining and add final space to buffer list
-        let s .= ' %#TabLineFill# '
+        let s .= '    %#TabLineFill# '
         "let s .= ' '
     endfor
     " after the last tab fill with TabLineFill and reset tab page nr
