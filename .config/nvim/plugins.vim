@@ -395,6 +395,13 @@ command! -nargs=0 CFormat :call CocAction('format')
 command! -nargs=? CFold :call CocAction('fold', <f-args>) " args: comment, imports or region
 command! -nargs=0 CDiag :call CocAction('diagnosticPreview')
 
+" Run jest for current project
+command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
+" Run jest for current file
+command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
+" Run jest for current test
+nnoremap <leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
+
 function! s:show_documentation()
     if &filetype == 'vim'
         execute 'h '.expand('<cword>')
