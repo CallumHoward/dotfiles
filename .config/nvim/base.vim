@@ -75,15 +75,27 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 function! GetTitle() abort
     if tabpagenr('$') > 1
         return fnamemodify(getcwd(), ':t')
+    " elseif filereadable(expand('%')) == 0
+    "     return '[No Name]'
     else
         return expand('%:t')
     endif
 endfunction
 
+function! SetTmuxTitle() abort
+    if !$DISABLE_AUTO_TITLE
+        let title = GetTitle()
+        if title != ""
+            call system('tmux rename-window " ' . title . '"')
+        endif
+    endif
+endfunction
+
+nnoremap <leader>ct :let $DISABLE_AUTO_TITLE=1
+
 " set title for tmux
 if exists('$TMUX')
-    "autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
-    autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window " ' . GetTitle() . '"') " expand('%:t')
+    autocmd WinEnter,BufWinEnter,FocusGained * call SetTmuxTitle()
 endif
 
 if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
