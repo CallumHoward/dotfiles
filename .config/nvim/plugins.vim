@@ -709,7 +709,10 @@ function MyTabLine()
     return s
 endfunction
 
-set tabline=%!MyTabLine()
+" vim-scrollview config
+let g:scrollview_column = 1
+let g:scrollview_winblend = 0
+hi link ScrollView PmenuSbar
 
 " vim-jsx-pretty config
 let g:vim_jsx_pretty_highlight_close_tag = 0
