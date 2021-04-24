@@ -47,6 +47,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('idbrii/vim-tagimposter')             " mappings can add to taglist
     call dein#add('ryanoasis/vim-devicons')
     call dein#add('joeytwiddle/sexy_scroller.vim')
+    call dein#add('dstein64/nvim-scrollview')
+    call dein#add('nacro90/numb.nvim')
     call dein#add('iamcco/markdown-preview.nvim', {
                 \ 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
                 \ 'build': 'sh -c "cd app & yarn install"' })
@@ -722,3 +724,6 @@ let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'ja
 
 " treesitter
 "luafile ~/.config/nvim/treesitter.lua
+
+" numb
+:lua require('numb').setup()
