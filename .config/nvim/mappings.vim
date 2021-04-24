@@ -69,6 +69,9 @@ nnoremap <silent> <leader>gb :GitMessenger<CR>
 xnoremap <silent> <leader>gb :GitMessenger<CR>
 nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
+nnoremap <leader>[s :call coc#config('cSpell.enabled', v:false)<CR>
+nnoremap <leader>]s :call coc#config('cSpell.enabled', v:true)<CR>
+
 nnoremap <leader>b :echo "did you mean \\gb?"<CR>
 
 nnoremap <silent><C-W>c :ScrollViewDisable<CR><C-W>c:ScrollViewEnable<CR>
