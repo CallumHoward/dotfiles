@@ -78,6 +78,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('romainl/vim-devdocs',                {'on_cmd': 'DD'})
     call dein#add('rizzatti/dash.vim')
     call dein#add('wfleming/vim-codeclimate')
+    call dein#add('umaumax/vim-lcov')
 
     " keybindings
     call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
