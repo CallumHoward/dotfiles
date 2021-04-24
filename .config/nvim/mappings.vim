@@ -71,6 +71,8 @@ nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
 nnoremap <leader>b :echo "did you mean \\gb?"<CR>
 
+nnoremap <silent><C-W>c :ScrollViewDisable<CR><C-W>c:ScrollViewEnable<CR>
+
 nmap cst #V%o\sa<BS>
 
 " move tabs
