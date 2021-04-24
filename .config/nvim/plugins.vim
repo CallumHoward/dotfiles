@@ -333,6 +333,19 @@ command! SynAttr :call SyntaxAttr()
 
 " Code climate config
 nmap <silent> <leader>cC :CodeClimateAnalyzeOpenFiles<CR>
+nmap <silent> <leader>jC :call coc#config('git', {'diffRevision': 'master'}) \|
+            \ :CocCommand git.refresh<CR>
+            \ :execute('!yarn test:cov --silent $(pkg-dir "%")') \|
+            \ :setl fdm=manual \|
+            \ :execute('LcovVisible coverage/lcov.info') \|
+            \ :CocCommand git.foldUnchanged<CR>
+nmap <silent> <leader>jc :call coc#config('git', {'diffRevision': 'master'}) \|
+            \ :CocCommand git.refresh<CR>
+            \ :sleep 1 \|
+            \ :setl fdm=manual \|
+            \ :execute('LcovVisible coverage/lcov.info') \|
+            \ :CocCommand git.foldUnchanged<CR>
+nmap <silent> <leader>cf :CocCommand git.foldUnchanged<CR>
 
 " CoC config
 let g:coc_node_path = '/usr/local/bin/node'
