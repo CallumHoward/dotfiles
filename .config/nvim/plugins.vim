@@ -52,8 +52,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('iamcco/markdown-preview.nvim', {
                 \ 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
                 \ 'build': 'sh -c "cd app & yarn install"' })
-    call dein#add('Yggdroot/indentLine')
-    call dein#add('lukas-reineke/indent-blankline.nvim')
+    call dein#add('lukas-reineke/indent-blankline.nvim', {'rev': 'lua'})
     call dein#add('APZelos/blamer.nvim')
     call dein#add('rhysd/git-messenger.vim', {
                 \   'lazy' : 1,
@@ -719,8 +718,10 @@ let g:vim_jsx_pretty_colorful_config = 1
 " indent guides config
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 232
-let g:indent_blankline_extra_indent_level = -1
-let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go', 'html.handlebars', 'scss']
+" let g:indent_blankline_extra_indent_level = -1 
+let g:indent_blankline_show_trailing_blankline_indent = v:false
+" let g:indent_blankline_use_treesitter = v:true
+let g:indentLine_fileType = ['c', 'cpp', 'typescriptreact', 'javascriptreact', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go', 'html.handlebars', 'scss']
 
 " treesitter
 "luafile ~/.config/nvim/treesitter.lua
