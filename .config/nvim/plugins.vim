@@ -92,7 +92,8 @@ if dein#load_state('~/.cache/dein')
     call dein#add('cocopon/iceberg.vim')
     call dein#add('mhartington/oceanic-next')
     call dein#add('w0ng/vim-hybrid')
-    call dein#add('christianchiarulli/onedark.vim')
+    call dein#add('romgrk/doom-one.vim')
+    " call dein#add('christianchiarulli/onedark.vim')
 
     " syntax plugins
     call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
