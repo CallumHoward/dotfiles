@@ -54,8 +54,8 @@ xmap ic <Plug>(coc-git-chunk-inner)
 omap ac <Plug>(coc-git-chunk-outer)
 xmap ac <Plug>(coc-git-chunk-outer)
 nnoremap <leader>gg :call coc#config('git', {'diffRevision': 'HEAD~'})<Left><Left><Left>
-nnoremap <leader>ggm :call coc#config('git', {'diffRevision': 'master'})<CR>
-nnoremap <leader>ggh :call coc#config('git', {'diffRevision': ''})<CR>
+nnoremap <leader>ggm :call coc#config('git', {'diffRevision': 'master'})<CR>:CocCommand git.refresh<CR>
+nnoremap <leader>ggh :call coc#config('git', {'diffRevision': ''})<CR>:CocCommand git.refresh<CR>
 nnoremap <leader>gf zE:CocCommand git.foldUnchanged<CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
