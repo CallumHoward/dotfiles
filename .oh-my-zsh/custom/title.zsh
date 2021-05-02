@@ -84,8 +84,8 @@ function omz_termsupport_preexec {
       "lldb" | "gdb")
           ICON= ;;
       "make" | "m" | "cmake")
-          ICON= ;;
-      "git" | "s" | "a" | "cm" | "gca" | "gd" | "gdmb" | "stash" | "pop" | "grs" | "show" | "lg" | "lgh" | "lgmb" | "push" | "co" | "com" | "cof" | "gmm" | "ba" | "baa" )
+          ICON=" ";;
+      "git" | "s" | "a" | "cm" | "gca" | "gd" | "gdc" | "gdmb" | "stash" | "pop" | "grs" | "show" | "lg" | "lgh" | "lgmb" | "push" | "co" | "com" | "cof" | "gmm" | "ba" | "baa" )
           ICON= ;;
       "top" | "htop" | "vtop" | "gtop")
           ICON= ;;
@@ -112,7 +112,7 @@ function omz_termsupport_preexec {
       "go")
           ICON= ;;
       "node")
-          ICON= ;;
+          ICON= ;;
       "aws")
           ICON= ;;
       "ping" | "pg" | "pgh")
