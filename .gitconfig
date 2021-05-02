@@ -16,8 +16,9 @@
     dt = difftool
 [pager]
     #diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
-    diff = diff-so-fancy | menos --tabs=5 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
+    #diff = diff-so-fancy | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
     #diff = delta --side-by-side --diff-so-fancy # | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
+    diff = git-split-diffs --color | less --tabs=4 -iFMRSX
 [interactive]
     #diffFilter = delta --color-only
 [diff]
