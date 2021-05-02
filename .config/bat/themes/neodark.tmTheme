@@ -27,7 +27,7 @@
                     <key>invisibles</key>
                     <string>#07000000</string>
                     <key>lineHighlight</key>
-                    <string>#07000000</string>
+                    <string>#01000000</string>
                     <key>selection</key>
                     <string>#07000000</string>
                     <key>gutter</key>
