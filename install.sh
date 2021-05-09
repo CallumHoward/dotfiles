@@ -13,6 +13,7 @@ declare -a files=(
     '.ideavimrc'
 
     '.zshrc'
+    '.zshenv'
     '.local_rc'
     #'.oh-my-zsh'
     '.shell_aliases'
