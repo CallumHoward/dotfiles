@@ -252,7 +252,8 @@ nnoremap <silent> <Leader>\ :CocCommand explorer --toggle --sources=buffer+,file
 "nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
 nnoremap <silent> <Leader>\ :CocCommand explorer --sources buffer+,file+ --width=45<CR>
 cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.')<CR>
-cabbrev cdg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gina cd' : 'cdg')<CR>
+command! Cdg exec 'cd' fnameescape(fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ') . ';'), ':h'))
+cabbrev cdg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Cdg' : 'cdg')<CR>
 
 " grep for word under cursor
 nmap <silent> <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cope<CR><C-W>J:sil redr!<CR>
