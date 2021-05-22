@@ -68,3 +68,11 @@
     newHighlight = 83 22
 [credential]
     helper = cache --timeout=3600000
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+[split-diffs]
+    theme-name = github-dark-dim
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master
