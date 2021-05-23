@@ -220,7 +220,7 @@ nnoremap <silent> <expr> <leader>w @/ =~# '^\\<.*\\>$'
             \ : ':let @/="\\<<C-R>/\\>"<CR>:echo "/".@/<CR>'
 
 " save temp session
-nnoremap <leader>]] :mks! ~/sess/temp_session.vim<CR>
+nnoremap <leader>]] :ScrollViewDisable <bar> mks! ~/sess/temp_session.vim <bar> ScrollViewEnable<CR>
 nnoremap <leader>[[ :source ~/sess/temp_session.vim<CR>
 
 augroup TerminalConfig
