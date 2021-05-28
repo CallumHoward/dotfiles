@@ -105,6 +105,15 @@ nnoremap <silent> g* :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|s
 nnoremap <silent> <Esc> :noh<CR>:call UncolorAllWords()<CR>:GitMessengerClose<CR>
 nnoremap <silent> <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? ":let save_cursor=getcurpos()\|let @/ = '\\<'.expand('<cword>').'\\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR><2-LeftMouse>" : 'zo'
 
+" makes * and # work on visual mode too.
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>:setl hlsearch<CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>:setl hlsearch<CR>
 
 nnoremap <silent> * :call InterestingWords('n')<CR>
 vnoremap <silent> * :call InterestingWords('v')<CR>
