@@ -667,7 +667,7 @@
 
   ###[ package: name@version from package.json (https://docs.npmjs.com/files/package.json) ]####
   # Package color.
-  typeset -g POWERLEVEL9K_PACKAGE_FOREGROUND=9
+  typeset -g POWERLEVEL9K_PACKAGE_FOREGROUND=16
   # Package format. The following parameters are available within the expansion.
   #
   # - P9K_PACKAGE_NAME     The value of `name` field in package.json.
@@ -909,7 +909,7 @@
   function prompt_package_version() {
       export version="$(get_package_version)"
       if [[ "$version" != "" ]]; then
-          p10k segment -f 9 -t "v$version"
+          p10k segment -f 13 -t "v$version"
       fi
   }
 
