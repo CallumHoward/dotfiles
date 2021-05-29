@@ -36,28 +36,6 @@ function auto-ls-after-cd() {
 }
 add-zsh-hook chpwd auto-ls-after-cd
 
-# place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use >/dev/null
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    #echo "Reverting to nvm default version"
-    nvm use default >/dev/null
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
 function edit-fzf() {
     local result=`skg`
     local filename=`echo $result | cut -f1 -d:`
@@ -219,6 +197,14 @@ function vman() {
 compdef vman="man"
 
 function Terminal() { tmux attach 2>/dev/null || tmux new }
+
+function kubectl() {
+    if ! type __start_kubectl >/dev/null 2>&1; then
+        source <(command kubectl completion zsh)
+    fi
+
+    command kubectl "$@"
+}
 
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
