@@ -1,4 +1,4 @@
-# vim: set ft=sh
+# vim: ft=sh
 
 alias title="printf '\033]0;%s\007'"
 alias T="Terminal"

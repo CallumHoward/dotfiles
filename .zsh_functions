@@ -1,4 +1,4 @@
-# vim: set ft=zsh
+# vim: ft=zsh
 
 function mkcd() { nocorrect mkdir -p "$@" && nocorrect cd "$@"; }
 
