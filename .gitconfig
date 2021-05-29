@@ -15,13 +15,19 @@
     vimdiff = difftool
     dt = difftool
 [pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
+    #diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
+    #diff = diff-so-fancy | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
+    #diff = delta --side-by-side --diff-so-fancy # | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
+    diff = git-split-diffs --color | less --tabs=4 -iFMRSX
+[interactive]
+    #diffFilter = delta --color-only
 [diff]
     tool = vimdiff
+    algorithm = patience
+    indentHeuristic = true
 [difftool]
     prompt = false
 [difftool "vimdiff"]
-    #cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
     cmd = nvim -d $BASE $LOCAL
 [merge]
     tool = vimdiff
@@ -32,11 +38,22 @@
     smudge = git hawser smudge %f
     required = true
 [filter "lfs"]
-    clean = git lfs clean %f
-    smudge = git lfs smudge %f
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
     required = true
 [core]
-    #pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = diff-so-fancy | menos --tabs=4 -iFMRSX
+    #pager = delta --diff-so-fancy # | menos --tabs=4 -iFMRSX
+    excludesfile = ~/.gitignore_global
+[delta]
+    syntax-theme = neodark
+    line-numbers = false
+    features = decorations
+    navigate = true
+[delta "decorations"]
+    file-style = bold white ul
+    file-decoration-style = bold white ul ol
 [color "diff"]
     meta = 15
     commit = 83
@@ -51,3 +68,11 @@
     newHighlight = 83 22
 [credential]
     helper = cache --timeout=3600000
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+[split-diffs]
+    theme-name = github-dark-dim
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master

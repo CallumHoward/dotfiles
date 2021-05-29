@@ -7,8 +7,9 @@
 #--postprocessor-args '-threads N'
 
 --embed-subs
---embed-thumbnail
-#--add-metadata
+
+#--embed-thumbnail
+--add-metadata
 
 --console-title
 --exec 'tput bel'

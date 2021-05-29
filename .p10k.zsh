@@ -39,6 +39,11 @@
       nest_level
       context
       dir                     # current directory
+      #package_version
+      package
+      telepresence_namespace
+      pyenv
+      node_version
       vcs                     # git status
       # =========================[ Line #2 ]=========================
       newline
@@ -67,7 +72,6 @@
       # dotnet_version        # .NET version (https://dotnet.microsoft.com)
       # rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
       # rvm                     # ruby version from rvm (https://rvm.io)
-      # kubecontext             # current kubernetes context (https://kubernetes.io/)
       # terraform               # terraform workspace (https://www.terraform.io)
       # aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
       # aws_eb_env            # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
@@ -87,6 +91,7 @@
       # example               # example user-defined segment (see prompt_example function below)
       # =========================[ Line #3 ]=========================
       newline
+      kubecontext             # current kubernetes context (https://kubernetes.io/)
       vi_mode
   )
 
@@ -226,13 +231,15 @@
   typeset -g POWERLEVEL9K_VI_MODE_OVERWRITE_BACKGROUND=red
   typeset -g POWERLEVEL9K_VI_MODE_OVERWRITE_FOREGROUND=15
 
+  typeset -g POWERLEVEL9K_VI_MODE_PREFIX='%k %K'
+
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=3
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
-  typeset -g POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=true
+  typeset -g POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=first
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
@@ -560,7 +567,7 @@
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=13
   # Context format when running with privileges: bold user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n%f at %2F%m'
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%n%f at %2F${BOX_NAME//\%/%%}"
 
   # Don't show context unless running with privileges or in SSH.
   # Tip: Remove the next line to always show context.
@@ -593,11 +600,12 @@
 
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
-  typeset -g POWERLEVEL9K_PYENV_FOREGROUND=37
+  typeset -g POWERLEVEL9K_PYENV_FOREGROUND=5
   # Don't show the current Python version if it's the same as global.
   typeset -g POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=false
   # Custom icon.
   # typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_PYENV_PREFIX='%fusing %5Fp'
 
   ##########[ nodenv: node.js version from nodenv (https://github.com/nodenv/nodenv) ]##########
   # Nodenv color.
@@ -609,9 +617,10 @@
 
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.
-  typeset -g POWERLEVEL9K_NVM_FOREGROUND=70
+  typeset -g POWERLEVEL9K_NVM_FOREGROUND=5
   # Custom icon.
   # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_NVM_PREFIX='%fusing %5Fn'
 
   ############[ nodeenv: node.js environment (https://github.com/ekalinin/nodeenv) ]############
   # Nodeenv color.
@@ -625,11 +634,12 @@
 
   ##############################[ node_version: node.js version ]###############################
   # Node version color.
-  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=70
+  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=5
   # Show node version only when in a directory tree containing package.json.
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_NODE_VERSION_PREFIX='%fusing %5Fn'
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
@@ -655,6 +665,18 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
+  ###[ package: name@version from package.json (https://docs.npmjs.com/files/package.json) ]####
+  # Package color.
+  typeset -g POWERLEVEL9K_PACKAGE_FOREGROUND=9
+  # Package format. The following parameters are available within the expansion.
+  #
+  # - P9K_PACKAGE_NAME     The value of `name` field in package.json.
+  # - P9K_PACKAGE_VERSION  The value of `version` field in package.json.
+  #
+  # typeset -g POWERLEVEL9K_PACKAGE_CONTENT_EXPANSION='${P9K_PACKAGE_NAME//\%/%%}@${P9K_PACKAGE_VERSION//\%/%%}'
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
   typeset -g POWERLEVEL9K_RBENV_FOREGROUND=168
@@ -674,6 +696,10 @@
   # typeset -g POWERLEVEL9K_RVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
+  # Show kubecontext only when the the command you are typing invokes one of these tools.
+  # Tip: Remove the next line to always show kubecontext.
+  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito'
+
   # Kubernetes context classes for the purpose of using different colors, icons and expansions with
   # different contexts.
   #
@@ -704,8 +730,8 @@
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
       '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=134
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='○'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=4
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='#'
 
   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
   # segment. Parameter expansions are very flexible and fast, too. See reference:
@@ -722,6 +748,8 @@
   # - P9K_KUBECONTEXT_NAMESPACE  The current context's namespace. Corresponds to column NAMESPACE
   #                              in the output of `kubectl config get-contexts`. If there is no
   #                              namespace, the parameter is set to "default".
+  # - P9K_KUBECONTEXT_USER       The current context's user. Corresponds to column AUTHINFO in the
+  #                              output of `kubectl config get-contexts`.
   #
   # If the context points to Google Kubernetes Engine (GKE) or Elastic Kubernetes Service (EKS),
   # the following extra parameters are available:
@@ -752,7 +780,7 @@
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
   # Custom prefix.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%fat '
+  #typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%fat '
 
   ################[ terraform: terraform workspace (https://www.terraform.io) ]#################
   # Terraform color.
@@ -871,6 +899,25 @@
   function instant_prompt_nest_level() {
     prompt_nest_level
   }
+
+  function get_package_version() {
+      [ -f "package.json" ] && \
+          command -v fx 2>&1 > /dev/null && \
+          fx package.json .version 2>/dev/null
+  }
+
+  function prompt_package_version() {
+      export version="$(get_package_version)"
+      if [[ "$version" != "" ]]; then
+          p10k segment -f 9 -t "v$version"
+      fi
+  }
+
+  function prompt_telepresence_namespace() {
+    p10k segment -f 5 -t "$TELEPRESENCE_CONTAINER_NAMESPACE"
+  }
+
+  typeset -g POWERLEVEL9K_TELEPRESENCE_NAMESPACE_PREFIX='%fto '
 
   # User-defined prompt segments can be customized the same way as built-in segments.
   # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=208

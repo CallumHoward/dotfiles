@@ -3,6 +3,7 @@
 declare -a files=(
     '.config'
     '.gitconfig'
+    '.gitignore_global'
     '.tmux.conf'
 
     '.vim'
@@ -12,6 +13,7 @@ declare -a files=(
     '.ideavimrc'
 
     '.zshrc'
+    '.zshenv'
     '.local_rc'
     #'.oh-my-zsh'
     '.shell_aliases'
@@ -39,7 +41,7 @@ if ! [ -x "$(which brew)" ]; then
         fi
         echo -n "Install: tmux neovim ranger htop... [Y/n]? "
         if echo "$answer" | grep -viq "^n" ; then
-            brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan
+            brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan wget
         fi
     fi
 elif [ -x "$(which apt-get)" ]; then
@@ -97,6 +99,8 @@ echo "Finished creating symlinks"
 echo "Downloading diff-so-fancy"
 wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" -O ~/.local/bin/diff-so-fancy
 chmod +x ~/.local/bin/diff-so-fancy
+wget "https://raw.githubusercontent.com/wincent/wincent/master/aspects/dotfiles/files/.zsh/bin/menos" -O ~/.local/bin/menos
+chmod +x ~/.local/bin/menos
 echo "Finished installing diff-so-fancy"
 
 echo "Installing tmux-256color terminfo"

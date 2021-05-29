@@ -1,0 +1,67 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+# Arrow function
+snippet ar "Arrow function" i
+(${1}) => {
+	${2}
+}
+endsnippet
+
+snippet arr "Arrow function" i
+const ${1} = (${2}) => {
+	${3}
+};
+endsnippet
+
+# For of loop
+snippet forof "For of loop"
+for (let ${1:s} of ${2:sequence}) {
+	${3}
+}
+endsnippet
+
+# Import
+snippet im "Import from"
+import ${1:foo} from "${2:bar}"
+endsnippet
+
+## Jest
+snippet exp "expect(value)"
+expect($1)$2;
+endsnippet
+
+snippet desc "describe(name, fn)"
+describe("$1", () => {
+	${VISUAL}$0
+});
+endsnippet
+
+snippet it "Test case"
+it("Should $1", () => {
+	$2
+});
+endsnippet
