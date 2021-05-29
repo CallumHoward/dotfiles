@@ -6,8 +6,9 @@
 
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-if [ -x "$(which nvim)" ]; then
+if command -v nvim > /dev/null 2>&1; then
     export EDITOR=nvim
+    export VISUAL=nvim
     #export MANPAGER="nvim +set\ filetype=man +Goyo -"
 else
     export EDITOR=vim
@@ -15,7 +16,7 @@ fi
 
 PATH=/usr/local/bin:$PATH
 PATH=/usr/local/sbin:$PATH
-PATH=$PATH:~/.local/bin
+PATH=~/.local/bin:$PATH
 
 # pager options
 export LESS="-RFX"
@@ -38,6 +39,7 @@ PATH=$PATH:~/.cabal/bin
 
 # golang
 export GOPATH=$HOME/golang
+export GOBIN=$GOPATH/bin
 PATH=$PATH:$GOPATH/bin
 
 # linuxbrew
@@ -66,8 +68,8 @@ export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
 export PATH="$CUDA_HOME/bin:$PATH"
 
 # FZF
-export FZF_DEFAULT_OPTS='--reverse --color=bg+:0,hl:3,spinner:15,info:11,prompt:7,hl+:3,pointer:6'
-export FZF_PREVIEW_COMMAND='highlight -O ansi {} || cat {}'
+export FZF_DEFAULT_OPTS='--reverse --color=bg+:0,hl:3,spinner:15,info:11,prompt:7,hl+:3,pointer:6 --bind=ctrl-j:preview-down,ctrl-k:preview-up'
+export FZF_PREVIEW_COMMAND='scope {}'
 export FZF_DEFAULT_COMMAND=' \
   (git ls-tree -r --name-only HEAD || \
    fd || \
@@ -80,10 +82,5 @@ export SKIM_DEFAULT_OPTIONS='--reverse --ansi --color=current_bg:0,matched:3,inf
 # yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# kubernetes
-if [ -x /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Fast Node Manager
+eval "$(fnm env --use-on-cd)"

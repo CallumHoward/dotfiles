@@ -10,7 +10,7 @@ alias rv="rsync -ahvz --progress --remove-source-files;b"
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
     #alias iina="open -a iina"
-    alias spotify="open -a spotify"
+    #alias spotify="open -a spotify"
     alias slack="open -a slack"
     alias safari="open -a safari"
     alias xcode="open -a xcode"
@@ -64,15 +64,18 @@ alias view="$EDITOR -R"
 alias vs="code"
 alias v.="v ."
 alias vd="v -d"
-alias F="v +F!"
-alias S="v '+GitFiles!?'"
+alias F="v '+F1'"
+alias S="v '+S1'"
+alias MB="v '+MB1'"
+#alias S="v '+GitFiles!?'"
+#alias RG="v +RG!"  # see .zsh_functions
 
 alias vtop="vtop --theme brew"
 alias goto=". goto"
 alias su="sudo su"
 
 alias pg="ping google.com"
-alias pgh="ping github.com"
+alias pgh="ping https://www.github.com"
 alias ipscan="arp -a | sed 's/ at.*$//' | sed 's/\.gateway//' | sed 's/[\(\)]//g' | grep -v '^\?' | column -t"
 
 alias m="make"
@@ -87,7 +90,7 @@ alias gdb="gdb -q"
 alias gdp="gdb -p"
 
 alias yt="youtube-dl"
-alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3"
+alias ym="youtube-dl --ignore-config -f 'bestaudio' --extract-audio --audio-format=mp3 --embed-thumbnail"
 alias y="yt"
 alias yi="y --ignore-config"
 
@@ -99,7 +102,7 @@ alias j="jobs"
 
 alias g="git"
 alias sb="git sb"
-alias ss="git sb | tail -n +2"
+alias ss="git status -s"
 alias a="git_add"
 alias ga="git_add"
 alias gc="git_commit"
@@ -124,26 +127,31 @@ alias gdm="gd master"
 alias gg="git grep -i -n --heading --break"
 alias lg="git lg"
 alias lgs="git lg --stat"
+alias lgh="git lg -n10"
+alias lgh.="lgh ."
 #alias clo="git clone --recursive -j4 && cd *(/om[1])" # moved to .zsh_functions
 alias gsm="git submodule update --init --recursive"
 alias gdmb="gd master...HEAD"
 alias gddmb="gdd master...HEAD"
-alias gdmbf='gdmb `gdmb --name-only | fzf -m`'
-alias gddmbf='gddmb `gdmb --name-only | fzf -m`'
+alias lgmb="lg master...HEAD"
+alias gdmbf='gdmb `gdmb --name-only | fzf -m --preview "git diff --color=always master...HEAD {}"`'
+alias gddmbf='gddmb `gdmb --name-only | fzf -m --preview "git diff --color=always master...HEAD {}"`'
 alias co="git_checkout"
-alias cof="ba | cut -c 3- | sed 's#remotes/[^/]*/##' | uniq | fzf --preview='{ git diff --color=always --stat master...{}; git diff --color=always master...{}; } | diff-so-fancy' | xargs git checkout"
-alias ba="git branch -a"
+alias cof="ba | grep -v master | fzf --preview='{ git diff --color=always --stat master...{}; git diff --color=always master...{}; } | diff-so-fancy' | xargs git checkout"
+alias ba="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
+alias baa="git branch -a"
 alias push="git push"
 alias pu="git push -u"
 alias pull="git pull"
-alias stash="git stash"
-alias pop="stash pop -q && s"
+alias stash="git stash -k"
+alias pop="git stash pop 2>&1 >/dev/null && s"
 alias show="git show"
 alias sp="stash && pull && stash pop"
 alias sl="git sl"
 alias rl="git rl"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
 alias gu="gitup"
+alias nvm="fnm"
 #alias br="browse" #conflict
 
 alias snatch="zou"
@@ -152,7 +160,9 @@ alias dict="trans -d"
 alias powershell="pwsh"
 alias ncdu="ncdu --color dark"
 
-if [ "`basename $SHELL`" = "zsh" ]; then
+alias cdp='cd `fd "package." $PACKAGE_DIR | xargs -IFFF dirname FFF | fzf`'
+
+if [ ! $BASH ]; then
     # if using with hub:
     # https://github.com/robbyrussell/oh-my-zsh/issues/1727#issuecomment-22366771
     # brew uninstall --force git && brew install git --without-completions
@@ -261,6 +271,12 @@ function ls_wrapper() {
     if [[ -t 0 || -p /dev/stdin ]]; then
         $bin "${args[@]}" $@
     fi
+}
+
+function cleanpipe() {
+    # usage: cleanpipe tcp:9999
+    lsof -i "$1"
+    lsof -t -i "$1" | xargs kill
 }
 
 alias ls=ls_wrapper

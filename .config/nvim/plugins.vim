@@ -20,28 +20,18 @@ if dein#load_state('~/.cache/dein')
     call dein#add('Shougo/neosnippet.vim', {'on_event': s:ces})                  " snippet expansion
     call dein#add('~/neosnippet-snippets', {'on_event': s:ces})                  " snippet collection
     call dein#add('Shougo/echodoc.vim', {'on_event': s:ces})                  " function signatures in status
-    "call dein#add('Shougo/deoplete.nvim', {'on_event': s:ces})                  " auto popup completion
     call dein#add('wellle/tmux-complete.vim')                  " tmux window completion source
     call dein#add('Shougo/neco-vim', {'on_ft': 'vim'})
     call dein#add('Shougo/neco-syntax')
-    "call dein#add('zchee/deoplete-jedi')                " can't be lazy
-    "call dein#add('artur-shaik/vim-javacomplete2',      {'on_ft': 'java'})
-    "call dein#add('zchee/deoplete-clang')               " can't be lazy
-    "call dein#add('carlitux/deoplete-ternjs', {'on_ft': 'javascript'})
-    "call dein#add('autozimu/LanguageClient-neovim', {
-    "    \ 'rev': 'next',
-    "    \ 'build': 'bash install.sh',
-    "    \ })
-    call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
+    call dein#add('neoclide/coc.nvim', {'merged': 0, 'rev': 'release'})
 
     " feature plugins
     call dein#add('neomake/neomake')
-    call dein#add('airblade/vim-gitgutter')             " line git status
     call dein#add('kshenoy/vim-signature')              " marks in signs column
-    call dein#add('liuchengxu/vista.vim')               " language server aware tags
+    call dein#add('liuchengxu/vista.vim',                {'on_cmd': 'Vista'})               " language server aware tags
     call dein#add('majutsushi/tagbar',                  {'on_cmd': 'TagbarToggle'})
-    call dein#add('valloric/MatchTagAlways',            {'on_ft': ['html', 'xml', 'jsx']})
-    call dein#add('alvan/vim-closetag',                 {'on_ft': ['html', 'xml', 'jsx']})
+    call dein#add('valloric/MatchTagAlways') ",            {'on_ft': ['html', 'xml', 'jsx', 'tsx', 'javascriptreact']})
+    call dein#add('alvan/vim-closetag') ",                 {'on_ft': ['html', 'xml', 'jsx', 'tsx', 'javascriptreact']})
     call dein#add('tpope/vim-abolish')                  " deal with word variants
     "call dein#add('cloudhead/neovim-fuzzy')
     "call dein#add('yuttie/comfortable-motion.vim')
@@ -57,8 +47,13 @@ if dein#load_state('~/.cache/dein')
     call dein#add('idbrii/vim-tagimposter')             " mappings can add to taglist
     call dein#add('ryanoasis/vim-devicons')
     call dein#add('joeytwiddle/sexy_scroller.vim')
-    call dein#add('Yggdroot/indentLine')
-    call dein#add('lukas-reineke/indent-blankline.nvim')
+    call dein#add('dstein64/nvim-scrollview')
+    call dein#add('nacro90/numb.nvim')
+    call dein#add('iamcco/markdown-preview.nvim', {
+                \ 'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+                \ 'build': 'sh -c "cd app & yarn install"' })
+    call dein#add('lukas-reineke/indent-blankline.nvim', {'rev': 'lua'})
+    call dein#add('APZelos/blamer.nvim')
     call dein#add('rhysd/git-messenger.vim', {
                 \   'lazy' : 1,
                 \   'on_cmd' : 'GitMessenger',
@@ -74,12 +69,16 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('CallumHoward/skim.vim',              {'depends': 'skim'})
     call dein#add('junegunn/fzf',                       { 'build': './install --all', 'merged': 0 })
     call dein#add('junegunn/fzf.vim',                   { 'depends': 'fzf' })
+    call dein#add('coreyja/fzf.devicon.vim',            { 'depends': 'fzf' })
     call dein#add('sakhnik/nvim-gdb')                   " gdb and lldb wrapper
     call dein#add('francoiscabrol/ranger.vim')          " ranger as netrw replacement
     call dein#add('CallumHoward/vim-tbone')             " send text to tmux pane
     call dein#add('CoatiSoftware/vim-sourcetrail',      {'on_cmd': 'SourcetrailStartServer'})
     "call dein#add('yamahigashi/sendtomaya.vim')
-    call dein#add('romainl/vim-devdocs')
+    call dein#add('romainl/vim-devdocs',                {'on_cmd': 'DD'})
+    call dein#add('rizzatti/dash.vim')
+    call dein#add('wfleming/vim-codeclimate')
+    call dein#add('umaumax/vim-lcov')
 
     " keybindings
     call dein#add('tpope/vim-surround.git',             {'on_event': s:ces})
@@ -93,19 +92,13 @@ if dein#load_state('~/.cache/dein')
     call dein#add('cocopon/iceberg.vim')
     call dein#add('mhartington/oceanic-next')
     call dein#add('w0ng/vim-hybrid')
+    call dein#add('romgrk/doom-one.vim')
+    " call dein#add('christianchiarulli/onedark.vim')
 
     " syntax plugins
-    call dein#add('rust-lang/rust.vim')
-    call dein#add('sophacles/vim-processing',           {'on_ft': 'processing'})
-    call dein#add('wavded/vim-stylus')                  " can't be lazy
-    call dein#add('neovimhaskell/haskell-vim')          " can't be lazy
-    call dein#add('tikhomirov/vim-glsl')
-    call dein#add('yuezk/vim-js')                       " can't be lazy
-    call dein#add('maxmellon/vim-jsx-pretty')           " can't be lazy
-    call dein#add('HerringtonDarkholme/yats.vim')       " can't be lazy
-    call dein#add('styled-components/vim-styled-components')
-    "call dein#add('arakashic/chromatica.nvim')          " can't be lazy
-    "call dein#add('octol/vim-cpp-enhanced-highlight')   " can't be lazy
+    call dein#add('vim-scripts/SyntaxAttr.vim')
+    call dein#add('masukomi/vim-markdown-folding')
+    call dein#add('sheerun/vim-polyglot')
 
     call dein#end()
     call dein#save_state()
@@ -114,6 +107,30 @@ endif
 filetype plugin indent on
 let g:dein#install_log_filename = '~/.cache/dein/dein_install.log'
 " ==== end dein Scripts ====
+
+runtime ftplugin/man.vim
+
+" coc plugins
+let g:coc_global_extensions = [
+            \ 'coc-browser',
+            \ 'coc-css',
+            \ 'coc-emmet',
+            \ 'coc-explorer',
+            \ 'coc-git',
+            \ 'coc-go',
+            \ 'coc-html',
+            \ 'coc-import-cost',
+            \ 'coc-json',
+            \ 'coc-neosnippet',
+            \ 'coc-prettier',
+            \ 'coc-python',
+            \ 'coc-snippets',
+            \ 'coc-sourcekit',
+            \ 'coc-spell-checker',
+            \ 'coc-styled-components',
+            \ 'coc-tsserver',
+            \ 'coc-yank',
+            \ ]
 
 " netrw filebrowser config
 let g:netrw_winsize = -28               " absolute width of netrw window
@@ -145,15 +162,6 @@ cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \| Ranger' : 'va')<C
 cabbrev spa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'sp \| Ranger' : 'spa')<CR>
 cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \| Ranger' : 'tra')<CR>
 
-" use deoplete completion
-let g:deoplete#enable_at_startup = 0
-if !exists('g:deoplete#omni#input_patterns') | let g:deoplete#omni#input_patterns = {} | endif
-"let g:deoplete#sources._ = ['tag', 'member', 'file', 'omni', 'buffer', 'tmux-complete']
-"let g:deoplete#auto_complete_start_length = 0
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3'
-
 " gutentags config
 let g:gutentags_cache_dir = '~/.local/share/nvim/tags/'
 
@@ -170,18 +178,22 @@ function! s:check_back_space() abort
 endfunction
 
 " SuperTab like snippets behavior
-let g:neosnippet#expand_word_boundary = 1
-imap <expr><TAB> neosnippet#expandable()
-            \ ? "\<Plug>(neosnippet_expand)" : pumvisible()
-            \ ? "\<C-n>" : neosnippet#jumpable()
-            \ ? "\<Plug>(neosnippet_jump)" : <SID>check_back_space()
-            \ ? "\<TAB>" : coc#refresh()
-smap <expr><TAB> neosnippet#expandable_or_jumpable()
-            \ ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-xmap <TAB> <Plug>(neosnippet_expand_target)
+" let g:neosnippet#expand_word_boundary = 1
+" imap <expr><TAB> neosnippet#expandable()
+"             \ ? "\<Plug>(neosnippet_expand)" : pumvisible()
+"             \ ? "\<C-n>" : neosnippet#jumpable()
+"             \ ? "\<Plug>(neosnippet_jump)" : <SID>check_back_space()
+"             \ ? "\<TAB>" : coc#refresh()
+" smap <expr><TAB> neosnippet#expandable_or_jumpable()
+"             \ ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" xmap <TAB> <Plug>(neosnippet_expand_target)
 
-" complete and close popup if visible else: break undo
-"inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "<C-g>u<CR>"
+inoremap <silent><expr> <TAB> pumvisible()
+            \ ? coc#_select_confirm() : coc#expandableOrJumpable()
+            \ ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : <SID>check_back_space()
+            \ ? "\<TAB>" : coc#refresh()
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 
 " Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -195,15 +207,27 @@ set concealcursor=niv
 let g:neosnippet#enable_completed_snippet=1
 let g:neosnippet#enable_optional_arguments=0
 
+" jsx and typescript config
+" by default .ts file are not identified as typescript and .tsx files are not
+" identified as typescript react file, so add following
+" au BufNewFile,BufRead *.ts setlocal filetype=typescript
+" au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx foldmethod=manual
+" au BufNewFile,BufRead *.tsx echom "hello foo bar"
+" au FileType typescriptreact setlocal filetype=typescript.tsx foldmethod=manual
+
 " vim-closetag config
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.jsx,*.tsx,*.md"
-let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,javascript.jsx,javascript.tsx'
+let g:closetag_xhtml_filetypes = 'xml,xhtml,jsx,javascript.jsx,javascript.tsx,typescript.tsx,javascriptreact'
 let g:closetag_emptyTags_caseSensitive = 1
+let g:vim_jsx_pretty_highlight_close_tag = 1
+let g:vim_jsx_pretty_colorful_config = 1
 
 " vim match tag always config
 let g:mta_filetypes = {
             \'javascript.jsx': 1,
             \'javascript.tsx': 1,
+            \'typescriptreact': 1,
+            \'javascriptreact': 1,
             \'html' : 1,
             \'xhtml' : 1,
             \'xml' : 1,
@@ -215,10 +239,10 @@ let g:mta_filetypes = {
 
 " gitgutter config
 set updatetime=500
-hi GitGutterAdd ctermfg=2
-hi GitGutterChange ctermfg=3
-hi GitGutterDelete ctermfg=1 cterm=bold
-hi GitGutterChangeDelete ctermfg=1
+hi GitGutterAdd ctermfg=2 ctermbg=none
+hi GitGutterChange ctermfg=3 ctermbg=none
+hi GitGutterDelete ctermfg=1 cterm=bold ctermbg=none
+hi GitGutterChangeDelete ctermfg=1 ctermbg=none
 let g:gitgutter_sign_added = '│'
 let g:gitgutter_sign_modified = '│'
 let g:gitgutter_sign_removed =  '.'
@@ -232,7 +256,6 @@ let g:gitgutter_sign_modified_removed = '│'
 let g:SignatureMap = {'Leader' : 'm'}   " disable extra mappings
 let g:SignatureMarkTextHLDynamic = 1    " keep gitgutter highlight color
 let g:SignatureForceMarkPlacement = 1   " use :delm x to delete mark x
-let g:SignatureMarkTextHL = 'ErrorMsg'
 
 " vim-clang-format config
 let g:clang_format#command = '/usr/local/opt/llvm/bin/clang-format'
@@ -306,44 +329,52 @@ hi NeomakeWarningSign ctermfg=9 ctermbg=none
 hi NeomakeInfoSign ctermfg=5 ctermbg=none
 hi NeomakeMessageSign ctermfg=5 ctermbg=none
 
-" deoplete-clang config
-let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
-let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++14', 'objc': 'c11', 'objcpp': 'c++1z'}
-let g:deoplete#sources#clang#flags = [
-        \ '-I/usr/local/opt/boost/include',
-        \ '-I~/Documents/Cinder.git/include',
-        \ '-I~/range-v3/include',
-        \ '-I/usr/local/Cellar/glew/2.1.0/include',
-        \ '-I/usr/local/Cellar/glfw/3.2.1/include']
+command! SynAttr :call SyntaxAttr()
 
-"nnoremap <leader>x :call LanguageClient_contextMenu()<CR>
-"nnoremap <silent> gd :silent! TagImposterAnticipateJump \| call LanguageClient#textDocument_definition()<CR>
-"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" Code climate config
+nmap <silent> <leader>cC :CodeClimateAnalyzeOpenFiles<CR>
+nmap <silent> <leader>jC :call coc#config('git', {'diffRevision': 'master'}) \|
+            \ :CocCommand git.refresh<CR>
+            \ :execute('!yarn test:cov --silent $(pkg-dir "%")') \|
+            \ :setl fdm=manual \|
+            \ :execute('LcovVisible coverage/lcov.info') \|
+            \ :CocCommand git.foldUnchanged<CR>
+nmap <silent> <leader>jc :call coc#config('git', {'diffRevision': 'master'}) \|
+            \ :CocCommand git.refresh<CR>
+            \ :sleep 1 \|
+            \ :setl fdm=manual \|
+            \ :execute('LcovVisible coverage/lcov.info') \|
+            \ :CocCommand git.foldUnchanged<CR>
+nmap <silent> <leader>cf :CocCommand git.foldUnchanged<CR>
 
 " CoC config
+let g:coc_node_path = '/usr/local/bin/node'
 set hidden "if hidden is not set, TextEdit might fail.
 " mapping to jump to tag under cursor
 
 nmap <silent> gr #<Plug>(coc-references)
 nnoremap <silent> gd <C-]>
 nmap <silent> <C-]> :silent! TagImposterAnticipateJump<CR><Plug>(coc-definition)
+nmap <silent> <C-W>] :split<CR>:silent! TagImposterAnticipateJump<CR><Plug>(coc-definition)
+nmap <silent> <C-W><C-]> :split<CR>:silent! TagImposterAnticipateJump<CR><Plug>(coc-definition)
 
 nmap <silent> <leader>cy <Plug>(coc-type-definition)
 nmap <silent> <leader>ci <Plug>(coc-implementation)
 nmap <silent> <leader>cr <Plug>(coc-rename)
 vmap <leader>cf  <Plug>(coc-format-selected)
 nmap <leader>cf  <Plug>(coc-format-selected)
-nmap <leader>ca  <Plug>(coc-codeaction)
+nmap <leader>ca  <Plug>(coc-codeaction-line)
+nmap <leader>cA  <Plug>(coc-codeaction)
 nmap <leader>cx  <Plug>(coc-fix-current)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> <leader>cd <Plug>(coc-diagnostic-info)
+nnoremap <silent> K :mks! ~/sess/k_bak.vim<CR>:call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>cl :<C-u>CocList<CR>
 nnoremap <silent> <leader>cp :<C-u>CocListResume<CR>
 nnoremap <silent> <leader>cs :<C-u>CocList -I symbols<CR>
 nnoremap <silent> <leader>cj :<C-u>CocNext<CR>
 nnoremap <silent> <leader>ck :<C-u>CocPrev<CR>
 nnoremap <silent> <leader>co :<C-u>CocList outline<CR>
-nnoremap <silent> <leader>cd  :<C-u>CocList diagnostics<CR>
+nnoremap <silent> <leader>cD :<C-u>CocList diagnostics --normal<CR>
 nnoremap <leader>c?  :nmap <leader>c<CR>
 nnoremap <leader>cc :CocCommand<CR>
 
@@ -351,9 +382,26 @@ nnoremap <leader>cc :CocCommand<CR>
 nmap <silent> [C <Plug>(coc-diagnostic-prev)
 nmap <silent> ]C <Plug>(coc-diagnostic-next)
 
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 CFormat :call CocAction('format')
-command! -nargs=? CFold :call CocAction('fold', <f-args>)
+command! -nargs=? CFold :call CocAction('fold', <f-args>) " args: comment, imports or region
+command! -nargs=0 CDiag :call CocAction('diagnosticPreview')
+
+" Run jest for current project
+command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
+" Run jest for current file
+command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
+" Run jest for current test
+nnoremap <leader>jt :call CocAction('runCommand', 'jest.singleTest')<CR>
 
 function! s:show_documentation()
     if &filetype == 'vim'
@@ -371,6 +419,8 @@ augroup cocAuGroup
     " Update signature help on jump placeholder
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     autocmd CursorHoldI * sil call CocActionAsync('showSignatureHelp')
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+    autocmd FocusGained * silent CocCommand git.refresh
 augroup end
 
 " echodoc config
@@ -384,10 +434,34 @@ autocmd InsertLeave * echo ""
 " tagbar config
 let g:tagbar_iconchars = ['+', '-']
 let g:tagbar_compact = 1
-nnoremap <leader><C-i> :TagbarToggle<CR>
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
+
+nnoremap <leader><C-i> :Vista!!<CR>
 
 " vista config
-let g:vista#renderer#enable_icon=0
+"let g:vista#renderer#enable_icon=0
+let g:vista_icon_indent = ["└ ", "│ "]
+let g:vista_default_executive = 'coc'
+let g:vista_sidebar_width = 45
+let g:vista#renderer#icons = {
+      \ 'field': '',
+      \ 'fields': '',
+      \ 'enumerator': 'הּ',
+      \ 'enum': 'הּ',
+      \ 'variable': '𝑣',
+      \}
 
 " poppy config
 if dein#is_sourced('poppy.vim')
@@ -395,6 +469,9 @@ if dein#is_sourced('poppy.vim')
     let g:poppyhigh = ['Ignore']
     let g:poppy_point_enable = 1
 endif
+
+" markdown preview config
+let g:mkdp_markdown_css = '~/dotfiles/github-markdown-css/github-markdown.css'
 
 " hardtime config
 let g:hardtime_default_on = 0
@@ -406,6 +483,13 @@ let g:hardtime_ignore_buffer_patterns = ["man"]
 let g:list_of_normal_keys = ["h", "j", "k", "l"]
 let g:list_of_visual_keys = ["h", "j", "k", "l"]
 let g:list_of_insert_keys = []
+
+" blamer config
+let g:blamer_enabled = 1
+let g:blamer_show_in_visual_modes = 0
+let g:blamer_show_in_insert_modes = 0
+let g:blamer_relative_time = 1
+let g:blamer_template = '<author> <author-time> • <summary>'  " hardcoded time to inlcude space
 
 " goyo config
 function! s:goyo_enter()
@@ -436,6 +520,7 @@ let g:cpp_class_scope_highlight = 1
 
 " interestingwords config
 let g:interestingWordsTermColors = ['211', '81', '48', '141']
+let g:interestingWordsRandomiseColors = 1
 
 " SimpylFold config
 let g:SimpylFold_fold_docstring = 0
@@ -446,6 +531,8 @@ autocmd! FileType fzf,skim
 autocmd  FileType fzf,skim set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 "showmode ruler
 "let g:fzf_nvim_statusline = 0 " disable statusline overwriting
+let g:fzf_layout = { 'down': '~60%' }
+let g:fzf_preview_use_dev_icons = 1
 
 " javascript config
 autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
@@ -455,18 +542,108 @@ command! -bang -nargs=* RG
   \ call fzf#vim#grep(
   \   'rg --colors "path:fg:green" --colors "path:style:nobold" --colors "line:fg:yellow" --colors "line:style:nobold" --colors "match:fg:black" --colors "match:bg:yellow" --column --line-number --no-heading --color=always --colors "match:style:nobold" --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \           : fzf#vim#with_preview('right:50%', '?'),
   \   <bang>0)
 
-command! -bang -nargs=? -complete=dir F
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --colors "path:fg:green" --colors "path:style:nobold" --colors "line:fg:yellow" --colors "line:style:nobold" --colors "match:fg:black" --colors "match:bg:yellow" --column --line-number --no-heading --color=always --colors "match:style:nobold" --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RGG call RipgrepFzf(<q-args>, <bang>0)
+
+" Files + devicons
+function! Fzf_files_with_dev_icons(command, full)
+    let l:fzf_files_options = '--preview "scope {2..} 2>/dev/null || cat {2..} 2>/dev/null || CLICOLOR_FORCE=1 ls -G {2..} 2>/dev/null"'
+    function! s:edit_devicon_prepended_file(item)
+        let l:file_path = a:item[4:-1]
+        execute 'silent e' l:file_path
+    endfunction
+    if a:full == '1'
+        call fzf#run({
+                    \ 'source': a:command.' | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'window': 'enew' })
+    else
+        call fzf#run({
+                    \ 'source': a:command.' | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'down': '60%' })
+    endif
+endfunction
+
+function! Fzf_git_diff_files_with_dev_icons(full)
+    let l:fzf_files_options = '--ansi --preview "sh -c \"(git diff --color=always -- {3..} | sed 1,4d; scope {3..} 2>/dev/null || [[ $? -eq 1 ]] && cat {3..} 2>/dev/null)\""'
+    function! s:edit_devicon_prepended_file_diff(item)
+        echom a:item
+        let l:file_path = a:item[7:-1]
+        echom l:file_path
+        let l:first_diff_line_number = system("git diff -U0 ".l:file_path." | rg '^@@.*\+' -o | rg '[0-9]+' -o | head -1")
+        execute 'silent e' l:file_path
+        execute l:first_diff_line_number
+    endfunction
+    if a:full
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always status --short --untracked-files=all | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file_diff'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'window': 'enew' })
+    else
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always status --short --untracked-files=all | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file_diff'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'down': '60%' })
+    endif
+endfunction
+
+function! Fzf_git_diff_merge_base_with_dev_icons(full)
+    let l:fzf_files_options = '--ansi --preview "sh -c \"(git diff --color=always master...HEAD -- {2..} | sed 1,4d; scope {2..} 2>/dev/null || [[ $? -eq 1 ]] && cat {2..} 2>/dev/null)\""'
+    function! s:edit_devicon_prepended_file(item)
+        let l:file_path = a:item[4:-1]
+        execute 'silent e' l:file_path
+    endfunction
+    if a:full
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always diff master...HEAD --name-only | sed \$d | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'window': 'enew' })
+    else
+        call fzf#run({
+                    \ 'source': 'git -c color.status=always diff master...HEAD --name-only | sed \$d | devicon-lookup',
+                    \ 'sink':   function('s:edit_devicon_prepended_file'),
+                    \ 'options': '-m ' . l:fzf_files_options,
+                    \ 'down': '60%' })
+    endif
+endfunction
+
+ " Open fzf Files " Open fzf Files
+command! F :call Fzf_files_with_dev_icons($FZF_DEFAULT_COMMAND, '0')
+command! F1 :call Fzf_files_with_dev_icons($FZF_DEFAULT_COMMAND, '1')
+command! S :call Fzf_git_diff_files_with_dev_icons('0')
+command! S1 :call Fzf_git_diff_files_with_dev_icons('1')
+command! GF :call Fzf_files_with_dev_icons("git ls-files \| uniq", '0')
+command! MB :call Fzf_git_diff_merge_base_with_dev_icons('0')
+command! MB1 :call Fzf_git_diff_merge_base_with_dev_icons('1')
 
 command! B :Buffers
 command! W :Windows
 command! T :Tags
-command! S :GitFiles?
+"command! S :GitFiles?
 command! M :Marks
 command! L :Lines
+command! H :History
+command! RGB :Lines
+
+let $BAT_THEME = 'neodark'
+let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'neodark'
+let g:fzf_preview_fzf_color_option ='bg+:0,hl:3,spinner:15,info:11,prompt:7,hl+:3,pointer:6'
 
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
@@ -486,15 +663,25 @@ function MyTabLine()
             let s .= '%#TabLine#'
         endif
         " empty space
-        let s .= ' '
+        let s .= '    '
         " set the tab page number (for mouse clicks)
         let s .= '%' . (t + 1) . 'T'
         " get buffer names and statuses
         let n = ''  " temp string for buffer names while we loop and check buftype
         let buflist = tabpagebuflist(t + 1)
         let bufcounter = 0  " counter to avoid last seperator
+        let unlisted = 0
         " loop through each buffer in a tab
         for bufnr in buflist
+            if !buflisted(bufnr)
+                let unlisted += 1
+                continue
+            endif
+        endfor
+        for bufnr in buflist
+            if !buflisted(bufnr)
+                continue
+            endif
             let winnr = tabpagewinnr(t + 1)
             let ismainpage = bufcounter == winnr - 1
             if exists('*WebDevIconsGetFileTypeSymbol')  " support for vim-devicons
@@ -520,7 +707,7 @@ function MyTabLine()
                 let n .= ' +'
             endif
             " no final ' ' added...formatting looks better done later
-            if bufcounter < len(buflist) - 1
+            if bufcounter < len(buflist) - 1 - unlisted
                 let n .= ' | '
             endif
             let bufcounter += 1
@@ -528,7 +715,7 @@ function MyTabLine()
         " add buffer names
         let s .= n
         " switch to no underlining and add final space to buffer list
-        let s .= ' %#TabLineFill# '
+        let s .= '    %#TabLineFill# '
         "let s .= ' '
     endfor
     " after the last tab fill with TabLineFill and reset tab page nr
@@ -540,10 +727,25 @@ function MyTabLine()
     return s
 endfunction
 
-set tabline=%!MyTabLine()
+" vim-scrollview config
+let g:scrollview_column = 1
+let g:scrollview_winblend = 0
+hi link ScrollView PmenuSbar
+
+" vim-jsx-pretty config
+let g:vim_jsx_pretty_highlight_close_tag = 0
+let g:vim_jsx_pretty_colorful_config = 1
 
 " indent guides config
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 232
-let g:indent_blankline_extra_indent_level = -1
-let g:indentLine_fileType = ['c', 'cpp', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go']
+" let g:indent_blankline_extra_indent_level = -1 
+let g:indent_blankline_show_trailing_blankline_indent = v:false
+" let g:indent_blankline_use_treesitter = v:true
+let g:indentLine_fileType = ['c', 'cpp', 'typescriptreact', 'javascriptreact', 'typescript.tsx', 'javascript.jsx', 'javascript', 'html', 'typescript', 'java', 'arduino', 'processing', 'go', 'html.handlebars', 'scss']
+
+" treesitter
+"luafile ~/.config/nvim/treesitter.lua
+
+" numb
+:lua require('numb').setup()

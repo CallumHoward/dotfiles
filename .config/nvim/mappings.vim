@@ -37,12 +37,26 @@ xnoremap <leader>t :Twrite<CR>
 nnoremap <leader><CR> V:Twrite<CR>:Tmux send-keys -t bottom Enter<CR>
 xnoremap <CR> :Twrite!<CR>:Tmux send-keys -t bottom Enter<CR>
 
-" git mappings
-nnoremap <leader>a :GitGutterStageHunk<CR>
-nnoremap <leader>gu :GitGutterUndoHunk<CR>
-nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
-nnoremap <leader>ggm :let g:gitgutter_diff_base='master'<CR>
-nnoremap <leader>ggh :let g:gitgutter_diff_base=''<CR>
+" git mappings (maintain trailing spaces)
+" nnoremap <leader>a :GitGutterStageHunk<CR>
+" nnoremap <leader>gu :GitGutterUndoHunk<CR>
+" nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
+" nnoremap <leader>ggm :let g:gitgutter_diff_base='master'<CR>
+" nnoremap <leader>ggh :let g:gitgutter_diff_base=''<CR>
+nmap [c <Plug>(coc-git-prevchunk)
+nmap ]c <Plug>(coc-git-nextchunk)
+nmap <leader>hp <Plug>(coc-git-chunkinfo)
+nmap <leader>a :CocCommand git.chunkStage<CR>
+nmap <leader>gu :CocCommand git.chunkUndo<CR>
+" create text object for git chunks
+omap ic <Plug>(coc-git-chunk-inner)
+xmap ic <Plug>(coc-git-chunk-inner)
+omap ac <Plug>(coc-git-chunk-outer)
+xmap ac <Plug>(coc-git-chunk-outer)
+nnoremap <leader>gg :call coc#config('git', {'diffRevision': 'HEAD~'})<Left><Left><Left>
+nnoremap <leader>ggm :call coc#config('git', {'diffRevision': 'master'})<CR>:CocCommand git.refresh<CR>
+nnoremap <leader>ggh :call coc#config('git', {'diffRevision': ''})<CR>:CocCommand git.refresh<CR>
+nnoremap <leader>gf zE:CocCommand git.foldUnchanged<CR>
 nnoremap <leader>gs :Gina status<CR>
 nnoremap <leader>gc :Gina commit<CR>
 nnoremap <leader>gp :Gina push<CR>
@@ -53,8 +67,16 @@ nnoremap <silent> <leader>gx V:Gina browse :<CR>
 xnoremap <silent> <leader>gx :Gina browse :<CR>
 nnoremap <silent> <leader>gb :GitMessenger<CR>
 xnoremap <silent> <leader>gb :GitMessenger<CR>
+nnoremap <silent> g/ /^[<=>]\{7}<CR>
+
+nnoremap <leader>[s :call coc#config('cSpell.enabled', v:false)<CR>
+nnoremap <leader>]s :call coc#config('cSpell.enabled', v:true)<CR>
 
 nnoremap <leader>b :echo "did you mean \\gb?"<CR>
+
+nnoremap <silent><C-W>c :ScrollViewDisable<CR><C-W>c:ScrollViewEnable<CR>
+
+nmap cst #V%o\sa<BS>
 
 " move tabs
 nnoremap <silent>g> :tabm +1<CR>
@@ -80,7 +102,18 @@ nnoremap <silent> # :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>'
 "nnoremap <silent> * :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
 nnoremap <silent> g# :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
 nnoremap <silent> g* :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
-nnoremap <silent> <Esc> :noh<CR>:call UncolorAllWords()<CR>
+nnoremap <silent> <Esc> :noh<CR>:call UncolorAllWords()<CR>:GitMessengerClose<CR>
+nnoremap <silent> <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? ":let save_cursor=getcurpos()\|let @/ = '\\<'.expand('<cword>').'\\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR><2-LeftMouse>" : 'zo'
+
+" makes * and # work on visual mode too.
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>:setl hlsearch<CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>:setl hlsearch<CR>
 
 nnoremap <silent> * :call InterestingWords('n')<CR>
 vnoremap <silent> * :call InterestingWords('v')<CR>
@@ -111,8 +144,8 @@ nnoremap <silent> ]B :blast<CR>
 " unimpaired tab mappings
 nnoremap <silent>]t gt
 nnoremap <silent>[t gT
-nnoremap <silent>]T :tabfirst<CR>
-nnoremap <silent>[T :tablast<CR>
+nnoremap <silent>[T :tabfirst<CR>
+nnoremap <silent>]T :tablast<CR>
 
 " tab navigation mappings
 nnoremap <silent><C-W>1 :tabn 1<CR>
@@ -191,8 +224,13 @@ xnoremap <leader>gd :g//d<CR>
 "xnoremap <leader>c ?//.*\zs
 
 " convert search pattern to match whole word only
-nnoremap <leader>w /\<<C-R>/\><CR><C-O>
-"TODO add the inverse
+nnoremap <silent> <expr> <leader>w @/ =~# '^\\<.*\\>$'
+            \ ? ':let @/=substitute(@/, "\\\\<\\\|\\\\>", "", "g")<CR>:echo "/".@/<CR>'
+            \ : ':let @/="\\<<C-R>/\\>"<CR>:echo "/".@/<CR>'
+
+" save temp session
+nnoremap <leader>]] :ScrollViewDisable <bar> mks! ~/sess/temp_session.vim <bar> ScrollViewEnable<CR>
+nnoremap <leader>[[ :source ~/sess/temp_session.vim<CR>
 
 augroup TerminalConfig
     au!
@@ -218,33 +256,21 @@ tnoremap <C-W><C-J> <C-\><C-N><C-W><C-J>
 tnoremap <C-W><C-K> <C-\><C-N><C-W><C-K>
 tnoremap <C-W><C-L> <C-\><C-N><C-W><C-L>
 
-let g:netrw_is_open=0
-function! ToggleNetrw()
-    if g:netrw_is_open
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:netrw_is_open=0
-    else
-        let g:netrw_is_open=1
-        silent Lexplore
-    endif
-endfunction
+nnoremap <silent> <Leader>\ :CocCommand explorer --toggle --sources=buffer+,file+<CR>
 
-nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
+"nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
+nnoremap <silent> <Leader>\ :CocCommand explorer --sources buffer+,file+ --width=45<CR>
 cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.')<CR>
-cabbrev cdg Gina cd
+command! Cdg exec 'cd' fnameescape(fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ') . ';'), ':h'))
+cabbrev cdg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Cdg' : 'cdg')<CR>
 
 " grep for word under cursor
-nmap <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
-"nmap <Leader>* #:sil! gr! "\b<C-R><C-W>\b"<CR>:cw<CR>:redr!<CR>
+nmap <silent> <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cope<CR><C-W>J:sil redr!<CR>
+xmap <silent> <Leader># y/<C-R>"<CR>:sil! gr! '<C-R>"'<CR>:cope<CR><C-W>J:sil redr!<CR>
+"nmap <silent> <Leader>* #ccl<CR>:sil! gr! "\b<C-R><C-W>\b"<CR>:cope<CR><C-W>J:sil redr!<CR>
 
 " open quickfix window for the last search
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:cope<CR>
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:cope<CR><C-W>J
 
 " fuzzy command mappings
 cabbrev vf <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert sf' : 'vf')<CR>
@@ -253,6 +279,14 @@ cabbrev ef <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'fin' : 'ef')<CR>
 
 " local markings mapping
 nnoremap <leader>m :marks abcdefghijklmnopqrstuvwxyz<CR>:norm `
+nnoremap <leader>M :marks ABCDEFGHIJKLMNOPQRSTUVWXYZ<CR>:norm `
+
+" visual at
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 " wrap git grep
 function! Ggrep(arg)
@@ -295,6 +329,8 @@ endif
 function! s:CloseBracket()
     let line = getline('.')
     if &ft =~# 'c\|cpp\|rust\|go\|python' && line =~# '^\s*\(struct\|class\|enum\) '
+        return "{\<Enter>};\<Esc>O"
+    elseif &ft =~# 'javascript\|react\|javascriptreact\|typescript\|typescriptreact' && line =~# '^\s*\(var\|const\|let\) '
         return "{\<Enter>};\<Esc>O"
     elseif searchpair('(', '', ')', 'bmn', '', line('.'))
         " Probably inside a function call. Close it off.

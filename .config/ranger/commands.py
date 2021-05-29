@@ -1871,7 +1871,6 @@ class fasd(Command):
 class fzfcd(Command):
     def execute(self):
         from subprocess import PIPE
-        #command="find -L \( -path '*.wine-pipelight' -o -path '*.ivy2*' -o -path '*.texlive*' -o -pa th '*.git' -o -path '*.metadata' -o -path '*_notes' \) -prune -o -type d -print 2>/dev/null | fzf"
         command="walker 2>/dev/null | fzf --preview='ls {}'"
         fzf = self.fm.execute_command(command, stdout=PIPE)
         stdout, stderr = fzf.communicate()

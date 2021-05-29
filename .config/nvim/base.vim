@@ -64,7 +64,7 @@ autocmd CursorHold * set noruler
 
 " diff config
 set diffopt+=iwhite " ignore whitespace
-set diffopt+=algorithm:patience " use patience diff algorithm
+set diffopt+=algorithm:patience,indent-heuristic,internal " use patience diff algorithm
 
 " disable foldcolumn for diffs
 autocmd FilterWritePre * if &diff | set fdc=0 | endif
@@ -72,10 +72,30 @@ autocmd FilterWritePre * if &diff | set fdc=0 | endif
 " disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+function! GetTitle() abort
+    if tabpagenr('$') > 1
+        return fnamemodify(getcwd(), ':t')
+    " elseif filereadable(expand('%')) == 0
+    "     return '[No Name]'
+    else
+        return expand('%:t')
+    endif
+endfunction
+
+function! SetTmuxTitle() abort
+    if !$DISABLE_AUTO_TITLE
+        let title = GetTitle()
+        if title != ""
+            call system('tmux rename-window " ' . title . '"')
+        endif
+    endif
+endfunction
+
+nnoremap <leader>ct :let $DISABLE_AUTO_TITLE=1
+
 " set title for tmux
 if exists('$TMUX')
-    "autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
-    autocmd WinEnter,BufWinEnter,FocusGained * call system('tmux rename-window " ' . expand('%:t') . '"')
+    autocmd WinEnter,BufWinEnter,FocusGained * call SetTmuxTitle()
 endif
 
 if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
@@ -138,6 +158,8 @@ autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 
 " jump to the previous cursor position in the file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " manpager
 hi link manFooter Title

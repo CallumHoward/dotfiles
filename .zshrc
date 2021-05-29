@@ -39,8 +39,10 @@ plugins=( \
     #vi-mode \
     zsh-prompt-benchmark \
     zsh-fzf-bindings \
-    proxy-title \
+    zsh-proxy-title \
     pip \
+    npm \
+    yarn \
     fasd \
     zsh-zbell \
     #zsh-syntax-highlighting \
@@ -81,11 +83,6 @@ setopt complete_aliases
 
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
-
-# git info for prompt
-#autoload -Uz vcs_info
-#zstyle ':vcs_info:*' enable git #svn
-#add-zsh-hook precmd vcs_info
 
 # zsh-autosuggestions config
 ZSH_AUTOSUGGEST_USE_ASYNC=1
