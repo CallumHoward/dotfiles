@@ -1,4 +1,4 @@
-# vim: set ft=sh
+# vim: ft=sh
 
 # allow ctrl-s for forward incremental search in interactive terminals
 # found that this messes with p10k instant prompt
