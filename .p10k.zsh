@@ -43,7 +43,7 @@
       package
       telepresence_namespace
       pyenv
-      nvm
+      node_version
       vcs                     # git status
       # =========================[ Line #2 ]=========================
       newline
@@ -634,12 +634,12 @@
 
   ##############################[ node_version: node.js version ]###############################
   # Node version color.
-  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=9
+  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=5
   # Show node version only when in a directory tree containing package.json.
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  typeset -g POWERLEVEL9K_NODE_VERSION_PREFIX='%fwith '
+  typeset -g POWERLEVEL9K_NODE_VERSION_PREFIX='%fusing %5Fn'
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.

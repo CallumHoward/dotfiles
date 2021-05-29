@@ -151,6 +151,7 @@ alias sl="git sl"
 alias rl="git rl"
 alias skgg="sk -i -c 'git grep -i -n --color=always \"{}\"'"
 alias gu="gitup"
+alias nvm="fnm"
 #alias br="browse" #conflict
 
 alias snatch="zou"
