@@ -1,4 +1,4 @@
-# vim: set ft=zsh
+# vim: ft=zsh
 
 # Zsh suffix aliases
 local _text_fts=(log conf md yaml inl asc txt TXT tex)
