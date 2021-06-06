@@ -310,6 +310,10 @@ if command -v xclip > /dev/null 2>&1; then
     alias pbpaste='xclip -selection clipboard -o'
 fi
 
+if [[ "$TERM" == "xterm-kitty" ]]; then
+    alias ssh="kitty +kitten ssh"
+fi
+
 if command -v browsh > /dev/null 2>&1; then
     alias browse="browsh --startup-url"
 elif command -v w3m > /dev/null 2>&1; then
