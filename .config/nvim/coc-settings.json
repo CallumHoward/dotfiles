@@ -76,6 +76,8 @@
   "importCost.showCalculatingDecoration": true,
   "tsserver.npm": "/usr/local/bin/npm",
 
+  "Lua.diagnostics.globals": ["vim"],
+
   "languageserver": {
     "ccls": {
       "command": "ccls",
