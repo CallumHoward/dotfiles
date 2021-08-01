@@ -55,6 +55,10 @@ echo "Finished installing packages"
 
 git update-index --skip-worktree .local_rc
 
+#TODO install walker
+#TODO install dein
+#TODO install neovim plugins and helpers
+
 echo -n "Install ranger-devicons [Y/n]? "
 read answer
 if echo "$answer" | grep -viq "^n" ; then
