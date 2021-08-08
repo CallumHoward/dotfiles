@@ -54,6 +54,7 @@ else
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=12'
 fi
 
+# di=\x1b[38;2;255;200;100m\x1b[0m:\
 export LF_ICONS="\
 di=:\
 fi=:\
