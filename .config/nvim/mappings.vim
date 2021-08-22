@@ -6,7 +6,16 @@ nnoremap ' `
 nnoremap ` '
 
 " toggle relative line numbers
-nnoremap <silent><C-Space> :setl rnu!<CR>
+function! ToggleLineNumber()
+  if g:numbertoggle != 1
+    let g:numbertoggle = 1
+  else
+    let g:numbertoggle = 0
+  endif
+  setl rnu!
+endfunction
+
+nnoremap <silent><C-Space> :call ToggleLineNumber()<CR>
 
 " select last pasted
 nnoremap gV `[v`]
