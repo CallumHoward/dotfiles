@@ -1,22 +1,22 @@
 -- LspInstall setup
 local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
+  require("lspinstall").setup()
+  local servers = require("lspinstall").installed_servers()
   for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
+    require("lspconfig")[server].setup({})
   end
 end
 
 setup_servers()
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
+require("lspinstall").post_install_hook = function()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
 -- Lsp configuration
-DATA_PATH = vim.fn.stdpath "data"
+DATA_PATH = vim.fn.stdpath("data")
 
 local signs = {
   { name = "LspDiagnosticsSignError", text = "" },
@@ -40,15 +40,17 @@ vim.cmd("nnoremap <silent> <C-W>] :sp<CR><cmd>lua vim.lsp.buf.implementation()<C
 vim.cmd("nnoremap <silent> <C-W><C-]> :vs<CR><cmd>lua vim.lsp.buf.implementation()<CR>")
 vim.cmd("nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>")
 vim.cmd("nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>")
-vim.cmd('nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>')
+vim.cmd("nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>")
 vim.cmd("nnoremap <silent> [C <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
 vim.cmd("nnoremap <silent> ]C <cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
 vim.cmd("nnoremap <silent> cr <cmd>lua vim.lsp.buf.rename()<CR>")
-vim.cmd("nnoremap <silent> cd <cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>")
+vim.cmd(
+  "nnoremap <silent> cd <cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>"
+)
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 vim.cmd('cabbrev T <c-r>=(getcmdtype()==":" && getcmdpos()==1 ? "Telescope" : "T")<CR>')
 
-require('vim.lsp.protocol').CompletionItemKind = {
+require("vim.lsp.protocol").CompletionItemKind = {
   "   (Text)",
   "   (Method)",
   "   (Function)",
