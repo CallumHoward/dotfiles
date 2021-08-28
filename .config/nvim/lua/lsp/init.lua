@@ -44,9 +44,7 @@ vim.cmd("nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>")
 vim.cmd("nnoremap <silent> [C <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
 vim.cmd("nnoremap <silent> ]C <cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
 vim.cmd("nnoremap <silent> cr <cmd>lua vim.lsp.buf.rename()<CR>")
-vim.cmd(
-  "nnoremap <silent> cd <cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false, border = 'single' })<CR>"
-)
+vim.cmd("nnoremap <silent> cd <cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false })<CR>")
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 vim.cmd('cabbrev T <c-r>=(getcmdtype()==":" && getcmdpos()==1 ? "Telescope" : "T")<CR>')
 
