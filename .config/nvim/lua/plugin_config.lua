@@ -148,8 +148,8 @@ local prettier_config = {
   -- prettier
   function()
     return {
-      exe = "prettier_d_slim",
-      args = { "--stdin", "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+      exe = "prettier",
+      args = { "--stdin", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--arrow-parens=always" },
       stdin = true,
     }
   end,
@@ -186,11 +186,11 @@ require("formatter").setup({
 
 vim.api.nvim_exec(
   [[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.lua FormatWrite
-augroup END
-]],
+    augroup FormatAutogroup
+      autocmd!
+      autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.vue,*.html,*.css,*.scss,*.less,*.json,*.md,*.lua silent FormatWrite
+    augroup END
+  ]],
   true
 )
 
