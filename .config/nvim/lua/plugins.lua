@@ -42,6 +42,7 @@ return require("packer").startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
   })
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
   use("kevinhwang91/nvim-bqf")
 
   -- Language features

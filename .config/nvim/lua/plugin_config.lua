@@ -107,7 +107,7 @@ require("telescope").setup({
     borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     sorting_strategy = "ascending",
     scroll_strategy = nil,
-    -- shorten_path = true,
+    path_display = { shorten = 5 },
     winblend = 9,
     file_ignore_patterns = { "messages.json$", "%.html$" },
     file_sorter = sorters.get_fzy_sorter,
@@ -118,6 +118,7 @@ require("telescope").setup({
     },
   },
 })
+require("telescope").load_extension("fzf")
 
 -- Lsp Signature
 require("lsp_signature").setup({
