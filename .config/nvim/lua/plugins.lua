@@ -26,7 +26,6 @@ return require("packer").startup(function(use)
   use({ "maaslalani/nordbuddy", "tjdevries/colorbuddy.nvim" })
 
   -- Cosmetic features
-  use("jeffkreeftmeijer/vim-numbertoggle")
   use("kyazdani42/nvim-web-devicons")
   use("joeytwiddle/sexy_scroller.vim")
   use("dstein64/nvim-scrollview")
