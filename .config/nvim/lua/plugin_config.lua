@@ -194,17 +194,6 @@ vim.api.nvim_exec(
   true
 )
 
--- Which-key
--- require('which-key').setup {
---   triggers_blacklist = {
---     i = { '{' }
---   }
--- }
-
--- Formatting
---require('lv-utils')
-vim.cmd('command! LspFormatting lua require("lv-utils").formatting()')
-
 -- Testing
 vim.cmd('let test#javascript#jest#options = "--color=always"')
 
