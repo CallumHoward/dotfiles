@@ -24,6 +24,11 @@ vim.g.indent_blankline_context_patterns = {
   "while",
   "for",
   "arguments",
+  "switch_statement",
+  "switch_case",
+  "switch_default",
+  "jsx_element",
+  "parenthesized_expression",
 }
 vim.g.indent_blankline_context_highlight_list = { "NonText" }
 vim.g.indent_blankline_buftype_exclude = { "nofile", "terminal" }
