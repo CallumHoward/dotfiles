@@ -46,6 +46,7 @@ return require("packer").startup(function(use)
 
   -- Language features
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  use("nvim-treesitter/playground")
 
   -- LSP features
   use("neovim/nvim-lspconfig")
