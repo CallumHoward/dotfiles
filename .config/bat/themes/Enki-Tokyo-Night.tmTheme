@@ -252,7 +252,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#f7768e</string>
+				<string>#bb9af7</string>
 			</dict>
 		</dict>
 		<dict>
@@ -481,11 +481,11 @@
 			<key>name</key>
 			<string>Class, Support, DOM, etc</string>
 			<key>scope</key>
-			<string>support.class, support.type, variable.other.readwrite.alias, support.orther.namespace.use.php, meta.use.php, support.other.namespace.php, support.type.sys-types, support.variable.dom, support.constant.math, support.type.object.module, support.constant.json, entity.name.namespace, meta.import.qualifier, entity.name.class</string>
+			<string>support.class, support.type, support.other.namespace.use.php, meta.use.php, support.other.namespace.php, support.type.sys-types, support.variable.dom, support.constant.math, support.type.object.module, support.constant.json, entity.name.namespace, meta.import.qualifier, entity.name.class</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#0db9d7</string>
+				<string>#FF0000</string>
 			</dict>
 		</dict>
 		<dict>
