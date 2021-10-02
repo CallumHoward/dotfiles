@@ -4,6 +4,7 @@ require("base")
 require("mappings")
 require("lsp")
 require("lsp.lua-ls")
+require("lsp.typescript-ls")
 
 vim.cmd("source ~/.config/nvim/mappings.vim")
 vim.cmd("source ~/.config/nvim/extra.vim")

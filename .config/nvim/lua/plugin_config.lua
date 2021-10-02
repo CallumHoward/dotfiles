@@ -157,6 +157,23 @@ require("telescope").setup({
 })
 require("telescope").load_extension("fzf")
 
+-- null-ls config for nvim-lsp-ts-utils
+local null_ls = require("null-ls")
+local sources = {
+  -- Handled in typescript-ls config
+  -- null_ls.builtins.formatting.prettier,
+  -- null_ls.builtins.formatting.eslint_d,
+  null_ls.builtins.diagnostics.write_good,
+  -- null_ls.builtins.code_actions.gitsigns,
+  null_ls.builtins.diagnostics.codespell,
+  null_ls.builtins.diagnostics.shellcheck,
+}
+null_ls.config({
+  debug = false,
+  sources = sources,
+})
+require("lspconfig")["null-ls"].setup({})
+
 -- Lsp Signature
 require("lsp_signature").setup({
   bind = true,
@@ -222,16 +239,6 @@ require("formatter").setup({
     },
   },
 })
-
--- vim.api.nvim_exec(
---   [[
---     augroup FormatAutogroup
---       autocmd!
---       autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.vue,*.html,*.css,*.scss,*.less,*.json,*.md,*.lua silent FormatWrite
---     augroup END
---   ]],
---   true
--- )
 
 -- Testing
 vim.cmd('let test#javascript#jest#options = "--color=always"')
