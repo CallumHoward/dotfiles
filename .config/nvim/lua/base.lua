@@ -43,6 +43,9 @@ vim.o.splitbelow = true -- Horizontal splits will automatically be below
 
 vim.cmd("set inccommand=split") -- Make substitution work in realtime
 
+vim.o.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic"
+vim.o.fillchars = "diff:╱"
+
 vim.cmd("set iskeyword+=-") -- treat dash separated words as a word text object"
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
 
