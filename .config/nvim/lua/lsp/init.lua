@@ -20,7 +20,7 @@ DATA_PATH = vim.fn.stdpath("data")
 
 local signs = {
   { name = "LspDiagnosticsSignError", text = "" },
-  { name = "LspDiagnosticsSignWarning", text = "" },
+  { name = "LspDiagnosticsSignWarning", text = "" },
   { name = "LspDiagnosticsSignHint", text = "" },
   { name = "LspDiagnosticsSignInformation", text = "" },
 }
