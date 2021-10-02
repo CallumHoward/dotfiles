@@ -49,13 +49,32 @@ vim.cmd("cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \\| Rang
 
 -- NvimTree
 vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_follow = 1
 vim.g.nvim_tree_indent_markers = 1
-vim.g.nvim_tree_disable_netrw = 0
 vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_lsp_diagnostics = 1
 vim.g.nvim_tree_highlight_opened_files = 3
-vim.cmd("let g:nvim_tree_show_icons = { 'git': 0, 'folders': 1, 'files': 1 }")
+vim.g.nvim_tree_show_icons = {
+  git = 0,
+  folders = 1,
+  files = 1,
+  folder_arrows = 0,
+}
+vim.g.nvim_tree_icons = {
+  default = "",
+  lsp = {
+    error = "",
+    warning = "",
+    hint = "",
+    info = "",
+  },
+}
+require("nvim-tree").setup({
+  update_focused_file = {
+    enable = true,
+  },
+  lsp_diagnostics = true,
+  tree_follow = true,
+  disable_netrw = true,
+})
 
 -- Completion
 require("compe_config")
