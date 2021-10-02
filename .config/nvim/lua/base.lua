@@ -79,6 +79,8 @@ augroup END
   true
 )
 
+vim.cmd([[ au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Search", timeout=200} ]])
+
 require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
   highlight = {
