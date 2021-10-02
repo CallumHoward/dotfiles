@@ -102,8 +102,8 @@ nnoremap <silent> [L :lfirst<CR>
 nnoremap <silent> ]L :llast<CR>
 
 " unimpaired buffer mappings
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [b :BufferPrevious<CR>
+nnoremap <silent> ]b :BufferNext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
@@ -130,8 +130,10 @@ nnoremap <silent><C-W><C-F> <C-W><C-V>gF
 nmap <silent><C-W><C-]> <C-W><C-V><C-]>
 
 " move tabs
-nnoremap <silent>g> :tabm +1<CR>
-nnoremap <silent>g< :tabm -1<CR>
+" nnoremap <silent>g> :tabm +1<CR>
+" nnoremap <silent>g< :tabm -1<CR>
+nnoremap <silent>g> :BufferMoveNext<CR>
+nnoremap <silent>g< :BufferMovePrevious<CR>
 
 " accordion expand traversal of folds
 nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
