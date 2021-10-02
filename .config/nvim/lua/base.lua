@@ -36,7 +36,7 @@ vim.cmd("set smartcase") -- don't ignore case if capital is used
 vim.o.undofile = true
 vim.cmd("set wildmode=longest,full")
 vim.cmd("set wildignorecase")
-vim.cmd("set wildoptions=pum,tagfile")
+-- vim.cmd("set wildoptions=pum,tagfile")
 
 vim.o.splitright = true -- Vertical splits will automatically be to the right
 vim.o.splitbelow = true -- Horizontal splits will automatically be below

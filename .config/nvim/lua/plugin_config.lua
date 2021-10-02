@@ -246,3 +246,11 @@ vim.cmd('let test#javascript#jest#options = "--color=always"')
 -- vCooler config
 vim.cmd("let g:vcoolor_disable_mappings = 1")
 vim.cmd('let g:vcoolor_map = "<leader>jc"')
+
+-- Wilder.nvim config
+vim.cmd(
+  [[ call wilder#set_option('renderer', wilder#popupmenu_renderer({ 'highlighter': wilder#basic_highlighter() })) ]]
+)
+vim.cmd(
+  [[ call wilder#set_option('renderer', wilder#popupmenu_renderer({ 'highlighter': wilder#basic_highlighter(), 'left': [' ', wilder#popupmenu_devicons()], 'right': [' ', wilder#popupmenu_scrollbar()]})) ]]
+)

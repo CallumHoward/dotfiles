@@ -72,6 +72,7 @@ return require("packer").startup(function(use)
   use("hrsh7th/vim-vsnip")
   use("rafamadriz/friendly-snippets")
   use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = { "jose-elias-alvarez/null-ls.nvim" } })
+  use("gelguy/wilder.nvim")
 
   -- Wrap external tools
   use({ "francoiscabrol/ranger.vim", requires = { "rbgrouleff/bclose.vim" } })
