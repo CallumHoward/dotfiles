@@ -223,15 +223,15 @@ require("formatter").setup({
   },
 })
 
-vim.api.nvim_exec(
-  [[
-    augroup FormatAutogroup
-      autocmd!
-      autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.vue,*.html,*.css,*.scss,*.less,*.json,*.md,*.lua silent FormatWrite
-    augroup END
-  ]],
-  true
-)
+-- vim.api.nvim_exec(
+--   [[
+--     augroup FormatAutogroup
+--       autocmd!
+--       autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx,*.vue,*.html,*.css,*.scss,*.less,*.json,*.md,*.lua silent FormatWrite
+--     augroup END
+--   ]],
+--   true
+-- )
 
 -- Testing
 vim.cmd('let test#javascript#jest#options = "--color=always"')
