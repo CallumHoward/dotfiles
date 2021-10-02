@@ -70,12 +70,12 @@ vim.cmd("autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatopt
 vim.cmd("let g:numbertoggle=0")
 vim.api.nvim_exec(
   [[
-augroup NumberToggleAutogroup
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && g:numbertoggle != 1 && mode() != "i" | set rnu | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &nu && g:numbertoggle != 1 | set nornu | endif
-augroup END
-]],
+    augroup NumberToggleAutogroup
+      autocmd!
+      autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && g:numbertoggle != 1 && mode() != "i" | set rnu | endif
+      autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &nu && g:numbertoggle != 1 | set nornu | endif
+    augroup END
+  ]],
   true
 )
 
