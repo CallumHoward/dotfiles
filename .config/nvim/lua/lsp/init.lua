@@ -29,25 +29,6 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
 end
 
-vim.cmd("nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>")
-vim.cmd("nnoremap <silent> <C-W>d :sp<CR><cmd>lua vim.lsp.buf.definition()<CR>")
-vim.cmd("nnoremap <silent> <C-W><C-D> :vs<CR><cmd>lua vim.lsp.buf.definition()<CR>")
-vim.cmd("nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>")
-vim.cmd("nnoremap <silent> <C-W>D :sp<CR><cmd>lua vim.lsp.buf.declaration()<CR>")
-vim.cmd("nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>:cope<CR><C-W>J")
-vim.cmd("nnoremap <silent> <C-]> <cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.cmd("nnoremap <silent> <C-W>] :sp<CR><cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.cmd("nnoremap <silent> <C-W><C-]> :vs<CR><cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.cmd("nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<CR>")
-vim.cmd("nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>")
-vim.cmd("nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>")
-vim.cmd("nnoremap <silent> [C <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
-vim.cmd("nnoremap <silent> ]C <cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
-vim.cmd("nnoremap <silent> cr <cmd>lua vim.lsp.buf.rename()<CR>")
-vim.cmd("nnoremap <silent> cd <cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false })<CR>")
-vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
-vim.cmd('cabbrev T <c-r>=(getcmdtype()==":" && getcmdpos()==1 ? "Telescope" : "T")<CR>')
-
 require("vim.lsp.protocol").CompletionItemKind = {
   "   (Text)",
   "   (Method)",
