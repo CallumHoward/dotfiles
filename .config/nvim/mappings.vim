@@ -48,11 +48,6 @@ xnoremap <CR> :Twrite!<CR>:Tmux send-keys -t bottom Enter<CR>
 
 nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
-nnoremap <leader>[s :call coc#config('cSpell.enabled', v:false)<CR>
-nnoremap <leader>]s :call coc#config('cSpell.enabled', v:true)<CR>
-
-nnoremap <leader>b :echo "did you mean \\gb?"<CR>
-
 nnoremap <silent><C-W>c :ScrollViewDisable<CR><C-W>c:ScrollViewEnable<CR>
 
 nmap cst #V%o\sa<BS>
@@ -60,12 +55,6 @@ nmap cst #V%o\sa<BS>
 " move tabs
 nnoremap <silent>g> :tabm +1<CR>
 nnoremap <silent>g< :tabm -1<CR>
-
-" xcode mappings
-"nnoremap <silent> <leader>r :wa <bar> silent exec "!xcoderun.sh ".getcwd()."/xcode/ ".fnamemodify(getcwd(), ':t').".xcodeproj &" <bar> redraw!<CR>
-"nnoremap <silent> <leader>x :wa <bar> silent exec "!xcodeopen.sh ".getcwd()."/xcode/ ".fnamemodify(getcwd(), ':t').".xcodeproj ".line('.')." ".@%." &" <bar> redraw!<CR>
-nnoremap <silent> <leader>r :wa <bar> silent exec "!xcoderun.sh ".getcwd()."/xcode/ AudioClassifier.xcodeproj &" <bar> redraw!<CR>
-nnoremap <silent> <leader>x :wa <bar> silent exec "!xcodeopen.sh ".getcwd()."/xcode/ AudioClassifier.xcodeproj ".line('.')." ".@%." &" <bar> redraw!<CR>
 
 " dot command works on ranges
 xnoremap . :normal .<CR>
@@ -93,12 +82,6 @@ function! s:VSetSearch(cmdtype)
 endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>:setl hlsearch<CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>:setl hlsearch<CR>
-
-nnoremap <silent> * :call InterestingWords('n')<CR>
-vnoremap <silent> * :call InterestingWords('v')<CR>
-vnoremap <silent> # :call InterestingWords('v')<CR>
-nnoremap <silent> n :call WordNavigation('forward')<CR>
-nnoremap <silent> N :call WordNavigation('backward')<CR>
 
 " unimpaired quickfix mappings
 nnoremap <silent> <leader>q :cw<CR><C-W>J
