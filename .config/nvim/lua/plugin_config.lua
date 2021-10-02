@@ -98,6 +98,7 @@ require("gitsigns").setup({
     topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
   },
+  preview_config = { border = "none" },
   current_line_blame = true,
   current_line_blame_formatter_opts = { relative_time = true },
   current_line_blame_formatter = function(name, blame_info, opts)
@@ -107,7 +108,7 @@ require("gitsigns").setup({
 
     local text
     if blame_info.author == "Not Committed Yet" then
-      text = "You, a while ago • Uncommitted changes"
+      text = "    You, a while ago • Uncommitted changes"
     else
       local date_time
 
@@ -123,6 +124,14 @@ require("gitsigns").setup({
     return { { " " .. text, "GitSignsCurrentLineBlame" } }
   end,
 })
+vim.api.nvim_set_keymap("n", "<leader>ggm", "<cmd>lua require('gitsigns').change_base('master', true)<CR>", map_opts)
+vim.api.nvim_set_keymap("n", "<leader>ggh", "<cmd>lua require('gitsigns').change_base('HEAD', true)<CR>", map_opts)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>gg",
+  "<cmd>lua require('gitsigns').change_base('HEAD~', true)<Left><Left><Left><Left><Left><Left><Left><Left>",
+  map_opts
+)
 
 -- Telescope
 local actions = require("telescope.actions")
