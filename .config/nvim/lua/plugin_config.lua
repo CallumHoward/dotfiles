@@ -174,6 +174,7 @@ vim.fn.sign_define("LightBulbSign", {
   texthl = "LspDiagnosticsDefaultWarning",
   linehl = "",
   numhl = "LspDiagnosticsDefaultWarning",
+  priorioty = 12,
 })
 
 -- Trouble
