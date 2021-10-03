@@ -302,8 +302,8 @@ command! MB1 :MB
 
 command! F :Telescope fd
 command! F1 :Telescope fd
-command! S :lua require('telescope_diff').my_git_status()<CR>
-command! S1 :lua require('telescope_diff').my_git_status()<CR>
+command! S :Telescope git_status
+command! S1 :Telescope git_status
 command! GF :Telescope git_files
 command! B :Telescope buffers
 command! M :Telescope marks
@@ -323,10 +323,6 @@ command! P :FormatWrite
 
 " Lcov
 command! C :set fdm=manual | LcovVisible coverage/lcov.info
-
-nnoremap <silent> <Leader>gla <cmd>lua require('telescope_diff').my_git_commits()<CR>
-nnoremap <silent> <Leader>glc <cmd>lua require('telescope_diff').my_git_bcommits()<CR>
-nnoremap <silent> <Leader>gs <cmd>lua require('telescope_diff').my_git_status()<CR>
 
 nnoremap <silent> <Leader><C-W>c <cmd>BufferClose<CR>
 nnoremap <silent> <Leader><C-W>o <cmd>BufferCloseAllButCurrent<CR>
