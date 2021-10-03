@@ -296,3 +296,38 @@ endfunction
 " don't close split when deleting a buffer
 command Bd bp\|bd #
 
+" Git
+command! -nargs=? -bar MB call setqflist(map(systemlist("git diff master...HEAD --pretty='' --name-only <args>"), '{"filename": v:val, "lnum": 1}'))<Bar>:Telescope quickfix
+command! MB1 :MB
+
+command! F :Telescope fd
+command! F1 :Telescope fd
+command! S :lua require('telescope_diff').my_git_status()<CR>
+command! S1 :lua require('telescope_diff').my_git_status()<CR>
+command! GF :Telescope git_files
+command! B :Telescope buffers
+command! M :Telescope marks
+command! H :Telescope oldfiles
+command! L :Telescope current_buffer_fuzzy_find
+command! QF :Telescope quickfix
+command! WS :Telescope lsp_dynamic_workspace_symbols
+command! RG :Telescope grep_string
+command! RGG :Telescope live_grep
+command! RGB :Telescope live_grep grep_open_files=true
+nnoremap <leader>: :Telescope commands
+cabbrev T <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Telescope' : 'T')<CR>
+
+" Prettier
+" command! P :!prettier --write "%"
+command! P :FormatWrite
+
+" Lcov
+command! C :set fdm=manual | LcovVisible coverage/lcov.info
+
+nnoremap <silent> <Leader>gla <cmd>lua require('telescope_diff').my_git_commits()<CR>
+nnoremap <silent> <Leader>glc <cmd>lua require('telescope_diff').my_git_bcommits()<CR>
+nnoremap <silent> <Leader>gs <cmd>lua require('telescope_diff').my_git_status()<CR>
+
+nnoremap <silent> <Leader><C-W>c <cmd>BufferClose<CR>
+nnoremap <silent> <Leader><C-W>o <cmd>BufferCloseAllButCurrent<CR>
+
