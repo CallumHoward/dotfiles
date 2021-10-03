@@ -294,7 +294,10 @@ function! s:CloseBracket()
 endfunction
 
 " don't close split when deleting a buffer
-command Bd bp\|bd #
+command Bd BufferClose
+cabbrev bd <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Bd' : 'bd')<CR>
+nnoremap <silent> <Leader><C-W>c <cmd>BufferClose<CR>
+nnoremap <silent> <Leader><C-W>o <cmd>BufferCloseAllButCurrent<CR>
 
 " Git
 command! -nargs=? -bar MB call setqflist(map(systemlist("git diff master...HEAD --pretty='' --name-only <args>"), '{"filename": v:val, "lnum": 1}'))<Bar>:Telescope quickfix
@@ -323,7 +326,4 @@ command! P :FormatWrite
 
 " Lcov
 command! C :set fdm=manual | LcovVisible coverage/lcov.info
-
-nnoremap <silent> <Leader><C-W>c <cmd>BufferClose<CR>
-nnoremap <silent> <Leader><C-W>o <cmd>BufferCloseAllButCurrent<CR>
 
