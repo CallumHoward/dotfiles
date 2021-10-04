@@ -86,11 +86,7 @@ return require("packer").startup(function(use)
   use({
     "iamcco/markdown-preview.nvim",
     run = [[sh -c 'cd app && yarn install']],
-    -- cmd = 'MarkdownPreview'
-  })
-  use({
-    "ruifm/gitlinker.nvim",
-    requires = "nvim-lua/plenary.nvim",
+    -- cmd = "MarkdownPreview",
   })
   use({
     "rcarriga/vim-ultest",
