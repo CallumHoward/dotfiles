@@ -113,11 +113,14 @@ vim.api.nvim_set_keymap(
   { silent = true }
 )
 
--- Vista config
-vim.g.vista_default_executive = "nvim_lsp"
-vim.g.vista_sidebar_width = 30
-vim.g.vista_highlight_whole_line = 1
-vim.g.vista_echo_cursor_strategy = "floating_win"
+-- Symbols outline config
+vim.g.symbols_outline = {
+  auto_preview = false,
+  position = "right",
+  width = 16,
+  show_symbol_details = true,
+}
+vim.api.nvim_exec([[ autocmd Filetype Outline setl nowrap ]], true)
 
 -- Git signs config
 require("gitsigns").setup({
