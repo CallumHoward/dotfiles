@@ -229,7 +229,6 @@ require("trouble").setup({
 
 -- Formatter
 local prettier_config = {
-  -- prettier
   function()
     return {
       exe = "prettier",
@@ -238,6 +237,18 @@ local prettier_config = {
     }
   end,
 }
+
+local clang_format_config = {
+  function()
+    return {
+      exe = "clang-format",
+      args = { "--assume-filename", vim.api.nvim_buf_get_name(0) },
+      stdin = true,
+      cwd = vim.fn.expand("%:p:h"), -- Run clang-format in cwd of the file.
+    }
+  end,
+}
+
 require("formatter").setup({
   logging = false,
   filetype = {
@@ -265,8 +276,20 @@ require("formatter").setup({
         }
       end,
     },
+    cpp = clang_format_config,
+    c = clang_format_config,
   },
 })
+
+vim.api.nvim_exec(
+  [[
+     augroup FormatAutogroup
+       autocmd!
+       autocmd BufWritePost *.lua,*.cpp,*.hpp,*.c,*.h silent FormatWrite
+     augroup END
+   ]],
+  true
+)
 
 -- Testing
 vim.cmd('let test#javascript#jest#options = "--color=always"')
