@@ -282,6 +282,7 @@ endif
 " don't close split when deleting a buffer
 command Bd BufferClose
 cabbrev bd <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Bd' : 'bd')<CR>
+cabbrev Bd! <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'bd!' : 'Bd!')<CR>
 nnoremap <silent> <Leader><C-W>c <cmd>BufferClose<CR>
 nnoremap <silent> <Leader><C-W>o <cmd>BufferCloseAllButCurrent<CR>
 
