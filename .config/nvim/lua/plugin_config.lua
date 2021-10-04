@@ -80,8 +80,36 @@ require("nvim-tree").setup({
 require("compe_config")
 -- vim.cmd('if g:compe then let g:compe.source.tabnine = v:true fi')
 
+-- DiffView config
+local cb = require("diffview.config").diffview_callback
+require("diffview").setup({
+  enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
+  signs = {
+    fold_closed = "",
+    fold_open = "",
+  },
+  key_bindings = {
+    view = {
+      ["]D"] = cb("select_next_entry"), -- Open the diff for the next file
+      ["[D"] = cb("select_prev_entry"), -- Open the diff for the previous file
+    },
+  },
+})
+
 -- Git linker config
 require("gitlinker").setup()
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>gb",
+  '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+  { silent = true }
+)
+vim.api.nvim_set_keymap(
+  "v",
+  "<leader>gb",
+  '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+  { silent = true }
+)
 
 -- Vista config
 vim.g.vista_default_executive = "nvim_lsp"

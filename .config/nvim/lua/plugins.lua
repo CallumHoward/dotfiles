@@ -95,6 +95,12 @@ return require("packer").startup(function(use)
 
   -- Source control features
   use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
+  use({
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  })
+  use("sindrets/diffview.nvim")
+  use("ygm2/rooter.nvim")
 
   -- Other features
   -- use {"kyazdani42/nvim-tree.lua", opt = true, cmd = { 'NvimTreeToggle' }}
