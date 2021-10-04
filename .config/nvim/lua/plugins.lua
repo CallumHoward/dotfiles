@@ -93,6 +93,7 @@ return require("packer").startup(function(use)
     requires = { "janko/vim-test" },
     run = ":UpdateRemotePlugins",
   })
+  use("CallumHoward/vim-lcov")
 
   -- Source control features
   use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
