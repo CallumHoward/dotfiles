@@ -25,3 +25,16 @@ vim.api.nvim_set_keymap(
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 
 vim.cmd("command! SynAttr :call SyntaxAttr()")
+
+vim.api.nvim_exec(
+  [[
+    augroup ClearSearchHL
+      autocmd!
+      autocmd CmdlineEnter /,\? set hlsearch
+      autocmd InsertEnter * set nohlsearch
+    augroup END
+  ]],
+  true
+)
+vim.api.nvim_set_keymap("n", "n", "<cmd>set hlsearch<CR>n", opts)
+vim.api.nvim_set_keymap("n", "N", "<cmd>set hlsearch<CR>N", opts)
