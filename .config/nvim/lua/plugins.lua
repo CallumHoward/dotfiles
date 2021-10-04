@@ -47,6 +47,11 @@ return require("packer").startup(function(use)
   -- Language features
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", branch = "0.5-compat" })
   use("nvim-treesitter/playground")
+  use("vim-scripts/SyntaxAttr.vim")
+  use("JoosepAlviste/nvim-ts-context-commentstring")
+  use("windwp/nvim-autopairs")
+  use("windwp/nvim-ts-autotag")
+  use({ "~/git/vim-import-cost", run = "npm install" })
 
   -- LSP features
   use("neovim/nvim-lspconfig")

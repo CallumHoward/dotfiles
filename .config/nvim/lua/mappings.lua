@@ -25,4 +25,4 @@ vim.api.nvim_set_keymap(
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 vim.cmd('cabbrev T <c-r>=(getcmdtype()=="<cmd>" && getcmdpos()==1 ? "Telescope" : "T")<CR>')
 
-vim.cmd('command! SynAttr :call SyntaxAttr()')
+vim.cmd("command! SynAttr :call SyntaxAttr()")

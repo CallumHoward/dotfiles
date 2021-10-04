@@ -275,9 +275,40 @@ vim.cmd('let test#javascript#jest#options = "--color=always"')
 vim.cmd("let g:vcoolor_disable_mappings = 1")
 vim.cmd('let g:vcoolor_map = "<leader>jc"')
 
--- Wilder.nvim config
-vim.cmd(
-  [[ call wilder#set_option('renderer', wilder#popupmenu_renderer({ 'highlighter': wilder#basic_highlighter() })) ]]
+-- nvim-ts-context-commentstring config
+require("nvim-treesitter.configs").setup({
+  context_commentstring = {
+    enable = true,
+  },
+  autotag = {
+    enable = true,
+  },
+})
+
+-- nvim-autopairs
+require("nvim-autopairs").setup({
+  disable_filetype = { "TelescopePrompt", "vim" },
+})
+
+require("nvim-autopairs.completion.compe").setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+  auto_select = false, -- auto select first item
+  map_char = { -- modifies the function or method delimiter by filetypes
+    all = "(",
+    tex = "{",
+  },
+})
+
+-- Import cost config
+vim.api.nvim_exec(
+  [[
+    augroup ImportCostAutogroup
+      autocmd!
+      autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx silent ImportCost
+    augroup END
+  ]],
+  true
 )
 vim.cmd(
   [[ call wilder#set_option('renderer', wilder#popupmenu_renderer({ 'highlighter': wilder#basic_highlighter(), 'left': [' ', wilder#popupmenu_devicons()], 'right': [' ', wilder#popupmenu_scrollbar()]})) ]]
