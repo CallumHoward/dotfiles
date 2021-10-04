@@ -113,6 +113,9 @@ nnoremap <silent>[t gT
 nnoremap <silent>[T :tabfirst<CR>
 nnoremap <silent>]T :tablast<CR>
 
+nnoremap <silent>[[ ?^\S<CR>:noh<CR>
+nnoremap <silent>]] /^\S<CR>:noh<CR>
+
 " tab navigation mappings
 nnoremap <silent><C-W>1 :tabn 1<CR>
 nnoremap <silent><C-W>2 :tabn 2<CR>
