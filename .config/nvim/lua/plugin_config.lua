@@ -1,3 +1,5 @@
+local map_opts = { silent = true, noremap = true }
+
 -- Colorscheme config
 vim.g.tokyonight_style = "storm"
 vim.g.tokyonight_italic_keywords = false
@@ -297,6 +299,10 @@ vim.cmd('let test#javascript#jest#options = "--color=always"')
 -- vCooler config
 vim.cmd("let g:vcoolor_disable_mappings = 1")
 vim.cmd('let g:vcoolor_map = "<leader>jc"')
+
+-- bufjump config
+vim.api.nvim_set_keymap("n", "<M-o>", "<cmd>lua require('bufjump').backward()<CR>", map_opts)
+vim.api.nvim_set_keymap("n", "<M-i>", "<cmd>lua require('bufjump').forward()<CR>", map_opts)
 
 -- nvim-ts-context-commentstring config
 require("nvim-treesitter.configs").setup({

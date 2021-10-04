@@ -113,8 +113,7 @@ return require("packer").startup(function(use)
   use("dstein64/vim-startuptime")
 
   -- Mapping plugins
-  use("windwp/nvim-ts-autotag")
-  use("9mm/vim-closer")
+  use("kwkarlwang/bufjump.nvim")
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
   use("tpope/vim-rsi")
