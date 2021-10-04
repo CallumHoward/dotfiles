@@ -178,8 +178,10 @@ xnoremap <leader>gd :g//d<CR>
 
 " convert search pattern to match whole word only
 nnoremap <silent> <expr> <leader>w @/ =~# '^\\<.*\\>$'
-            \ ? ':let @/=substitute(@/, "\\\\<\\\|\\\\>", "", "g")<CR>:echo "/".@/<CR>'
+            \ ? ':let @/=substitute(@/, "\\\\<\\\|\\\\V\\\|\\\\>", "", "g")<CR>:echo "/".@/<CR>'
             \ : ':let @/="\\<<C-R>/\\>"<CR>:echo "/".@/<CR>'
+" strip whole word patterns when pasting search register
+inoremap <silent><C-R>/ <C-O>:let @m=substitute(@/, "\\\\<\\\|\\\\V\\\|\\\\>", "", "g")<CR><C-R>m
 
 " save temp session
 nnoremap <leader>]] :ScrollViewDisable <bar> mks! ~/sess/temp_session.vim <bar> ScrollViewEnable<CR>
