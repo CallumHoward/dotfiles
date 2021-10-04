@@ -211,10 +211,8 @@ tnoremap <C-W><C-J> <C-\><C-N><C-W><C-J>
 tnoremap <C-W><C-K> <C-\><C-N><C-W><C-K>
 tnoremap <C-W><C-L> <C-\><C-N><C-W><C-L>
 
-nnoremap <silent> <Leader>\ :CocCommand explorer --toggle --sources=buffer+,file+<CR>
+nnoremap <silent> <Leader>\ :NvimTreeToggle<CR>:NvimTreeRefresh<CR>
 
-"nnoremap <silent> <Leader>\ :call ToggleNetrw()<CR>
-nnoremap <silent> <Leader>\ :CocCommand explorer --sources buffer+,file+ --width=45<CR>
 cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.')<CR>
 command! Cdg exec 'cd' fnameescape(fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ') . ';'), ':h'))
 cabbrev cdg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Cdg' : 'cdg')<CR>
