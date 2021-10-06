@@ -79,7 +79,7 @@ function pdftotext() {
 }
 
 function clo() {
-    git clone --recursive -j4 "$1" && cd *(/om[1])
+    git clone --recursive -j4 ${@} && cd *(/om[1])
 }
 
 function sf() {
