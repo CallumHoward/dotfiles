@@ -90,6 +90,14 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
   },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+    config = {
+      c = "// %s",
+      cpp = "// %s",
+    },
+  },
 })
 
 -- TODO does not work, set in extra.vim for now
