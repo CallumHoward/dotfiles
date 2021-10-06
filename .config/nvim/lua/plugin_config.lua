@@ -51,6 +51,8 @@ vim.cmd("cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \\| Rang
 
 -- NvimTree
 vim.g.nvim_tree_git_hl = 1
+vim.g.nvim_tree_ignore = { ".git", "node_modules" }
+vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_highlight_opened_files = 3
