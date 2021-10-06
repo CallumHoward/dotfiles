@@ -177,7 +177,7 @@ require("telescope").setup({
     borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     sorting_strategy = "ascending",
     scroll_strategy = nil,
-    path_display = { shorten = 5 },
+    path_display = { "smart" },
     winblend = 9,
     file_ignore_patterns = { "messages.json$", "%.html$" },
     file_sorter = sorters.get_fzy_sorter,
