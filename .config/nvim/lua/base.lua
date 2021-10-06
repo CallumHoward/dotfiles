@@ -8,6 +8,8 @@ vim.api.nvim_set_keymap("s", "kj", "<ESC>", { noremap = true, silent = true })
 vim.wo.number = true -- Set numbered lines
 vim.wo.relativenumber = true
 vim.wo.list = true
+-- vim.cmd("set signcolumn=number") -- merge signcolumn with number column
+vim.cmd("set signcolumn=yes") -- always show signcolumn
 vim.cmd("set shortmess+=I") -- Don't show welcome message
 vim.cmd("set shortmess+=c") -- Don't pass messages to |ins-completion-menu|.
 vim.cmd("set noshowcmd")
