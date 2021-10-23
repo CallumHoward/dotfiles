@@ -129,6 +129,7 @@ alias lg="git lg"
 alias lgs="git lg --stat"
 alias lgh="git lg -n10"
 alias lgh.="lgh ."
+alias lgl="lg origin/master..HEAD"
 #alias clo="git clone --recursive -j4 && cd *(/om[1])" # moved to .zsh_functions
 alias gsm="git submodule update --init --recursive"
 alias gdmb="gd master...HEAD"
