@@ -31,8 +31,10 @@ nnoremap <leader>E :vs %<.
 " toggle diff
 function! ToggleDiff()
     if &diff
+        ScrollViewEnable
         windo diffoff
     else
+        ScrollViewDisable
         windo diffthis
     endif
     wincmd w
