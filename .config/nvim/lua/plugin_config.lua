@@ -239,7 +239,13 @@ local prettier_config = {
   function()
     return {
       exe = "prettier",
-      args = { "--stdin", "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--arrow-parens=always" },
+      args = {
+        "--stdin",
+        "--stdin-filepath",
+        vim.api.nvim_buf_get_name(0),
+        "--arrow-parens=always",
+        "--plugin-search-dir=.",
+      },
       stdin = true,
     }
   end,
@@ -263,6 +269,7 @@ require("formatter").setup({
     typescript = prettier_config,
     javascriptreact = prettier_config,
     typescriptreact = prettier_config,
+    svelte = prettier_config,
     vue = prettier_config,
     html = prettier_config,
     css = prettier_config,
