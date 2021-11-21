@@ -262,6 +262,28 @@ local clang_format_config = {
   end,
 }
 
+local stylua_config = {
+  function()
+    return {
+      exe = "stylua",
+      args = {
+        "--config-path " .. os.getenv("HOME") .. "/.config/stylua/stylua.toml",
+        "-",
+      },
+      stdin = true,
+    }
+  end,
+}
+
+local gofmt_config = {
+  function()
+    return {
+      exe = "gofmt",
+      stdin = true,
+    }
+  end,
+}
+
 require("formatter").setup({
   logging = false,
   filetype = {
@@ -277,21 +299,10 @@ require("formatter").setup({
     less = prettier_config,
     json = prettier_config,
     markdown = prettier_config,
-    lua = {
-      -- stylua
-      function()
-        return {
-          exe = "stylua",
-          args = {
-            "--config-path " .. os.getenv("HOME") .. "/.config/stylua/stylua.toml",
-            "-",
-          },
-          stdin = true,
-        }
-      end,
-    },
+    lua = stylua_config,
     cpp = clang_format_config,
     c = clang_format_config,
+    go = gofmt_config,
   },
 })
 
@@ -299,7 +310,7 @@ vim.api.nvim_exec(
   [[
      augroup FormatAutogroup
        autocmd!
-       autocmd BufWritePost *.lua,*.cpp,*.hpp,*.c,*.h silent FormatWrite
+       autocmd BufWritePost *.lua,*.cpp,*.hpp,*.c,*.h,*.go silent FormatWrite
      augroup END
    ]],
   true
