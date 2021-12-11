@@ -31,7 +31,7 @@ require("compe").setup({
     zsh = { kind = "  " },
     tmux = { kind = "  ", all_panes = true },
     tabnine = { kind = "  " },
-    emoji = { kind = " ﲃ ", filetypes = { "markdown", "text" } },
+    emoji = { kind = " ﲃ ", filetypes = { "markdown", "text", "html" } },
     -- for emoji press : (idk if that in compe tho)
   },
 })

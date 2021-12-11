@@ -284,6 +284,15 @@ local gofmt_config = {
   end,
 }
 
+local swift_format_config = {
+  function()
+    return {
+      exe = "swift format",
+      stdin = true,
+    }
+  end,
+}
+
 require("formatter").setup({
   logging = false,
   filetype = {
@@ -303,6 +312,7 @@ require("formatter").setup({
     cpp = clang_format_config,
     c = clang_format_config,
     go = gofmt_config,
+    swift = swift_format_config,
   },
 })
 
@@ -310,7 +320,7 @@ vim.api.nvim_exec(
   [[
      augroup FormatAutogroup
        autocmd!
-       autocmd BufWritePost *.lua,*.cpp,*.hpp,*.c,*.h,*.go silent FormatWrite
+       autocmd BufWritePost *.lua,*.cpp,*.hpp,*.c,*.h,*.go,*.swift silent FormatWrite
      augroup END
    ]],
   true
