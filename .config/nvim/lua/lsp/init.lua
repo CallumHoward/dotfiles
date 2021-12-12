@@ -48,6 +48,19 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
 end
 
+vim.api.nvim_exec(
+  [[
+    augroup VirtualTextToggleAutogroup
+      autocmd!
+      autocmd InsertEnter * lua vim.diagnostic.config({ virtual_text = false })
+      autocmd InsertEnter * hi link GitSignsCurrentLineBlame EndOfBuffer
+      autocmd InsertLeave * lua vim.diagnostic.config({ virtual_text = true })
+      autocmd InsertLeave * hi link GitSignsCurrentLineBlame Comment
+  augroup END
+  ]],
+  true
+)
+
 require("vim.lsp.protocol").CompletionItemKind = {
   "   (Text)",
   "   (Method)",

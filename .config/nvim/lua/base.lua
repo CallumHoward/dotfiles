@@ -43,8 +43,6 @@ vim.cmd("set wildignorecase")
 vim.o.splitright = true -- Vertical splits will automatically be to the right
 vim.o.splitbelow = true -- Horizontal splits will automatically be below
 
-vim.cmd("set inccommand=split") -- Make substitution work in realtime
-
 vim.o.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic"
 vim.o.fillchars = "diff:╱"
 
