@@ -165,10 +165,10 @@ nnoremap <silent> <leader><Space> :keeppatterns %s/\s\+$//e<CR><C-O>
 xnoremap <silent> <leader><Space> :keeppatterns s/\s\+$//e<CR><C-O>
 
 " global substitution on last used search pattern
-nnoremap <leader>s :%s///g<Left><Left>
-xnoremap <leader>s :s///g<Left><Left>
-nnoremap <leader>S :%Subvert/<C-R>///g<Left><Left>
-xnoremap <leader>S :Subvert/<C-R>///g<Left><Left>
+nnoremap <leader>s <cmd>set icm=split<CR>:%s///g<Left><Left>
+xnoremap <leader>s <cmd>set icm=nosplit<CR>:s///g<Left><Left>
+nnoremap <leader>S <cmd>set icm=split<CR>:%Subvert/<C-R>///g<Left><Left>
+xnoremap <leader>S <cmd>set icm=nosplit<CR>:Subvert/<C-R>///g<Left><Left>
 
 " global mappings
 nnoremap <leader>gn :g//norm 
