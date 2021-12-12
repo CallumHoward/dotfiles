@@ -179,6 +179,7 @@ vim.api.nvim_set_keymap(
   "<cmd>lua require('gitsigns').change_base('HEAD~', true)<Left><Left><Left><Left><Left><Left><Left><Left>",
   map_opts
 )
+vim.api.nvim_set_keymap("n", "<leader>hl", "<cmd>Gitsigns setqflist<CR>", map_opts)
 
 -- Telescope
 local actions = require("telescope.actions")
