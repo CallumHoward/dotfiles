@@ -17,13 +17,10 @@ return require("packer").startup(function(use)
   use("wbthomason/packer.nvim") -- Package manager
 
   -- Colorscheme
-  use("~/neodark")
-  use("romgrk/doom-one.vim")
   use("folke/tokyonight.nvim")
   use("cocopon/iceberg.vim")
   use("mhartington/oceanic-next")
   use("w0ng/vim-hybrid")
-  use({ "maaslalani/nordbuddy", "tjdevries/colorbuddy.nvim" })
 
   -- Cosmetic features
   use("kyazdani42/nvim-web-devicons")
