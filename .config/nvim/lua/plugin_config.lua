@@ -61,8 +61,6 @@ vim.cmd("cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \\| Rang
 
 -- NvimTree
 vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_ignore = { ".git", "node_modules" }
-vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_highlight_opened_files = 3
@@ -74,20 +72,24 @@ vim.g.nvim_tree_show_icons = {
 }
 vim.g.nvim_tree_icons = {
   default = "",
-  lsp = {
-    error = "",
-    warning = "",
-    hint = "",
-    info = "",
+  diagnostics = {
+    enable = true,
+    icons = {
+      error = "",
+      warning = "",
+      hint = "",
+      info = "",
+    },
   },
 }
 require("nvim-tree").setup({
   update_focused_file = {
     enable = true,
   },
-  lsp_diagnostics = true,
   tree_follow = true,
   disable_netrw = true,
+  nvim_tree_ignore = { ".git", "node_modules" },
+  nvim_tree_gitignore = true,
 })
 
 -- Completion
