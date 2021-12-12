@@ -52,7 +52,7 @@ return require("packer").startup(function(use)
 
   -- LSP features
   use("neovim/nvim-lspconfig")
-  use("kabouzeid/nvim-lspinstall")
+  use("williamboman/nvim-lsp-installer")
   use("simrat39/symbols-outline.nvim")
   use("kosayoda/nvim-lightbulb")
   use("ray-x/lsp_signature.nvim")

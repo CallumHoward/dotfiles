@@ -1,22 +1,41 @@
--- LspInstall setup
-local function setup_servers()
-  require("lspinstall").setup()
-  local servers = require("lspinstall").installed_servers()
-  for _, server in pairs(servers) do
-    require("lspconfig")[server].setup({})
+local lsp_installer = require("nvim-lsp-installer")
+
+-- Include the servers you want to have installed by default below
+local servers = {
+  "bashls",
+  "cssls",
+  "diagnosticls",
+  "dockerls",
+  "ember",
+  -- "eslint",
+  "gopls",
+  "html",
+  "jsonls",
+  "pyright",
+  "sumneko_lua",
+  "svelte",
+  -- "tailwindcss",
+  "tsserver",
+  "vimls",
+  "yamlls",
+}
+
+for _, name in pairs(servers) do
+  local server_is_found, server = lsp_installer.get_server(name)
+  if server_is_found then
+    if not server:is_installed() then
+      print("Installing " .. name)
+      server:install()
+    else
+      server:on_ready(function()
+        local opts = {}
+        server:setup(opts)
+      end)
+    end
   end
 end
 
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require("lspinstall").post_install_hook = function()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
-
--- Lsp configuration
-DATA_PATH = vim.fn.stdpath("data")
+require("lspconfig").sourcekit.setup({})
 
 local signs = {
   { name = "LspDiagnosticsSignError", text = "" },

@@ -1,13 +1,8 @@
-require("lspconfig").lua.setup({
-  cmd = {
-    DATA_PATH .. "/lspinstall/lua/sumneko-lua-language-server",
-    "-E",
-    DATA_PATH .. "/lspinstall/lua/main.lua",
-  },
+local opts = {
   settings = {
     Lua = {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        -- (most likely LuaJIT in the case of Neovim)
         version = "LuaJIT",
         -- Setup your lua path
         path = vim.split(package.path, ";"),
@@ -25,4 +20,13 @@ require("lspconfig").lua.setup({
       },
     },
   },
-})
+}
+
+local lsp_installer_servers = require("nvim-lsp-installer.servers")
+local server_available, requested_server = lsp_installer_servers.get_server("sumneko_lua")
+
+if server_available then
+  requested_server:on_ready(function()
+    requested_server:setup(opts)
+  end)
+end
