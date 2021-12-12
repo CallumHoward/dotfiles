@@ -233,18 +233,18 @@ require("lsp_signature").setup({
 })
 
 -- Lightbulb
-vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+vim.cmd([[ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb() ]])
 vim.fn.sign_define("LightBulbSign", {
   text = "",
-  texthl = "LspDiagnosticsDefaultWarning",
+  texthl = "DiagnosticSignWarn",
   linehl = "",
-  numhl = "LspDiagnosticsDefaultWarning",
+  numhl = "DiagnosticSignWarn",
   priorioty = 12,
 })
 
 -- Trouble
 require("trouble").setup({
-  use_lsp_diagnostic_signs = true,
+  use_diagnostic_signs = true,
 })
 
 -- Formatter

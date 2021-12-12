@@ -42,7 +42,7 @@ return require("packer").startup(function(use)
   use("kevinhwang91/nvim-bqf")
 
   -- Language features
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", branch = "0.5-compat" })
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("nvim-treesitter/playground")
   use("vim-scripts/SyntaxAttr.vim")
   use("JoosepAlviste/nvim-ts-context-commentstring")

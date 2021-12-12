@@ -17,12 +17,7 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>
 vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
 vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-vim.api.nvim_set_keymap(
-  "n",
-  "cd",
-  " <cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ show_header = false })<CR>",
-  opts
-)
+vim.api.nvim_set_keymap("n", "cd", '<cmd>lua vim.diagnostic.open_float(0, { scope = "line", header = "" })<CR>', opts)
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 
 vim.cmd("command! SynAttr :call SyntaxAttr()")

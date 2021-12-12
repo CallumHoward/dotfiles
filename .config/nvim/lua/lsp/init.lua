@@ -38,10 +38,10 @@ end
 require("lspconfig").sourcekit.setup({})
 
 local signs = {
-  { name = "LspDiagnosticsSignError", text = "" },
-  { name = "LspDiagnosticsSignWarning", text = "" },
-  { name = "LspDiagnosticsSignHint", text = "" },
-  { name = "LspDiagnosticsSignInformation", text = "" },
+  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
+  { name = "DiagnosticSignInfo", text = "" },
 }
 
 for _, sign in ipairs(signs) do
