@@ -3,7 +3,17 @@ local map_opts = { silent = true, noremap = true }
 -- Colorscheme config
 vim.g.tokyonight_style = "storm"
 vim.g.tokyonight_italic_keywords = false
-vim.g.tokyonight_sidebars = { "qf", "vista_kind", "Outline", "terminal", "packer", "help", "UltestSummary" }
+vim.g.tokyonight_dark_sidebar = true
+vim.g.tokyonight_sidebars = {
+  "qf",
+  "vista_kind",
+  "Outline",
+  "terminal",
+  "packer",
+  "help",
+  "UltestSummary",
+  "nofile",
+}
 
 -- Scrollbar config
 vim.cmd("let g:scrollview_column = 1")
