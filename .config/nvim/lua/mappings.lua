@@ -11,6 +11,7 @@ vim.api.nvim_set_keymap("n", "<C-W>]", "<cmd>sp<CR><cmd>lua vim.lsp.buf.implemen
 vim.api.nvim_set_keymap("n", "<C-W><C-]>", "<cmd>vs<CR><cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>cA", "<cmd>TSLspFixCurrent<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>ci", "<cmd>TSLspImportCurrent<CR>", opts)
 vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
