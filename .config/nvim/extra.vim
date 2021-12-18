@@ -69,6 +69,7 @@ if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
 endif
 
 packadd cfilter
+packadd termdebug
 
 let g:python3_host_prog = '/usr/local/bin/python3'
 
