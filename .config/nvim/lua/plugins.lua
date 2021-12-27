@@ -32,6 +32,7 @@ return require("packer").startup(function(use)
   -- use 'folke/which-key.nvim'
   use({ "~/git/vim-hexokinase", run = { "make hexokinase" } }) -- preview colours
   use("KabbAmine/vCoolor.vim") -- show OS colour picker
+  use("rcarriga/nvim-notify")
 
   -- Selector
   use({

@@ -15,6 +15,9 @@ vim.g.tokyonight_sidebars = {
   "nofile",
 }
 
+-- vim-notify config
+vim.notify = require("notify")
+
 -- Scrollbar config
 vim.cmd("let g:scrollview_column = 1")
 
