@@ -349,6 +349,11 @@ vim.cmd('let test#javascript#jest#options = "--color=always"')
 vim.cmd("let g:vcoolor_disable_mappings = 1")
 vim.cmd('let g:vcoolor_map = "<leader>jc"')
 
+-- Hexokinase
+vim.cmd(
+  "let g:Hexokinase_ftEnabled = ['css', 'html', 'scss', 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'handlebars', 'vim', 'conf']"
+)
+
 -- bufjump config
 vim.api.nvim_set_keymap("n", "<M-o>", "<cmd>lua require('bufjump').backward()<CR>", map_opts)
 vim.api.nvim_set_keymap("n", "<M-i>", "<cmd>lua require('bufjump').forward()<CR>", map_opts)
