@@ -67,16 +67,23 @@ return require("packer").startup(function(use)
   use("mustache/vim-mustache-handlebars")
 
   -- Completion
-  use("hrsh7th/nvim-compe")
-  use("andersevenrud/compe-tmux")
-  -- If packer fails for tabnine, do
-  -- `cd ~/.local/share/nvim/site/pack/packer/start/compe-tabnine && ./install.sh`
-  -- use {'tzachar/compe-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-compe'}
-  use("tamago324/compe-zsh")
+  use("hrsh7th/cmp-buffer")
+  use("hrsh7th/cmp-calc")
+  use("hrsh7th/cmp-cmdline")
+  use("hrsh7th/cmp-emoji")
+  use("hrsh7th/cmp-nvim-lsp")
+  use("hrsh7th/cmp-nvim-lsp-document-symbol")
+  use("hrsh7th/cmp-nvim-lua")
+  use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-vsnip")
+  use("hrsh7th/nvim-cmp")
   use("hrsh7th/vim-vsnip")
+  use("dmitmel/cmp-cmdline-history")
+  use("ray-x/cmp-treesitter")
+  use("andersevenrud/cmp-tmux")
+  use("onsails/lspkind-nvim")
   use("rafamadriz/friendly-snippets")
-  use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = { "jose-elias-alvarez/null-ls.nvim" } })
-  use("gelguy/wilder.nvim")
+  use({ "tzachar/cmp-tabnine", run = "./install.sh" })
 
   -- Wrap external tools
   use({ "francoiscabrol/ranger.vim", requires = { "rbgrouleff/bclose.vim" } })

@@ -20,6 +20,8 @@ local servers = {
   "yamlls",
 }
 
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 for _, name in pairs(servers) do
   local server_is_found, server = lsp_installer.get_server(name)
   if server_is_found then
@@ -28,14 +30,17 @@ for _, name in pairs(servers) do
       server:install()
     else
       server:on_ready(function()
-        local opts = {}
-        server:setup(opts)
+        server:setup({
+          capabilities = capabilities,
+        })
       end)
     end
   end
 end
 
-require("lspconfig").sourcekit.setup({})
+require("lspconfig").sourcekit.setup({
+  capabilities = capabilities,
+})
 
 local signs = {
   { name = "DiagnosticSignError", text = "" },
