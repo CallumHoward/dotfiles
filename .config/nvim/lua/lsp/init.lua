@@ -7,6 +7,7 @@ local servers = {
   "diagnosticls",
   "dockerls",
   "ember",
+  "emmet_ls",
   -- "eslint",
   "gopls",
   "html",
