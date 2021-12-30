@@ -229,7 +229,7 @@ if [ "`basename $SHELL`" = "zsh" ]; then
     alias npm="nocorrect npm"
 
     if command -v nvim > /dev/null 2>&1; then
-        alias vim="nocorrect env TERM=tmux-256color nvim"
+        alias vim="nvim"
     fi
 else
     alias cd.="cd ."
