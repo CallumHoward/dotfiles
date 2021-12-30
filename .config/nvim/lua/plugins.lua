@@ -55,6 +55,7 @@ return require("packer").startup(function(use)
   -- LSP features
   use("neovim/nvim-lspconfig")
   use("williamboman/nvim-lsp-installer")
+  use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = { "jose-elias-alvarez/null-ls.nvim" } })
   use("simrat39/symbols-outline.nvim")
   use("kosayoda/nvim-lightbulb")
   use("ray-x/lsp_signature.nvim")
