@@ -14,6 +14,7 @@ local servers = {
   "jsonls",
   "pyright",
   "sumneko_lua",
+  "sourcekit",
   "svelte",
   -- "tailwindcss",
   "tsserver",
