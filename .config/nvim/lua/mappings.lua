@@ -34,3 +34,10 @@ vim.api.nvim_exec(
 )
 vim.api.nvim_set_keymap("n", "n", "<cmd>set hlsearch<CR>n", opts)
 vim.api.nvim_set_keymap("n", "N", "<cmd>set hlsearch<CR>N", opts)
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>y",
+  "<cmd>let @+=expand('%')<CR>:lua vim.notify(vim.fn.expand('%'), 'info', { title = 'Copied buffer path' })<CR>",
+  opts
+)
