@@ -55,6 +55,13 @@ vim.g.indent_blankline_filetype_exclude = { "qf", "vista_kind", "terminal", "pac
 
 -- Ultest config
 vim.cmd("autocmd Filetype UltestSummary setl nowrap")
+vim.g.ultest_pass_sign = "﫟"
+vim.g.ultest_fail_sign = ""
+vim.g.ultest_running_sign = "喇"
+vim.g.ultest_not_run_sign = "ﱤ"
+vim.cmd("nnoremap <leader>jn :UltestNearest<CR>")
+vim.cmd("nnoremap <leader>ju :UltestSummary<CR>")
+vim.cmd("nnoremap <leader>jf :Ultest<CR>")
 
 -- Ranger config
 vim.cmd("cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'ra')<CR>")
