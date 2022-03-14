@@ -77,6 +77,7 @@ alias -g MD='mv ~/Downloads/*(.om[1]) .; ls'
 alias -g NO='--name-only'
 alias -g BF='`ba | fzf -m | tr "\n" " "`'
 alias -g GF='`git -c color.status=always status -s | fzf -m --ansi --preview "echo {} | cut -c4- | xargs git diff --color=always" | cut -c4- | tr "\n" " "`'
+alias -g SL='git stash apply `git -c color.status=always sl | fzf --ansi --preview "echo {} | cut -c 1-10 | xargs git show --color=always" | cut -c 1-10 | tr "\n" " "`'
 
 alias -g SR='| sort -nr'
 alias -g CC='gcc -Wall -Werror -std=c11 -g -o *.c(.om[1]:r) *.c(.om[1])'
