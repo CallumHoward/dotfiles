@@ -1,4 +1,5 @@
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufEnter *.js.tftmpl :setlocal filetype=javascript
 
 " Skeletons
 augroup Skeletons
