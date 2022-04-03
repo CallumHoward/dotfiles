@@ -113,6 +113,12 @@ require("diffview").setup({
     fold_closed = "",
     fold_open = "",
   },
+  hooks = {
+    diff_buf_read = function()
+      vim.opt_local.wrap = false
+      vim.opt_local.foldenable = true
+    end,
+  },
   key_bindings = {
     view = {
       ["]D"] = cb("select_next_entry"), -- Open the diff for the next file
