@@ -116,7 +116,7 @@ return require("packer").startup(function(use)
     requires = { "janko/vim-test" },
     run = ":UpdateRemotePlugins",
   })
-  use("CallumHoward/vim-lcov")
+  -- use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
 
   -- Source control features
   use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })

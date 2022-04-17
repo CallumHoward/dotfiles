@@ -221,6 +221,20 @@ require("telescope").setup({
       },
     },
   },
+  -- extensions = {
+  --   dash = {
+  --     fileTypeKeywords = {
+  --       NvimTree = false,
+  --       TelescopePrompt = false,
+  --       terminal = false,
+  --       packer = false,
+  --       -- a table of strings will search on multiple keywords
+  --       typescript = { "typescript", "javascript", "css", "html" },
+  --       typescriptreact = { "typescript", "javascript", "react", "css", "html" },
+  --       javascriptreact = { "javascript", "react", "css", "html" },
+  --     },
+  --   },
+  -- },
 })
 require("telescope").load_extension("fzf")
 -- require("telescope").load_extension("dap")
