@@ -92,6 +92,11 @@ return require("packer").startup(function(use)
   use("rafamadriz/friendly-snippets")
   use({ "tzachar/cmp-tabnine", run = "./install.sh" })
 
+  -- Debug
+  -- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+  -- use("Pocco81/DAPInstall.nvim")
+  -- use("nvim-telescope/telescope-dap.nvim")
+
   -- Wrap external tools
   use({ "francoiscabrol/ranger.vim", requires = { "rbgrouleff/bclose.vim" } })
   -- use 'kevinhwang91/rnvimr'

@@ -399,6 +399,14 @@ vim.api.nvim_exec(
   ]],
   true
 )
-vim.cmd(
-  [[ call wilder#set_option('renderer', wilder#popupmenu_renderer({ 'highlighter': wilder#basic_highlighter(), 'left': [' ', wilder#popupmenu_devicons()], 'right': [' ', wilder#popupmenu_scrollbar()]})) ]]
-)
+
+-- Debug
+-- require("dapui").setup()
+
+-- -- Configure all installed debuggers
+-- local dap_install = require("dap-install")
+
+-- local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
+-- for _, debugger in ipairs(dbg_list) do
+--   dap_install.config(debugger)
+-- end
