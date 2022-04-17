@@ -410,3 +410,6 @@ vim.api.nvim_exec(
 -- for _, debugger in ipairs(dbg_list) do
 --   dap_install.config(debugger)
 -- end
+
+-- AsyncDo
+vim.cmd([[command! -bang -nargs=* -complete=file Make call asyncdo#run(<bang>0, &makeprg, <f-args>)]])
