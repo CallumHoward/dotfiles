@@ -219,6 +219,7 @@ require("telescope").setup({
   },
 })
 require("telescope").load_extension("fzf")
+-- require("telescope").load_extension("dap")
 
 -- null-ls config for nvim-lsp-ts-utils
 local null_ls = require("null-ls")
