@@ -49,6 +49,7 @@ return require("packer").startup(function(use)
   -- Language features
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use("nvim-treesitter/playground")
+  use("nvim-treesitter/nvim-treesitter-textobjects")
   use("vim-scripts/SyntaxAttr.vim")
   use("powerman/vim-plugin-AnsiEsc")
   use("JoosepAlviste/nvim-ts-context-commentstring")
