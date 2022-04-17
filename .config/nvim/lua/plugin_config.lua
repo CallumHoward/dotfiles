@@ -71,7 +71,6 @@ vim.cmd("cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \\| Rang
 
 -- NvimTree
 vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_highlight_opened_files = 3
 vim.g.nvim_tree_show_icons = {
@@ -95,6 +94,11 @@ vim.g.nvim_tree_icons = {
 require("nvim-tree").setup({
   update_focused_file = {
     enable = true,
+  },
+  renderer = {
+    indent_markers = {
+      enable = true,
+    },
   },
   tree_follow = true,
   disable_netrw = true,
