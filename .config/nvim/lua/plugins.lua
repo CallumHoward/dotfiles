@@ -70,6 +70,8 @@ return require("packer").startup(function(use)
 
   -- Filetype support
   use("mustache/vim-mustache-handlebars")
+  use("jxnblk/vim-mdx-js")
+  use("rhysd/vim-syntax-codeowners")
 
   -- Completion
   use("hrsh7th/cmp-buffer")
@@ -116,7 +118,6 @@ return require("packer").startup(function(use)
   use("ygm2/rooter.nvim")
 
   -- Other features
-  -- use {"kyazdani42/nvim-tree.lua", opt = true, cmd = { 'NvimTreeToggle' }}
   use("kyazdani42/nvim-tree.lua")
   use("dstein64/vim-startuptime")
 
