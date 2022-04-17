@@ -55,6 +55,10 @@ return require("packer").startup(function(use)
   use("windwp/nvim-autopairs")
   use("windwp/nvim-ts-autotag")
   use({ "~/git/vim-import-cost", run = "npm install" })
+  use({
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+  })
 
   -- LSP features
   use("neovim/nvim-lspconfig")
