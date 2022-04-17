@@ -13,6 +13,10 @@ end
 -- Auto compile when there are changes in plugins.lua
 vim.cmd("autocmd BufWritePost plugins.lua PackerCompile")
 
+require("packer").init({
+  max_jobs = 8,
+})
+
 return require("packer").startup(function(use)
   use("wbthomason/packer.nvim") -- Package manager
 
