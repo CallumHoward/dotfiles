@@ -2,8 +2,6 @@ setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal softtabstop=2
 setlocal commentstring=//\ %s
-" setlocal makeprg=eslint_d\ --format\ unix\ --ext\ .ts,.tsx\ packages/\ sckit/\ e2e-tests/
-setlocal makeprg=esprint\ --format\ unix
 
 nnoremap <leader>jl yiwoconsole.log("LOG <C-R>": ", <C-R>");<Esc>
 xnoremap <leader>jl yoconsole.log("LOG: ", <C-R>");<Esc>
