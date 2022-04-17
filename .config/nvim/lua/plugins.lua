@@ -116,6 +116,7 @@ return require("packer").startup(function(use)
     requires = { "janko/vim-test" },
     run = ":UpdateRemotePlugins",
   })
+  use("hauleth/asyncdo.vim")
   -- use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
 
   -- Source control features
