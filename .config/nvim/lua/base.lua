@@ -82,7 +82,7 @@ vim.api.nvim_exec(
 vim.cmd([[ au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Search", timeout=200} ]])
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = {}, -- list of language that will be disabled
@@ -107,3 +107,5 @@ vim.g.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.cmd("set nofoldenable")
+
+vim.cmd([[ let g:node_host_prog = '~/.fnm/node-versions/v16.13.0/installation/bin/neovim-node-host' ]])
