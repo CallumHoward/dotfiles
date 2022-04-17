@@ -370,8 +370,8 @@ vim.cmd(
 vim.api.nvim_set_keymap("n", "<M-o>", "<cmd>lua require('bufjump').backward()<CR>", map_opts)
 vim.api.nvim_set_keymap("n", "<M-i>", "<cmd>lua require('bufjump').forward()<CR>", map_opts)
 
--- nvim-ts-context-commentstring config
 require("nvim-treesitter.configs").setup({
+  -- nvim-ts-context-commentstring config
   context_commentstring = {
     enable = true,
   },
