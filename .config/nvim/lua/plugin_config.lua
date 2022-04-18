@@ -234,6 +234,18 @@ local actions = require("telescope.actions")
 local sorters = require("telescope.sorters")
 require("telescope").setup({
   defaults = {
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--type-not=svg",
+      "--type-not=json",
+      -- "--type-not=dump",
+    },
     layout_config = {
       prompt_position = "top",
     },
