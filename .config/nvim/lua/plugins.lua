@@ -118,6 +118,7 @@ return require("packer").startup(function(use)
   })
   use("hauleth/asyncdo.vim")
   -- use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
+  use("CallumHoward/vim-lcov")
 
   -- Source control features
   use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
