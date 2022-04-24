@@ -1,43 +1,93 @@
-local opts = { silent = true, noremap = true }
+vim.keymap.set("n", "gd", function()
+  vim.lsp.buf.definition()
+end)
+vim.keymap.set("n", "<C-W>d", function()
+  vim.cmd("split")
+  vim.lsp.buf.definition()
+end)
+vim.keymap.set("n", "<C-W><C-D>", function()
+  vim.cmd("vsplit")
+  vim.lsp.buf.definition()
+end)
 
-vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-W>d", "<cmd>sp<CR><cmd>lua vim.lsp.buf.definition()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-W><C-D>", "<cmd>vs<CR><cmd>lua vim.lsp.buf.definition()<CR>", opts)
-vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-W>D", "<cmd>sp<CR><cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>:cope<CR><C-W>J", opts)
-vim.api.nvim_set_keymap("n", "<C-]>", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-W>]", "<cmd>sp<CR><cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-W><C-]>", "<cmd>vs<CR><cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>cA", "<cmd>TSLspFixCurrent<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>ci", "<cmd>TSLspImportCurrent<CR>", opts)
-vim.api.nvim_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-vim.api.nvim_set_keymap("n", "cd", '<cmd>lua vim.diagnostic.open_float(0, { scope = "line", header = "" })<CR>', opts)
-vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
+vim.keymap.set("n", "gD", function()
+  vim.lsp.buf.declaration()
+end)
+vim.keymap.set("n", "<C-W>D", function()
+  vim.cmd("split")
+  vim.lsp.buf.declaration()
+end)
 
-vim.cmd("command! SynAttr :call SyntaxAttr()")
+vim.keymap.set("n", "gr", function()
+  vim.lsp.buf.references()
+end)
+vim.keymap.set("n", "<C-]>", function()
+  vim.lsp.buf.implementation()
+end)
+vim.keymap.set("n", "<C-W>]", function()
+  vim.cmd("split")
+  vim.lsp.buf.implementation()
+end)
+vim.keymap.set("n", "<C-W><C-]>", function()
+  vim.cmd("vsplit")
+  vim.lsp.buf.implementation()
+end)
 
-vim.api.nvim_exec(
-  [[
-    augroup ClearSearchHL
-      autocmd!
-      autocmd CmdlineEnter /,\? set hlsearch
-      autocmd InsertEnter * set nohlsearch
-    augroup END
-  ]],
-  true
-)
-vim.api.nvim_set_keymap("n", "n", "<cmd>set hlsearch<CR>n", opts)
-vim.api.nvim_set_keymap("n", "N", "<cmd>set hlsearch<CR>N", opts)
+vim.keymap.set("n", "<leader>ca", function()
+  vim.lsp.buf.code_action()
+end)
+vim.keymap.set("n", "<leader>cA", "<cmd>TSLspFixCurrent<CR>")
+vim.keymap.set("n", "<leader>ci", "<cmd>TSLspImportCurrent<CR>")
+vim.keymap.set("n", "K", function()
+  vim.lsp.buf.hover()
+end)
+vim.keymap.set("n", "<C-K>", function()
+  vim.lsp.buf.signature_help()
+end)
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>y",
-  "<cmd>let @+=expand('%')<CR>:lua vim.notify(vim.fn.expand('%'), 'info', { title = 'Copied buffer path' })<CR>",
-  opts
-)
+local float_opts = { scope = "line", header = "" }
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.goto_prev({ float = float_opts })
+end)
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.goto_next({ float = float_opts })
+end)
+vim.keymap.set("n", "<leader>cd", function()
+  vim.diagnostic.open_float(float_opts)
+end)
+vim.keymap.set("n", "<leader>cD", function()
+  vim.diagnostic.config({ virtual_text = false })
+end)
+vim.keymap.set("n", "<leader>cr", function()
+  vim.lsp.buf.rename()
+end)
+
+vim.api.nvim_create_user_command("LspVirtualTextHide", function()
+  vim.diagnostic.config({ virtual_text = false })
+end, {
+  nargs = 0,
+  desc = "Hide LSP virtual text",
+})
+
+vim.api.nvim_create_user_command("SynAttr", "call SyntaxAttr()", {
+  desc = "Show the highlight group under cursor",
+})
+
+local clear_search_hl = vim.api.nvim_create_augroup("ClearSearchHL", {})
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  pattern = "/,?",
+  command = "set hlsearch",
+  group = clear_search_hl,
+})
+vim.api.nvim_create_autocmd("InsertEnter", {
+  pattern = "*",
+  command = "set nohlsearch",
+  group = clear_search_hl,
+})
+vim.keymap.set("n", "n", "<cmd>set hlsearch<CR>n")
+vim.keymap.set("n", "N", "<cmd>set hlsearch<CR>N")
+
+vim.keymap.set("n", "<leader>y", function()
+  vim.cmd("let @+=expand('%')")
+  vim.notify(vim.fn.expand("%"), "info", { title = "Copied buffer path" })
+end)
