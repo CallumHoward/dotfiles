@@ -116,7 +116,12 @@ return require("packer").startup(function(use)
   -- Wrap external tools
   use({ "francoiscabrol/ranger.vim", requires = { "rbgrouleff/bclose.vim" } })
   -- use 'kevinhwang91/rnvimr'
-  use("mhartington/formatter.nvim")
+  use({
+    "mhartington/formatter.nvim",
+    config = function()
+      require("plugins.formatter_config")
+    end,
+  })
   use({
     "iamcco/markdown-preview.nvim",
     run = [[sh -c 'cd app && yarn install']],
