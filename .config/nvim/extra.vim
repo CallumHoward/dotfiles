@@ -1,22 +1,3 @@
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-autocmd BufEnter *.js.tftmpl :setlocal filetype=javascript
-
-" Skeletons
-augroup Skeletons
-    autocmd!
-    autocmd BufNewFile *.test.tsx 0r ~/.config/nvim/skeletons/jest.test.tsx
-augroup END
-
-" cursorline configuration
-autocmd FocusLost,InsertEnter,WinLeave,BufWinLeave,CmdwinLeave * if &ft !~ "NvimTree" | setl nocul | endif
-autocmd FocusGained,InsertLeave,WinEnter,BufWinEnter,CmdwinEnter * setl cul
-
-" jump to the previous cursor position in the file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-set fdm=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
 function! GetTitle() abort
     if tabpagenr('$') > 1
         return fnamemodify(getcwd(), ':t')
@@ -68,9 +49,6 @@ if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
 
     autocmd WinEnter,BufWinEnter,FocusGained * call SetTerminalTitle()
 endif
-
-packadd cfilter
-packadd termdebug
 
 let g:python3_host_prog = '/usr/local/bin/python3'
 

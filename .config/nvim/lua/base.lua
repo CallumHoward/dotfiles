@@ -49,12 +49,6 @@ vim.o.fillchars = "diff:╱"
 vim.cmd("set iskeyword+=-") -- treat dash separated words as a word text object"
 vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
 
--- vim.o.title = true
--- TERMINAL = vim.fn.expand('$TERMINAL')
--- vim.cmd('let &titleold="'..TERMINAL..'"')
--- vim.o.titlestring="%t"
--- vim.cmd('autocmd BufEnter * let &titlestring = " " . expand("%:t")')
-
 vim.o.fileencoding = "utf-8" -- The encoding written to file
 vim.o.termguicolors = true -- set term gui colors most terminals support this
 vim.wo.cursorline = true -- Enable highlighting of the current line
@@ -62,24 +56,6 @@ vim.o.backup = false -- This is recommended by coc
 vim.o.writebackup = false -- This is recommended by coc
 vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = 500 -- Faster mapping timeout
-
--- disable automatic comment insertion
-vim.cmd("autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o")
--- vim.cmd('set formatoptions-=c formatoptions-=r formatoptions-=o')
-
-vim.cmd("let g:numbertoggle=0")
-vim.api.nvim_exec(
-  [[
-    augroup NumberToggleAutogroup
-      autocmd!
-      autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && g:numbertoggle != 1 && mode() != "i" | set rnu | endif
-      autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &nu && g:numbertoggle != 1 | set nornu | endif
-    augroup END
-  ]],
-  true
-)
-
-vim.cmd([[ au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Search", timeout=200} ]])
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = "all",
@@ -100,12 +76,10 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
--- TODO does not work, set in extra.vim for now
--- vim.cmd('set foldexpr=nvim_treesitter#foldexpr()')
 vim.g.foldmethod = "expr"
 vim.g.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.cmd("set nofoldenable")
+vim.o.foldenable = false
 
 vim.cmd([[ let g:node_host_prog = '~/.fnm/node-versions/v16.13.0/installation/bin/neovim-node-host' ]])
