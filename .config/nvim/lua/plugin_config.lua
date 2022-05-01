@@ -1,3 +1,6 @@
+require("impatient")
+-- require("impatient").enable_profile()
+
 local map_opts = { silent = true, noremap = true }
 
 -- Colorscheme config
