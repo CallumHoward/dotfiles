@@ -15,6 +15,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   command = "source <afile> | PackerCompile",
 })
 
+-- Load vim pack plugins
+vim.cmd("packadd! cfilter")
+-- vim.cmd("packadd! termdebug")
+
+-- Limit parallel jobs to prevent failures
 require("packer").init({
   max_jobs = 8,
 })
