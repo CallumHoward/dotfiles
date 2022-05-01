@@ -42,6 +42,9 @@ return require("packer").startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
+    config = function()
+      require("plugins.telescope_config")
+    end,
   })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
   use("kevinhwang91/nvim-bqf")
@@ -121,7 +124,11 @@ return require("packer").startup(function(use)
   use("CallumHoward/vim-lcov")
 
   -- Source control features
-  use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
+  use({
+    "lewis6991/gitsigns.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function() require("plugins.gitsigns_config") end,
+  })
   use({
     "ruifm/gitlinker.nvim",
     requires = "nvim-lua/plenary.nvim",
