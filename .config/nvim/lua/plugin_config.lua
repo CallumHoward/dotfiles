@@ -109,9 +109,6 @@ require("nvim-tree").setup({
   },
 })
 
--- Completion
-require("cmp_config")
-
 -- DiffView config
 local cb = require("diffview.config").diffview_callback
 require("diffview").setup({
@@ -276,10 +273,6 @@ require("nvim-treesitter.configs").setup({
 require("nvim-autopairs").setup({
   disable_filetype = { "TelescopePrompt", "vim" },
 })
-
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local cmp = require("cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
 -- Import cost config
 vim.api.nvim_exec(

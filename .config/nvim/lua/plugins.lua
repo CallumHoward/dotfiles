@@ -99,7 +99,6 @@ return require("packer").startup(function(use)
   use("hrsh7th/cmp-nvim-lua")
   use("hrsh7th/cmp-path")
   use("hrsh7th/cmp-vsnip")
-  use("hrsh7th/nvim-cmp")
   use("hrsh7th/vim-vsnip")
   use("dmitmel/cmp-cmdline-history")
   use("ray-x/cmp-treesitter")
@@ -107,6 +106,12 @@ return require("packer").startup(function(use)
   use("onsails/lspkind-nvim")
   use("rafamadriz/friendly-snippets")
   use({ "tzachar/cmp-tabnine", run = "./install.sh" })
+  use({
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require("plugins.cmp_config")
+    end,
+  })
 
   -- Debug
   -- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
@@ -140,7 +145,9 @@ return require("packer").startup(function(use)
   use({
     "lewis6991/gitsigns.nvim",
     requires = "nvim-lua/plenary.nvim",
-    config = function() require("plugins.gitsigns_config") end,
+    config = function()
+      require("plugins.gitsigns_config")
+    end,
   })
   use({
     "ruifm/gitlinker.nvim",
