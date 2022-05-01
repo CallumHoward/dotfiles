@@ -1,17 +1,19 @@
---- Bootstrap packer
-local execute = vim.api.nvim_command
+-- Bootstrap packer
 local fn = vim.fn
-
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
+local repo_path = "https://github.com/wbthomason/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({ "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path })
-  execute("packadd packer.nvim")
+  packer_bootstrap = fn.system({ "git", "clone", "--depth", "1", repo_path, install_path })
 end
---- End bootstrap
+-- End bootstrap
 
 -- Auto compile when there are changes in plugins.lua
-vim.cmd("autocmd BufWritePost plugins.lua PackerCompile")
+local packer_user_config = vim.api.nvim_create_augroup("PackerUserConfig", {})
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = packer_user_config,
+  pattern = "plugins.lua",
+  command = "source <afile> | PackerCompile",
+})
 
 require("packer").init({
   max_jobs = 8,
@@ -149,4 +151,9 @@ return require("packer").startup(function(use)
   use("tpope/vim-commentary")
   use("tpope/vim-sleuth")
   use("tpope/vim-abolish")
+
+  -- Automatically set up configuration after cloning packer.nvim
+  if packer_bootstrap then
+    require("packer").sync()
+  end
 end)
