@@ -103,10 +103,10 @@ require("nvim-tree").setup({
       enable = true,
     },
   },
-  tree_follow = true,
   disable_netrw = true,
-  nvim_tree_ignore = { ".git", "node_modules" },
-  nvim_tree_gitignore = true,
+  filters = {
+    dotfiles = true,
+  },
 })
 
 -- Completion
