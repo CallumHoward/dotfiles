@@ -5,18 +5,6 @@
 nnoremap ' `
 nnoremap ` '
 
-" toggle relative line numbers
-function! ToggleLineNumber()
-  if g:numbertoggle != 1
-    let g:numbertoggle = 1
-  else
-    let g:numbertoggle = 0
-  endif
-  setl rnu!
-endfunction
-
-nnoremap <silent><C-Space> :call ToggleLineNumber()<CR>
-
 " select last pasted
 nnoremap gV `[v`]
 
@@ -31,22 +19,14 @@ nnoremap <leader>E :vs %<.
 " toggle diff
 function! ToggleDiff()
     if &diff
-        ScrollViewEnable
         windo diffoff
     else
-        ScrollViewDisable
         windo diffthis
     endif
     wincmd w
 endfunction
 
 nnoremap <leader>d :call ToggleDiff()<CR>
-
-let g:tbone_write_pane='bottom-right'
-nnoremap <leader>t V:Twrite<CR>
-xnoremap <leader>t :Twrite<CR>
-nnoremap <leader><CR> V:Twrite<CR>:Tmux send-keys -t bottom Enter<CR>
-xnoremap <CR> :Twrite!<CR>:Tmux send-keys -t bottom Enter<CR>
 
 nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
@@ -289,31 +269,9 @@ cabbrev Bd! <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'bd!' : 'Bd!')<CR>
 nnoremap <silent> <Leader><C-W>c <cmd>BufferClose<CR>
 nnoremap <silent> <Leader><C-W>o <cmd>BufferCloseAllButCurrent<CR>
 
-" Git
-command! -nargs=? -bar MB call setqflist(map(systemlist("git diff master...HEAD --pretty='' --name-only <args>"), '{"filename": v:val, "lnum": 1}'))<Bar>:Telescope quickfix
-command! MB1 :MB
-
-command! F :Telescope fd
-command! F1 :Telescope fd
-command! S :Telescope git_status
-command! S1 :Telescope git_status
-command! GF :Telescope git_files
-command! B :Telescope buffers
-command! M :Telescope marks
-command! H :Telescope oldfiles
-command! L :Telescope current_buffer_fuzzy_find
-command! QF :Telescope quickfix
-command! WS :Telescope lsp_dynamic_workspace_symbols
-command! RG :Telescope grep_string
-command! RGG :Telescope live_grep
-command! RGB :Telescope live_grep grep_open_files=true
-nnoremap <leader>: :Telescope commands
-cabbrev T <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Telescope' : 'T')<CR>
-
 " Prettier
 " command! P :!prettier --write "%"
 command! P :FormatWrite
 
 " Lcov
 command! C :set fdm=manual | LcovVisible coverage/lcov.info
-
