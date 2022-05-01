@@ -132,19 +132,16 @@ require("diffview").setup({
 })
 
 -- Git linker config
-require("gitlinker").setup()
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>gb",
-  '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-  { silent = true }
-)
-vim.api.nvim_set_keymap(
-  "v",
-  "<leader>gb",
-  '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-  { silent = true }
-)
+local gl = require("gitlinker")
+local gla = require("gitlinker.actions")
+local function open_blame()
+  gl.get_buf_range_url("n", {
+    action_callback = gla.open_in_browser,
+  })
+end
+gl.setup()
+vim.keymap.set("n", "<leader>gb", open_blame)
+vim.keymap.set("v", "<leader>gb", open_blame)
 
 -- Symbols outline config
 vim.g.symbols_outline = {
@@ -210,8 +207,9 @@ vim.cmd(
 )
 
 -- bufjump config
-vim.api.nvim_set_keymap("n", "<M-o>", "<cmd>lua require('bufjump').backward()<CR>", map_opts)
-vim.api.nvim_set_keymap("n", "<M-i>", "<cmd>lua require('bufjump').forward()<CR>", map_opts)
+local bj = require("bufjump")
+vim.keymap.set("n", "<M-o>", bj.backward)
+vim.keymap.set("n", "<M-i>", bj.forward)
 
 require("nvim-treesitter.configs").setup({
   -- nvim-ts-context-commentstring config
@@ -299,7 +297,7 @@ vim.keymap.set("n", "<leader>nu", pi.update) -- Update package on line
 vim.keymap.set("n", "<leader>nd", pi.delete) -- Delete package on line
 vim.keymap.set("n", "<leader>ni", pi.install) -- Install a new package
 vim.keymap.set("n", "<leader>nr", pi.reinstall) -- Reinstall dependencies
-vim.keymap.set("n", "<leader>np", pi.changeversion) -- Install a different package version
+-- vim.keymap.set("n", "<leader>np", pi.changeversion) -- Install a different package version
 
 -- Debug
 -- require("dapui").setup()
