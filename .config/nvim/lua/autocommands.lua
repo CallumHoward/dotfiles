@@ -1,31 +1,27 @@
 -- Disable automatic comment insertion
-local format_options_autogroup = vim.api.nvim_create_augroup("FormatOptionsAutogroup", {})
 vim.api.nvim_create_autocmd("FileType", {
-  group = format_options_autogroup,
+  group = vim.api.nvim_create_augroup("FormatOptionsAutogroup", {}),
   pattern = "*",
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
 })
 
 -- Filetype handling
-local file_type_autogroup = vim.api.nvim_create_augroup("FileTypeAutogroup", {})
 vim.api.nvim_create_autocmd("BufEnter", {
-  group = file_type_autogroup,
+  group = vim.api.nvim_create_augroup("FileTypeAutogroup", {}),
   pattern = "*.js.tftmpl",
   command = "setlocal filetype=javascript",
 })
 
 -- Skeletons
-local skeletons_autogroup = vim.api.nvim_create_augroup("SkeletonsAutogroup", {})
 vim.api.nvim_create_autocmd("BufNewFile", {
-  group = skeletons_autogroup,
+  group = vim.api.nvim_create_augroup("SkeletonsAutogroup", {}),
   pattern = "*.test.tsx",
   command = "0r ~/.config/nvim/skeletons/jest.test.tsx",
 })
 
 -- Restore cursor position
-local restore_cursor_pos_autogroup = vim.api.nvim_create_augroup("RestoreCursorPosAutogroup", {})
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = restore_cursor_pos_autogroup,
+  group = vim.api.nvim_create_augroup("RestoreCursorPosAutogroup", {}),
   pattern = "*",
   command = [[ if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif ]],
 })
@@ -76,9 +72,8 @@ vim.keymap.set("n", "<C-Space>", function()
 end)
 
 -- Yank highlight
-local yank_highlight_autogroup = vim.api.nvim_create_augroup("YankHighlightAutogroup", {})
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = yank_highlight_autogroup,
+  group = vim.api.nvim_create_augroup("YankHighlightAutogroup", {}),
   pattern = "*",
   callback = function()
     vim.highlight.on_yank({ higroup = "Search", timeout = 200 })
