@@ -86,9 +86,11 @@ local changed_on_branch = function()
 end
 
 local resume_or_builtin = function()
-  local ok = pcall(t.resume)
-  if not ok then
+  local cached_pickers = require("telescope.state").get_global_key("cached_pickers")
+  if cached_pickers == nil or vim.tbl_isempty(cached_pickers) then
     t.builtin()
+  else
+    t.resume()
   end
 end
 
