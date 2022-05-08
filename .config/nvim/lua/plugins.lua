@@ -38,7 +38,12 @@ return require("packer").startup(function(use)
   use("kyazdani42/nvim-web-devicons")
   use("joeytwiddle/sexy_scroller.vim")
   use("dstein64/nvim-scrollview")
-  use("lukas-reineke/indent-blankline.nvim")
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("plugins.indent_blankline")
+    end,
+  })
   use({ "romgrk/barbar.nvim", requires = { "~/git/nvim-web-devicons" } })
   use("kshenoy/vim-signature")
   -- use 'folke/which-key.nvim'
