@@ -63,7 +63,13 @@ return require("packer").startup(function(use)
   use("kevinhwang91/nvim-bqf")
 
   -- Language features
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function()
+      require("plugins.treesitter_config")
+    end,
+  })
   use("nvim-treesitter/playground")
   use("nvim-treesitter/nvim-treesitter-textobjects")
   use("vim-scripts/SyntaxAttr.vim")
