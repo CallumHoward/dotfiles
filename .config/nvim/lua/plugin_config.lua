@@ -1,8 +1,3 @@
-require("impatient")
--- require("impatient").enable_profile()
-
-local map_opts = { silent = true, noremap = true }
-
 -- Colorscheme config
 vim.g.tokyonight_style = "storm"
 vim.g.tokyonight_italic_keywords = false

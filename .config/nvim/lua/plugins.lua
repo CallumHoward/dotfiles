@@ -26,7 +26,13 @@ require("packer").init({
 
 return require("packer").startup(function(use)
   use("wbthomason/packer.nvim") -- Package manager
-  use("lewis6991/impatient.nvim") -- Startup cache
+  use({
+    "lewis6991/impatient.nvim",
+    config = function()
+      require("impatient")
+      -- require("impatient").enable_profile()
+    end,
+  }) -- Startup cache
 
   -- Colorscheme
   use("folke/tokyonight.nvim")
