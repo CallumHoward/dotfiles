@@ -137,7 +137,7 @@ alias lgmb="lg master...HEAD"
 alias gdmbf='gdmb `gdmb --name-only | fzf -m --preview "git diff --color=always master...HEAD {}"`'
 alias gddmbf='gddmb `gdmb --name-only | fzf -m --preview "git diff --color=always master...HEAD {}"`'
 alias co="git_checkout"
-alias cof="ba | grep -v master | fzf --preview='{ git diff --color=always --stat master...{}; git diff --color=always master...{}; } | diff-so-fancy' | xargs git checkout"
+alias cof="ba | grep -v master | fzf --preview='{ git diff --color=always --stat master...{}; git diff --color=always master...{}; } | ~/git/git-split-diffs/bin/git-split-diffs --color' | xargs git checkout"
 alias ba="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
 alias baa="git branch -a"
 alias push="git push"
