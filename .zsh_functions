@@ -187,10 +187,6 @@ function git_checkout() {
     fi
 }
 
-function RG() {
-    v "+RG! $@"
-}
-
 function vman() {
     nvim -R -c "Goyo | Man $@ | wincmd w | bd | nnoremap q :qa!<CR>"
 }
