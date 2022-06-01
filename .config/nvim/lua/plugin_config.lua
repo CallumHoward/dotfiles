@@ -35,43 +35,6 @@ vim.cmd("cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \\| Ranger'
 vim.cmd("cabbrev spa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'sp \\| Ranger' : 'ra')<CR>")
 vim.cmd("cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \\| Ranger' : 'ra')<CR>")
 
--- NvimTree
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_highlight_opened_files = 3
-vim.g.nvim_tree_show_icons = {
-  git = 0,
-  folders = 1,
-  files = 1,
-  folder_arrows = 0,
-}
-vim.g.nvim_tree_icons = {
-  default = "",
-  diagnostics = {
-    enable = true,
-    icons = {
-      error = "",
-      warning = "",
-      hint = "",
-      info = "",
-    },
-  },
-}
-require("nvim-tree").setup({
-  update_focused_file = {
-    enable = true,
-  },
-  renderer = {
-    indent_markers = {
-      enable = true,
-    },
-  },
-  disable_netrw = true,
-  filters = {
-    dotfiles = true,
-  },
-})
-
 -- DiffView config
 local cb = require("diffview.config").diffview_callback
 require("diffview").setup({
