@@ -7,6 +7,7 @@ require("autocommands")
 require("lsp")
 require("lsp.emmet-ls")
 require("lsp.lua-ls")
+require("lsp.null-ls")
 require("lsp.typescript-ls")
 require("lsp.json-ls")
 
