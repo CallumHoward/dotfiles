@@ -174,7 +174,12 @@ return require("packer").startup(function(use)
   use("ygm2/rooter.nvim")
 
   -- Other features
-  use("kyazdani42/nvim-tree.lua")
+  use({
+    "kyazdani42/nvim-tree.lua",
+    config = function()
+      require("plugins.nvim_tree_config")
+    end,
+  })
   use("dstein64/vim-startuptime")
 
   -- Mapping plugins
