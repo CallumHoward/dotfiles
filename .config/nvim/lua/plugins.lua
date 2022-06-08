@@ -30,7 +30,7 @@ return require("packer").startup(function(use)
     "lewis6991/impatient.nvim",
     config = function()
       require("impatient")
-      -- require("impatient").enable_profile()
+      -- require("impatient").enable_profile() -- uncommend and use :LuaCacheProfile
     end,
   }) -- Startup cache
 
@@ -47,7 +47,7 @@ return require("packer").startup(function(use)
   use({
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("plugins.indent_blankline")
+      require("plugins.indent_blankline_config")
     end,
   })
   use({ "romgrk/barbar.nvim", requires = { "~/git/nvim-web-devicons" } })
@@ -156,7 +156,7 @@ return require("packer").startup(function(use)
   })
   use("hauleth/asyncdo.vim")
   -- use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
-  use("CallumHoward/vim-lcov")
+  use({ "CallumHoward/vim-lcov", cmd = "LcovVisible" })
 
   -- Source control features
   use({
