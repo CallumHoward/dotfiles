@@ -50,10 +50,10 @@ return require("packer").startup(function(use)
       require("plugins.indent_blankline_config")
     end,
   })
-  use({ "romgrk/barbar.nvim", requires = { "~/git/nvim-web-devicons" } })
+  use({ "romgrk/barbar.nvim", tag = "release/1.0.0", requires = { "kyazdani42/nvim-web-devicons" } })
   use("kshenoy/vim-signature")
   -- use 'folke/which-key.nvim'
-  use({ "~/git/vim-hexokinase", run = { "make hexokinase" } }) -- preview colours
+  use({ "RRethy/vim-hexokinase", run = { "make hexokinase" } }) -- preview colours
   use("KabbAmine/vCoolor.vim") -- show OS colour picker
   use("rcarriga/nvim-notify")
 
@@ -83,7 +83,7 @@ return require("packer").startup(function(use)
   use("JoosepAlviste/nvim-ts-context-commentstring")
   use("windwp/nvim-autopairs")
   use("windwp/nvim-ts-autotag")
-  use({ "~/git/vim-import-cost", run = "npm install" })
+  use({ "CallumHoward/vim-import-cost", run = "npm install" })
   use({
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
