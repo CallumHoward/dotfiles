@@ -83,7 +83,8 @@ return require("packer").startup(function(use)
   use("JoosepAlviste/nvim-ts-context-commentstring")
   use("windwp/nvim-autopairs")
   use("windwp/nvim-ts-autotag")
-  use({ "CallumHoward/vim-import-cost", run = "npm install" })
+  use({ "yardnsm/vim-import-cost", run = "npm install" })
+  use({'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'})
   use({
     "vuki656/package-info.nvim",
     requires = "MunifTanjim/nui.nvim",
