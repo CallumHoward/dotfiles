@@ -51,7 +51,7 @@ plugins=( \
     fast-syntax-highlighting
     zsh-autosuggestions \
     zsh-vim-mode \
-    history-search-multi-word \
+    H-S-MW \
 )
 
 source $ZSH/oh-my-zsh.sh
