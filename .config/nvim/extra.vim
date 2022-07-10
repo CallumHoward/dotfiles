@@ -51,4 +51,4 @@ if has('nvim') && !has('gui_running') && $TERM_PROGRAM == 'Apple_Terminal'
 endif
 
 let g:python3_host_prog = '/usr/local/bin/python3'
-
+let g:ultest_deprecation_notice = 0
