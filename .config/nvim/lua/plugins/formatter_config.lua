@@ -14,6 +14,14 @@ local prettier_config = {
   end,
 }
 
+local flutter_config = {
+  function()
+    return {
+      exe = "flutter format",
+    }
+  end,
+}
+
 local clang_format_config = {
   function()
     return {
@@ -76,11 +84,12 @@ require("formatter").setup({
     c = clang_format_config,
     go = gofmt_config,
     swift = swift_format_config,
+    dart = flutter_config,
   },
 })
 
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = vim.api.nvim_create_augroup("FormatterAutogroup", {}),
-  pattern = { "*.lua", "*.cpp", "*.hpp", "*.c", "*.h", "*.go", "*.swift", "*.tsx", "*.ts" },
+  pattern = { "*.lua", "*.cpp", "*.hpp", "*.c", "*.h", "*.go", "*.swift", "*.tsx", "*.ts", "*.svelte", "*.dart" },
   command = "FormatWrite",
 })

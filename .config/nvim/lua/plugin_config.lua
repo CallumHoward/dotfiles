@@ -6,6 +6,7 @@ vim.g.tokyonight_sidebars = {
   "qf",
   "vista_kind",
   "Outline",
+  "flutterToolsOutline",
   "terminal",
   "packer",
   "help",
@@ -165,3 +166,12 @@ vim.keymap.set("n", "<leader>nr", pi.reinstall) -- Reinstall dependencies
 
 -- AsyncDo
 vim.cmd([[command! -bang -nargs=* -complete=file Make call asyncdo#run(<bang>0, &makeprg, <f-args>)]])
+
+require("flutter-tools").setup({
+  widget_guides = {
+    enabled = true,
+  },
+  outline = {
+    open_cmd = "30vnew",
+  },
+})
