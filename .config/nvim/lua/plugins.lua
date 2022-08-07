@@ -98,6 +98,13 @@ return require("packer").startup(function(use)
   use("kosayoda/nvim-lightbulb")
   use("ray-x/lsp_signature.nvim")
   use({
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig",
+    config = function()
+      require("plugins.nvim_navic_config")
+    end,
+  })
+  use({
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
   })
