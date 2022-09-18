@@ -197,7 +197,7 @@ tnoremap <C-W><C-K> <C-\><C-N><C-W><C-K>
 tnoremap <C-W><C-L> <C-\><C-N><C-W><C-L>
 
 nnoremap <silent> <Leader>\ :NvimTreeToggle<CR>:NvimTreeRefresh<CR>
-nnoremap <leader><C-i> :SymbolsOutline<CR>
+nnoremap <leader><Tab> :SymbolsOutline<CR>
 
 cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.')<CR>
 command! Cdg exec 'cd' fnameescape(fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ') . ';'), ':h'))
