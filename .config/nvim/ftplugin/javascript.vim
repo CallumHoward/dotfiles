@@ -28,3 +28,6 @@ nnoremap <leader>jo $/\<\(it\\|describe\\|test\)\>\ze(/e<CR>Na.only<Esc>
 nnoremap <leader>jO $/\.only\><CR>N:s///<CR>
 nnoremap <leader>js $/\<\(it\\|describe\\|test\)\>\ze(/e<CR>Na.skip<Esc>
 nnoremap <leader>jS $/\.skip\><CR>N:s///<CR>
+
+nmap <leader>ja dsB:keeppatterns s/\s*\<return\>//<CR>:silent! keeppatterns s/;$//<CR>J
+nmap <leader>jA ysifB:keeppatterns s/=>\s{/&return /<CR>
