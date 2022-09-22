@@ -1,19 +1,3 @@
--- Colorscheme config
-vim.g.tokyonight_style = "storm"
-vim.g.tokyonight_italic_keywords = false
-vim.g.tokyonight_dark_sidebar = true
-vim.g.tokyonight_sidebars = {
-  "qf",
-  "vista_kind",
-  "Outline",
-  "flutterToolsOutline",
-  "terminal",
-  "packer",
-  "help",
-  "UltestSummary",
-  "nofile",
-}
-
 -- vim-notify config
 vim.notify = require("notify")
 

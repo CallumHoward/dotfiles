@@ -35,10 +35,15 @@ return require("packer").startup(function(use)
   }) -- Startup cache
 
   -- Colorscheme
-  use("folke/tokyonight.nvim")
-  use("cocopon/iceberg.vim")
-  use("mhartington/oceanic-next")
-  use("w0ng/vim-hybrid")
+  use({
+    "folke/tokyonight.nvim",
+    config = function()
+      require("plugins.tokyonight_config")
+    end,
+  })
+  -- use("cocopon/iceberg.vim")
+  -- use("mhartington/oceanic-next")
+  -- use("w0ng/vim-hybrid")
 
   -- Cosmetic features
   use("kyazdani42/nvim-web-devicons")
