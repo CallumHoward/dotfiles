@@ -30,8 +30,6 @@ nnoremap <leader>d :call ToggleDiff()<CR>
 
 nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
-nnoremap <silent><C-W>c :ScrollViewDisable<CR><C-W>c:ScrollViewEnable<CR>
-
 nmap cst #V%o\sa<BS>
 
 " move tabs
@@ -169,7 +167,7 @@ nnoremap <silent> <expr> <leader>w @/ =~# '^\\<.*\\>$'
 inoremap <silent><C-R>/ <C-O>:let @m=substitute(@/, "\\\\<\\\|\\\\V\\\|\\\\>", "", "g")<CR><C-R>m
 
 " save temp session
-nnoremap <leader>]] :ScrollViewDisable <bar> mks! ~/sess/temp_session.vim <bar> ScrollViewEnable<CR>
+nnoremap <leader>]] :mks! ~/sess/temp_session.vim<CR>
 nnoremap <leader>[[ :source ~/sess/temp_session.vim<CR>
 
 augroup TerminalConfig
