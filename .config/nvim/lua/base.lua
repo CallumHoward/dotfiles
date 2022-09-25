@@ -31,6 +31,8 @@ vim.cmd("set scrolloff=1")
 vim.o.pumheight = 5 -- completion menu size
 vim.o.pumblend = 9 -- transparency for completion menu
 vim.o.winblend = 9 -- transparency for floating windows
+vim.o.winminheight = 0
+vim.o.winminwidth = 0
 
 vim.cmd("set ignorecase") -- for search patterns
 vim.cmd("set smartcase") -- don't ignore case if capital is used
