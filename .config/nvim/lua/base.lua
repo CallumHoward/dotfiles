@@ -12,8 +12,8 @@ vo.relativenumber = true
 vo.list = true
 -- vo.signcolumn = "number" -- Merge signcolumn with number column
 vo.signcolumn = "yes" -- Always show signcolumn
-vo.shortmess = vo.shortmess + "I" -- Don't show welcome message
-vo.shortmess = vo.shortmess + "c" -- Don't pass messages to |ins-completion-menu|.
+vo.shortmess:append("I") -- Don't show welcome message
+vo.shortmess:append("c") -- Don't pass messages to |ins-completion-menu|.
 vo.showcmd = false -- Don't show extra info at end of command line
 vo.ruler = false -- Don't show character and line numbers
 
@@ -27,7 +27,7 @@ vo.breakindent = true -- Wrapped text is indented
 vo.breakindentopt = "sbr,shift:0,min:20" -- Config for breakindent
 vo.showbreak = "↳ "
 vo.breakat = " ,{"
-vo.cpoptions = vo.cpoptions + "n" -- Column calc for wrapped lines
+vo.cpoptions:append("n") -- Column calc for wrapped lines
 vo.scrolloff = 1 -- Leave 1 line visible at the top and bottom of window when scrolling
 
 vo.pumheight = 5 -- Completion menu size
@@ -49,7 +49,7 @@ vo.splitbelow = true -- Horizontal splits will automatically be below
 vo.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic"
 vo.fillchars = "diff:╱"
 
-vo.iskeyword = vo.iskeyword + "-" -- Treat dash separated words as a word text object"
+vo.iskeyword:append("-") -- Treat dash separated words as a word text object"
 vo.hidden = true -- Required to keep multiple buffers open multiple buffers
 
 vo.fileencoding = "utf-8" -- The encoding written to file
