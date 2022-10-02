@@ -279,6 +279,10 @@ function ls_wrapper() {
     fi
 }
 
+function ct() {
+    export DISABLE_AUTO_TITLE=true && tmux rename-window " $1"
+}
+
 function cleanpipe() {
     # usage: cleanpipe tcp:9999
     lsof -i "$1"
