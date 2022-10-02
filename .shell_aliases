@@ -154,6 +154,10 @@ alias gu="gitup"
 alias nvm="fnm"
 #alias br="browse" #conflict
 
+alias ni="n install"
+alias na="n add"
+alias nu="n uninstall"
+
 alias snatch="zou"
 alias translate="trans"
 alias dict="trans -d"
@@ -186,6 +190,7 @@ if [ ! $BASH ]; then
     compdef _git pull=git-pull
     compdef _git show=git-show
     compdef _git clo=git-clone
+    compdef _yarn n=yarn
 fi
 
 alias show_desktop_icons="defaults write com.apple.finder CreateDesktop true; killall Finder"
@@ -247,9 +252,9 @@ else
     alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
 fi
 
-if command -v jq > /dev/null 2>&1; then
-    alias jq="python -m json.tool"
-fi
+# if command -v jq > /dev/null 2>&1; then
+#     alias jq="python -m json.tool"
+# fi
 
 function ls_wrapper() {
     local bin
