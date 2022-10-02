@@ -1,85 +1,65 @@
 vim.cmd("colorscheme tokyonight")
 
-vim.o.mouse = "a" -- Enable your mouse
+local vo = vim.opt
 
-vim.api.nvim_set_keymap("i", "kj", "<ESC>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("s", "kj", "<ESC>", { noremap = true, silent = true })
+vo.mouse = "a" -- Enable mouse
 
-vim.wo.number = true -- Set numbered lines
-vim.wo.relativenumber = true
-vim.wo.list = true
--- vim.cmd("set signcolumn=number") -- merge signcolumn with number column
-vim.cmd("set signcolumn=yes") -- always show signcolumn
-vim.cmd("set shortmess+=I") -- Don't show welcome message
-vim.cmd("set shortmess+=c") -- Don't pass messages to |ins-completion-menu|.
-vim.cmd("set noshowcmd")
-vim.cmd("set noruler")
+vim.keymap.set("i", "kj", "<ESC>")
+vim.keymap.set("s", "kj", "<ESC>")
 
-vim.cmd("set expandtab") -- Converts tabs to spaces
-vim.cmd("set shiftwidth=2") -- Change the number of space characters inserted for indentation
-vim.cmd("set tabstop=2") -- Insert 2 spaces for a tab
-vim.cmd("set softtabstop=2") -- Change the number of space characters inserted for indentation
-vim.bo.smartindent = true -- indent based on filetype
-vim.wo.linebreak = true -- wrap long lines at characters in 'breakat'
-vim.wo.breakindent = true -- wrapped text is indented
-vim.cmd("set briopt=sbr,shift:0,min:20") -- config for breakindent
-vim.cmd('let &showbreak="↳ "')
-vim.cmd('let &breakat=" ,{"')
-vim.cmd("set cpoptions+=n")
-vim.cmd("set scrolloff=1")
+vo.number = true -- Set numbered lines
+vo.relativenumber = true
+vo.list = true
+-- vo.signcolumn = "number" -- Merge signcolumn with number column
+vo.signcolumn = "yes" -- Always show signcolumn
+vo.shortmess:append("I") -- Don't show welcome message
+vo.shortmess:append("c") -- Don't pass messages to |ins-completion-menu|.
+vo.showcmd = false -- Don't show extra info at end of command line
+vo.ruler = false -- Don't show character and line numbers
 
-vim.o.pumheight = 5 -- completion menu size
-vim.o.pumblend = 9 -- transparency for completion menu
-vim.o.winblend = 9 -- transparency for floating windows
+vo.expandtab = true -- Converts tabs to spaces
+vo.shiftwidth = 2 -- Change the number of space characters inserted for indentation
+vo.tabstop = 2 -- Insert 2 spaces for a tab
+vo.softtabstop = 2 -- Change the number of space characters inserted for indentation
+vo.smartindent = true -- Indent based on filetype
+vo.linebreak = true -- Wrap long lines at characters in 'breakat'
+vo.breakindent = true -- Wrapped text is indented
+vo.breakindentopt = "sbr,shift:0,min:20" -- Config for breakindent
+vo.showbreak = "↳ "
+vo.breakat = " ,{"
+vo.cpoptions:append("n") -- Column calc for wrapped lines
+vo.scrolloff = 1 -- Leave 1 line visible at the top and bottom of window when scrolling
 
-vim.cmd("set ignorecase") -- for search patterns
-vim.cmd("set smartcase") -- don't ignore case if capital is used
+vo.pumheight = 5 -- Completion menu size
+vo.pumblend = 9 -- Transparency for completion menu
+vo.winblend = 9 -- Transparency for floating windows
+vo.winminheight = 0
+vo.winminwidth = 0
 
-vim.o.undofile = true
-vim.cmd("set wildmode=longest,full")
-vim.cmd("set wildignorecase")
--- vim.cmd("set wildoptions=pum,tagfile")
+vo.ignorecase = true -- For search patterns
+vo.smartcase = true -- Don't ignore case if capital is used
 
-vim.o.splitright = true -- Vertical splits will automatically be to the right
-vim.o.splitbelow = true -- Horizontal splits will automatically be below
+vo.undofile = true
+vo.wildmode = "longest,full"
+vo.wildignorecase = true
 
-vim.o.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic"
-vim.o.fillchars = "diff:╱"
+vo.splitright = true -- Vertical splits will automatically be to the right
+vo.splitbelow = true -- Horizontal splits will automatically be below
 
-vim.cmd("set iskeyword+=-") -- treat dash separated words as a word text object"
-vim.o.hidden = true -- Required to keep multiple buffers open multiple buffers
+vo.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic"
+vo.fillchars = "diff:╱"
 
-vim.o.fileencoding = "utf-8" -- The encoding written to file
-vim.o.termguicolors = true -- set term gui colors most terminals support this
-vim.wo.cursorline = true -- Enable highlighting of the current line
-vim.o.backup = false -- This is recommended by coc
-vim.o.writebackup = false -- This is recommended by coc
-vim.o.updatetime = 300 -- Faster completion
-vim.o.timeoutlen = 500 -- Faster mapping timeout
+vo.iskeyword:append("-") -- Treat dash separated words as a word text object"
+vo.hidden = true -- Required to keep multiple buffers open multiple buffers
 
-require("nvim-treesitter.configs").setup({
-  ensure_installed = "all",
-  highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = {}, -- list of language that will be disabled
-  },
-  indent = {
-    enable = true,
-  },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-    config = {
-      c = "// %s",
-      cpp = "// %s",
-    },
-  },
-})
+vo.fileencoding = "utf-8" -- The encoding written to file
+vo.termguicolors = true -- Set term gui colors most terminals support this
+vo.cursorline = true -- Enable highlighting of the current line
+vo.backup = false -- This is recommended by coc
+vo.writebackup = false -- This is recommended by coc
+vo.updatetime = 300 -- Faster completion
+vo.timeoutlen = 500 -- Faster mapping timeout
 
-vim.g.foldmethod = "expr"
-vim.g.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldenable = false
-
-vim.cmd([[ let g:node_host_prog = '~/.fnm/node-versions/v16.13.0/installation/bin/neovim-node-host' ]])
+vo.foldmethod = "expr"
+vo.foldexpr = "nvim_treesitter#foldexpr()"
+vo.foldenable = false

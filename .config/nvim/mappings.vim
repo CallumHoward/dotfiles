@@ -30,8 +30,6 @@ nnoremap <leader>d :call ToggleDiff()<CR>
 
 nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
-nnoremap <silent><C-W>c :ScrollViewDisable<CR><C-W>c:ScrollViewEnable<CR>
-
 nmap cst #V%o\sa<BS>
 
 " move tabs
@@ -94,6 +92,46 @@ nnoremap <silent>]t gt
 nnoremap <silent>[t gT
 nnoremap <silent>[T :tabfirst<CR>
 nnoremap <silent>]T :tablast<CR>
+
+" unimpaired move line mappings
+function! s:ExecMove(cmd) abort
+  let old_fdm = &foldmethod
+  if old_fdm !=# 'manual'
+    let &foldmethod = 'manual'
+  endif
+  normal! m`
+  silent! exe a:cmd
+  norm! ``
+  if old_fdm !=# 'manual'
+    let &foldmethod = old_fdm
+  endif
+endfunction
+
+function! s:Move(cmd, count, map) abort
+  call s:ExecMove('move'.a:cmd.a:count)
+  silent! call repeat#set("\<Plug>(unimpaired-move-".a:map.")", a:count)
+endfunction
+
+function! s:MoveSelectionUp(count) abort
+  call s:ExecMove("'<,'>move'<--".a:count)
+  silent! call repeat#set("\<Plug>(unimpaired-move-selection-up)", a:count)
+endfunction
+
+function! s:MoveSelectionDown(count) abort
+  call s:ExecMove("'<,'>move'>+".a:count)
+  silent! call repeat#set("\<Plug>(unimpaired-move-selection-down)", a:count)
+endfunction
+
+nnoremap <silent> <Plug>unimpairedMoveUp            :<C-U>call <SID>Move('--',v:count1,'up')<CR>
+nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:count1,'down')<CR>
+noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
+noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
+nnoremap <silent><M-k> <Plug>unimpairedMoveUp\|==
+nnoremap <silent><M-j> <Plug>unimpairedMoveDown\|==
+xnoremap <silent><M-k> <Plug>unimpairedMoveSelectionUp\|gv=gv
+xnoremap <silent><M-j> <Plug>unimpairedMoveSelectionDown\|gv=gv
+inoremap <silent><M-k> <Esc>:m-2<CR>==gi
+inoremap <silent><M-j> <Esc>:m+1<CR>==gi
 
 nnoremap <silent>[[ ?^\S<CR>:noh<CR>
 nnoremap <silent>]] /^\S<CR>:noh<CR>
@@ -169,7 +207,7 @@ nnoremap <silent> <expr> <leader>w @/ =~# '^\\<.*\\>$'
 inoremap <silent><C-R>/ <C-O>:let @m=substitute(@/, "\\\\<\\\|\\\\V\\\|\\\\>", "", "g")<CR><C-R>m
 
 " save temp session
-nnoremap <leader>]] :ScrollViewDisable <bar> mks! ~/sess/temp_session.vim <bar> ScrollViewEnable<CR>
+nnoremap <leader>]] :mks! ~/sess/temp_session.vim<CR>
 nnoremap <leader>[[ :source ~/sess/temp_session.vim<CR>
 
 augroup TerminalConfig
