@@ -194,6 +194,30 @@ compdef vman="man"
 
 function Terminal() { tmux attach 2>/dev/null || tmux new }
 
+function n() {
+    local root=$(npm root)
+    local bin="npm"
+    if [ -f "${root}/../pnpm-lock.yaml" ]; then
+        bin="pnpm"
+    elif [ -f "${root}/../yarn.lock" ]; then
+        bin="yarn"
+    fi
+
+    if [ "$#" -eq 0 ]; then
+        echo "${bin} install"
+        $bin install
+    elif [[ "$bin" == "npm" ]] && [[ "$1" == "add" ]]; then
+        echo "$bin install ${@:2}"
+        $bin install ${@:2}
+    elif [[ "$(cat ${root}/../package.json | jq '.scripts | keys' | grep "$1")" != "" ]]; then
+        echo "$bin run $@"
+        $bin run $@
+    else
+        echo "$bin $@"
+        $bin $@
+    fi
+}
+
 function kubectl() {
     if ! type __start_kubectl >/dev/null 2>&1; then
         source <(command kubectl completion zsh)
