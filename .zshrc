@@ -46,9 +46,13 @@ plugins=( \
     yarn \
     fasd \
     zsh-zbell \
+    # zsh-vim-mode goes before zsh-autocomplete, but then
+    # history-search-multi-word highlighting doesn't work
+    #zsh-vim-mode \
+    #zsh-autocomplete \
     #zsh-syntax-highlighting \
     history-substring-search \
-    fast-syntax-highlighting
+    F-Sy-H \
     zsh-autosuggestions \
     zsh-vim-mode \
     H-S-MW \
@@ -77,7 +81,7 @@ MODE_INDICATOR_SEARCH='%B%K{2}%F{15} SEARCH %f%k%b'
 MODE_INDICATOR_VISUAL='%B%K{9}%F{15} VISUAL %f%k%b'
 MODE_INDICATOR_VLINE='%B%K{9}%F{15} V-LINE %f%k%b'
 
-setopt transientrprompt
+#setopt transientrprompt
 
 # make the alias a distinct command for completion purposes
 setopt complete_aliases
