@@ -6,7 +6,7 @@ local servers = {
   "cssls",
   "diagnosticls",
   "dockerls",
-  "ember",
+  -- "ember",
   "emmet_ls",
   -- "eslint",
   "gopls",
