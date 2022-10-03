@@ -188,11 +188,16 @@ xnoremap <leader>s <cmd>set icm=nosplit<CR>:s///g<Left><Left>
 nnoremap <leader>S <cmd>set icm=split<CR>:%Subvert/<C-R>///g<Left><Left>
 xnoremap <leader>S <cmd>set icm=nosplit<CR>:Subvert/<C-R>///g<Left><Left>
 
+" search inside selection
+xnoremap <leader>v <Esc>/\%V
+
 " global mappings
 nnoremap <leader>gn :g//norm 
 nnoremap <leader>gd :g//d<CR>
+nnoremap <leader>gD :v//d<CR>
 xnoremap <leader>gn :g//norm 
 xnoremap <leader>gd :g//d<CR>
+xnoremap <leader>gD :v//d<CR>
 
 " restrict search to comment
 "nnoremap <leader>c ?\v(//|#).*\zs
