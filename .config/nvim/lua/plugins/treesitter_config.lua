@@ -1,8 +1,25 @@
 require("nvim-treesitter.configs").setup({
+  ensure_installed = "all",
+
+  highlight = {
+    enable = true, -- false will disable the whole extension
+    disable = {}, -- list of language that will be disabled
+  },
+
+  indent = {
+    enable = true,
+  },
+
   -- nvim-ts-context-commentstring config
   context_commentstring = {
     enable = true,
+    enable_autocmd = false,
+    config = {
+      c = "// %s",
+      cpp = "// %s",
+    },
   },
+
   autotag = {
     enable = true,
   },
@@ -29,9 +46,11 @@ require("nvim-treesitter.configs").setup({
       enable = true,
       swap_next = {
         ["]a"] = "@parameter.inner",
+        ["<M-l>"] = "@parameter.inner",
       },
       swap_previous = {
         ["[a"] = "@parameter.inner",
+        ["<M-h>"] = "@parameter.inner",
       },
     },
     move = {
@@ -39,15 +58,19 @@ require("nvim-treesitter.configs").setup({
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
         ["]m"] = "@function.outer",
+        ["]f"] = "@function.outer",
       },
       goto_next_end = {
         ["]M"] = "@function.outer",
+        ["]F"] = "@function.outer",
       },
       goto_previous_start = {
         ["[m"] = "@function.outer",
+        ["[f"] = "@function.outer",
       },
       goto_previous_end = {
         ["[M"] = "@function.outer",
+        ["[F"] = "@function.outer",
       },
       ["[]"] = "@class.outer",
     },
