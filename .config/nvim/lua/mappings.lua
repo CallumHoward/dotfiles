@@ -36,7 +36,7 @@ vim.keymap.set("n", "<leader>ci", "<cmd>TSLspImportCurrent<CR>")
 
 -- Documentation
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
-vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help)
+vim.keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help)
 
 -- Diagnostics
 local float_opts = { scope = "line", header = "" }
@@ -73,3 +73,15 @@ vim.keymap.set("n", "<leader>y", function()
   vim.cmd("let @+=expand('%')")
   vim.notify(vim.fn.expand("%"), "info", { title = "Copied buffer path" })
 end)
+
+vim.keymap.set("n", "[w", function()
+  vim.opt.wrap = false
+end)
+
+vim.keymap.set("n", "]w", function()
+  vim.opt.wrap = true
+end)
+
+vim.keymap.set("n", "<C-w>[w", "<Cmd>windo set nowrap<CR>")
+vim.keymap.set("n", "<C-w>]w", "<Cmd>windo set wrap<CR>")
+vim.keymap.set("n", "<C-w><Space>", "<C-w>|<C-w>_")
