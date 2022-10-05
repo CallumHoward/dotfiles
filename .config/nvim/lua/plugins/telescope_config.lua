@@ -25,8 +25,9 @@ require("telescope").setup({
     borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     sorting_strategy = "ascending",
     scroll_strategy = nil,
-    path_display = { "smart" },
+    path_display = { truncate = 3 },
     winblend = 9,
+    dynamic_preview_title = true,
     file_ignore_patterns = { "messages.json$", "%.html$", "%.dump$", "%.svg$" },
     file_sorter = sorters.get_fzy_sorter,
     mappings = {
@@ -37,14 +38,28 @@ require("telescope").setup({
       },
       n = {
         ["<esc>"] = actions.close,
+        ["<C-c>"] = actions.close,
         ["<M-p>"] = action_layout.toggle_preview,
         ["<M-o>"] = t.builtin,
+        ["<C-u>"] = actions.results_scrolling_up,
+        ["<C-d>"] = actions.results_scrolling_down,
       },
     },
   },
   pickers = {
     find_files = {
       find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+    },
+    git_status = {
+      git_icons = {
+        added = "+",
+        changed = "~",
+        copied = "",
+        deleted = "-",
+        renamed = ">",
+        unmerged = "^",
+        untracked = "?",
+      },
     },
   },
   -- extensions = {
@@ -67,22 +82,24 @@ require("telescope").load_extension("fzf")
 
 -- Functions
 local changed_on_branch = function()
-  pickers.new({
-    results_title = "Modified on current branch",
-    finder = finders.new_oneshot_job({
-      "git",
-      "diff",
-      "--name-only",
-      "--relative",
-      "master",
-    }),
-    sorter = sorters.get_fuzzy_file(),
-    previewer = previewers.new_termopen_previewer({
-      get_command = function(entry)
-        return { "git", "diff", "--relative", "master", entry.value }
-      end,
-    }),
-  }):find()
+  pickers
+    .new({
+      results_title = "Modified on current branch",
+      finder = finders.new_oneshot_job({
+        "git",
+        "diff",
+        "--name-only",
+        "--relative",
+        "master",
+      }),
+      sorter = sorters.get_fuzzy_file(),
+      previewer = previewers.new_termopen_previewer({
+        get_command = function(entry)
+          return { "git", "diff", "--relative", "master", entry.value }
+        end,
+      }),
+    })
+    :find()
 end
 
 local resume_or_builtin = function()
