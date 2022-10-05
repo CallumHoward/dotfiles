@@ -95,10 +95,7 @@ return require("packer").startup(function(use)
           Misc = { color = colors.purple },
         },
       })
-      require("hlslens").setup({
-        auto_enable = false,
-        nearest_float_when = "never",
-      })
+      require("hlslens").setup({ auto_enable = false, nearest_float_when = "never" })
       require("scrollbar.handlers.search").setup()
     end,
   })
@@ -114,12 +111,7 @@ return require("packer").startup(function(use)
       vim.keymap.set("n", "<C-w>_", "<Cmd>WindowsMaximizeVertically<CR>")
       vim.keymap.set("n", "<C-w>|", "<Cmd>WindowsMaximizeHorizontally<CR>")
       vim.keymap.set("n", "<C-w>=", "<Cmd>WindowsEqualize<CR>")
-
-      require("windows").setup({
-        autowidth = {
-          enable = false,
-        },
-      })
+      require("windows").setup({ autowidth = { enable = false } })
     end,
   })
   use({
@@ -159,10 +151,7 @@ return require("packer").startup(function(use)
       vim.keymap.set("n", "g>", "<Cmd>BufferMoveNext<CR>")
       vim.keymap.set("n", "g<", "<Cmd>BufferMovePrevious<CR>")
 
-      require("bufferline").setup({
-        hide = { inactive = true },
-        auto_hide = true,
-      })
+      require("bufferline").setup({ hide = { inactive = true }, auto_hide = true })
     end,
   })
   use({ "kshenoy/vim-signature", event = "BufEnter" })
@@ -239,10 +228,7 @@ return require("packer").startup(function(use)
     event = "BufReadPost",
     config = function()
       local colors = require("tokyonight.colors").setup()
-      require("hlargs").setup({
-        color = colors.yellow,
-        hl_priority = 149,
-      })
+      require("hlargs").setup({ color = colors.yellow, hl_priority = 149 })
     end,
   })
   use({ "JoosepAlviste/nvim-ts-context-commentstring", event = "BufWinEnter" })
@@ -250,9 +236,7 @@ return require("packer").startup(function(use)
     "windwp/nvim-autopairs",
     event = "BufWinEnter",
     config = function()
-      require("nvim-autopairs").setup({
-        disable_filetype = { "TelescopePrompt", "vim" },
-      })
+      require("nvim-autopairs").setup({ disable_filetype = { "TelescopePrompt", "vim" } })
     end,
   })
   use({
@@ -369,9 +353,7 @@ return require("packer").startup(function(use)
     event = { "BufReadPost", "CmdlineEnter" },
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("trouble").setup({
-        use_diagnostic_signs = true,
-      })
+      require("trouble").setup({ use_diagnostic_signs = true })
     end,
   })
 
