@@ -39,6 +39,7 @@ return require("packer").startup(function(use)
     "folke/tokyonight.nvim",
     config = function()
       require("plugins.tokyonight_config")
+      vim.cmd("colorscheme tokyonight")
     end,
   })
   -- use("cocopon/iceberg.vim")

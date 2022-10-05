@@ -1,5 +1,3 @@
-vim.cmd("colorscheme tokyonight")
-
 local vo = vim.opt
 
 vo.mouse = "a" -- Enable mouse
