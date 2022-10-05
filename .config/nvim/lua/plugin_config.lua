@@ -1,140 +1,41 @@
--- vim-notify config
-vim.notify = require("notify")
-
--- Scrollbar config
-vim.cmd("let g:scrollview_column = 1")
-
--- Ultest config
-vim.cmd("autocmd Filetype UltestSummary setl nowrap")
-vim.g.ultest_pass_sign = "﫟"
-vim.g.ultest_fail_sign = ""
-vim.g.ultest_running_sign = "喇"
-vim.g.ultest_not_run_sign = "ﱤ"
-vim.cmd("nnoremap <leader>jn :UltestNearest<CR>")
-vim.cmd("nnoremap <leader>ju :UltestSummary<CR>")
-vim.cmd("nnoremap <leader>jf :Ultest<CR>")
-
--- Ranger config
-vim.cmd("cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'ra')<CR>")
-vim.cmd("cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \\| Ranger' : 'ra')<CR>")
-vim.cmd("cabbrev spa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'sp \\| Ranger' : 'ra')<CR>")
-vim.cmd("cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \\| Ranger' : 'ra')<CR>")
-
--- DiffView config
-local cb = require("diffview.config").diffview_callback
-require("diffview").setup({
-  enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
-  signs = {
-    fold_closed = "",
-    fold_open = "",
-  },
-  hooks = {
-    diff_buf_read = function()
-      vim.opt_local.wrap = false
-      vim.opt_local.foldenable = true
-    end,
-  },
-  key_bindings = {
-    view = {
-      ["]D"] = cb("select_next_entry"), -- Open the diff for the next file
-      ["[D"] = cb("select_prev_entry"), -- Open the diff for the previous file
-    },
-  },
-})
-
--- Git linker config
-local gl = require("gitlinker")
-local gla = require("gitlinker.actions")
-local function open_blame()
-  gl.get_buf_range_url("n", {
-    action_callback = gla.open_in_browser,
-  })
-end
-gl.setup()
-vim.keymap.set("n", "<leader>gb", open_blame)
-vim.keymap.set("v", "<leader>gb", open_blame)
-
--- Symbols outline config
-vim.g.symbols_outline = {
-  auto_preview = false,
-  position = "right",
-  width = 16,
-  show_symbol_details = true,
-}
-vim.api.nvim_exec([[ autocmd Filetype Outline setl nowrap ]], true)
-
--- Lsp Signature
-require("lsp_signature").setup({
-  bind = true,
-  hint_enable = false,
-  handler_opts = {
-    border = "none",
-  },
-  padding = " ",
-})
-
--- Lightbulb
-vim.cmd([[ autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb() ]])
-vim.fn.sign_define("LightBulbSign", {
-  text = "",
-  texthl = "DiagnosticSignWarn",
-  linehl = "",
-  numhl = "DiagnosticSignWarn",
-  priorioty = 12,
-})
-
--- Trouble
-require("trouble").setup({
-  use_diagnostic_signs = true,
-})
-
 -- Testing
-vim.cmd('let test#javascript#jest#options = "--color=always"')
+-- vim.cmd('let test#javascript#jest#options = "--color=always"')
 
--- vCooler config
-vim.cmd("let g:vcoolor_disable_mappings = 1")
-vim.cmd('let g:vcoolor_map = "<leader>jc"')
+-- -- Lsp Signature
+-- require("lsp_signature").setup({
+--   bind = true,
+--   hint_enable = false,
+--   handler_opts = {
+--     border = "none",
+--   },
+--   padding = " ",
+-- })
 
--- Hexokinase
-vim.cmd(
-  "let g:Hexokinase_ftEnabled = ['css', 'html', 'scss', 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'handlebars', 'vim', 'conf']"
-)
-
--- bufjump config
-local bj = require("bufjump")
-vim.keymap.set("n", "<M-o>", bj.backward)
-vim.keymap.set("n", "<M-i>", bj.forward)
-
--- nvim-autopairs
-require("nvim-autopairs").setup({
-  disable_filetype = { "TelescopePrompt", "vim" },
-})
-
--- Import cost config
-vim.api.nvim_exec(
-  [[
-    augroup ImportCostAutogroup
-      autocmd!
-      autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx silent ImportCost
-    augroup END
-  ]],
-  true
-)
+-- -- Import cost config
+-- vim.api.nvim_exec(
+--   [[
+--     augroup ImportCostAutogroup
+--       autocmd!
+--       autocmd BufWritePost *.js,*.ts,*.jsx,*.tsx silent ImportCost
+--     augroup END
+--   ]],
+--   true
+-- )
 
 -- Package info config
-local pi = require("package-info")
-pi.setup({
-  colors = {
-    up_to_date = "#565f89", -- Text color for up to date package virtual text
-    outdated = "#e0af68", -- Text color for outdated package virtual text
-  },
-})
-vim.keymap.set("n", "<leader>ns", pi.show) -- Show package versions
-vim.keymap.set("n", "<leader>nc", pi.hide) -- Hide package versions
-vim.keymap.set("n", "<leader>nu", pi.update) -- Update package on line
-vim.keymap.set("n", "<leader>nd", pi.delete) -- Delete package on line
-vim.keymap.set("n", "<leader>ni", pi.install) -- Install a new package
-vim.keymap.set("n", "<leader>nr", pi.reinstall) -- Reinstall dependencies
+-- local pi = require("package-info")
+-- pi.setup({
+--   colors = {
+--     up_to_date = "#565f89", -- Text color for up to date package virtual text
+--     outdated = "#e0af68", -- Text color for outdated package virtual text
+--   },
+-- })
+-- vim.keymap.set("n", "<leader>ns", pi.show) -- Show package versions
+-- vim.keymap.set("n", "<leader>nc", pi.hide) -- Hide package versions
+-- vim.keymap.set("n", "<leader>nu", pi.update) -- Update package on line
+-- vim.keymap.set("n", "<leader>nd", pi.delete) -- Delete package on line
+-- vim.keymap.set("n", "<leader>ni", pi.install) -- Install a new package
+-- vim.keymap.set("n", "<leader>nr", pi.reinstall) -- Reinstall dependencies
 -- vim.keymap.set("n", "<leader>np", pi.changeversion) -- Install a different package version
 
 -- Debug
@@ -148,14 +49,11 @@ vim.keymap.set("n", "<leader>nr", pi.reinstall) -- Reinstall dependencies
 --   dap_install.config(debugger)
 -- end
 
--- AsyncDo
-vim.cmd([[command! -bang -nargs=* -complete=file Make call asyncdo#run(<bang>0, &makeprg, <f-args>)]])
-
-require("flutter-tools").setup({
-  widget_guides = {
-    enabled = true,
-  },
-  outline = {
-    open_cmd = "30vnew",
-  },
-})
+-- require("flutter-tools").setup({
+--   widget_guides = {
+--     enabled = true,
+--   },
+--   outline = {
+--     open_cmd = "30vnew",
+--   },
+-- })

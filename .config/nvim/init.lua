@@ -1,16 +1,19 @@
+do
+  local ok, _ = pcall(require, "impatient")
+  -- require("impatient").enable_profile() -- uncommend and use :LuaCacheProfile
+
+  if not ok then
+    vim.notify("impatient.nvim not installed", vim.log.levels.WARN)
+  end
+end
+
 require("plugins")
-require("plugin_config")
+-- require("plugin_config")
 require("base")
 require("mappings")
 require("commands")
+-- require("functions")
 require("autocommands")
-require("lsp")
-require("lsp.emmet-ls")
-require("lsp.lua-ls")
-require("lsp.null-ls")
-require("lsp.typescript-ls")
-require("lsp.json-ls")
-require("lsp.stylelint-ls")
 
 vim.cmd("source ~/.config/nvim/mappings.vim")
 vim.cmd("source ~/.config/nvim/extra.vim")
