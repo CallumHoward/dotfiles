@@ -153,10 +153,8 @@ nnoremap <silent><C-W><C-F> <C-W><C-V>gF
 nmap <silent><C-W><C-]> <C-W><C-V><C-]>
 
 " move tabs
-" nnoremap <silent>g> :tabm +1<CR>
-" nnoremap <silent>g< :tabm -1<CR>
-nnoremap <silent>g> :BufferMoveNext<CR>
-nnoremap <silent>g< :BufferMovePrevious<CR>
+nnoremap <silent>g> :tabm +1<CR>
+nnoremap <silent>g< :tabm -1<CR>
 
 " accordion expand traversal of folds
 nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
