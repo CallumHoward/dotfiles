@@ -252,10 +252,6 @@ else
     alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
 fi
 
-# if command -v jq > /dev/null 2>&1; then
-#     alias jq="python -m json.tool"
-# fi
-
 function ls_wrapper() {
     local bin
     local args=( )
