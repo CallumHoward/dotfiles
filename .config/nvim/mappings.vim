@@ -32,10 +32,6 @@ nnoremap <silent> g/ /^[<=>]\{7}<CR>
 
 nmap cst #V%o\sa<BS>
 
-" move tabs
-nnoremap <silent>g> :tabm +1<CR>
-nnoremap <silent>g< :tabm -1<CR>
-
 " dot command works on ranges
 xnoremap . :normal .<CR>
 
