@@ -11,7 +11,7 @@
 --   padding = " ",
 -- })
 
--- -- Import cost config
+-- Import cost config
 -- vim.api.nvim_exec(
 --   [[
 --     augroup ImportCostAutogroup
