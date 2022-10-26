@@ -85,6 +85,9 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgrep.conf"
 # yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+# Python
+export PATH="/usr/local/opt/python/libexec/bin/:$PATH"
+
 # Fast Node Manager
 if command -v fnm > /dev/null 2>&1; then
   eval "$(fnm env --log-level=quiet --use-on-cd)"
