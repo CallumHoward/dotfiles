@@ -22,7 +22,7 @@ local servers = {
   "yamlls",
 }
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 for _, name in pairs(servers) do
   local server_is_found, server = lsp_installer.get_server(name)
