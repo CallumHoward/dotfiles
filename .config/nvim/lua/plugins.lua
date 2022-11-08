@@ -191,6 +191,15 @@ return require("packer").startup(function(use)
     requires = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make", event = "BufWinEnter" },
+      {
+        "princejoogie/dir-telescope.nvim",
+        config = function()
+          require("dir-telescope").setup({
+            hidden = true,
+            respect_gitignore = true,
+          })
+        end,
+      }
     },
     config = function()
       require("plugins.telescope_config")

@@ -6,6 +6,7 @@ local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
+local extensions = require("telescope.extensions")
 
 require("telescope").setup({
   defaults = {
@@ -79,6 +80,7 @@ require("telescope").setup({
 })
 require("telescope").load_extension("fzf")
 -- require("telescope").load_extension("dap")
+require("telescope").load_extension("dir")
 
 -- Functions
 local changed_on_branch = function()
@@ -127,6 +129,7 @@ vim.api.nvim_create_user_command("H", t.oldfiles, {})
 vim.api.nvim_create_user_command("B", t.buffers, {})
 vim.api.nvim_create_user_command("RG", t.grep_string, {})
 vim.api.nvim_create_user_command("RGG", t.live_grep, {})
+vim.api.nvim_create_user_command("RGD", extensions.dir.live_grep, {})
 vim.api.nvim_create_user_command("RGB", function()
   t.live_grep({ grep_open_files = true })
 end, {})
