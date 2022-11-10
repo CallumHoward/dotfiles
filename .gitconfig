@@ -4,7 +4,7 @@
     smudge = git media smudge %f
 [user]
     name = CallumHoward
-    email = callumh@cse.unsw.edu.au
+    email = 7144420+CallumHoward@users.noreply.github.com
 [push]
     default = current
 [alias]
@@ -14,6 +14,8 @@
     rl = reflog --pretty=format:'%Cred%h%Creset %C(yellow)%gd%C(reset) %C(auto)%gs%C(reset) %C(green)(%cr)%C(reset) %C(bold blue)<%an>%Creset' --abbrev-commit
     vimdiff = difftool
     dt = difftool
+    # git change-commits GIT_COMMITTER_EMAIL "<email_old>" "<email_new>"
+    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
 [pager]
     #diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
     #diff = diff-so-fancy | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
