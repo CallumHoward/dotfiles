@@ -81,6 +81,7 @@ require("telescope").setup({
 require("telescope").load_extension("fzf")
 -- require("telescope").load_extension("dap")
 require("telescope").load_extension("dir")
+require("telescope").load_extension("notify")
 
 -- Functions
 local changed_on_branch = function()

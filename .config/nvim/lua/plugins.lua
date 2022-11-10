@@ -173,6 +173,10 @@ return require("packer").startup(function(use)
     event = "VimEnter",
     config = function()
       vim.notify = require("notify")
+      vim.keymap.set("n", "<Esc>", function()
+        vim.cmd("set nohlsearch")
+        vim.notify.dismiss()
+      end)
     end,
   })
   use({
