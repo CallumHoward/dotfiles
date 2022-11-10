@@ -6,7 +6,7 @@ local sorters = require("telescope.sorters")
 local previewers = require("telescope.previewers")
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
-local extensions = require("telescope.extensions")
+local extensions = require("telescope").extensions
 
 require("telescope").setup({
   defaults = {
