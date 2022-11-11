@@ -70,7 +70,7 @@ vim.keymap.set("n", "N", "<cmd>set hlsearch<CR>N")
 
 -- Copy buffer relative filepath
 vim.keymap.set("n", "<leader>y", function()
-  vim.cmd("let @+=expand('%')")
+  vim.fn.setreg("+", vim.fn.expand("%"))
   vim.notify(vim.fn.expand("%"), "info", { title = "Copied buffer path" })
 end)
 
