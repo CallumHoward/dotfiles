@@ -81,31 +81,6 @@ xnoremap <silent><M-j> <Plug>unimpairedMoveSelectionDown\|gv=gv
 inoremap <silent><M-k> <Esc>:m-2<CR>==gi
 inoremap <silent><M-j> <Esc>:m+1<CR>==gi
 
-" open new vertical split mappings
-nnoremap <silent><C-W><C-F> <C-W><C-V>gF
-nmap <silent><C-W><C-]> <C-W><C-V><C-]>
-
-" move tabs
-nnoremap <silent>g> :tabm +1<CR>
-nnoremap <silent>g< :tabm -1<CR>
-
-" accordion expand traversal of folds
-nnoremap <silent> z] :<C-u>silent! normal! zc<CR>zjzozz
-nnoremap <silent> z[ :<C-u>silent! normal! zc<CR>zkzo[zzz
-nnoremap <silent> zV :<C-u>silent! normal! zM<CR>zv
-nnoremap <silent> <Space> za
-
-" resync folds
-" nnoremap <silent> <leader>f :set foldmethod=manual<CR>zE:call CocAction('fold')<CR>zvzz
-nnoremap <silent> <C-l> <C-l>:syntax sync fromstart<CR>
-
-" quickly set foldlevel
-nnoremap <leader>1 :set foldnestmax=1<CR>
-nnoremap <leader>2 :set foldnestmax=2<CR>
-nnoremap <leader>3 :set foldnestmax=3<CR>
-nnoremap <leader>4 :set foldnestmax=4<CR>
-nnoremap <leader>5 :set foldnestmax=5<CR>
-
 " restrict search to comment
 "nnoremap <leader>c ?\v(//|#).*\zs
 "nnoremap <leader>c ?//.*\zs
