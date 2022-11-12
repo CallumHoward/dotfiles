@@ -31,8 +31,6 @@ end)
 -- Refactor and fix
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-vim.keymap.set("n", "<leader>cA", "<cmd>TSLspFixCurrent<CR>")
-vim.keymap.set("n", "<leader>ci", "<cmd>TSLspImportCurrent<CR>")
 
 -- Documentation
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
@@ -65,8 +63,8 @@ vim.api.nvim_create_autocmd("InsertEnter", {
   command = "set nohlsearch",
   group = clear_search_hl,
 })
-vim.keymap.set("n", "n", "<cmd>set hlsearch<CR>n")
-vim.keymap.set("n", "N", "<cmd>set hlsearch<CR>N")
+vim.keymap.set("n", "n", "<CMD>set hlsearch<CR>n")
+vim.keymap.set("n", "N", "<CMD>set hlsearch<CR>N")
 
 -- Copy buffer relative filepath
 vim.keymap.set("n", "<leader>y", function()
@@ -74,14 +72,162 @@ vim.keymap.set("n", "<leader>y", function()
   vim.notify(vim.fn.expand("%"), "info", { title = "Copied buffer path" })
 end)
 
+-- Window wrapping mappings
 vim.keymap.set("n", "[w", function()
   vim.opt.wrap = false
 end)
-
 vim.keymap.set("n", "]w", function()
   vim.opt.wrap = true
 end)
+vim.keymap.set("n", "<C-w>[w<C-w>p", "<CMD>windo set nowrap<CR>")
+vim.keymap.set("n", "<C-w>]w<C-w>p", "<CMD>windo set wrap<CR>")
 
-vim.keymap.set("n", "<C-w>[w", "<Cmd>windo set nowrap<CR>")
-vim.keymap.set("n", "<C-w>]w", "<Cmd>windo set wrap<CR>")
+-- Maximise current window
 vim.keymap.set("n", "<C-w><Space>", "<C-w>|<C-w>_")
+
+-- Swap mark keys
+vim.keymap.set("n", "'", "`")
+vim.keymap.set("n", "`", "'")
+
+-- Select last pasted
+vim.keymap.set("n", "gV", "`[v`]")
+
+-- Add word under cursor to search pattern
+
+-- Go to alternate file
+vim.keymap.set("n", "<leader>e", "<CMD>e %<.")
+vim.keymap.set("n", "<leader>E", "<CMD>vs %<.")
+
+-- Search SCM markers
+vim.keymap.set("n", "g/", "/^[<=>]\\{7}<CR>")
+
+-- Dot command works on ranges
+vim.keymap.set("x", ".", "<CMD>normal .<CR>")
+
+-- Wrapped line movement mappings (adds larger jumps to jumplist)
+local jump = function(key, threshold)
+  return vim.v.count > threshold and "m'" .. vim.v.count .. key or "g" .. key
+end
+for _, v in ipairs({ "j", "k" }) do
+  vim.keymap.set({ "n", "x" }, v, function()
+    return jump(v, 5)
+  end, { expr = true })
+end
+
+-- Incremental commandline history search
+vim.keymap.set("c", "<C-n>", function()
+  return vim.fn.wildmenumode() and "\\<C-n>" or "\\<down>"
+end, { expr = true })
+vim.keymap.set("c", "<C-p>", function()
+  return vim.fn.wildmenumode() and "\\<C-p>" or "\\<up>"
+end, { expr = true })
+
+-- Mappings for searching word under cursor
+
+-- Unimpaired quickfix list mappings
+vim.keymap.set("n", "<leader>q", "<CMD>cw<CR><C-W>J")
+vim.keymap.set("n", "[q", "<CMD>cprevious<CR>")
+vim.keymap.set("n", "]q", "<CMD>cnext<CR>")
+vim.keymap.set("n", "[Q", "<CMD>cfirst<CR>")
+vim.keymap.set("n", "]Q", "<CMD>clast<CR>")
+
+-- Unimpaired location list mappings
+vim.keymap.set("n", "<leader>l", "<CMD>lw<CR><C-W>J")
+vim.keymap.set("n", "[l", "<CMD>lprevious<CR>")
+vim.keymap.set("n", "]l", "<CMD>lnext<CR>")
+vim.keymap.set("n", "[L", "<CMD>lfirst<CR>")
+vim.keymap.set("n", "]L", "<CMD>llast<CR>")
+
+-- Unimpaired buffer mappings
+vim.keymap.set("n", "[b", "<CMD>bprevious<CR>")
+vim.keymap.set("n", "]b", "<CMD>bnext<CR>")
+vim.keymap.set("n", "[B", "<CMD>bfirst<CR>")
+vim.keymap.set("n", "]B", "<CMD>blast<CR>")
+
+-- Unimpaired tab mappings
+vim.keymap.set("n", "[t", "gT")
+vim.keymap.set("n", "]t", "gt")
+vim.keymap.set("n", "[T", "<CMD>tabfirst<CR>")
+vim.keymap.set("n", "]T", "<CMD>tablast<CR>")
+
+-- Move to top level non-whitespace
+vim.keymap.set("n", "[[", "<CMD>keeppatterns ?^\\S<CR>")
+vim.keymap.set("n", "]]", "<CMD>keeppatterns /^\\S<CR>")
+
+-- Tab navigation mappings
+for i = 1, 8 do
+  vim.keymap.set("n", "<C-w>" .. i, "<CMD>tabn " .. i .. "<CR>")
+end
+vim.keymap.set("n", "<C-w>0", "<CMD>tabfirst<CR>")
+vim.keymap.set("n", "<C-w>9", "<CMD>tablast<CR>")
+
+-- Open new vertical split mappings
+vim.keymap.set("n", "<C-w><C-f>", "<C-w><C-v>gF")
+vim.keymap.set("n", "<C-w><C-]>", "<C-w><C-v><C-]>", { remap = true })
+
+-- Move tabs
+vim.keymap.set("n", "g>", "<CMD>tabm +1<CR>")
+vim.keymap.set("n", "g<", "<CMD>tabm -1<CR>")
+
+-- Accordion expand traversal of folds
+vim.keymap.set("n", "z]", "<CMD><C-u>silent! normal! zc<CR>zjzozz")
+vim.keymap.set("n", "z[", "<CMD><C-u>silent! normal! zc<CR>zkzo[zzz")
+vim.keymap.set("n", "zV", "<CMD><C-u>silent! normal! zM<CR>zv")
+vim.keymap.set("n", "<Space>", "za")
+
+-- Resync syntax highlighting
+vim.keymap.set("n", "<C-l>", "<C-l><CMD>syntax sync fromstart<CR>")
+
+-- Quickly set foldlevel
+for i = 1, 5 do
+  vim.keymap.set("n", "<leader>" .. i, "<CMD>set foldnestmax=" .. i .. "<CR>")
+end
+
+-- Readline-like delete to end of line
+vim.keymap.set("i", "<C-k>", "<C-o>D")
+
+-- Remove trailing whitespace
+vim.keymap.set("n", "<leader><Space>", "<CMD>keeppatterns %s/\\s\\+$//e<CR><C-o>")
+vim.keymap.set("x", "<leader><Space>", "<CMD>keeppatterns s/\\s\\+$//e<CR><C-o>")
+
+-- Global subsitution on last used search pattern
+vim.keymap.set("n", "<leader>s", "<CMD>set icm=split<CR>:%s///g<Left><Left>")
+vim.keymap.set("x", "<leader>s", "<CMD>set icm=nosplit<CR>:s///g<Left><Left>")
+
+-- Search inside selection
+vim.keymap.set("x", "<leader>/", "<Esc>/\\%V")
+
+-- Global mappings
+vim.keymap.set({ "n", "x" }, "<leader>gn", ":g//norm ")
+vim.keymap.set({ "n", "x" }, "<leader>gd", ":g//norm ")
+vim.keymap.set({ "n", "x" }, "<leader>gD", ":g//norm ")
+
+-- Save temp session
+vim.keymap.set("n", "<leader>]]", "<CMD>mks! ~/sess/temp_session.vim<CR>")
+vim.keymap.set("n", "<leader>[[", "<CMD>source ~/sess/temp_session.vim<CR>")
+
+-- Terminal window mappings
+vim.keymap.set("t", "<C-w><C-w>", "<C-\\><C-n><C-w><C-w>")
+vim.keymap.set("t", "<C-w><C-h>", "<C-\\><C-n><C-w><C-h>")
+vim.keymap.set("t", "<C-w><C-j>", "<C-\\><C-n><C-w><C-j>")
+vim.keymap.set("t", "<C-w><C-k>", "<C-\\><C-n><C-w><C-k>")
+vim.keymap.set("t", "<C-w><C-l>", "<C-\\><C-n><C-w><C-l>")
+
+-- Grep for word under cursor
+vim.keymap.set("n", "<leader>#", function()
+  vim.cmd("normal #")
+  vim.cmd([[silent! grep! "\b]] .. vim.fn.expand("<cword>") .. [[\b"]])
+  vim.cmd("copen | normal J")
+  vim.cmd("silent redraw!")
+end)
+vim.keymap.set(
+  "x",
+  "<leader>#",
+  [["oy/<C-r>o<CR>]] .. [[silent! grep! '<C-r>o' | copen<CR>]] .. [[<C-w>J<CMD>sil redr!<CR>]]
+)
+
+-- Grep for visual selection
+vim.keymap.set("n", "<leader>/", function()
+  vim.cmd([[execute 'vimgrep /' . @/ . '/g %']])
+  vim.cmd("copen | normal J")
+end)

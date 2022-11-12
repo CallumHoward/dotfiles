@@ -2,19 +2,9 @@
 " Vim mappings configuration
 " Callum Howard
 
-nnoremap ' `
-nnoremap ` '
-
-" select last pasted
-nnoremap gV `[v`]
-
 " add word under cursor to search pattern
 nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
 nnoremap <leader>? /<C-R>/\\|
-
-" go to alternate file
-nnoremap <leader>e :e %<.
-nnoremap <leader>E :vs %<.
 
 " toggle diff
 function! ToggleDiff()
@@ -28,22 +18,10 @@ endfunction
 
 nnoremap <leader>d :call ToggleDiff()<CR>
 
-nnoremap <silent> g/ /^[<=>]\{7}<CR>
-
-nmap cst #V%o\sa<BS>
+" nmap cst #V%o\sa<BS>
 
 " dot command works on ranges
 xnoremap . :normal .<CR>
-
-" wrapped line movement mappings (adds larger jumps to jumplist)
-nnoremap <expr> j v:count > 5 ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count > 5 ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-xnoremap <expr> j v:count > 5 ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-xnoremap <expr> k v:count > 5 ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-" incremental commandline history search
-cnoremap <expr> <c-n> wildmenumode() ? "\<c-n>" : "\<down>"
-cnoremap <expr> <c-p> wildmenumode() ? "\<c-p>" : "\<up>"
 
 " prevent jump after searching word under cursor with # and *, clear with Escape
 nnoremap <silent> # :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
@@ -62,32 +40,6 @@ function! s:VSetSearch(cmdtype)
 endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>:setl hlsearch<CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>:setl hlsearch<CR>
-
-" unimpaired quickfix mappings
-nnoremap <silent> <leader>q :cw<CR><C-W>J
-nnoremap <silent> [q :cprevious<CR>
-nnoremap <silent> ]q :cnext<CR>
-nnoremap <silent> [Q :cfirst<CR>
-nnoremap <silent> ]Q :clast<CR>
-
-" unimpaired location list mappings
-nnoremap <silent> <leader>l :lw<CR>
-nnoremap <silent> [l :lprevious<CR>zmzv
-nnoremap <silent> ]l :lnext<CR>zmzv
-nnoremap <silent> [L :lfirst<CR>
-nnoremap <silent> ]L :llast<CR>
-
-" unimpaired buffer mappings
-nnoremap <silent> [b :BufferPrevious<CR>
-nnoremap <silent> ]b :BufferNext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
-
-" unimpaired tab mappings
-nnoremap <silent>]t gt
-nnoremap <silent>[t gT
-nnoremap <silent>[T :tabfirst<CR>
-nnoremap <silent>]T :tablast<CR>
 
 " unimpaired move line mappings
 function! s:ExecMove(cmd) abort
@@ -129,21 +81,6 @@ xnoremap <silent><M-j> <Plug>unimpairedMoveSelectionDown\|gv=gv
 inoremap <silent><M-k> <Esc>:m-2<CR>==gi
 inoremap <silent><M-j> <Esc>:m+1<CR>==gi
 
-nnoremap <silent>[[ ?^\S<CR>:noh<CR>
-nnoremap <silent>]] /^\S<CR>:noh<CR>
-
-" tab navigation mappings
-nnoremap <silent><C-W>1 :tabn 1<CR>
-nnoremap <silent><C-W>2 :tabn 2<CR>
-nnoremap <silent><C-W>3 :tabn 3<CR>
-nnoremap <silent><C-W>4 :tabn 4<CR>
-nnoremap <silent><C-W>5 :tabn 5<CR>
-nnoremap <silent><C-W>6 :tabn 6<CR>
-nnoremap <silent><C-W>7 :tabn 7<CR>
-nnoremap <silent><C-W>8 :tabn 8<CR>
-nnoremap <silent><C-W>0 :tabfirst<CR>
-nnoremap <silent><C-W>9 :tablast<CR>
-
 " open new vertical split mappings
 nnoremap <silent><C-W><C-F> <C-W><C-V>gF
 nmap <silent><C-W><C-]> <C-W><C-V><C-]>
@@ -159,7 +96,7 @@ nnoremap <silent> zV :<C-u>silent! normal! zM<CR>zv
 nnoremap <silent> <Space> za
 
 " resync folds
-nnoremap <silent> <leader>f :set foldmethod=manual<CR>zE:call CocAction('fold')<CR>zvzz
+" nnoremap <silent> <leader>f :set foldmethod=manual<CR>zE:call CocAction('fold')<CR>zvzz
 nnoremap <silent> <C-l> <C-l>:syntax sync fromstart<CR>
 
 " quickly set foldlevel
@@ -168,30 +105,6 @@ nnoremap <leader>2 :set foldnestmax=2<CR>
 nnoremap <leader>3 :set foldnestmax=3<CR>
 nnoremap <leader>4 :set foldnestmax=4<CR>
 nnoremap <leader>5 :set foldnestmax=5<CR>
-
-" readline-like delete to end of line
-imap <C-k> <C-o>D
-
-" remove trailing whitespace
-nnoremap <silent> <leader><Space> :keeppatterns %s/\s\+$//e<CR><C-O>
-xnoremap <silent> <leader><Space> :keeppatterns s/\s\+$//e<CR><C-O>
-
-" global substitution on last used search pattern
-nnoremap <leader>s <cmd>set icm=split<CR>:%s///g<Left><Left>
-xnoremap <leader>s <cmd>set icm=nosplit<CR>:s///g<Left><Left>
-nnoremap <leader>S <cmd>set icm=split<CR>:%Subvert/<C-R>///g<Left><Left>
-xnoremap <leader>S <cmd>set icm=nosplit<CR>:Subvert/<C-R>///g<Left><Left>
-
-" search inside selection
-xnoremap <leader>v <Esc>/\%V
-
-" global mappings
-nnoremap <leader>gn :g//norm 
-nnoremap <leader>gd :g//d<CR>
-nnoremap <leader>gD :v//d<CR>
-xnoremap <leader>gn :g//norm 
-xnoremap <leader>gd :g//d<CR>
-xnoremap <leader>gD :v//d<CR>
 
 " restrict search to comment
 "nnoremap <leader>c ?\v(//|#).*\zs
@@ -205,48 +118,27 @@ nnoremap <silent> <expr> <leader>w @/ =~# '^\\<.*\\>$'
 " strip whole word patterns when pasting search register
 inoremap <silent><C-R>/ <C-O>:let @m=substitute(@/, "\\\\<\\\|\\\\V\\\|\\\\>", "", "g")<CR><C-R>m
 
-" save temp session
-nnoremap <leader>]] :mks! ~/sess/temp_session.vim<CR>
-nnoremap <leader>[[ :source ~/sess/temp_session.vim<CR>
-
 augroup TerminalConfig
-    au!
-    autocmd TermOpen * setlocal nonumber norelativenumber
-let g:previous_window = -1
-function SmartInsert()
-  if &buftype == 'terminal'
-    if g:previous_window != winnr()
-      startinsert
+  au!
+  autocmd TermOpen * setlocal nonumber norelativenumber
+  let g:previous_window = -1
+  function SmartInsert()
+    if &buftype == 'terminal'
+      if g:previous_window != winnr()
+        startinsert
+      endif
+      let g:previous_window = winnr()
+    else
+      let g:previous_window = -1
     endif
-    let g:previous_window = winnr()
-  else
-    let g:previous_window = -1
-  endif
-endfunction
+  endfunction
 
-au BufEnter * call SmartInsert()
+  au BufEnter * call SmartInsert()
 augroup END
-
-tnoremap <C-W><C-W> <C-\><C-N><C-W><C-W>
-tnoremap <C-W><C-H> <C-\><C-N><C-W><C-H>
-tnoremap <C-W><C-J> <C-\><C-N><C-W><C-J>
-tnoremap <C-W><C-K> <C-\><C-N><C-W><C-K>
-tnoremap <C-W><C-L> <C-\><C-N><C-W><C-L>
-
-nnoremap <silent> <Leader>\ :NvimTreeToggle<CR>:NvimTreeRefresh<CR>
-nnoremap <leader><Tab> :SymbolsOutline<CR>
 
 cabbrev cd. <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'lcd %:p:h\|pwd' : 'cd.')<CR>
 command! Cdg exec 'cd' fnameescape(fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ') . ';'), ':h'))
 cabbrev cdg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Cdg' : 'cdg')<CR>
-
-" grep for word under cursor
-nmap <silent> <Leader># #:sil! gr! "\b<C-R><C-W>\b"<CR>:cope<CR><C-W>J:sil redr!<CR>
-xmap <silent> <Leader># y/<C-R>"<CR>:sil! gr! '<C-R>"'<CR>:cope<CR><C-W>J:sil redr!<CR>
-"nmap <silent> <Leader>* #ccl<CR>:sil! gr! "\b<C-R><C-W>\b"<CR>:cope<CR><C-W>J:sil redr!<CR>
-
-" open quickfix window for the last search
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:cope<CR><C-W>J
 
 " fuzzy command mappings
 cabbrev vf <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vert sf' : 'vf')<CR>
