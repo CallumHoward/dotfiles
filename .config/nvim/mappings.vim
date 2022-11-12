@@ -20,9 +20,6 @@ nnoremap <leader>d :call ToggleDiff()<CR>
 
 " nmap cst #V%o\sa<BS>
 
-" dot command works on ranges
-xnoremap . :normal .<CR>
-
 " prevent jump after searching word under cursor with # and *, clear with Escape
 nnoremap <silent> # :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
 "nnoremap <silent> * :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
