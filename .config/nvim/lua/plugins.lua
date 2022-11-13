@@ -150,6 +150,8 @@ return require("packer").startup(function(use)
 
       vim.keymap.set("n", "g>", "<Cmd>BufferMoveNext<CR>")
       vim.keymap.set("n", "g<", "<Cmd>BufferMovePrevious<CR>")
+      vim.keymap.set("n", "[b", "<cmd>BufferPrevious<CR>")
+      vim.keymap.set("n", "]b", "<cmd>BufferNext<CR>")
 
       require("bufferline").setup({ hide = { inactive = true }, auto_hide = true })
     end,
@@ -203,7 +205,7 @@ return require("packer").startup(function(use)
             respect_gitignore = true,
           })
         end,
-      }
+      },
     },
     config = function()
       require("plugins.telescope_config")
@@ -539,7 +541,14 @@ return require("packer").startup(function(use)
   use({ "tpope/vim-repeat", keys = { "." } })
   use({ "tpope/vim-rsi", event = { "InsertEnter", "CmdlineEnter" } })
   use({ "tpope/vim-sleuth", event = "BufWinEnter" })
-  use({ "tpope/vim-abolish", event = "BufWinEnter" })
+  use({
+    "tpope/vim-abolish",
+    event = "BufWinEnter",
+    config = function()
+      vim.keymap.set("n", "<leader>S", "<cmd>set icm=split<CR>:%Subvert/<C-r>///g<Left><Left>", { remap = true })
+      vim.keymap.set("x", "<leader>S", "<cmd>set icm=split<CR>:Subvert/<C-r>///g<Left><Left>", { remap = true })
+    end,
+  })
   use({ "fuadsaud/vim-textobj-variable-segment", requires = "kana/vim-textobj-user", event = "BufWinEnter" })
   -- use("mvolkmann/vim-js-arrow-function") -- TODO test this
 

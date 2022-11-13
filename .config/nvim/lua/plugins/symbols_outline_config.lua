@@ -6,3 +6,5 @@ require("symbols-outline").setup({
 })
 
 vim.api.nvim_exec([[ autocmd Filetype Outline setl nowrap ]], true)
+
+vim.keymap.set("<leader><Tab>", "<cmd>SymbolsOutline<CR>")

@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<CR>")
+
 require("nvim-tree").setup({
   update_focused_file = {
     enable = true,
@@ -31,3 +33,4 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+vim.keymap.set("n", "<leader>\\", "<cmd>NvimTreeToggle<CR><cmd>:NvimTreeRefresh<CR>")
