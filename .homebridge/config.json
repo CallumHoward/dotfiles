@@ -1,0 +1,94 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "80:1F:02:DD:C7:FF",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+
+    "accessories": [
+        {
+            "accessory": "NetworkDevice",
+            "name": "PC",
+            "mac": "30:5A:3A:54:CE:0F",
+            "ip": "10.0.0.94",
+            "shutdownCommand": "sshpass -p 'VedBed64' ssh wpc -t 'shutdown -s'",
+            "shutdownGraceTime": 60
+        },
+        {
+            "accessory": "webostv",
+            "name": "TV",
+            "ip": "10.0.0.25",
+            "mac": "78:5D:C8:75:C7:81",
+            "keyFile": "/home/pi/.homebridge/lgtvKeyFile",
+            "pollingInterval": 10,
+            "tvService": true,
+            "inputs": [
+                {
+                    "appId": "com.webos.app.livetv",
+                    "name": "Live TV"
+                },
+                {
+                    "appId": "com.webos.app.hdmi1",
+                    "name": "PC"
+                },
+                {
+                    "appId": "youtube.leanback.v4",
+                    "name": "YouTube"
+                },
+                {
+                    "appId": "com.webos.app.photovideo",
+                    "name": "Photo Video"
+                }
+            ],
+            "volumeControl": false,
+            "channelControl": false,
+            "mediaControl": false
+        }
+    ],
+
+    "platforms": [
+        {
+            "platform": "TemperPlatform",
+            "accessories": [
+                {
+                    "name": "Temper",
+                    "type": "temper",
+                    "services": [
+                        {
+                            "name": "Temper",
+                            "subType": "bbb",
+                            "type": "temp",
+                            "command": "sudo",
+                            "param": ["temper"]
+                        }
+                    ]
+                }
+        },
+        {
+            "platform": "TuyaLan",
+            "devices": [
+                {
+                    "name": "Aircon",
+                    "type": "AirConditioner",
+                    "manufacturer": "Kogan",
+                    "model": "KAPRA14WFGA",
+                    "id": "06100728807d3a56dc0b",
+                    "key": "6d4cbc365adfb01f"
+                }
+            ]
+        },
+        {
+            "platform": "yeelight",
+            "name": "Yeelight",
+            "defaultValue": {
+                "473813": {
+                    "name": "Bedroom"
+                },
+                "c98012": {
+                    "name": "Living Room"
+                }
+            }
+        }
+    ]
+}
