@@ -121,10 +121,8 @@ return require("packer").startup(function(use)
       require("plugins.indent_blankline_config")
     end,
   })
-  -- use({ "romgrk/barbar.nvim", tag = "release/1.0.0", requires = { "kyazdani42/nvim-web-devicons" } })
   use({
     "romgrk/barbar.nvim",
-    -- branch = "feat/hide-buffers",
     -- event = "BufReadPost",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
@@ -196,7 +194,7 @@ return require("packer").startup(function(use)
     event = "BufWinEnter",
     requires = {
       "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make", event = "BufWinEnter" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       {
         "princejoogie/dir-telescope.nvim",
         config = function()
@@ -231,6 +229,7 @@ return require("packer").startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter-textobjects", event = "BufWinEnter" })
   use({ "vim-scripts/SyntaxAttr.vim", cmd = "SynAttr" })
   -- use("powerman/vim-plugin-AnsiEsc")
+  -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use({
     "Kasama/nvim-custom-diagnostic-highlight",
     event = "BufReadPost",
