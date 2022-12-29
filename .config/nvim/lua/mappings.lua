@@ -51,6 +51,9 @@ vim.keymap.set("n", "<leader>cD", function()
   vim.diagnostic.config({ virtual_text = false })
 end)
 
+-- Highlight symbol under cursor
+vim.keymap.set("n", "*", vim.lsp.buf.document_highlight)
+
 -- Search highlight behaviour
 local clear_search_hl = vim.api.nvim_create_augroup("ClearSearchHL", {})
 vim.api.nvim_create_autocmd("CmdlineEnter", {
@@ -220,6 +223,7 @@ vim.keymap.set("n", "<leader>#", function()
   vim.cmd("copen | normal J")
   vim.cmd("silent redraw!")
 end)
+-- TODO not working?
 vim.keymap.set(
   "x",
   "<leader>#",
