@@ -36,6 +36,10 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help)
 
+-- Markdown link shortcut
+vim.keymap.set("n", "<C-K>", "ysiw]'>a()<Left>", { remap = true })
+vim.keymap.set("x", "<C-K>", "S]'>a()<Left>", { remap = true })
+
 -- Diagnostics
 local float_opts = { scope = "line", header = "" }
 vim.keymap.set("n", "[d", function()
