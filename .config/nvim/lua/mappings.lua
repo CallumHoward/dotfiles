@@ -36,24 +36,34 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help)
 
--- Markdown link shortcut
-vim.keymap.set("n", "<C-K>", "ysiw]'>a()<Left>", { remap = true })
-vim.keymap.set("x", "<C-K>", "S]'>a()<Left>", { remap = true })
-
 -- Diagnostics
 local float_opts = { scope = "line", header = "" }
+local show_diagnostics_virtual_text = true
+local toggle_diagnostic_virtual_text = function()
+  show_diagnostics_virtual_text = not show_diagnostics_virtual_text
+  vim.diagnostic.config({ virtual_text = show_diagnostics_virtual_text })
+end
+
+local show_diagnostics_virtual_text_autogroup = vim.api.nvim_create_augroup("DiagnosticsVirtualTextAutogroup", {})
+vim.api.nvim_create_autocmd("CursorMoved", {
+  group = show_diagnostics_virtual_text_autogroup,
+  pattern = "*",
+  callback = function()
+    vim.diagnostic.config({ virtual_text = show_diagnostics_virtual_text })
+  end,
+})
+
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.goto_prev({ float = float_opts })
+  vim.diagnostic.goto_prev({ float = false })
 end)
 vim.keymap.set("n", "]d", function()
-  vim.diagnostic.goto_next({ float = float_opts })
+  vim.diagnostic.goto_next({ float = false })
 end)
 vim.keymap.set("n", "<leader>cd", function()
+  vim.diagnostic.config({ virtual_text = false })
   vim.diagnostic.open_float(float_opts)
 end)
-vim.keymap.set("n", "<leader>cD", function()
-  vim.diagnostic.config({ virtual_text = false })
-end)
+vim.keymap.set("n", "<leader>cD", toggle_diagnostic_virtual_text)
 
 -- Highlight symbol under cursor TODO doesn't clear or navigate
 -- vim.keymap.set("n", "*", vim.lsp.buf.document_highlight)
@@ -171,7 +181,9 @@ vim.keymap.set("n", "`", "'")
 -- Select last pasted
 vim.keymap.set("n", "gV", "`[v`]")
 
--- Add word under cursor to search pattern
+-- Markdown link shortcut
+vim.keymap.set("n", "<C-K>", "ysiw]'>a()<Left>", { remap = true })
+vim.keymap.set("x", "<C-K>", "S]'>a()<Left>", { remap = true })
 
 -- Go to alternate file
 vim.keymap.set("n", "<leader>e", "<CMD>e %<.")
@@ -200,8 +212,6 @@ end, { expr = true })
 vim.keymap.set("c", "<C-p>", function()
   return vim.fn.wildmenumode() and "\\<C-p>" or "\\<up>"
 end, { expr = true })
-
--- Mappings for searching word under cursor
 
 -- Unimpaired quickfix list mappings
 vim.keymap.set("n", "<leader>q", "<CMD>cw<CR><C-W>J")
