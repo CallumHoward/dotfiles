@@ -2,41 +2,7 @@
 " Vim mappings configuration
 " Callum Howard
 
-" add word under cursor to search pattern
-nnoremap <leader>* /<C-R>/\\|\<<C-R><C-W>\><CR><C-O>
-nnoremap <leader>? /<C-R>/\\|
-
-" toggle diff
-function! ToggleDiff()
-    if &diff
-        windo diffoff
-    else
-        windo diffthis
-    endif
-    wincmd w
-endfunction
-
-nnoremap <leader>d :call ToggleDiff()<CR>
-
 " nmap cst #V%o\sa<BS>
-
-" prevent jump after searching word under cursor with # and *, clear with Escape
-nnoremap <silent> # :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
-"nnoremap <silent> * :let save_cursor=getcurpos()\|let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
-nnoremap <silent> g# :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
-nnoremap <silent> g* :let save_cursor=getcurpos()\|let @/ = expand('<cword>')\|set hlsearch<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR>
-nnoremap <silent> <Esc> :noh<CR><Esc>
-nnoremap <silent> <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? ":let save_cursor=getcurpos()\|let @/ = '\\<'.expand('<cword>').'\\>'\|set hlsearch<CR>w?<CR>:%s///gn<CR>:call setpos('.', save_cursor)<CR><2-LeftMouse>" : 'zo'
-
-" makes * and # work on visual mode too.
-function! s:VSetSearch(cmdtype)
-  let temp = @s
-  norm! gv"sy
-  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-  let @s = temp
-endfunction
-xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>:setl hlsearch<CR>
-xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>:setl hlsearch<CR>
 
 " unimpaired move line mappings
 function! s:ExecMove(cmd) abort
@@ -145,7 +111,7 @@ cabbrev gg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Gg' : 'gg')<CR>
 
 " use Ag/Rg for grep if available
 if executable('rg') | set gp=rg\ -S\ --vimgrep\ --no-heading gfm=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m|endif
-com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|botright cw|redr!|let @/="<args>"|set hls
+com! -nargs=+ -complete=file -bar Rg sil! gr! <args>|bot cw|redr!|let @/="<args>"|set hls
 cabbrev rg <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Rg' : 'rg')<CR>
 
 " MRU command-line completion
