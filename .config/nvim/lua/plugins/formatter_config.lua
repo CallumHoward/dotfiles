@@ -90,6 +90,18 @@ require("formatter").setup({
 
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = vim.api.nvim_create_augroup("FormatterAutogroup", {}),
-  pattern = { "*.lua", "*.cpp", "*.hpp", "*.c", "*.h", "*.go", "*.swift", "*.tsx", "*.ts", "*.svelte", "*.dart" },
+  pattern = {
+    "*.lua",
+    "*.cpp",
+    "*.hpp",
+    "*.c",
+    "*.h",
+    "*.go",
+    "*.swift",
+    "*.tsx",
+    "*.ts",
+    "*.svelte",
+    "*.dart",
+  },
   command = "FormatWrite",
 })

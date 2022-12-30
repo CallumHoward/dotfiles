@@ -40,9 +40,7 @@ vim.api.nvim_create_autocmd({ "FocusLost", "InsertEnter", "WinLeave", "BufWinLea
 vim.api.nvim_create_autocmd({ "FocusGained", "InsertLeave", "WinEnter", "BufWinEnter", "CmdwinEnter" }, {
   group = cursorline_autogroup,
   pattern = "*",
-  callback = function()
-    vim.o.cursorline = true
-  end,
+  callback = function() vim.o.cursorline = true end,
 })
 
 -- Relative Number toggle
@@ -75,7 +73,5 @@ end)
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("YankHighlightAutogroup", {}),
   pattern = "*",
-  callback = function()
-    vim.highlight.on_yank({ higroup = "Search", timeout = 200 })
-  end,
+  callback = function() vim.highlight.on_yank({ higroup = "Search", timeout = 200 }) end,
 })

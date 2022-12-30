@@ -1,6 +1,4 @@
-vim.api.nvim_create_user_command("LspVirtualTextHide", function()
-  vim.diagnostic.config({ virtual_text = false })
-end, {
+vim.api.nvim_create_user_command("LspVirtualTextHide", function() vim.diagnostic.config({ virtual_text = false }) end, {
   nargs = 0,
   desc = "Hide LSP virtual text",
 })

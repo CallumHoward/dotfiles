@@ -15,18 +15,10 @@ local hl_cword = function(exclusive, reverse)
   vim.fn.setpos(".", save_cursor)
 end
 
-vim.keymap.set("n", "#", function()
-  hl_cword(true, true)
-end)
-vim.keymap.set("n", "g#", function()
-  hl_cword(true, true)
-end)
-vim.keymap.set("n", "*", function()
-  hl_cword(false, false)
-end)
-vim.keymap.set("n", "g*", function()
-  hl_cword(false, false)
-end)
+vim.keymap.set("n", "#", function() hl_cword(true, true) end)
+vim.keymap.set("n", "g#", function() hl_cword(true, true) end)
+vim.keymap.set("n", "*", function() hl_cword(false, false) end)
+vim.keymap.set("n", "g*", function() hl_cword(false, false) end)
 
 -- Make * and # work on visual mode too
 local v_set_search = function(cmdtype)
@@ -40,12 +32,8 @@ local v_set_search = function(cmdtype)
   vim.fn.setreg("o", temp)
 end
 
-vim.keymap.set("x", "*", function()
-  v_set_search("/")
-end)
-vim.keymap.set("x", "#", function()
-  v_set_search("?")
-end)
+vim.keymap.set("x", "*", function() v_set_search("/") end)
+vim.keymap.set("x", "#", function() v_set_search("?") end)
 
 -- Add word under cursor to search pattern
 vim.keymap.set("n", "<leader>*", "/<C-R>/\\|\\<<C-R><C-W>\\><CR><C-O>")

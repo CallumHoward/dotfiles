@@ -95,7 +95,10 @@ return require("packer").startup(function(use)
           Misc = { color = colors.purple },
         },
       })
-      require("hlslens").setup({ auto_enable = false, nearest_float_when = "never" })
+      require("hlslens").setup({
+        auto_enable = false,
+        nearest_float_when = "never",
+      })
       require("scrollbar.handlers.search").setup()
     end,
   })
@@ -117,9 +120,7 @@ return require("packer").startup(function(use)
   use({
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPost",
-    config = function()
-      require("plugins.indent_blankline_config")
-    end,
+    config = function() require("plugins.indent_blankline_config") end,
   })
   use({
     "romgrk/barbar.nvim",
@@ -130,21 +131,13 @@ return require("packer").startup(function(use)
       local nvim_tree_events = require("nvim-tree.events")
       local bufferline_api = require("bufferline.api")
 
-      local function get_tree_size()
-        return require("nvim-tree.view").View.width + 1
-      end
+      local function get_tree_size() return require("nvim-tree.view").View.width + 1 end
 
-      nvim_tree_events.subscribe("TreeOpen", function()
-        bufferline_api.set_offset(get_tree_size())
-      end)
+      nvim_tree_events.subscribe("TreeOpen", function() bufferline_api.set_offset(get_tree_size()) end)
 
-      nvim_tree_events.subscribe("Resize", function()
-        bufferline_api.set_offset(get_tree_size())
-      end)
+      nvim_tree_events.subscribe("Resize", function() bufferline_api.set_offset(get_tree_size()) end)
 
-      nvim_tree_events.subscribe("TreeClose", function()
-        bufferline_api.set_offset(0)
-      end)
+      nvim_tree_events.subscribe("TreeClose", function() bufferline_api.set_offset(0) end)
 
       vim.keymap.set("n", "g>", "<Cmd>BufferMoveNext<CR>")
       vim.keymap.set("n", "g<", "<Cmd>BufferMovePrevious<CR>")
@@ -182,9 +175,7 @@ return require("packer").startup(function(use)
   use({
     "luukvbaal/stabilize.nvim",
     event = "BufWinEnter",
-    config = function()
-      require("stabilize").setup()
-    end,
+    config = function() require("stabilize").setup() end,
   })
 
   -- Selector
@@ -205,27 +196,24 @@ return require("packer").startup(function(use)
         end,
       },
     },
-    config = function()
-      require("plugins.telescope_config")
-    end,
+    config = function() require("plugins.telescope_config") end,
   })
   use({
     "kevinhwang91/nvim-bqf",
     ft = "qf",
-    config = function()
-      require("plugins.nvim_bqf_config")
-    end,
+    config = function() require("plugins.nvim_bqf_config") end,
   })
 
   -- Language features
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    config = function()
-      require("plugins.treesitter_config")
-    end,
+    config = function() require("plugins.treesitter_config") end,
   })
-  use({ "nvim-treesitter/playground", cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" } })
+  use({
+    "nvim-treesitter/playground",
+    cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
+  })
   use({ "nvim-treesitter/nvim-treesitter-textobjects", event = "BufWinEnter" })
   use({ "vim-scripts/SyntaxAttr.vim", cmd = "SynAttr" })
   -- use("powerman/vim-plugin-AnsiEsc")
@@ -233,9 +221,7 @@ return require("packer").startup(function(use)
   use({
     "Kasama/nvim-custom-diagnostic-highlight",
     event = "BufReadPost",
-    config = function()
-      require("nvim-custom-diagnostic-highlight").setup({})
-    end,
+    config = function() require("nvim-custom-diagnostic-highlight").setup({}) end,
   })
   use({
     "m-demare/hlargs.nvim",
@@ -250,7 +236,9 @@ return require("packer").startup(function(use)
     "windwp/nvim-autopairs",
     event = "BufWinEnter",
     config = function()
-      require("nvim-autopairs").setup({ disable_filetype = { "TelescopePrompt", "vim" } })
+      require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt", "vim" },
+      })
     end,
   })
   use({
@@ -271,7 +259,16 @@ return require("packer").startup(function(use)
   })
   use({
     "axelvc/template-string.nvim",
-    ft = { "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte", "vue", "tsx", "jsx" },
+    ft = {
+      "javascript",
+      "typescript",
+      "javascriptreact",
+      "typescriptreact",
+      "svelte",
+      "vue",
+      "tsx",
+      "jsx",
+    },
     config = function()
       require("template-string").setup({
         remove_template_string = true,
@@ -291,9 +288,7 @@ return require("packer").startup(function(use)
     },
     config = function()
       require("refactoring").setup()
-      vim.keymap.set({ "n", "x" }, "<leader>cR", function()
-        require("refactoring").select_refactor()
-      end)
+      vim.keymap.set({ "n", "x" }, "<leader>cR", function() require("refactoring").select_refactor() end)
     end,
   })
   -- use({ "yardnsm/vim-import-cost", run = "npm install" })
@@ -323,9 +318,7 @@ return require("packer").startup(function(use)
     "mxsdev/symbols-outline.nvim",
     cmd = "SymbolsOutline",
     branch = "merge-jsx-tree",
-    config = function()
-      require("plugins.symbols_outline_config")
-    end,
+    config = function() require("plugins.symbols_outline_config") end,
   })
   use({
     "kosayoda/nvim-lightbulb",
@@ -347,9 +340,7 @@ return require("packer").startup(function(use)
     "SmiteshP/nvim-navic",
     after = "nvim-lspconfig",
     requires = "neovim/nvim-lspconfig",
-    config = function()
-      require("plugins.nvim_navic_config")
-    end,
+    config = function() require("plugins.nvim_navic_config") end,
   })
   -- use("nvim-lua/lsp-status.nvim")
   use({
@@ -357,18 +348,19 @@ return require("packer").startup(function(use)
     event = "BufReadPost",
     config = function()
       require("inc_rename").setup()
-      vim.keymap.set("n", "<leader>cr", function()
-        return ":IncRename " .. vim.fn.expand("<cword>")
-      end, { expr = true })
+      vim.keymap.set(
+        "n",
+        "<leader>cr",
+        function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+        { expr = true }
+      )
     end,
   })
   use({
     "folke/trouble.nvim",
     event = { "BufReadPost", "CmdlineEnter" },
     requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup({ use_diagnostic_signs = true })
-    end,
+    config = function() require("trouble").setup({ use_diagnostic_signs = true }) end,
   })
 
   -- -- Filetype support
@@ -380,9 +372,7 @@ return require("packer").startup(function(use)
   use({
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
-    config = function()
-      require("plugins.cmp_config")
-    end,
+    config = function() require("plugins.cmp_config") end,
     requires = {
       { "onsails/lspkind-nvim" },
       { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
@@ -420,10 +410,11 @@ return require("packer").startup(function(use)
     keys = { "<leader>r" },
     config = function()
       vim.keymap.set("n", "<leader>r", "<Cmd>Ranger<CR>")
-      vim.cmd("cabbrev ra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Ranger' : 'ra')<CR>")
-      vim.cmd("cabbrev va <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'vs \\| Ranger' : 'ra')<CR>")
-      vim.cmd("cabbrev spa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'sp \\| Ranger' : 'ra')<CR>")
-      vim.cmd("cabbrev tra <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'tabe \\| Ranger' : 'ra')<CR>")
+      local expr = " <C-R>=(getcmdtype()==':' && getcmdpos()==1 ? "
+      vim.cmd("cabbrev ra" .. expr .. "'Ranger' : 'ra')<CR>")
+      vim.cmd("cabbrev va" .. expr .. "'vs \\| Ranger' : 'ra')<CR>")
+      vim.cmd("cabbrev spa" .. expr .. "'sp \\| Ranger' : 'ra')<CR>")
+      vim.cmd("cabbrev tra" .. expr .. "'tabe \\| Ranger' : 'ra')<CR>")
     end,
   })
   -- use 'kevinhwang91/rnvimr'
@@ -431,16 +422,12 @@ return require("packer").startup(function(use)
     "mhartington/formatter.nvim",
     event = "BufWritePost",
     cmd = { "P", "Format", "FormatWrite" },
-    config = function()
-      require("plugins.formatter_config")
-    end,
+    config = function() require("plugins.formatter_config") end,
   })
   use({
     "iamcco/markdown-preview.nvim",
     run = [[sh -c 'cd app && yarn install']],
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown", "markdown.mdx" }
-    end,
+    setup = function() vim.g.mkdp_filetypes = { "markdown", "markdown.mdx" } end,
     ft = { "markdown", "markdown.mdx" },
   })
   use({
@@ -451,9 +438,7 @@ return require("packer").startup(function(use)
       { "haydenmeade/neotest-jest", event = "BufReadPost" },
       { "nvim-neotest/neotest-go", event = "BufReadPost" },
     },
-    config = function()
-      require("plugins.neotest_config")
-    end,
+    config = function() require("plugins.neotest_config") end,
   })
   use({
     "hauleth/asyncdo.vim",
@@ -471,9 +456,7 @@ return require("packer").startup(function(use)
     "lewis6991/gitsigns.nvim",
     event = "BufWinEnter",
     requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("plugins.gitsigns_config")
-    end,
+    config = function() require("plugins.gitsigns_config") end,
   })
   use({
     "ruifm/gitlinker.nvim",
@@ -482,9 +465,7 @@ return require("packer").startup(function(use)
     config = function()
       local gl = require("gitlinker")
       local gla = require("gitlinker.actions")
-      local function open_blame()
-        gl.get_buf_range_url("n", { action_callback = gla.open_in_browser })
-      end
+      local function open_blame() gl.get_buf_range_url("n", { action_callback = gla.open_in_browser }) end
       gl.setup()
       vim.keymap.set("n", "<leader>gb", open_blame)
       vim.keymap.set("v", "<leader>gb", open_blame)
@@ -493,17 +474,13 @@ return require("packer").startup(function(use)
   use({
     "sindrets/diffview.nvim",
     event = "CmdlineEnter",
-    config = function()
-      require("plugins.diffview_config")
-    end,
+    config = function() require("plugins.diffview_config") end,
   })
   use({
     "akinsho/git-conflict.nvim",
     event = "BufReadPost",
     tag = "v1.0.0",
-    config = function()
-      require("git-conflict").setup()
-    end,
+    config = function() require("git-conflict").setup() end,
   })
   use({ "ygm2/rooter.nvim", event = "BufWinEnter" })
 
@@ -511,9 +488,7 @@ return require("packer").startup(function(use)
   use({
     "kyazdani42/nvim-tree.lua",
     event = "BufReadPost",
-    config = function()
-      require("plugins.nvim_tree_config")
-    end,
+    config = function() require("plugins.nvim_tree_config") end,
   })
   -- use("vim-scripts/restore_view.vim") -- Save folds, cursor position etc.
 
@@ -548,7 +523,11 @@ return require("packer").startup(function(use)
       vim.keymap.set("x", "<leader>S", "<cmd>set icm=split<CR>:Subvert/<C-r>///g<Left><Left>", { remap = true })
     end,
   })
-  use({ "fuadsaud/vim-textobj-variable-segment", requires = "kana/vim-textobj-user", event = "BufWinEnter" })
+  use({
+    "fuadsaud/vim-textobj-variable-segment",
+    requires = "kana/vim-textobj-user",
+    event = "BufWinEnter",
+  })
   -- use("mvolkmann/vim-js-arrow-function") -- TODO test this
 
   -- Automatically set up configuration after cloning packer.nvim

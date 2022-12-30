@@ -97,9 +97,7 @@ local changed_on_branch = function()
       }),
       sorter = sorters.get_fuzzy_file(),
       previewer = previewers.new_termopen_previewer({
-        get_command = function(entry)
-          return { "git", "diff", "--relative", "master", entry.value }
-        end,
+        get_command = function(entry) return { "git", "diff", "--relative", "master", entry.value } end,
       }),
     })
     :find()
@@ -131,9 +129,7 @@ vim.api.nvim_create_user_command("B", t.buffers, {})
 vim.api.nvim_create_user_command("RG", t.grep_string, {})
 vim.api.nvim_create_user_command("RGG", t.live_grep, {})
 vim.api.nvim_create_user_command("RGD", extensions.dir.live_grep, {})
-vim.api.nvim_create_user_command("RGB", function()
-  t.live_grep({ grep_open_files = true })
-end, {})
+vim.api.nvim_create_user_command("RGB", function() t.live_grep({ grep_open_files = true }) end, {})
 vim.api.nvim_create_user_command("MB", changed_on_branch, {})
 
 -- Mappings

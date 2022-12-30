@@ -1,10 +1,6 @@
 -- Window wrapping mappings
-vim.keymap.set("n", "[w", function()
-  vim.opt.wrap = false
-end)
-vim.keymap.set("n", "]w", function()
-  vim.opt.wrap = true
-end)
+vim.keymap.set("n", "[w", function() vim.opt.wrap = false end)
+vim.keymap.set("n", "]w", function() vim.opt.wrap = true end)
 vim.keymap.set("n", "<C-w>[w<C-w>p", "<CMD>windo set nowrap<CR>")
 vim.keymap.set("n", "<C-w>]w<C-w>p", "<CMD>windo set wrap<CR>")
 

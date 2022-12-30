@@ -33,9 +33,7 @@ require("neotest").setup({
       jestCommand = "npm test --",
       -- jestConfigFile = "custom.jest.config.ts",
       -- env = { CI = true },
-      cwd = function()
-        return vim.fn.getcwd()
-      end,
+      cwd = function() return vim.fn.getcwd() end,
     }),
     require("neotest-go"),
   },
@@ -45,6 +43,4 @@ vim.cmd("autocmd Filetype neotest-summary setl nowrap")
 
 vim.keymap.set("n", "<leader>ju", require("neotest").summary.toggle)
 vim.keymap.set("n", "<leader>jn", require("neotest").run.run)
-vim.keymap.set("n", "<leader>jf", function()
-  require("neotest").run.run(vim.fn.expand("%"))
-end)
+vim.keymap.set("n", "<leader>jf", function() require("neotest").run.run(vim.fn.expand("%")) end)

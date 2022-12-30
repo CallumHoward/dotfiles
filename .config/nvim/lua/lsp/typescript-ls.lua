@@ -15,9 +15,7 @@ local function filter(arr, fn)
   return filtered
 end
 
-local function filterReactDTS(value)
-  return string.match(value.uri, "%.d.ts") == nil
-end
+local function filterReactDTS(value) return string.match(value.uri, "%.d.ts") == nil end
 
 local opts = {
   on_attach = function(client, bufnr)
@@ -46,7 +44,5 @@ local lsp_installer_servers = require("nvim-lsp-installer.servers")
 local server_available, requested_server = lsp_installer_servers.get_server("tsserver")
 
 if server_available then
-  requested_server:on_ready(function()
-    requested_server:setup(opts)
-  end)
+  requested_server:on_ready(function() requested_server:setup(opts) end)
 end
