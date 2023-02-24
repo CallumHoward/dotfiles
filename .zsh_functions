@@ -160,10 +160,10 @@ function git_commit() {
     git_status_conditional
 }
 
-function cm() {
-    nocorrect git commit -m "$*"
-    git_status_conditional
-}
+# function cm() {
+#     nocorrect git commit -m "$*"
+#     git_status_conditional
+# }
 
 function cv() {
     git commit -v "$@"
