@@ -140,51 +140,44 @@ function br() {
     $bin "$url/tree/$branch/$gitpath"
 }
 
+function git_status_conditional {
+    if (( `git status -s | wc -l` < $LINES )); then
+        s | tail -n +2
+    fi
+}
+
 function git_add() {
     if [ "$#" -eq 0 ]; then
         git add -v .
     else
         git add -v "$@"
     fi
-
-    if (( `git status -s | wc -l` < $LINES )); then
-        s | tail -n +2
-    fi
+    git_status_conditional
 }
 
 function git_commit() {
     git commit "$@"
-    if (( `git status -s | wc -l` < $LINES )); then
-        s | tail -n +2
-    fi
+    git_status_conditional
 }
 
 function cm() {
     nocorrect git commit -m "$*"
-    if (( `git status -s | wc -l` < $LINES )); then
-        s | tail -n +2
-    fi
+    git_status_conditional
 }
 
 function cv() {
     git commit -v "$@"
-    if (( `git status -s | wc -l` < $LINES )); then
-        s | tail -n +2
-    fi
+    git_status_conditional
 }
 
 function git_reset() {
     git reset -q "$@"
-    if (( `git status -s | wc -l` < $LINES )); then
-        s | tail -n +2
-    fi
+    git_status_conditional
 }
 
 function git_checkout() {
     git checkout "$@"
-    if (( `git status -sb | wc -l` < $LINES )); then
-        s
-    fi
+    git_status_conditional
 }
 
 function vman() {
