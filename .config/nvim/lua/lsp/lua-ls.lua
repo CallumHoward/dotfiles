@@ -18,6 +18,9 @@ local opts = {
         maxPreload = 100000,
         preloadFileSize = 1000,
       },
+      completion = {
+        callSnippet = "Replace",
+      },
     },
   },
 }
