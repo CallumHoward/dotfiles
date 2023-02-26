@@ -35,7 +35,6 @@ require("tokyonight").setup({
     hl.SymbolsOutlineConnector = hl.IndentBlanklineChar
     hl.FocusedSymbol = hl.CursorLine
     hl.Folded = hl.StatusLineNC
-    hl.NvimTreeFolderIcon = hl.Directory
     hl.HlSearchLens = hl.EndOfBuffer
     hl.HlSearchLensNear = hl.EndOfBuffer
     hl.HLSearchNear = hl.CurSearch
@@ -43,6 +42,7 @@ require("tokyonight").setup({
     hl.GitSignsCurrentLineBlame = hl.Comment
     hl.typescriptParens = { fg = c.fg }
     hl.SignatureMarkText = { fg = c.blue, bold = true }
+    hl.NotifyBackground = hl.Normal
 
     local util = require("tokyonight.util")
     hl.Search = { bg = util.darken(c.blue0, 0.5), fg = c.fg }
