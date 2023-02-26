@@ -16,8 +16,8 @@ vim.keymap.set("n", "<C-K>", "ysiw]'>a()<Left>", { remap = true })
 vim.keymap.set("x", "<C-K>", "S]'>a()<Left>", { remap = true })
 
 -- Go to alternate file
-vim.keymap.set("n", "<leader>e", "<CMD>e %<.")
-vim.keymap.set("n", "<leader>E", "<CMD>vs %<.")
+vim.keymap.set("n", "<leader>e", ":e %<.")
+vim.keymap.set("n", "<leader>E", ":vs %<.")
 
 -- Search SCM markers
 vim.keymap.set("n", "g/", "/^[<=>]\\{7}<CR>")
@@ -62,5 +62,5 @@ vim.keymap.set("x", "<leader>s", "<CMD>set icm=nosplit<CR>:s///g<Left><Left>")
 
 -- Global mappings
 vim.keymap.set({ "n", "x" }, "<leader>gn", ":g//norm ")
-vim.keymap.set({ "n", "x" }, "<leader>gd", ":g//norm ")
-vim.keymap.set({ "n", "x" }, "<leader>gD", ":g//norm ")
+vim.keymap.set({ "n", "x" }, "<leader>gd", ":g//d<CR>")
+vim.keymap.set({ "n", "x" }, "<leader>gD", ":v//d<CR>")
