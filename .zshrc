@@ -105,3 +105,10 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char forward-word)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #zprof
+
+# bun completions
+[ -s "/Users/callumhoward/.bun/_bun" ] && source "/Users/callumhoward/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
