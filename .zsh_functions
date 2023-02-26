@@ -140,9 +140,27 @@ function br() {
     $bin "$url/tree/$branch/$gitpath"
 }
 
-function git_status_conditional {
-    if (( `git status -s | wc -l` < $LINES )); then
-        s | tail -n +2
+function git_status_conditional() {
+    output="$(git status -s)"
+    nl="${output//[!$'\n']/}"
+    if [ "$((#nl + 8))" -lt "${LINES}" ]; then
+        s
+    fi
+}
+
+alias git="g"
+function g() {
+    if [[ "$1" == "add" ]]; then
+        \git add -v ${@:2}
+        git_status_conditional
+    elif [[ "$1" == "reset" ]]; then
+        \git reset -q ${@:2}
+        git_status_conditional
+    elif [[ "$1" == "commit" ]] || [[ "$1" == "checkout" ]]; then
+        \git $@
+        git_status_conditional
+    else
+        \git $@
     fi
 }
 
@@ -202,6 +220,8 @@ function n() {
     elif [[ "$bin" == "npm" ]] && [[ "$1" == "add" ]]; then
         echo "$bin install ${@:2}"
         $bin install ${@:2}
+    elif [[ "$1" == "t" ]]; then
+        $bin test ${@:2}
     elif [[ "$(cat ${root}/../package.json | jq '.scripts | keys' | grep "$1")" != "" ]]; then
         echo "$bin run $@"
         $bin run $@

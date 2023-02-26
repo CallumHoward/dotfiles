@@ -48,6 +48,56 @@ globalias() {
 zle -N globalias
 bindkey "^I" globalias                 # tab key to expand globalalias
 
+setopt extendedglob
+typeset -Ag abbreviations
+abbreviations=(
+  'cm' 'git commit -m "__CURSOR__"'
+  'a' 'git add'
+  'co' 'git checkout'
+  'grs' 'git reset'
+  'gca' 'git commit --amend'
+  'gcv' 'git commit -v'
+  'gd' 'git diff'
+  'gdc' 'git diff --cached'
+  'lg' 'git lg'
+  'lgh' 'git lg -n10'
+  'gdmb' 'git diff master...HEAD'
+  'stash' 'git stash push -m "__CURSOR__"'
+  'show' 'git show'
+)
+
+magic-abbrev-expand() {
+    local MATCH
+    LBUFFER=${LBUFFER%%(^| )(#m)[_a-zA-Z0-9]#}
+    command=${abbreviations[$MATCH]}
+    LBUFFER+=${command:-$MATCH}
+
+    if [[ "${command}" =~ "__CURSOR__" ]]; then
+        RBUFFER=${LBUFFER[(ws:__CURSOR__:)2]}
+        LBUFFER=${LBUFFER[(ws:__CURSOR__:)1]}
+    else
+        zle self-insert
+    fi
+    BUFFER=${BUFFER%%}
+    zle reset-prompt
+}
+
+no-magic-abbrev-expand() {
+  LBUFFER+=' '
+}
+
+accept-line() {
+  zle magic-abbrev-expand
+  zle .accept-line
+}
+
+zle -N magic-abbrev-expand
+zle -N no-magic-abbrev-expand
+# zle -N accept-line
+bindkey " " magic-abbrev-expand
+bindkey "^x " no-magic-abbrev-expand
+bindkey -M isearch " " self-insert
+
 # http://www.zzapper.co.uk/zshtips.html
 alias -g ND='*(/om[1])'           # newest directory
 alias -g NF='*(.om[1])'           # newest file
