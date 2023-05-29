@@ -1,11 +1,4 @@
-do
-  local ok, _ = pcall(require, "impatient")
-  -- require("impatient").enable_profile() -- uncommend and use :LuaCacheProfile
-
-  if not ok then
-    vim.notify("impatient.nvim not installed", vim.log.levels.WARN)
-  end
-end
+vim.loader.enable()
 
 require("plugins")
 -- require("plugin_config")
