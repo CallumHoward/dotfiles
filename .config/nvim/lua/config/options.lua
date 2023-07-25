@@ -7,10 +7,11 @@ vim.g.maplocalleader = "\\"
 
 local vo = vim.opt
 
-vo.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic"
+vo.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic,linematch:50"
 vo.fillchars:append("diff:╱")
 
 vo.iskeyword:append("-") -- Treat dash separated words as a word text object"
+vo.clipboard = ""
 
 vo.linebreak = true -- Wrap long lines at characters in 'breakat'
 vo.breakindent = true -- Wrapped text is indented
@@ -20,5 +21,10 @@ vo.breakat = " ,{"
 vo.cpoptions:append("n") -- Column calc for wrapped lines
 
 vo.foldmethod = "expr"
-vo.foldexpr = "nvim_treesitter#foldexpr()"
+vo.foldexpr = "vim.treesitter.foldexpr()"
 vo.foldenable = false
+
+vo.mousescroll = "ver:1,hor:6"
+
+vo.splitkeep = "cursor"
+vo.scrolloff = 1

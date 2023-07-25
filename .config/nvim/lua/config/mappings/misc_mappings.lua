@@ -12,8 +12,8 @@ vim.keymap.set("n", "`", "'")
 vim.keymap.set("n", "gV", "`[v`]")
 
 -- Markdown link shortcut
-vim.keymap.set("n", "<C-K>", "ysiw]'>a()<Left>", { remap = true })
-vim.keymap.set("x", "<C-K>", "S]'>a()<Left>", { remap = true })
+vim.keymap.set("n", "<C-K>", "ysiw]f]a()<Left>", { remap = true })
+vim.keymap.set("x", "<C-K>", "S]f]a()<Left>", { remap = true })
 
 -- Go to alternate file
 vim.keymap.set("n", "<leader>e", ":e %<.")
@@ -26,14 +26,22 @@ vim.keymap.set("n", "g/", "/^[<=>]\\{7}<CR>")
 vim.keymap.set("x", ".", "<CMD>normal .<CR>")
 
 -- Wrapped line movement mappings (adds larger jumps to jumplist)
-local jump = function(key, threshold) return vim.v.count > threshold and "m'" .. vim.v.count .. key or "g" .. key end
+local jump = function(key, threshold)
+  return vim.v.count > threshold and "m'" .. vim.v.count .. key or "g" .. key
+end
 for _, v in ipairs({ "j", "k" }) do
-  vim.keymap.set({ "n", "x" }, v, function() return jump(v, 5) end, { expr = true })
+  vim.keymap.set({ "n", "x" }, v, function()
+    return jump(v, 5)
+  end, { expr = true })
 end
 
 -- Incremental commandline history search
-vim.keymap.set("c", "<C-n>", function() return vim.fn.wildmenumode() and "\\<C-n>" or "\\<down>" end, { expr = true })
-vim.keymap.set("c", "<C-p>", function() return vim.fn.wildmenumode() and "\\<C-p>" or "\\<up>" end, { expr = true })
+vim.keymap.set("c", "<C-n>", function()
+  return vim.fn.wildmenumode() and "\\<C-n>" or "\\<down>"
+end, { expr = true })
+vim.keymap.set("c", "<C-p>", function()
+  return vim.fn.wildmenumode() and "\\<C-p>" or "\\<up>"
+end, { expr = true })
 
 -- Accordion expand traversal of folds
 vim.keymap.set("n", "z]", "<CMD><C-u>silent! normal! zc<CR>zjzozz")

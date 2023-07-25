@@ -9,33 +9,33 @@ alias rp="rsync -ahvz --progress;b"
 alias rv="rsync -ahvz --progress --remove-source-files;b"
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
-    #alias iina="open -a iina"
-    #alias spotify="open -a spotify"
-    alias slack="open -a slack"
-    alias safari="open -a safari"
-    alias xcode="open -a xcode"
-    #alias dash="open -a dash"
-    alias notes="open -a notes"
-    alias wavebox="open -a wavebox"
-    alias eclipse="open -a eclipse"
-    alias processing="open -a processing"
-    alias keycastr="open -a keycastr"
-    alias filezilla="open -a filezilla"
-    alias wireshark="open -a wireshark"
-    alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
-    alias harvest="open -a harvest"
-    alias haskell="open -a haskell"
-    alias handbrake="open -a handbrake"
-    alias hyper="open -a hyper"
-    alias activity="open -a activity\ monitor"
-    alias chrome="open -a google\ chrome"
-    alias k="open -a Keychain\ Access"
+	#alias iina="open -a iina"
+	#alias spotify="open -a spotify"
+	alias slack="open -a slack"
+	alias safari="open -a safari"
+	alias xcode="open -a xcode"
+	#alias dash="open -a dash"
+	alias notes="open -a notes"
+	alias wavebox="open -a wavebox"
+	alias eclipse="open -a eclipse"
+	alias processing="open -a processing"
+	alias keycastr="open -a keycastr"
+	alias filezilla="open -a filezilla"
+	alias wireshark="open -a wireshark"
+	alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+	alias harvest="open -a harvest"
+	alias haskell="open -a haskell"
+	alias handbrake="open -a handbrake"
+	alias hyper="open -a hyper"
+	alias activity="open -a activity\ monitor"
+	alias chrome="open -a google\ chrome"
+	alias k="open -a Keychain\ Access"
 
-    #alias htop="sudo htop"
+	#alias htop="sudo htop"
 
-    alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
-    alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
-    alias xc=xcd
+	alias xcr="xcodebuild -project xcode/*.xcodeproj 2>/dev/null | xcpretty --no-utf --color"
+	alias xcd="xcodebuild -project xcode/*.xcodeproj 2>/dev/null -configuration Debug | xcpretty --no-utf --color"
+	alias xc=xcd
 fi
 
 alias oo="o"
@@ -109,7 +109,7 @@ alias gcv="git_commit -v"
 alias grs="git_reset"
 alias grv="git remote -v"
 alias gmm="git merge master"
-alias com="git checkout master"
+alias com="git checkout \$(git branch -rl '*/HEAD' | grep -o '[^/]*$')"
 alias cob="git checkout -b"
 alias gcd='cd "`git rev-parse --show-toplevel 2>/dev/null | head -1`"'
 alias cdg="gcd"
@@ -155,6 +155,11 @@ alias nvm="fnm"
 #alias br="browse" #conflict
 
 alias ni="n install"
+alias nt="n test"
+alias ntw="n test --watch"
+alias ne="n test:e2e-ui"
+alias ni="n test:isolated-ui"
+alias nb="n build"
 alias na="n add"
 alias nu="n uninstall"
 
@@ -167,30 +172,30 @@ alias ncdu="ncdu --color dark"
 alias cdp='cd `fd "package." $PACKAGE_DIR | xargs -IFFF dirname FFF | fzf`'
 
 if [ ! $BASH ]; then
-    # if using with hub:
-    # https://github.com/robbyrussell/oh-my-zsh/issues/1727#issuecomment-22366771
-    # brew uninstall --force git && brew install git --without-completions
-    # as of September 2018, formula needs to be pinned.
-    # https://stackoverflow.com/a/17757092
-    compdef _git s=git-status
-    compdef _git a=git-add
-    compdef _git ga=git-add
-    compdef _git gc=git-commit
-    compdef _git gcv=git-commit
-    compdef _git grs=git-reset
-    compdef _git grv=git-remote
-    compdef _git gd=git-diff
-    compdef _git gdc=git-diff
-    compdef _git gdh=git-diff
-    compdef _git stash=git-stash
-    compdef _git co=git-checkout
-    compdef _git lg=git-log
-    compdef _git ba=git-branch
-    compdef _git push=git-push
-    compdef _git pull=git-pull
-    compdef _git show=git-show
-    compdef _git clo=git-clone
-    compdef _yarn n=yarn
+	# if using with hub:
+	# https://github.com/robbyrussell/oh-my-zsh/issues/1727#issuecomment-22366771
+	# brew uninstall --force git && brew install git --without-completions
+	# as of September 2018, formula needs to be pinned.
+	# https://stackoverflow.com/a/17757092
+	compdef _git s=git-status
+	compdef _git a=git-add
+	compdef _git ga=git-add
+	compdef _git gc=git-commit
+	compdef _git gcv=git-commit
+	compdef _git grs=git-reset
+	compdef _git grv=git-remote
+	compdef _git gd=git-diff
+	compdef _git gdc=git-diff
+	compdef _git gdh=git-diff
+	compdef _git stash=git-stash
+	compdef _git co=git-checkout
+	compdef _git lg=git-log
+	compdef _git ba=git-branch
+	compdef _git push=git-push
+	compdef _git pull=git-pull
+	compdef _git show=git-show
+	compdef _git clo=git-clone
+	compdef _yarn n=yarn
 fi
 
 alias show_desktop_icons="defaults write com.apple.finder CreateDesktop true; killall Finder"
@@ -220,108 +225,108 @@ alias skg="sk -i -c 'rg --glob=!tags --line-number --color=always \"{}\" -S \
     --colors 'match:bg:yellow' \
     --colors 'match:style:nobold''"
 
-if [ "`basename $SHELL`" = "zsh" ]; then
-    alias cd.="nocorrect cd ."
-    alias cd..="nocorrect cd .."
-    alias cd...="nocorrect cd ../.."
-    alias cd....="nocorrect cd ../../.."
-    alias cd.....="nocorrect cd ../../../.."
-    alias mv="nocorrect mv -iv"
-    alias cp="nocorrect cp -iv"
-    alias mkdir="nocorrect mkdir -pv"
-    alias git="nocorrect git"
-    alias npm="nocorrect npm"
+if [ "$(basename $SHELL)" = "zsh" ]; then
+	alias cd.="nocorrect cd ."
+	alias cd..="nocorrect cd .."
+	alias cd...="nocorrect cd ../.."
+	alias cd....="nocorrect cd ../../.."
+	alias cd.....="nocorrect cd ../../../.."
+	alias mv="nocorrect mv -iv"
+	alias cp="nocorrect cp -iv"
+	alias mkdir="nocorrect mkdir -pv"
+	alias git="nocorrect git"
+	alias npm="nocorrect npm"
 
-    if command -v nvim > /dev/null 2>&1; then
-        alias vim="nvim"
-    fi
+	if command -v nvim >/dev/null 2>&1; then
+		alias vim="nvim"
+	fi
 else
-    alias cd.="cd ."
-    alias cd..="cd .."
-    alias cd...="cd ..."
-    alias cd....="cd ...."
-    alias cd.....="cd ....."
-    alias mv="mv -iv"
-    alias cp="cp -iv"
-    alias mkdir="mkdir -pv"
+	alias cd.="cd ."
+	alias cd..="cd .."
+	alias cd...="cd ..."
+	alias cd....="cd ...."
+	alias cd.....="cd ....."
+	alias mv="mv -iv"
+	alias cp="cp -iv"
+	alias mkdir="mkdir -pv"
 fi
 
-if command -v sn > /dev/null 2>&1; then
-    alias ds="sn sort -n 10 | head -9 | sed 's/\.\///'"
+if command -v sn >/dev/null 2>&1; then
+	alias ds="sn sort -n 10 | head -9 | sed 's/\.\///'"
 else
-    alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
+	alias ds="du -ah * | egrep -v '^\s*\d+K' | sort -nr | head"
 fi
 
 function ls_wrapper() {
-    local bin
-    local args=( )
-    if [[ ! "$@" =~ "-[A-Za-z]*l" ]]; then
-        args+=-x
-    fi
-    if command -v exa > /dev/null 2>&1; then
-        bin=exa
-        args+=( --icons --group-directories-first )
-    elif [[ "$OSTYPE" =~ "darwin" ]]; then
-        bin=ls
-        args+=-G
-    else
-        bin=ls
-        args+=( --group-directories-first --color=auto )
-    fi
+	local bin
+	local args=()
+	if [[ ! "$@" =~ "-[A-Za-z]*l" ]]; then
+		args+=-x
+	fi
+	if command -v exa >/dev/null 2>&1; then
+		bin=exa
+		args+=(--icons --group-directories-first)
+	elif [[ "$OSTYPE" =~ "darwin" ]]; then
+		bin=ls
+		args+=-G
+	else
+		bin=ls
+		args+=(--group-directories-first --color=auto)
+	fi
 
-    # test for if in interactive shell
-    if [[ -t 0 || -p /dev/stdin ]]; then
-        $bin "${args[@]}" $@
-    fi
+	# test for if in interactive shell
+	if [[ -t 0 || -p /dev/stdin ]]; then
+		$bin "${args[@]}" $@
+	fi
 }
 
 function ct() {
-    export DISABLE_AUTO_TITLE=true && tmux rename-window " $1"
+	export DISABLE_AUTO_TITLE=true && tmux rename-window " $1"
 }
 
 function cleanpipe() {
-    # usage: cleanpipe tcp:9999
-    lsof -i "$1"
-    lsof -t -i "$1" | xargs kill
+	# usage: cleanpipe tcp:9999
+	lsof -i "$1"
+	lsof -t -i "$1" | xargs kill
 }
 
 alias ls=ls_wrapper
-if command -v exa > /dev/null 2>&1; then
-    alias tree="exa --tree --icons"
+if command -v exa >/dev/null 2>&1; then
+	alias tree="exa --tree --icons"
 else
-    alias tree="tree -C"
+	alias tree="tree -C"
 fi
 
-if command -v git-st > /dev/null 2>&1; then
-    alias s='(set -o pipefail && git-st 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
-    alias s.='(set -o pipefail && git-st . 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
+if command -v git-st >/dev/null 2>&1; then
+	alias s='(set -o pipefail && git-st 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
+	alias s.='(set -o pipefail && git-st . 2>/dev/null | perl -pe "s/^((?:(?>(?:\e\[.*?m)*).){$COLUMNS}).*/\$1\e[m/") || ls'
 else
-    alias s="git sb 2>/dev/null || ls"
+	alias s="git sb 2>/dev/null || ls"
 fi
 
-if command -v gcal > /dev/null 2>&1; then
-    alias cal="gcal"
+if command -v gcal >/dev/null 2>&1; then
+	alias cal="gcal"
 fi
 
-if command -v hub > /dev/null 2>&1; then
-    alias git="hub"
+if command -v hub >/dev/null 2>&1; then
+	alias git="hub"
 fi
 
-if ! command -v fd > /dev/null 2>&1; then
-    alias fd="find . -iname"
+if ! command -v fd >/dev/null 2>&1; then
+	alias fd="find . -iname"
 fi
 
-if command -v xclip > /dev/null 2>&1; then
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
+if command -v xclip >/dev/null 2>&1; then
+	alias pbcopy='xclip -selection clipboard'
+	alias pbpaste='xclip -selection clipboard -o'
 fi
 
 if [[ "$TERM" == "xterm-kitty" ]]; then
-    alias ssh="kitty +kitten ssh"
+	alias ssh="kitty +kitten ssh"
 fi
 
-if command -v browsh > /dev/null 2>&1; then
-    alias browse="browsh --startup-url"
-elif command -v w3m > /dev/null 2>&1; then
-    alias browse="w3m"
+if command -v browsh >/dev/null 2>&1; then
+	alias browse="browsh --startup-url"
+elif command -v w3m >/dev/null 2>&1; then
+	alias browse="w3m"
 fi

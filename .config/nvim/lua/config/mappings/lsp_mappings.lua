@@ -1,7 +1,10 @@
 -- Jump to definition
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "<C-W>d", function()
+  local preserve_splitkeep = vim.opt.splitkeep
+  vim.opt.splitkeep = "cursor"
   vim.cmd("split")
+  vim.opt.splitkeep = preserve_splitkeep
   vim.lsp.buf.definition()
 end)
 vim.keymap.set("n", "<C-W><C-D>", function()
@@ -20,7 +23,10 @@ end)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "<C-]>", vim.lsp.buf.implementation)
 vim.keymap.set("n", "<C-W>]", function()
+  local preserve_splitkeep = vim.opt.splitkeep
+  vim.opt.splitkeep = "cursor"
   vim.cmd("split")
+  vim.opt.splitkeep = preserve_splitkeep
   vim.lsp.buf.implementation()
 end)
 vim.keymap.set("n", "<C-W><C-]>", function()
@@ -29,8 +35,22 @@ vim.keymap.set("n", "<C-W><C-]>", function()
 end)
 
 -- Refactor and fix
-vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+vim.keymap.set("n", "<leader>cA", function()
+  vim.lsp.buf.code_action({
+    context = {
+      only = {
+        "source",
+      },
+      diagnostics = {},
+    },
+  })
+end, { desc = "Source Action" })
+
+-- LSP format
+vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format Document" })
+vim.keymap.set("x", "<leader>cf", vim.lsp.buf.format, { desc = "Format Range" })
 
 -- Documentation
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
@@ -48,11 +68,17 @@ local show_diagnostics_virtual_text_autogroup = vim.api.nvim_create_augroup("Dia
 vim.api.nvim_create_autocmd("CursorMoved", {
   group = show_diagnostics_virtual_text_autogroup,
   pattern = "*",
-  callback = function() vim.diagnostic.config({ virtual_text = show_diagnostics_virtual_text }) end,
+  callback = function()
+    vim.diagnostic.config({ virtual_text = show_diagnostics_virtual_text })
+  end,
 })
 
-vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev({ float = false }) end)
-vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next({ float = false }) end)
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.goto_prev({ float = false })
+end)
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.goto_next({ float = false })
+end)
 vim.keymap.set("n", "<leader>cd", function()
   vim.diagnostic.config({ virtual_text = false })
   vim.diagnostic.open_float(float_opts)

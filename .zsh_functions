@@ -170,17 +170,14 @@ function git_add() {
     else
         git add -v "$@"
     fi
-    git_status_conditional
 }
 
 function git_commit() {
     git commit "$@"
-    git_status_conditional
 }
 
 function cm() {
     nocorrect git commit -m "$*"
-    git_status_conditional
 }
 
 function cv() {
@@ -190,12 +187,10 @@ function cv() {
 
 function git_reset() {
     git reset -q "$@"
-    git_status_conditional
 }
 
 function git_checkout() {
     git checkout "$@"
-    git_status_conditional
 }
 
 function vman() {
@@ -206,11 +201,11 @@ compdef vman="man"
 function Terminal() { tmux attach 2>/dev/null || tmux new }
 
 function n() {
-    local root=$(npm root)
+  local root=$(dirname $(npm root))
     local bin="npm"
-    if [ -f "${root}/../pnpm-lock.yaml" ]; then
+    if [ -f "${root}/pnpm-lock.yaml" ]; then
         bin="pnpm"
-    elif [ -f "${root}/../yarn.lock" ]; then
+    elif [ -f "${root}/yarn.lock" ]; then
         bin="yarn"
     fi
 
@@ -222,7 +217,7 @@ function n() {
         $bin install ${@:2}
     elif [[ "$1" == "t" ]]; then
         $bin test ${@:2}
-    elif [[ "$(cat ${root}/../package.json | jq '.scripts | keys' | grep "$1")" != "" ]]; then
+    elif [[ "$(cat ${root}/package.json | jq '.scripts | keys' | grep "$1" 2>/dev/null)" != "" ]]; then
         echo "$bin run $@"
         $bin run $@
     else

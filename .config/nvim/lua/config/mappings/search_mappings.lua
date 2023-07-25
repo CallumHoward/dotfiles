@@ -15,10 +15,18 @@ local hl_cword = function(exclusive, reverse)
   vim.fn.setpos(".", save_cursor)
 end
 
-vim.keymap.set("n", "#", function() hl_cword(true, true) end)
-vim.keymap.set("n", "g#", function() hl_cword(true, true) end)
-vim.keymap.set("n", "*", function() hl_cword(false, false) end)
-vim.keymap.set("n", "g*", function() hl_cword(false, false) end)
+vim.keymap.set("n", "#", function()
+  hl_cword(true, true)
+end)
+vim.keymap.set("n", "g#", function()
+  hl_cword(true, true)
+end)
+vim.keymap.set("n", "*", function()
+  hl_cword(false, false)
+end)
+vim.keymap.set("n", "g*", function()
+  hl_cword(false, false)
+end)
 
 -- Make * and # work on visual mode too
 local v_set_search = function(cmdtype)
@@ -32,8 +40,12 @@ local v_set_search = function(cmdtype)
   vim.fn.setreg("o", temp)
 end
 
-vim.keymap.set("x", "*", function() v_set_search("/") end)
-vim.keymap.set("x", "#", function() v_set_search("?") end)
+vim.keymap.set("x", "*", function()
+  v_set_search("/")
+end)
+vim.keymap.set("x", "#", function()
+  v_set_search("?")
+end)
 
 -- Add word under cursor to search pattern
 vim.keymap.set("n", "<leader>*", "/<C-R>/\\|\\<<C-R><C-W>\\><CR><C-O>")
@@ -62,15 +74,21 @@ vim.keymap.set("n", "<leader>/", function()
 end)
 
 -- Grep for word under cursor
-vim.keymap.set("x", "<Leader>#", function()
+local grepUnderCursor = function(cmd)
   local temp = vim.fn.getreg("o")
-  vim.cmd([[ normal! "oy ]])
+  vim.cmd(cmd)
   local selection = vim.fn.getreg("o")
   vim.fn.setreg("/", selection)
   vim.opt.hlsearch = true
   vim.cmd("sil! gr! -F '" .. selection .. "'")
   vim.cmd("bot copen")
   vim.fn.setreg("o", temp)
+end
+vim.keymap.set("n", "<Leader>#", function()
+  grepUnderCursor([[ normal! "oyiw ]])
+end)
+vim.keymap.set("x", "<Leader>#", function()
+  grepUnderCursor([[ normal! "oy ]])
 end)
 
 -- Search inside selection
