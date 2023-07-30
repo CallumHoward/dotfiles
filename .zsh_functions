@@ -52,7 +52,7 @@ function cf() {
     if [ -d "$1" ]; then cd "$1"
     elif [[ "$1" == ,* ]]; then cd `fasd -ldR ${1#\,} | head -1`
     else
-        local dir=`walker | rg -v "/\.|\.dSYM|\.xcodeproj|build|bin|ctc|^$" | $bin`
+        local dir=`fd -t d | $bin`
         if [ "$dir" != "" ]; then cd $dir; fi
     fi
     # ls after cd, but only if there are less then $LINES items in the directory

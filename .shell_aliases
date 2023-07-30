@@ -169,7 +169,7 @@ alias dict="trans -d"
 alias powershell="pwsh"
 alias ncdu="ncdu --color dark"
 
-alias cdp='cd `fd "package." $PACKAGE_DIR | xargs -IFFF dirname FFF | fzf`'
+alias cdp='cd `fd "package." | xargs -n 1 dirname | grep '/' | fzf || echo .`'
 
 if [ ! $BASH ]; then
 	# if using with hub:
