@@ -1,181 +1,181 @@
 #!/bin/bash
 
 function omz_cmd_icon {
-  local ICON=""
-  local COLOR="#6d8086"
-  case "$1" in
-      "npm" | "npx" | "create-react-app")
-          ICON=
-          COLOR='#e8274b'
-          ;;
-      "yarn")
-          ICON=𝔂
-          COLOR='#f1e05a'
-          ;;
-      "brew" | "bu")
-          ICON=
-          COLOR='#e0af68'
-          ;;
-      "vim" | "v" | "nvim" | "vi")
-          ICON=
-          COLOR='#019833'
-          ;;
-      "python" | "python2" | "python3" | "pip" | "pip2" | "pip3" | "p" | "p3")
-          ICON=
-          COLOR='#3572a5'
-          ;;
-      "ranger" | "ra")
-          ICON=𝞤
-          COLOR='#e0af68'
-          ;;
-      "man" | "less" | "cat" | "ls" | "ll" | "la" | "exa" | "history" | "sort" | "uniq" | "head" | "tail" | "bat")
-          ICON=
-          COLOR='#519aba'
-          ;;
-      "tree")
-          ICON=פּ
-          COLOR='#519aba'
-          ;;
-      "y" | "youtube-dl" | "ytmdl" | "ym" | "yi")
-          ICON=
-          COLOR='#e8274b'
-          ;;
-      "lldb")
-          ICON=
-          COLOR='#519aba'
-          ;;
-      "gdb")
-          ICON=
-          COLOR='#f88a02'
-          ;;
-      "make" | "m" | "cmake")
-          ICON=" "
-          COLOR='#f14c28'
-          ;;
-      "git" | "s" | "a" | "cm" | "gca" | "gd" | "gdc" | "gdmb" | "stash" | "pop" | "grs" | "show" | "lg" | "lgh" | "lgmb" | "push" | "co" | "com" | "cof" | "gmm" | "ba" | "baa" )
-          ICON=''
-          COLOR='#f14c28'
-          ;;
-      "top" | "htop" | "vtop" | "gtop" | "bpytop")
-          ICON=
-          COLOR='#31b53e'
-          ;;
-      "br" | "hub" | "gh")
-          ICON=
-          COLOR='#a074c4'
-          ;;
-      "grep" | "find" | "ag")
-          ICON=
-          COLOR='#89e051'
-          ;;
-      "rg" | "fd")
-          ICON=
-          COLOR='#dea584'
-          ;;
-      "grep" | "ag" | "rg" | "find" | "fd")
-          ICON=
-          COLOR='#89e051'
-          ;;
-      "wget" | "curl")
-          ICON=
-          COLOR='#519aba'
-          ;;
-      "sudo" | "su")
-          ICON=
-          COLOR='#a074c4'
-          ;;
-      "cd" | ".." | "..." | "...." | "-" | "open" | "o" | "oo" | "cdg")
-          ICON=
-          COLOR='#519aba'
-          ;;
-      "rm" | "trash")
-          ICON=
-          COLOR='#6d8086'
-          ;;
-      "apt" | "apt-get")
-          ICON=
-          COLOR='#dea584'
-          ;;
-      "cp" | "rsync" | "scp")
-          ICON=
-          COLOR='#519aba'
-          ;;
-      "docker" | "docker-compose")
-          ICON=
-          COLOR='#519aba'
-          ;;
-      "gcc" | "g++" | "clang" | "clang++")
-          ICON=
-          COLOR='#1b75bb'
-          ;;
-      "go")
-          ICON=
-          COLOR='#519aba'
-          ;;
-      "node")
-          ICON=
-          COLOR='#e8274b'
-          ;;
-      "aws")
-          ICON=
-          COLOR='#fb9d3b'
-          ;;
-      "ping" | "pg" | "pgh")
-          ICON=
-          COLOR='#a074c4'
-          ;;
-      "time")
-          ICON=祥
-          COLOR='#519aba'
-          ;;
-      "sleep")
-          ICON=鈴
-          COLOR='#519aba'
-          ;;
-      *)
-        local PATH="${1/\~/$HOME}"
-        if [[ "$PATH" = "$HOME" ]]; then
-          ICON=
-        elif [[ "$1" =~ "" ]]; then
-          ICON=
-          COLOR='#019833'
-        elif [[ "$1" =~ "dotfiles" ]]; then
-          ICON=
-        elif [[ "$1" =~ "notes" ]]; then
-          ICON=ﴬ
-        elif [[ -d "$PATH/node_modules" && -f "$PATH/package.json" ]]; then
-          ICON=
-        elif [[ -d "$PATH/.git" ]]; then
-          ICON=
-        elif [[ -d "$PATH" ]]; then
-          ICON=
-        fi
-      ;;
-  esac
-  printf "#[fg=${COLOR}]$ICON"
+	local ICON="󰏀"
+	local COLOR="#6d8086"
+	case "$1" in
+	"npm" | "npx" | "create-react-app")
+		ICON=
+		COLOR='#e8274b'
+		;;
+	"yarn")
+		ICON=𝔂
+		COLOR='#f1e05a'
+		;;
+	"brew" | "bu")
+		ICON=
+		COLOR='#e0af68'
+		;;
+	"vim" | "v" | "nvim" | "vi")
+		ICON=
+		COLOR='#019833'
+		;;
+	"python" | "python2" | "python3" | "pip" | "pip2" | "pip3" | "p" | "p3")
+		ICON=
+		COLOR='#3572a5'
+		;;
+	"ranger" | "ra")
+		ICON=𝞤
+		COLOR='#e0af68'
+		;;
+	"man" | "less" | "cat" | "ls" | "ll" | "la" | "exa" | "history" | "sort" | "uniq" | "head" | "tail" | "bat")
+		ICON=
+		COLOR='#519aba'
+		;;
+	"tree")
+		ICON=󰙅
+		COLOR='#519aba'
+		;;
+	"y" | "youtube-dl" | "ytmdl" | "ym" | "yi")
+		ICON=
+		COLOR='#e8274b'
+		;;
+	"lldb")
+		ICON=
+		COLOR='#519aba'
+		;;
+	"gdb")
+		ICON=
+		COLOR='#f88a02'
+		;;
+	"make" | "m" | "cmake")
+		ICON=" "
+		COLOR='#f14c28'
+		;;
+	"git" | "s" | "a" | "cm" | "gca" | "gd" | "gdc" | "gdmb" | "stash" | "pop" | "grs" | "show" | "lg" | "lgh" | "lgmb" | "push" | "co" | "com" | "cof" | "gmm" | "ba" | "baa")
+		ICON=''
+		COLOR='#f14c28'
+		;;
+	"top" | "htop" | "vtop" | "gtop" | "bpytop")
+		ICON=
+		COLOR='#31b53e'
+		;;
+	"br" | "hub" | "gh")
+		ICON=
+		COLOR='#a074c4'
+		;;
+	"grep" | "find" | "ag")
+		ICON=
+		COLOR='#89e051'
+		;;
+	"rg" | "fd")
+		ICON=
+		COLOR='#dea584'
+		;;
+	"grep" | "ag" | "rg" | "find" | "fd")
+		ICON=
+		COLOR='#89e051'
+		;;
+	"wget" | "curl")
+		ICON=
+		COLOR='#519aba'
+		;;
+	"sudo" | "su")
+		ICON=
+		COLOR='#a074c4'
+		;;
+	"cd" | ".." | "..." | "...." | "-" | "open" | "o" | "oo" | "cdg")
+		ICON=
+		COLOR='#519aba'
+		;;
+	"rm" | "trash")
+		ICON=
+		COLOR='#6d8086'
+		;;
+	"apt" | "apt-get")
+		ICON=󰏖
+		COLOR='#dea584'
+		;;
+	"cp" | "rsync" | "scp")
+		ICON=
+		COLOR='#519aba'
+		;;
+	"docker" | "docker-compose")
+		ICON=
+		COLOR='#519aba'
+		;;
+	"gcc" | "g++" | "clang" | "clang++")
+		ICON=
+		COLOR='#1b75bb'
+		;;
+	"go")
+		ICON=
+		COLOR='#519aba'
+		;;
+	"node")
+		ICON=
+		COLOR='#e8274b'
+		;;
+	"aws")
+		ICON=
+		COLOR='#fb9d3b'
+		;;
+	"ping" | "pg" | "pgh")
+		ICON=
+		COLOR='#a074c4'
+		;;
+	"time")
+		ICON=󰔛
+		COLOR='#519aba'
+		;;
+	"sleep")
+		ICON=󰒲
+		COLOR='#519aba'
+		;;
+	*)
+		local PATH="${1/\~/$HOME}"
+		if [[ "$PATH" = "$HOME" ]]; then
+			ICON=󱂵
+		elif [[ "$1" =~ "" ]]; then
+			ICON=
+			COLOR='#019833'
+		elif [[ "$1" =~ "dotfiles" ]]; then
+			ICON=
+		elif [[ "$1" =~ "notes" ]]; then
+			ICON=󰠮
+		elif [[ -d "$PATH/node_modules" && -f "$PATH/package.json" ]]; then
+			ICON=
+		elif [[ -d "$PATH/.git" ]]; then
+			ICON=
+		elif [[ -d "$PATH" ]]; then
+			ICON=
+		fi
+		;;
+	esac
+	printf "#[fg=${COLOR}]$ICON"
 }
 
 function boxnum {
-  local ICON=""
-  case "$1" in
-    "0") ICON="";;
-    "1") ICON="";;
-    "2") ICON="";;
-    "3") ICON="";;
-    "4") ICON="";;
-    "5") ICON="";;
-    "6") ICON="";;
-    "7") ICON="";;
-    "8") ICON="";;
-    "9") ICON="";;
-  esac
-  printf "$ICON"
+	local ICON=" 󰏀"
+	case "$1" in
+	"0") ICON="󰎢" ;;
+	"1") ICON="󰎥" ;;
+	"2") ICON="󰎨" ;;
+	"3") ICON="󰎫" ;;
+	"4") ICON="󰎲" ;;
+	"5") ICON="󰎯" ;;
+	"6") ICON="󰎴" ;;
+	"7") ICON="󰎷" ;;
+	"8") ICON="󰎺" ;;
+	"9") ICON="󰎽" ;;
+	esac
+	printf "$ICON"
 }
 
 function util_select {
-  case "$1" in
-    "icon") omz_cmd_icon "$2";;
-    "boxnum") boxnum "$2";;
-  esac
+	case "$1" in
+	"icon") omz_cmd_icon "$2" ;;
+	"boxnum") boxnum "$2" ;;
+	esac
 }
 util_select $@
