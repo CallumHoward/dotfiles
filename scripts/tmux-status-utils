@@ -1,10 +1,10 @@
 #!/bin/bash
 
 function omz_cmd_icon {
-	local ICON="󰏀"
+	local ICON=""
 	local COLOR="#6d8086"
 	case "$1" in
-	"npm" | "npx" | "create-react-app")
+	"npm" | "npx" | "create-react-app" | "n")
 		ICON=
 		COLOR='#e8274b'
 		;;
