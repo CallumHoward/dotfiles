@@ -1,5 +1,7 @@
 -- Window wrapping mappings
+-- stylua: ignore
 vim.keymap.set("n", "[w", function() vim.opt.wrap = false end)
+-- stylua: ignore
 vim.keymap.set("n", "]w", function() vim.opt.wrap = true end)
 vim.keymap.set("n", "<C-w>[w<C-w>p", "<CMD>windo set nowrap<CR>")
 vim.keymap.set("n", "<C-w>]w<C-w>p", "<CMD>windo set wrap<CR>")
@@ -55,6 +57,9 @@ vim.keymap.set("n", "g<", "<CMD>tabm -1<CR>")
 -- Save temp session
 vim.keymap.set("n", "<leader>]]", "<CMD>mks! ~/sess/temp_session.vim<CR>")
 vim.keymap.set("n", "<leader>[[", "<CMD>source ~/sess/temp_session.vim<CR>")
+
+-- Delete buffer
+vim.keymap.set("n", "<M-w>", "<CMD>bd<CR>")
 
 -- Terminal window mappings
 vim.keymap.set("t", "<C-w><C-w>", "<C-\\><C-n><C-w><C-w>")

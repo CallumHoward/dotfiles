@@ -19,6 +19,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_autocmd("BufEnter", {
   group = filetype_autogroup,
+  pattern = "*.postcss",
+  command = "setlocal filetype=css.postcss",
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = filetype_autogroup,
   pattern = "*.mdx",
   command = "setlocal filetype=markdown.mdx",
 })
@@ -84,7 +90,18 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
     end
   end,
 })
-vim.keymap.set("n", "<C-Space>", function()
+vim.keymap.set("n", "<leader><C-Space>", function()
   vim.g.numbertoggle = not vim.g.numbertoggle
   vim.o.relativenumber = not vim.o.relativenumber
 end)
+
+-- resize splits if window got resized
+vim.api.nvim_del_augroup_by_name("lazyvim_resize_splits")
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = vim.api.nvim_create_augroup("ResizeSplits", {}),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
