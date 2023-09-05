@@ -20,7 +20,7 @@
     #diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
     #diff = diff-so-fancy | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
     #delta = delta --side-by-side --diff-so-fancy # | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'
-    diff = ~/git/git-split-diffs/bin/git-split-diffs --color | less --tabs=4 -iFMRSX
+    diff = git-split-diffs --color | less --tabs=4 -iFMRSX
 [interactive]
     #diffFilter = delta --color-only
 [diff]
@@ -45,7 +45,7 @@
     process = git-lfs filter-process
     required = true
 [core]
-    pager = ~/git/git-split-diffs/bin/git-split-diffs --color | less -RFX
+    pager = git-split-diffs --color | less -RFX
     # pager = delta --diff-so-fancy # | menos --tabs=4 -iFMRSX
     excludesfile = ~/.gitignore_global
 [delta]
@@ -71,7 +71,7 @@
 [credential]
     helper = cache --timeout=3600000
 [url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+	insteadOf = https://github.com/
 [split-diffs]
     theme-name = github-dark-dim
 [pull]

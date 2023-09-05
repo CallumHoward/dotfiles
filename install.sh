@@ -42,6 +42,7 @@ if ! [ -x "$(which brew)" ]; then
         echo -n "Install: tmux neovim ranger htop... [Y/n]? "
         if echo "$answer" | grep -viq "^n" ; then
             brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan wget
+            brew install bat && bat cache --build
         fi
     fi
 elif [ -x "$(which apt-get)" ]; then
@@ -55,16 +56,10 @@ echo "Finished installing packages"
 
 git update-index --skip-worktree .local_rc
 
-#TODO install walker
-#TODO install dein
-#TODO install neovim plugins and helpers
-
 echo -n "Install ranger-devicons [Y/n]? "
 read answer
 if echo "$answer" | grep -viq "^n" ; then
-    cd ~/.config/ranger/plugins/ranger_devicons
-    make install
-    cd -
+  pip install ansicolors
 fi
 
 echo -n "Install oh-my-zsh [Y/n]? "
