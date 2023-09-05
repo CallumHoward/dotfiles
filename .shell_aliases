@@ -110,6 +110,7 @@ alias grs="git_reset"
 alias grv="git remote -v"
 alias gmm="git merge master"
 alias com="git checkout \$(git branch -rl '*/HEAD' | grep -o '[^/]*$')"
+alias comm="com"
 alias cob="git checkout -b"
 alias gcd='cd "`git rev-parse --show-toplevel 2>/dev/null | head -1`"'
 alias cdg="gcd"
