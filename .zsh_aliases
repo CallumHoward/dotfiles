@@ -61,13 +61,17 @@ abbreviations=(
   'gdc' 'git diff --cached'
   'lg' 'git lg'
   'pu' 'git push'
+  'nct' 'n check:types'
   'nt' 'n test'
+  'ntu' 'n test -u'
   'ntw' 'n test --watch'
+  'ntp' 'n test:preview'
+  'ntd' 'n test:debug'
   'na' 'n add'
   'nu' 'n uninstall'
   'lgh' 'git lg -n10'
   'gdmb' 'git diff master...HEAD'
-  'stash' 'git stash push -m "__CURSOR__"'
+  'stash' 'git stash push -ku -m "__CURSOR__"'
   'show' 'git show'
 )
 
