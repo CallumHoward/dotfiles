@@ -10,7 +10,7 @@ local vo = vim.opt
 vo.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic,linematch:50"
 vo.fillchars:append("diff:╱")
 
-vo.grepprg = "rg --vimgrep --hidden"
+vo.grepprg = "rg --vimgrep --hidden -g '!{.git,yarn.lock,*.log,messages.json}'"
 
 vo.iskeyword:append("-") -- Treat dash separated words as a word text object"
 vo.clipboard = ""

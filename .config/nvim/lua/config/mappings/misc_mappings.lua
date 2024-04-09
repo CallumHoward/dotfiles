@@ -54,7 +54,12 @@ vim.keymap.set("n", "<C-l>", "<C-l><CMD>syntax sync fromstart<CR>")
 
 -- Quickly set foldlevel
 for i = 1, 5 do
-  vim.keymap.set("n", "<leader>" .. i, "<CMD>set foldnestmax=" .. i .. "<CR>")
+  vim.keymap.set(
+    "n",
+    "<leader>" .. i,
+    "<CMD>set foldnestmax=" .. i .. "<CR>",
+    { buffer = true, desc = "which_key_ignore" }
+  )
 end
 
 -- Readline-like delete to end of line
