@@ -141,14 +141,19 @@ function omz_cmd_icon {
 			COLOR='#019833'
 		elif [[ "$1" =~ "dotfiles" ]]; then
 			ICON=
+			COLOR='#519aba'
 		elif [[ "$1" =~ "notes" ]]; then
 			ICON=󰠮
+			COLOR='#e0af68'
 		elif [[ -d "$PATH/node_modules" && -f "$PATH/package.json" ]]; then
 			ICON=
+			COLOR='#519aba'
 		elif [[ -d "$PATH/.git" ]]; then
 			ICON=
+			COLOR='#519aba'
 		elif [[ -d "$PATH" ]]; then
 			ICON=
+			COLOR='#3572a5'
 		fi
 		;;
 	esac
