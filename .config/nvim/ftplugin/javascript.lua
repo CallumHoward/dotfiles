@@ -112,6 +112,13 @@ vim.keymap.set("n", "<leader>jS", function()
   vim.b.minianimate_disable = minianimate_disable
 end, { buffer = true, desc = "Remove .skip from current test case" })
 
+vim.keymap.set(
+  "n",
+  "<leader>jp",
+  'odebug();<Esc>ggOimport { debug } from "jest-preview";<Esc>g;',
+  { buffer = true, desc = "Add jest-preview debug" }
+)
+
 -- Compiler mappings
 vim.keymap.set("n", "<leader>jt", ":comp tsc | Make<CR>", { buffer = true, desc = "Compile tsc (async)" })
 vim.keymap.set("n", "<leader>je", ":comp eslint | Make<CR>", { buffer = true, desc = "Compile eslint (async)" })

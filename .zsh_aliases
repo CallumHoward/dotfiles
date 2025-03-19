@@ -54,6 +54,8 @@ abbreviations=(
   'cm' 'git commit -m "__CURSOR__"'
   'a' 'git add'
   'co' 'git checkout'
+  'cob' 'git checkout -b'
+  'com' 'git checkout master'
   'grs' 'git reset'
   'gca' 'git commit --amend'
   'gcv' 'git commit -v'
@@ -71,8 +73,12 @@ abbreviations=(
   'nu' 'n uninstall'
   'lgh' 'git lg -n10'
   'gdmb' 'git diff master...HEAD'
+  'lgmb' 'git lg master...HEAD'
   'stash' 'git stash push -ku -m "__CURSOR__"'
   'show' 'git show'
+  'nt' 'n test'
+  'ntu' 'n test -u'
+  'na' 'n add'
 )
 
 magic-abbrev-expand() {

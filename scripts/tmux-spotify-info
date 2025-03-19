@@ -13,7 +13,7 @@ tell application "Spotify"
 
       if artist_name > 0
         # If the track has an artist set and is therefore most likely a song rather than an advert
-        "  " & artist_name & " - " & track_name # & " #[bg=black] #[bg=colour234]"
+        "   " & artist_name & " - " & track_name # & " #[bg=black] #[bg=colour234]"
       else
         # If the track doesn't have an artist set and is therefore most likely an advert rather than a song
         "~ " & track_name

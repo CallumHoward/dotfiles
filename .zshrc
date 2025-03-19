@@ -28,6 +28,9 @@ ENABLE_CORRECTION="true"
 #    export TERM=tmux-256color
 #fi
 
+# Required to be sourced before fasd plugin
+PATH=~/.local/bin:$PATH
+
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
 # NOTE load autosuggestions after syntax highlighting
 # NOTE load history-search-multi-word after zsh-vim-mode
@@ -106,14 +109,14 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char forward-word)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Refresh the prompt periodically
-TRAPALRM() {
-  local f
-  for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
-    [[ "${+functions[$f]}" == 0 ]] || "$f" &>/dev/null || true
-  done
-  p10k display -r
-}
-TMOUT=30
+# TRAPALRM() {
+#   local f
+#   for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
+#     [[ "${+functions[$f]}" == 0 ]] || "$f" &>/dev/null || true
+#   done
+#   p10k display -r
+# }
+# TMOUT=30
 
 #zprof
 

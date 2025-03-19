@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
 vim.keymap.set("n", "<leader><C-Space>", function()
   vim.g.numbertoggle = not vim.g.numbertoggle
   vim.o.relativenumber = not vim.o.relativenumber
-end)
+end, { desc = "Toggle relative line numbers" })
 
 -- Resize splits if window got resized
 vim.api.nvim_del_augroup_by_name("lazyvim_resize_splits")
@@ -124,5 +124,12 @@ if vim.fn.exists("$TMUX") then
     group = tmux_title_autogroup,
     pattern = "*",
     callback = SetTmuxTitle,
+  })
+  vim.api.nvim_create_autocmd({ "WinEnter" }, {
+    group = tmux_title_autogroup,
+    pattern = "*",
+    callback = function()
+      vim.g.tmux_window_target = vim.fn.system("tmux display-message -p '#S:#I'")
+    end,
   })
 end
