@@ -23,7 +23,19 @@ return {
     "chrishrb/gx.nvim",
     keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
     cmd = { "Browse" },
-    config = true,
+    config = {
+      handlers = {
+        jira = { -- custom handler to open Jira tickets (these have higher precedence than builtin handlers)
+          name = "jira", -- set name of handler
+          handle = function(mode, line, _)
+            local ticket = require("gx.helper").find(line, mode, "(%u+-%d+)")
+            if ticket and #ticket < 20 then
+              return "http://safetyculture.atlassian.net/browse/" .. ticket
+            end
+          end,
+        },
+      },
+    },
   },
   {
     "lewis6991/gitsigns.nvim",

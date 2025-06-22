@@ -39,13 +39,12 @@ return {
               "git",
               "diff",
               "--name-only",
-              "--relative",
-              "master",
+              "master...HEAD",
             }, {}),
             sorter = require("telescope.sorters").get_fuzzy_file(),
             previewer = require("telescope.previewers").new_termopen_previewer({
               get_command = function(entry)
-                return { "git", "diff", "--relative", "master", entry.value }
+                return { "git", "diff", "master...HEAD", entry.value }
               end,
             }),
           }, {})

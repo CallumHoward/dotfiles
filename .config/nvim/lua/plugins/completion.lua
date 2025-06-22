@@ -1,82 +1,78 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
-    enabled = true,
-    dependencies = { "hrsh7th/cmp-emoji" },
-    event = "InsertEnter",
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
-      local luasnip = require("luasnip")
-      local cmp = require("cmp")
-
-      opts.mapping = {
-        ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["{"] = function(fallback)
-          cmp.close()
-          fallback()
-        end,
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-          -- they way you will only jump inside the snippet region
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      }
-    end,
+    "saghen/blink.cmp",
+    dependencies = { "mgalliou/blink-cmp-tmux" },
+    opts = {
+      sources = {
+        default = { "tmux" },
+        providers = {
+          tmux = {
+            module = "blink-cmp-tmux",
+            name = "tmux",
+            -- default options
+            opts = {
+              all_panes = false,
+              capture_history = false,
+              -- only suggest completions from `tmux` if the `trigger_chars` are
+              -- used
+              triggered_only = false,
+              trigger_chars = { "." },
+            },
+          },
+        },
+      },
+    },
   },
-  -- {
-  --   "saghen/blink.cmp",
-  --   opts = {
-  --     sources = {
-  --       providers = {
-  --         lsp = {
-  --           -- enabled = false,
-  --           async = true,
-  --           timeout_ms = 200,
-  --           min_keyword_length = 3,
-  --         },
-  --       },
-  --     },
-  --   },
-  -- config = function(_, opts)
-  --   opts.sources.providers.lsp.async = function()
-  --     local clients = vim.lsp.get_clients({ bufnr = 0 })
-  --     for _, client in ipairs(clients) do
-  --       if client.name == "vtsls" then
-  --         return true
-  --       end
-  --       return false
-  --     end
-  --   end
-  -- end,
-  -- },
+  {
+    "saghen/blink.cmp",
+    dependencies = { "alexandre-abrioux/blink-cmp-npm.nvim" },
+    opts = {
+      sources = {
+        default = { "npm" },
+        providers = {
+          -- configure the provider
+          npm = {
+            name = "npm",
+            module = "blink-cmp-npm",
+            async = true,
+            -- optional - make blink-cmp-npm completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
+            -- optional - blink-cmp-npm config
+            ---@module "blink-cmp-npm"
+            ---@type blink-cmp-npm.Options
+            opts = {
+              ignore = {},
+              only_semantic_versions = true,
+              only_latest_version = false,
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    "saghen/blink.cmp",
+    dependencies = {
+      "moyiz/blink-emoji.nvim",
+    },
+    opts = {
+      sources = {
+        default = { "emoji" },
+        providers = {
+          emoji = {
+            module = "blink-emoji",
+            name = "Emoji",
+            score_offset = 15, -- Tune by preference
+            opts = {
+              insert = true, -- Insert emoji (default) or complete its name
+              ---@type string|table|fun():table
+              trigger = function()
+                return { ":" }
+              end,
+            },
+          },
+        },
+      },
+    },
+  },
 }

@@ -11,46 +11,11 @@ return {
     end,
   },
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    keys = {
-      {
-        "<leader>ch",
-        function()
-          local chat = require("CopilotChat")
-          chat.toggle()
-        end,
-        mode = { "n", "x" },
-        desc = "CopilotChat - Toggle",
-      },
-      {
-        "<leader>tch",
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.help_actions())
-        end,
-        mode = { "n", "x" },
-        desc = "CopilotChat - Help actions",
-      },
-      -- Show prompts actions with telescope
-      {
-        "<leader>tcp",
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-        end,
-        mode = { "n", "x" },
-        desc = "CopilotChat - Prompt actions",
-      },
-    },
-  },
-  {
-    "pwntester/octo.nvim",
-    keys = {
-      {
-        "<leader>go",
-        "<cmd>Octo<cr>",
-        { desc = "Octo" },
-      },
-    },
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("lint").linters["markdownlint-cli2"].args = {
+        '--config="~/.markdownlint-cli2.jsonc"',
+      }
+    end,
   },
 }

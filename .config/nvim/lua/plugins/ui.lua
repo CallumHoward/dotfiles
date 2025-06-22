@@ -58,26 +58,26 @@ return {
     "kshenoy/vim-signature",
     event = "BufEnter",
   },
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<Esc>",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-          vim.cmd("nohlsearch")
-        end,
-        desc = "Dismiss all Notifications",
-      },
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Dismiss all Notifications",
-      },
-    },
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   keys = {
+  --     {
+  --       "<Esc>",
+  --       function()
+  --         require("notify").dismiss({ silent = true, pending = true })
+  --         vim.cmd("nohlsearch")
+  --       end,
+  --       desc = "Dismiss all Notifications",
+  --     },
+  --     {
+  --       "<leader>un",
+  --       function()
+  --         require("notify").dismiss({ silent = true, pending = true })
+  --       end,
+  --       desc = "Dismiss all Notifications",
+  --     },
+  --   },
+  -- },
   -- preview colours
   {
     "RRethy/vim-hexokinase",

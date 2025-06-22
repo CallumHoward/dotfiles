@@ -1,9 +1,32 @@
 return {
-  -- {
-  --   "zeioth/garbage-day.nvim",
-  --   dependencies = "neovim/nvim-lspconfig",
-  --   event = "VeryLazy",
-  -- },
+  {
+    "copilotlsp-nvim/copilot-lsp",
+    init = function()
+      vim.g.copilot_nes_debounce = 500
+      vim.lsp.enable("copilot_ls")
+
+      vim.keymap.set("n", "<CR>", function()
+        -- Try to jump to the start of the suggestion edit.
+        -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
+        local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
+          or (require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit())
+          or vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
+      end, { desc = "Clear Copilot suggestion or fallback" })
+
+      vim.keymap.set("n", "<esc>", function()
+        if not require("copilot-lsp.nes").clear() then
+          -- fallback to other functionality
+          Snacks.notifier.hide()
+          vim.cmd("nohlsearch")
+        end
+      end)
+    end,
+  },
+  {
+    "zeioth/garbage-day.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+  },
   -- {
   --   "pmizio/typescript-tools.nvim",
   --   opts = {
@@ -73,23 +96,28 @@ return {
         coffeesense = {
           filetypes = { "coffee" },
         },
-        emmet_ls = {
-          filetypes = {
-            "html",
-            "typescriptreact",
-            "javascriptreact",
-            "css",
-            "sass",
-            "scss",
-            "less",
-            "javascript",
-            "typescript",
-            "markdown",
-            "ejs",
-            "svelte",
-          },
-        },
+        -- emmet_ls = {
+        --   filetypes = {
+        --     "html",
+        --     "typescriptreact",
+        --     "javascriptreact",
+        --     "css",
+        --     "sass",
+        --     "scss",
+        --     "less",
+        --     "javascript",
+        --     "typescript",
+        --     "markdown",
+        --     "ejs",
+        --     "svelte",
+        --   },
+        -- },
         vtsls = {
+          -- init_options = {
+          --   tsserver = {
+          --     tsconfig = vim.fn.expand("./tsconfig.json"),
+          --   },
+          -- },
           settings = {
             typescript = {
               tsserver = {
@@ -137,6 +165,7 @@ return {
           opts.capabilities.documentFormattingProvider = true
         end, -- example to setup with typescript.nvim
         emmet = function(_, opts)
+          opts.autostart = false
           opts.capabilities.textDocument.completion.completionItem.snippetSupport = false
         end,
         tailwindcss = function(_, opts)
