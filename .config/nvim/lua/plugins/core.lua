@@ -1,3 +1,5 @@
+vim.g.lazyvim_picker = "snacks"
+
 return {
   {
     "LazyVim/LazyVim",
