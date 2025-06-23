@@ -56,6 +56,7 @@ abbreviations=(
   'co' 'git checkout'
   'cob' 'git checkout -b'
   'com' 'git checkout master'
+  'gm' 'git merge'
   'grs' 'git reset'
   'gca' 'git commit --amend'
   'gcv' 'git commit -v'
@@ -93,7 +94,8 @@ magic-abbrev-expand() {
     else
         zle self-insert
     fi
-    BUFFER=${BUFFER%%}
+    BUFFER=${BUFFER%%
+}
     zle reset-prompt
 }
 
