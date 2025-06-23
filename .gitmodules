@@ -27,7 +27,7 @@
 	url = https://github.com/z-shell/F-Sy-H.git
 [submodule ".config/ranger/plugins/ranger_devicons"]
 	path = .config/ranger/plugins/ranger_devicons
-	url = https://github.com/CallumHoward/ranger_devicons.git
+	url = https://github.com/alexanderjeurissen/ranger_devicons.git
 [submodule ".oh-my-zsh/custom/plugins/zsh-vim-mode"]
 	path = .oh-my-zsh/custom/plugins/zsh-vim-mode
 	url = https://github.com/softmoth/zsh-vim-mode.git

@@ -73,11 +73,8 @@
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [split-diffs]
-	theme-name = github-dark-dim
-	theme-directory = /Users/callumhoward/.config/git-split-diffs
+    theme-name = github-dark-dim
 [pull]
     rebase = false
 [init]
     defaultBranch = master
-[rerere]
-	enabled = true

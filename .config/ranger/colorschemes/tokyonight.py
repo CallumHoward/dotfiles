@@ -62,9 +62,9 @@ class Tokyonight(ColorScheme):
                 else:
                     fg = red
                 fg += BRIGHT
-            # if context.line_number and not context.selected:
-            #     fg = default
-            #     attr &= ~bold
+            if context.line_number and not context.selected:
+                fg = default
+                attr &= ~bold
             if not context.selected and (context.cut or context.copied):
                 attr |= bold
                 fg = black

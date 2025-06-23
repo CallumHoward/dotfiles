@@ -1,65 +1,62 @@
 -- Window wrapping mappings
-vim.keymap.set("n", "[w", function()
-  vim.opt.wrap = false
-end, { desc = "Disable window wrapping" })
-vim.keymap.set("n", "]w", function()
-  vim.opt.wrap = true
-end, { desc = "Enable window wrapping" })
-vim.keymap.set("n", "<C-w>[W", "<CMD>windo set nowrap<CR>", { desc = "Disable wrapping in all windows" })
-vim.keymap.set("n", "<C-w>]W", "<CMD>windo set wrap<CR>", { desc = "Enable wrapping in all windows" })
+-- stylua: ignore
+vim.keymap.set("n", "[w", function() vim.opt.wrap = false end)
+-- stylua: ignore
+vim.keymap.set("n", "]w", function() vim.opt.wrap = true end)
+vim.keymap.set("n", "<C-w>[w<C-w>p", "<CMD>windo set nowrap<CR>")
+vim.keymap.set("n", "<C-w>]w<C-w>p", "<CMD>windo set wrap<CR>")
 
 -- Maximise current window
-vim.keymap.set("n", "<C-w><Space>", "<C-w>|<C-w>_", { desc = "Maximize current window" })
+vim.keymap.set("n", "<C-w><Space>", "<C-w>|<C-w>_")
 
 -- Unimpaired quickfix list mappings
-vim.keymap.set("n", "[q", "<CMD>cprevious<CR>", { desc = "Go to previous quickfix" })
-vim.keymap.set("n", "]q", "<CMD>cnext<CR>", { desc = "Go to next quickfix" })
-vim.keymap.set("n", "[Q", "<CMD>cfirst<CR>", { desc = "Go to first quickfix" })
-vim.keymap.set("n", "]Q", "<CMD>clast<CR>", { desc = "Go to last quickfix" })
+vim.keymap.set("n", "<leader>q", "<CMD>cw<CR><C-W>J")
+vim.keymap.set("n", "[q", "<CMD>cprevious<CR>")
+vim.keymap.set("n", "]q", "<CMD>cnext<CR>")
+vim.keymap.set("n", "[Q", "<CMD>cfirst<CR>")
+vim.keymap.set("n", "]Q", "<CMD>clast<CR>")
 
 -- Unimpaired location list mappings
-vim.keymap.set("n", "[l", "<CMD>lprevious<CR>", { desc = "Go to previous location" })
-vim.keymap.set("n", "]l", "<CMD>lnext<CR>", { desc = "Go to next location" })
-vim.keymap.set("n", "[L", "<CMD>lfirst<CR>", { desc = "Go to first location" })
-vim.keymap.set("n", "]L", "<CMD>llast<CR>", { desc = "Go to last location" })
+vim.keymap.set("n", "<leader>l", "<CMD>lw<CR><C-W>J")
+vim.keymap.set("n", "[l", "<CMD>lprevious<CR>")
+vim.keymap.set("n", "]l", "<CMD>lnext<CR>")
+vim.keymap.set("n", "[L", "<CMD>lfirst<CR>")
+vim.keymap.set("n", "]L", "<CMD>llast<CR>")
 
 -- Unimpaired buffer mappings
-vim.keymap.set("n", "[b", "<CMD>bprevious<CR>", { desc = "Go to previous buffer" })
-vim.keymap.set("n", "]b", "<CMD>bnext<CR>", { desc = "Go to next buffer" })
-vim.keymap.set("n", "[B", "<CMD>bfirst<CR>", { desc = "Go to first buffer" })
-vim.keymap.set("n", "]B", "<CMD>blast<CR>", { desc = "Go to last buffer" })
+vim.keymap.set("n", "[b", "<CMD>bprevious<CR>")
+vim.keymap.set("n", "]b", "<CMD>bnext<CR>")
+vim.keymap.set("n", "[B", "<CMD>bfirst<CR>")
+vim.keymap.set("n", "]B", "<CMD>blast<CR>")
 
 -- Unimpaired tab mappings
-vim.keymap.set("n", "[t", "gT", { desc = "Go to previous tab" })
-vim.keymap.set("n", "]t", "gt", { desc = "Go to next tab" })
-vim.keymap.set("n", "[T", "<CMD>tabfirst<CR>", { desc = "Go to first tab" })
-vim.keymap.set("n", "]T", "<CMD>tablast<CR>", { desc = "Go to last tab" })
+vim.keymap.set("n", "[t", "gT")
+vim.keymap.set("n", "]t", "gt")
+vim.keymap.set("n", "[T", "<CMD>tabfirst<CR>")
+vim.keymap.set("n", "]T", "<CMD>tablast<CR>")
 
 -- Move to top level non-whitespace
-vim.keymap.set("n", "[[", "<CMD>keeppatterns ?^\\S<CR>", { desc = "Move to previous non-whitespace" })
-vim.keymap.set("n", "]]", "<CMD>keeppatterns /^\\S<CR>", { desc = "Move to next non-whitespace" })
+vim.keymap.set("n", "[[", "<CMD>keeppatterns ?^\\S<CR>")
+vim.keymap.set("n", "]]", "<CMD>keeppatterns /^\\S<CR>")
 
 -- Tab navigation mappings
 for i = 1, 8 do
-  vim.keymap.set("n", "<C-w>" .. i, "<CMD>tabn " .. i .. "<CR>", { desc = "Go to tab " .. i })
+  vim.keymap.set("n", "<C-w>" .. i, "<CMD>tabn " .. i .. "<CR>")
 end
-vim.keymap.set("n", "<C-w>0", "<CMD>tabfirst<CR>", { desc = "Go to first tab" })
-vim.keymap.set("n", "<C-w>9", "<CMD>tablast<CR>", { desc = "Go to last tab" })
+vim.keymap.set("n", "<C-w>0", "<CMD>tabfirst<CR>")
+vim.keymap.set("n", "<C-w>9", "<CMD>tablast<CR>")
 
 -- Open new vertical split mappings
-vim.keymap.set("n", "<C-w><C-f>", "<C-w><C-v>gF", { desc = "Open new vertical split" })
-vim.keymap.set("n", "<C-w><C-]>", "<C-w><C-v><C-]>", { remap = true, desc = "Open new vertical split with tag jump" })
+vim.keymap.set("n", "<C-w><C-f>", "<C-w><C-v>gF")
+vim.keymap.set("n", "<C-w><C-]>", "<C-w><C-v><C-]>", { remap = true })
 
 -- Move tabs
-vim.keymap.set("n", "g>", "<CMD>tabm +1<CR>", { desc = "Move tab right" })
-vim.keymap.set("n", "g<", "<CMD>tabm -1<CR>", { desc = "Move tab left" })
-
--- Close tab
-vim.keymap.set("n", "<leader><M-w>", "<CMD>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "g>", "<CMD>tabm +1<CR>")
+vim.keymap.set("n", "g<", "<CMD>tabm -1<CR>")
 
 -- Save temp session
--- vim.keymap.set("n", "<leader>]]", "<CMD>mks! ~/sess/temp_session.vim<CR>")
--- vim.keymap.set("n", "<leader>[[", "<CMD>source ~/sess/temp_session.vim<CR>")
+vim.keymap.set("n", "<leader>]]", "<CMD>mks! ~/sess/temp_session.vim<CR>")
+vim.keymap.set("n", "<leader>[[", "<CMD>source ~/sess/temp_session.vim<CR>")
 
 -- Delete buffer
 vim.keymap.set("n", "<M-w>", "<CMD>bd<CR>")
@@ -79,4 +76,4 @@ vim.keymap.set("n", "<leader>d", function()
     vim.cmd("windo diffthis")
   end
   vim.cmd("wincmd w")
-end, { desc = "Toggle Diff" })
+end)

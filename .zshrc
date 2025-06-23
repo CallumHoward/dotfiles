@@ -28,9 +28,6 @@ ENABLE_CORRECTION="true"
 #    export TERM=tmux-256color
 #fi
 
-# Required to be sourced before fasd plugin
-PATH=~/.local/bin:$PATH
-
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
 # NOTE load autosuggestions after syntax highlighting
 # NOTE load history-search-multi-word after zsh-vim-mode
@@ -41,13 +38,12 @@ plugins=( \
     #mosh \
     #npm \
     #vi-mode \
-    # zsh-prompt-benchmark \ # enable when needed
+    zsh-prompt-benchmark \
     zsh-fzf-bindings \
     zsh-proxy-title \
     pip \
     npm \
     yarn \
-    bun \
     fasd \
     zsh-zbell \
     # zsh-vim-mode goes before zsh-autocomplete, but then
@@ -55,7 +51,7 @@ plugins=( \
     #zsh-vim-mode \
     #zsh-autocomplete \
     #zsh-syntax-highlighting \
-    # history-substring-search \ # Broken since 35a5357704ace1d9732a15cc3a5d792df53f2170
+    history-substring-search \
     F-Sy-H \
     zsh-autosuggestions \
     zsh-vim-mode \
@@ -108,21 +104,11 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char forward-word)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Refresh the prompt periodically
-# TRAPALRM() {
-#   local f
-#   for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
-#     [[ "${+functions[$f]}" == 0 ]] || "$f" &>/dev/null || true
-#   done
-#   p10k display -r
-# }
-# TMOUT=30
-
 #zprof
+
+# bun completions
+[ -s "/Users/callumhoward/.bun/_bun" ] && source "/Users/callumhoward/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# export REACT_EDITOR=launch-editor-script.sh
-# export REACT_EDITOR=echo

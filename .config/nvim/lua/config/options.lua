@@ -8,7 +8,9 @@ vim.g.maplocalleader = "\\"
 local vo = vim.opt
 
 vo.diffopt = "internal,filler,closeoff,iwhite,vertical,algorithm:patience,indent-heuristic,linematch:50"
-vo.grepprg = "rg --vimgrep --hidden -g '!{.git,yarn.lock,*.log,messages.json}'"
+vo.fillchars:append("diff:╱")
+
+vo.grepprg = "rg --vimgrep --hidden"
 
 vo.iskeyword:append("-") -- Treat dash separated words as a word text object"
 vo.clipboard = ""
@@ -21,8 +23,7 @@ vo.breakat = " ,{"
 vo.cpoptions:append("n") -- Column calc for wrapped lines
 
 vo.foldmethod = "expr"
-vo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vo.foldnestmax = 2
+vo.foldexpr = "vim.treesitter.foldexpr()"
 vo.foldenable = false
 
 vo.mousescroll = "ver:1,hor:6"
