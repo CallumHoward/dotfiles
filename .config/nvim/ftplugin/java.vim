@@ -1,1 +1,0 @@
-setlocal foldnestmax=2
