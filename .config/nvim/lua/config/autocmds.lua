@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = filetype_autogroup,
   pattern = "lazy",
-  command = "setl signcolumn=no",
+  command = "setl signcolumn=no nolinebreak nobreakindent cpoptions-=n",
 })
 
 -- Skeletons

@@ -51,28 +51,8 @@ return {
       preview_config = { border = "none" },
       current_line_blame = true,
       current_line_blame_opts = { virt_text_priority = 1 },
-      -- current_line_blame_formatter_opts = { relative_time = true },
       current_line_blame_formatter = space .. "<author>, <author_time:%R> • <summary>",
       current_line_blame_formatter_nc = space .. "You, a while ago • Uncommitted changes",
-      -- current_line_blame_formatter = function(name, blame_info, opts)
-      --   if blame_info.author:gsub("%s+", "") == name then
-      --     blame_info.author = "You"
-      --   end
-      --
-      --   local text
-      --   local date_time
-      --
-      --   if opts ~= nil and opts.relative_time then
-      --     date_time = require("gitsigns.util").get_relative_time(tonumber(blame_info["author_time"]))
-      --   else
-      --     date_time = os.date("%Y-%m-%d", tonumber(blame_info["author_time"]))
-      --   end
-      --
-      --   text = string.format(space .. "%s, %s • %s", blame_info.author, date_time, blame_info.summary)
-      --
-      --   return { { text, "GitSignsCurrentLineBlame" } }
-      -- end,
-
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
@@ -158,39 +138,42 @@ return {
       end,
     },
   },
-  -- {
-  --   "vuki656/package-info.nvim",
-  --   -- dependencies = "MunifTanjim/nui.nvim",
-  --   event = "BufEnter package.json",
-  --   config = function()
-  --     require("package-info").setup({
-  --       hide_up_to_date = true,
-  --     })
-  --   end,
-  --   keys = function()
-  --     vim.keymap.set("n", "<leader>ns", require("package-info").show, { desc = "Show dependency versions" })
-  --     vim.keymap.set("n", "<leader>nc", require("package-info").hide, { desc = "Hide dependency versions" })
-  --     vim.keymap.set("n", "<leader>nt", require("package-info").toggle, { desc = "Toggle dependency versions" })
-  --     vim.keymap.set("n", "<leader>nu", require("package-info").update, { desc = "Update dependency on the line" })
-  --     vim.keymap.set("n", "<leader>nd", require("package-info").delete, { desc = "Delete dependency on the line" })
-  --     vim.keymap.set("n", "<leader>ni", require("package-info").install, { desc = "Install a new dependency" })
-  --     vim.keymap.set(
-  --       "n",
-  --       "<leader>np",
-  --       require("package-info").change_version,
-  --       { desc = "Install a different dependency version" }
-  --     )
-  --   end,
-  -- },
+  {
+    "vuki656/package-info.nvim",
+    -- dependencies = "MunifTanjim/nui.nvim",
+    event = "BufEnter package.json",
+    config = function()
+      require("package-info").setup({
+        hide_up_to_date = true,
+      })
+    end,
+    keys = function()
+      vim.keymap.set("n", "<leader>ns", require("package-info").show, { desc = "Show dependency versions" })
+      vim.keymap.set("n", "<leader>nc", require("package-info").hide, { desc = "Hide dependency versions" })
+      vim.keymap.set("n", "<leader>nt", require("package-info").toggle, { desc = "Toggle dependency versions" })
+      vim.keymap.set("n", "<leader>nu", require("package-info").update, { desc = "Update dependency on the line" })
+      vim.keymap.set("n", "<leader>nd", require("package-info").delete, { desc = "Delete dependency on the line" })
+      vim.keymap.set("n", "<leader>ni", require("package-info").install, { desc = "Install a new dependency" })
+      vim.keymap.set(
+        "n",
+        "<leader>np",
+        require("package-info").change_version,
+        { desc = "Install a different dependency version" }
+      )
+    end,
+  },
   {
     "folke/trouble.nvim",
     keys = {
       {
         "<leader>q",
-        function()
-          require("trouble").toggle({ mode = "quickfix" })
-        end,
-        { desc = "Toggle Trouble quickfix" },
+        keys = {
+          {
+            "<leader>xQ",
+            "<cmd>Trouble qflist toggle<cr>",
+            desc = "Quickfix List (Trouble)",
+          },
+        },
       },
     },
     opts = {
@@ -214,37 +197,14 @@ return {
     },
   },
   {
-    "ruifm/gitlinker.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      local gl = require("gitlinker")
-      local gla = require("gitlinker.actions")
-      local function open_blame()
-        gl.get_buf_range_url("n", { action_callback = gla.open_in_browser })
-      end
-      gl.setup()
-      -- For Git Blame
-      -- gl.setup({
-      --   callbacks = {
-      --     ["github.com"] = function(url_data)
-      --       local url = require("gitlinker.hosts").get_base_https_url(url_data)
-      --         .. "/blame/"
-      --         .. url_data.rev
-      --         .. "/"
-      --         .. url_data.file
-      --       if url_data.lstart then
-      --         url = url .. "#L" .. url_data.lstart
-      --         if url_data.lend then
-      --           url = url .. "-L" .. url_data.lend
-      --         end
-      --       end
-      --       return url
-      --     end,
-      --   },
-      -- })
-      vim.keymap.set("n", "<leader>gB", open_blame, { desc = "Open blame" })
-      vim.keymap.set("v", "<leader>gB", open_blame, { desc = "Open blame" })
-    end,
+    "linrongbin16/gitlinker.nvim",
+    cmd = "GitLink",
+    opts = {},
+    keys = {
+      { "<leader>gy", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Yank git link" },
+      { "<leader>gO", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git permlink" },
+      { "<leader>gB", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open git blame" },
+    },
   },
   {
     "tpope/vim-abolish",
@@ -276,12 +236,20 @@ return {
       return {}
     end,
   },
-  -- { -- Throwing error
-  --   "RRethy/nvim-treesitter-endwise",
-  --   config = function()
-  --     vim.cmd("TSEnable endwise")
-  --   end,
-  -- },
+  {
+    "RRethy/nvim-treesitter-endwise",
+    ft = {
+      "bash",
+      "elixir",
+      "fish",
+      "julia",
+      "lua",
+      "luau",
+      "ruby",
+      "verilog",
+      "vim",
+    },
+  },
   { "windwp/nvim-ts-autotag", config = { enable_close_on_slash = false } },
   {
     "axelvc/template-string.nvim",

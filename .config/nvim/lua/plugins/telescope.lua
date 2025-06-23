@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 local Util = require("lazyvim.util")
 
 -- Commands
@@ -19,6 +23,7 @@ return {
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   {
     "nvim-telescope/telescope.nvim",
+    disabled = true,
     -- dependencies = {
     --   "nvim-telescope/telescope-fzf-native.nvim",
     --   build = "make",
