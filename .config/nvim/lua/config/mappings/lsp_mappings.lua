@@ -56,6 +56,11 @@ vim.keymap.set("x", "<leader>cf", vim.lsp.buf.format, { desc = "Format Range" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help)
 
+-- Inlay Hints
+vim.keymap.set("n", "<leader>uh", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end, { desc = "Toggle Inlay Hints" })
+
 -- Diagnostics
 local float_opts = { scope = "line", header = "" }
 local show_diagnostics_virtual_text = true
@@ -63,6 +68,7 @@ local toggle_diagnostic_virtual_text = function()
   show_diagnostics_virtual_text = not show_diagnostics_virtual_text
   vim.diagnostic.config({ virtual_text = show_diagnostics_virtual_text })
 end
+vim.keymap.set("n", "<leader>uv", toggle_diagnostic_virtual_text, { desc = "Toggle diagnostic virtual text" })
 
 local show_diagnostics_virtual_text_autogroup = vim.api.nvim_create_augroup("DiagnosticsVirtualTextAutogroup", {})
 vim.api.nvim_create_autocmd("CursorMoved", {
@@ -74,13 +80,18 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 })
 
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.goto_prev({ float = false })
+  vim.diagnostic.goto_prev({ float = false, desc = "Next Diagnostic" })
 end)
 vim.keymap.set("n", "]d", function()
-  vim.diagnostic.goto_next({ float = false })
+  vim.diagnostic.goto_next({ float = false, desc = "Prev Diagnostic" })
+end)
+vim.keymap.set("n", "]e", function()
+  vim.diagnostic.goto_next({ float = false, severity = "ERROR", desc = "Next Error" })
+end)
+vim.keymap.set("n", "[e", function()
+  vim.diagnostic.goto_prev({ float = false, severity = "ERROR", desc = "Prev Error" })
 end)
 vim.keymap.set("n", "<leader>cd", function()
   vim.diagnostic.config({ virtual_text = false })
   vim.diagnostic.open_float(float_opts)
 end)
-vim.keymap.set("n", "<leader>cD", toggle_diagnostic_virtual_text)

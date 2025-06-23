@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = filetype_autogroup,
   pattern = "lazy",
-  command = "setl signcolumn=no",
+  command = "setl signcolumn=no nolinebreak nobreakindent cpoptions-=n",
 })
 
 -- Skeletons
@@ -93,9 +93,9 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
 vim.keymap.set("n", "<leader><C-Space>", function()
   vim.g.numbertoggle = not vim.g.numbertoggle
   vim.o.relativenumber = not vim.o.relativenumber
-end)
+end, { desc = "Toggle relative line numbers" })
 
--- resize splits if window got resized
+-- Resize splits if window got resized
 vim.api.nvim_del_augroup_by_name("lazyvim_resize_splits")
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = vim.api.nvim_create_augroup("ResizeSplits", {}),
@@ -105,3 +105,31 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
     vim.cmd("tabnext " .. current_tab)
   end,
 })
+
+-- Name tmux windows
+function SetTmuxTitle()
+  local title = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+  if string.find(title, "man") then
+    -- Do nothing
+  elseif title ~= "" then
+    vim.fn.system('tmux rename-window " ' .. title .. '"')
+  else
+    vim.fn.system('tmux rename-window " nvim"')
+  end
+end
+
+if vim.fn.exists("$TMUX") then
+  local tmux_title_autogroup = vim.api.nvim_create_augroup("TmuxTitleAutogroup", {})
+  vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "FocusGained", "CmdlineLeave" }, {
+    group = tmux_title_autogroup,
+    pattern = "*",
+    callback = SetTmuxTitle,
+  })
+  vim.api.nvim_create_autocmd({ "WinEnter" }, {
+    group = tmux_title_autogroup,
+    pattern = "*",
+    callback = function()
+      vim.g.tmux_window_target = vim.fn.system("tmux display-message -p '#S:#I'")
+    end,
+  })
+end

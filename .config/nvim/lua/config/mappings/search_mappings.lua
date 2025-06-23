@@ -1,12 +1,21 @@
 -- Prevent jump after searching word under cursor with # and *
-local hl_cword = function(exclusive, reverse)
+local hl_cword = function(exclusive, reverse, cumulative)
   local save_cursor = vim.fn.getcurpos()
   local cword = vim.fn.expand("<cword>")
+  local prev_search = vim.fn.getreg("/")
+  local search
+
   if exclusive then
-    vim.fn.setreg("/", "\\<" .. cword .. "\\>")
+    search = "\\<" .. cword .. "\\>"
   else
-    vim.fn.setreg("/", cword)
+    search = cword
   end
+
+  if cumulative then
+    search = prev_search .. "\\|" .. search
+  end
+  vim.fn.setreg("/", search)
+
   vim.opt.hlsearch = true
   if reverse then
     vim.cmd("normal! w?<CR>")
@@ -17,16 +26,16 @@ end
 
 vim.keymap.set("n", "#", function()
   hl_cword(true, true)
-end)
+end, { desc = "Search cword (exclusive)" })
 vim.keymap.set("n", "g#", function()
-  hl_cword(true, true)
-end)
+  hl_cword(false, true)
+end, { desc = "Search Cword" })
 vim.keymap.set("n", "*", function()
-  hl_cword(false, false)
-end)
+  hl_cword(true, false)
+end, { desc = "Search cword (exclusive)" })
 vim.keymap.set("n", "g*", function()
   hl_cword(false, false)
-end)
+end, { desc = "Search Cword" })
 
 -- Make * and # work on visual mode too
 local v_set_search = function(cmdtype)
@@ -42,14 +51,19 @@ end
 
 vim.keymap.set("x", "*", function()
   v_set_search("/")
-end)
+end, { desc = "Search Selection" })
 vim.keymap.set("x", "#", function()
   v_set_search("?")
-end)
+end, { desc = "Search Selection" })
 
 -- Add word under cursor to search pattern
-vim.keymap.set("n", "<leader>*", "/<C-R>/\\|\\<<C-R><C-W>\\><CR><C-O>")
-vim.keymap.set("n", "<leader>?", "/<C-R>/\\|")
+vim.keymap.set("n", "<leader>*", function()
+  hl_cword(true, false, true)
+end, { desc = "Add Cword to Search (exclusive)" })
+vim.keymap.set("n", "<leader>g*", function()
+  hl_cword(false, false, true)
+end, { desc = "Add CWord to Search" })
+vim.keymap.set("n", "<leader>?", "/<C-R>/\\|", { desc = "Add to Search (prompt)" })
 
 -- Search highlight behaviour
 local clear_search_hl = vim.api.nvim_create_augroup("ClearSearchHL", {})
@@ -65,13 +79,21 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 })
 vim.keymap.set("n", "n", "<CMD>set hlsearch<CR>n")
 vim.keymap.set("n", "N", "<CMD>set hlsearch<CR>N")
-vim.keymap.set("n", "<Esc>", "<CMD>noh<CR><Esc>")
+-- vim.keymap.set("n", "<Esc>", "<CMD>noh<CR><Esc>")
+vim.keymap.set("n", "<Esc>", function()
+  if not require("copilot-lsp.nes").clear() then
+    -- fallback to other functionality
+    Snacks.notifier.hide()
+    vim.cmd("nohlsearch")
+  end
+end)
 
--- List search matches in curret buffer
+-- List search matches in current buffer
 vim.keymap.set("n", "<leader>/", function()
   vim.cmd([[execute 'vimgrep /' . @/ . '/g %']])
-  vim.cmd("bot copen")
-end)
+  -- vim.cmd("bot copen")
+  vim.cmd("Trouble quickfix")
+end, { desc = "List Search Matches" })
 
 -- Grep for word under cursor
 local grepUnderCursor = function(cmd)
@@ -81,18 +103,19 @@ local grepUnderCursor = function(cmd)
   vim.fn.setreg("/", selection)
   vim.opt.hlsearch = true
   vim.cmd("sil! gr! -F '" .. selection .. "'")
-  vim.cmd("bot copen")
+  -- vim.cmd("bot copen")
+  vim.cmd("Trouble quickfix")
   vim.fn.setreg("o", temp)
 end
 vim.keymap.set("n", "<Leader>#", function()
   grepUnderCursor([[ normal! "oyiw ]])
-end)
+end, { desc = "Grep for Cword" })
 vim.keymap.set("x", "<Leader>#", function()
   grepUnderCursor([[ normal! "oy ]])
-end)
+end, { desc = "Grep for Visual Selection" })
 
 -- Search inside selection
-vim.keymap.set("x", "<leader>/", "<Esc>/\\%V")
+vim.keymap.set("x", "<leader>/", "<Esc>/\\%V", { desc = "Search Inside Selection" })
 
 -- Highlight symbol under cursor TODO doesn't clear or navigate
 -- vim.keymap.set("n", "*", vim.lsp.buf.document_highlight)

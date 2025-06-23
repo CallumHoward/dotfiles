@@ -2,30 +2,37 @@ vim.opt_local.tabstop = 2
 vim.opt_local.shiftwidth = 2
 vim.opt_local.softtabstop = 2
 
+local filetype_autogroup = vim.api.nvim_create_augroup("FileTypeAutogroup", {})
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = filetype_autogroup,
+  pattern = "*",
+  command = "setlocal formatexpr=",
+})
+
 -- Console logging mappings
 
 vim.keymap.set(
   "n",
   "<leader>jl",
-  'yiwoconsole.log("LOG <C-R>"");<Esc>',
+  'yiwoconsole.log("LOG <C-R>":", <C-R>");<Esc>',
   { buffer = true, desc = "Add log for word under cursor (after)" }
 )
 vim.keymap.set(
   "x",
   "<leader>jl",
-  'yoconsole.log("LOG <C-R>"");<Esc>',
+  'yoconsole.log("LOG <C-R>":", <C-R>");<Esc>',
   { buffer = true, desc = "Add log for selection (after)" }
 )
 vim.keymap.set(
   "n",
   "<leader>jL",
-  'yiwOconsole.log("LOG <C-R>"");<Esc>',
+  'yiwOconsole.log("LOG <C-R>":", <C-R>");<Esc>',
   { buffer = true, desc = "Add log for word under cursor (before)" }
 )
 vim.keymap.set(
   "x",
   "<leader>jL",
-  'yOconsole.log("LOG <C-R>"");<Esc>',
+  'yOconsole.log("LOG <C-R>":", <C-R>");<Esc>',
   { buffer = true, desc = "Add log for selection (before)" }
 )
 
@@ -104,6 +111,13 @@ vim.keymap.set("n", "<leader>jS", function()
 
   vim.b.minianimate_disable = minianimate_disable
 end, { buffer = true, desc = "Remove .skip from current test case" })
+
+vim.keymap.set(
+  "n",
+  "<leader>jp",
+  'odebug();<Esc>ggOimport { debug } from "jest-preview";<Esc>g;',
+  { buffer = true, desc = "Add jest-preview debug" }
+)
 
 -- Compiler mappings
 vim.keymap.set("n", "<leader>jt", ":comp tsc | Make<CR>", { buffer = true, desc = "Compile tsc (async)" })

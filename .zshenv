@@ -1,1 +1,2 @@
 SHELL_SESSIONS_DISABLE=1
+LAUNCH_EDITOR=launch_editor_script.sh
