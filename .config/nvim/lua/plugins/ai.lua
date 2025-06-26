@@ -10,17 +10,47 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    event = "VeryLazy",
+    lazy = true,
     keys = {
-      { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "Code Companion Chat" },
+      { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", mode = "n", desc = "Code Companion Chat" },
+      { "<leader>ac", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "Code Companion Chat" },
       { "<leader>aa", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "Code Companion Chat" },
     },
+    cmd = { "Codecompanion", "CodeCompanionChat", "CodeCompanionActions", "CodecompanionCmd" },
+    init = function()
+      local spinner = require("plugins.extensions.codecompanion-spinner")
+      spinner:init()
+    end,
     opts = {
       strategies = {
         chat = {
           adapter = {
             name = "copilot",
             model = "claude-sonnet-4",
+          },
+          opts = {
+            goto_file_action = "tabnew",
+          },
+          keymaps = {
+            send = {
+              callback = function(chat)
+                vim.cmd("stopinsert")
+                chat:submit()
+                chat:add_buf_message({ role = "llm", content = "" })
+              end,
+              index = 1,
+              description = "Send",
+            },
+          },
+          variables = {
+            ["project"] = {
+              ---@return string
+              callback = "CLAUDE.md",
+              description = "Claude project information",
+              opts = {
+                contains_code = true,
+              },
+            },
           },
         },
       },

@@ -148,18 +148,18 @@ return {
       })
     end,
     keys = function()
-      vim.keymap.set("n", "<leader>ns", require("package-info").show, { desc = "Show dependency versions" })
-      vim.keymap.set("n", "<leader>nc", require("package-info").hide, { desc = "Hide dependency versions" })
-      vim.keymap.set("n", "<leader>nt", require("package-info").toggle, { desc = "Toggle dependency versions" })
-      vim.keymap.set("n", "<leader>nu", require("package-info").update, { desc = "Update dependency on the line" })
-      vim.keymap.set("n", "<leader>nd", require("package-info").delete, { desc = "Delete dependency on the line" })
-      vim.keymap.set("n", "<leader>ni", require("package-info").install, { desc = "Install a new dependency" })
-      vim.keymap.set(
-        "n",
-        "<leader>np",
-        require("package-info").change_version,
-        { desc = "Install a different dependency version" }
-      )
+      -- vim.keymap.set("n", "<leader>ns", require("package-info").show, { desc = "Show dependency versions" })
+      -- vim.keymap.set("n", "<leader>nc", require("package-info").hide, { desc = "Hide dependency versions" })
+      -- vim.keymap.set("n", "<leader>nt", require("package-info").toggle, { desc = "Toggle dependency versions" })
+      -- vim.keymap.set("n", "<leader>nu", require("package-info").update, { desc = "Update dependency on the line" })
+      -- vim.keymap.set("n", "<leader>nd", require("package-info").delete, { desc = "Delete dependency on the line" })
+      -- vim.keymap.set("n", "<leader>ni", require("package-info").install, { desc = "Install a new dependency" })
+      -- vim.keymap.set(
+      --   "n",
+      --   "<leader>np",
+      --   require("package-info").change_version,
+      --   { desc = "Install a different dependency version" }
+      -- )
     end,
   },
   {
@@ -198,6 +198,7 @@ return {
   },
   {
     "linrongbin16/gitlinker.nvim",
+    lazy = true,
     cmd = "GitLink",
     opts = {},
     keys = {
@@ -227,7 +228,7 @@ return {
   {
     "fuadsaud/vim-textobj-variable-segment",
     dependencies = { "kana/vim-textobj-user" },
-    event = "BufWinEnter",
+    event = "VeryLazy",
   },
   {
     -- Disable default <tab> and <s-tab> behaviour provided by LazyVim
@@ -250,10 +251,23 @@ return {
       "vim",
     },
   },
-  { "windwp/nvim-ts-autotag", config = { enable_close_on_slash = false } },
+  {
+    "windwp/nvim-ts-autotag",
+    config = { enable_close_on_slash = false },
+    ft = {
+      "javascript",
+      "typescript",
+      "javascriptreact",
+      "typescriptreact",
+      "svelte",
+      "vue",
+      "tsx",
+      "jsx",
+    },
+  },
   {
     "axelvc/template-string.nvim",
-    event = "VeryLazy",
+    lazy = true,
     ft = {
       "javascript",
       "typescript",
@@ -290,6 +304,7 @@ return {
   },
   {
     "isakbm/gitgraph.nvim",
+    lazy = true,
     opts = {
       -- symbols = {
       --   merge_commit = "M",

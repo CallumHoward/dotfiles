@@ -25,6 +25,39 @@ return {
       { "<leader>fP", function() Snacks.picker() end, desc = "Pickers" },
       { "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = vim.fn.getcwd() }}) end, desc = "Recent (Root Dir)" },
       {
+        "<leader>fG", -- "f" for files, "g" for git
+        function()
+          -- 1. Execute the git command to get a list of changed file names.
+          --    vim.fn.systemlist() runs a shell command and returns its output as a Lua table (list).
+          local git_files = vim.fn.systemlist("git diff master...HEAD --name-only")
+
+          -- 2. Handle cases where the command fails or returns no files.
+          --    vim.v.shell_error is non-zero if the last command failed.
+          if vim.v.shell_error ~= 0 then
+            vim.notify("Not a git repository or 'main' branch not found.", vim.log.levels.ERROR)
+            -- As a fallback, try with 'master'
+            git_files = vim.fn.systemlist("git diff master...HEAD --name-only")
+            if vim.v.shell_error ~= 0 then
+              vim.notify("Also failed to find 'master' branch.", vim.log.levels.ERROR)
+              return
+            end
+          end
+
+          if #git_files == 0 then
+            vim.notify("No files changed since main/master.", vim.log.levels.INFO)
+            return
+          end
+
+          -- 3. Open the Snacks picker with the list of files.
+          --    We pass the `git_files` table to the `items` option.
+          require("snacks").picker({
+            items = git_files,
+            title = "Changed Files (since main/master)",
+          })
+        end,
+        desc = "Git Changed Files",
+      },
+      {
         "<leader>gM",
         function()
           Snacks.picker.git_diff({

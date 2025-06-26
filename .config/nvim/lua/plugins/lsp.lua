@@ -25,7 +25,8 @@ return {
   {
     "zeioth/garbage-day.nvim",
     dependencies = "neovim/nvim-lspconfig",
-    event = "VeryLazy",
+    lazy = true,
+    ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
   },
   -- {
   --   "pmizio/typescript-tools.nvim",
@@ -71,7 +72,8 @@ return {
   -- },
   {
     "OlegGulevskyy/better-ts-errors.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
     dependencies = { "MunifTanjim/nui.nvim" },
     config = {
       keymaps = {
@@ -96,28 +98,10 @@ return {
         coffeesense = {
           filetypes = { "coffee" },
         },
-        -- emmet_ls = {
-        --   filetypes = {
-        --     "html",
-        --     "typescriptreact",
-        --     "javascriptreact",
-        --     "css",
-        --     "sass",
-        --     "scss",
-        --     "less",
-        --     "javascript",
-        --     "typescript",
-        --     "markdown",
-        --     "ejs",
-        --     "svelte",
-        --   },
-        -- },
         vtsls = {
-          -- init_options = {
-          --   tsserver = {
-          --     tsconfig = vim.fn.expand("./tsconfig.json"),
-          --   },
-          -- },
+          keys = {
+            { "<leader>cD", false },
+          },
           settings = {
             typescript = {
               tsserver = {
