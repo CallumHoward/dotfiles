@@ -28,6 +28,10 @@ function omz_cmd_icon {
     ICON=𝞤
     COLOR='#e0af68'
     ;;
+  "claude" | "cl")
+    ICON=✻
+    COLOR='#c47052'
+    ;;
   "man" | "less" | "cat" | "ls" | "ll" | "la" | "exa" | "history" | "sort" | "uniq" | "head" | "tail" | "bat")
     ICON=
     COLOR='#519aba'
