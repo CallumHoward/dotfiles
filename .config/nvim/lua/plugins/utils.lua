@@ -1,3 +1,13 @@
+---@param ... (string|string[]|nil)
+local function git_args(...)
+  local ret = { "-c", "core.quotepath=false" } ---@type string[]
+  for i = 1, select("#", ...) do
+    local arg = select(i, ...)
+    vim.list_extend(ret, type(arg) == "table" and arg or { arg })
+  end
+  return ret
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -25,53 +35,57 @@ return {
       { "<leader>fP", function() Snacks.picker() end, desc = "Pickers" },
       { "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = vim.fn.getcwd() }}) end, desc = "Recent (Root Dir)" },
       {
-        "<leader>fG", -- "f" for files, "g" for git
+        "<leader>gM",
         function()
-          -- 1. Execute the git command to get a list of changed file names.
-          --    vim.fn.systemlist() runs a shell command and returns its output as a Lua table (list).
-          local git_files = vim.fn.systemlist("git diff master...HEAD --name-only")
-
-          -- 2. Handle cases where the command fails or returns no files.
-          --    vim.v.shell_error is non-zero if the last command failed.
-          if vim.v.shell_error ~= 0 then
-            vim.notify("Not a git repository or 'main' branch not found.", vim.log.levels.ERROR)
-            -- As a fallback, try with 'master'
-            git_files = vim.fn.systemlist("git diff master...HEAD --name-only")
-            if vim.v.shell_error ~= 0 then
-              vim.notify("Also failed to find 'master' branch.", vim.log.levels.ERROR)
-              return
-            end
-          end
-
-          if #git_files == 0 then
-            vim.notify("No files changed since main/master.", vim.log.levels.INFO)
-            return
-          end
-
-          -- 3. Open the Snacks picker with the list of files.
-          --    We pass the `git_files` table to the `items` option.
-          require("snacks").picker({
-            items = git_files,
-            title = "Changed Files (since main/master)",
+          Snacks.picker.files({
+            ---@param opts snacks.picker.git.files.Config
+            ---@type snacks.picker.finder
+            finder = function(opts, ctx)
+              local args = git_args(opts.args, "--no-pager", "diff", "master...HEAD", "--no-color", "--no-ext-diff", "--name-only")
+              if not opts.cwd then
+                local uv = vim.uv or vim.loop
+                opts.cwd = Snacks.git.get_root() or uv.cwd() or "."
+                ctx.picker:set_cwd(opts.cwd)
+              end
+              local cwd = svim.fs.normalize(opts.cwd) or nil
+              return require("snacks.picker.source.proc").proc({
+                opts,
+                {
+                  cmd = "git",
+                  args = args,
+                  ---@param item snacks.picker.finder.Item
+                  transform = function(item)
+                    item.cwd = cwd
+                    item.file = item.text
+                  end,
+                  preview = function(item)
+                    return {
+                      text = item.file,
+                      ft = "diff",
+                      loc = false
+                    }
+                  end,
+                },
+              }, ctx)
+            end,
           })
         end,
         desc = "Git Changed Files",
       },
       {
-        "<leader>gM",
+        "<leader>fG",
         function()
           Snacks.picker.git_diff({
+            ---@param opts snacks.picker.git.Config
+            ---@type snacks.picker.finder
             finder = function(opts, ctx)
-              local file, line
-              local header, hunk = {}, {}
+              local args = git_args(opts.args, "--no-pager", "diff", "master...HEAD", "--no-color", "--no-ext-diff")
+              local file, line ---@type string?, number?
+              local header, hunk = {}, {} ---@type string[], string[]
               local header_len = 4
               local finder = require("snacks.picker.source.proc").proc({
                 opts,
-                {
-                  cmd = "git",
-                  -- stylua: ignore
-                  args = { "-c", "core.quotepath=false", "--no-pager", "diff", "origin/master...HEAD", "--no-color", "--no-ext-diff" },
-                },
+                { cmd = "git", args = args },
               }, ctx)
               return function(cb)
                 local function add()

@@ -22,12 +22,12 @@ return {
       end)
     end,
   },
-  {
-    "zeioth/garbage-day.nvim",
-    dependencies = "neovim/nvim-lspconfig",
-    lazy = true,
-    ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-  },
+  -- {
+  --   "zeioth/garbage-day.nvim",
+  --   dependencies = "neovim/nvim-lspconfig",
+  --   lazy = true,
+  --   ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
+  -- },
   -- {
   --   "pmizio/typescript-tools.nvim",
   --   opts = {
@@ -70,18 +70,18 @@ return {
   --   },
   --   event = "VeryLazy",
   -- },
-  {
-    "OlegGulevskyy/better-ts-errors.nvim",
-    lazy = true,
-    ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-    dependencies = { "MunifTanjim/nui.nvim" },
-    config = {
-      keymaps = {
-        toggle = "<leader>cD",
-        go_to_definition = "<leader>gD",
-      },
-    },
-  },
+  -- {
+  --   "OlegGulevskyy/better-ts-errors.nvim",
+  --   lazy = true,
+  --   ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
+  --   dependencies = { "MunifTanjim/nui.nvim" },
+  --   config = {
+  --     keymaps = {
+  --       toggle = "<leader>cD",
+  --       go_to_definition = "<leader>gD",
+  --     },
+  --   },
+  -- },
   {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
@@ -93,6 +93,9 @@ return {
       inlay_hints = { enabled = false },
       keys = {
         { "<leader>co", false },
+      },
+      folds = {
+        enabled = false,
       },
       servers = {
         coffeesense = {
@@ -145,9 +148,9 @@ return {
         htmx = function(_, opts)
           opts.autostart = false
         end,
-        eslint = function(_, opts)
-          opts.capabilities.documentFormattingProvider = true
-        end, -- example to setup with typescript.nvim
+        -- eslint = function(_, opts)
+        --   opts.capabilities.documentFormattingProvider = true
+        -- end, -- example to setup with typescript.nvim
         emmet = function(_, opts)
           opts.autostart = false
           opts.capabilities.textDocument.completion.completionItem.snippetSupport = false

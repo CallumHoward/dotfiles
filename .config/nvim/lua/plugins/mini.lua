@@ -9,7 +9,7 @@ return {
   --   },
   -- },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     keys = { "v", "S" },
     opts = function()
       -- Remap adding surrounding to Visual mode selection
