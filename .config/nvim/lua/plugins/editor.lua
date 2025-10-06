@@ -106,6 +106,8 @@ return {
         -- stylua: ignore
         map("n", "<leader>ggm", function() gs.change_base("master", true) end, { desc = "Diff master" })
         -- stylua: ignore
+        map("n", "<leader>ggM", function() gs.change_base("main", true) end, { desc = "Diff main" })
+        -- stylua: ignore
         map("n", "<leader>ggh", function() gs.change_base("HEAD", true) end, { desc = "Diff HEAD" })
         map("n", "<leader>ggf", function()
           gs.change_base("FILE", true)

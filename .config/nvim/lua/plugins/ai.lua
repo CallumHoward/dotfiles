@@ -9,6 +9,20 @@ return {
     end,
   },
   {
+    "folke/sidekick.nvim",
+    opts = {
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = true,
+        },
+      },
+      tools = {
+        claude = { cmd = { "~/.local/bin/claude" }, url = "https://github.com/anthropics/claude-code" },
+      },
+    },
+  },
+  {
     "olimorris/codecompanion.nvim",
     lazy = true,
     keys = {
@@ -22,11 +36,18 @@ return {
       spinner:init()
     end,
     opts = {
+      memory = {
+        chat = {
+          enabled = true,
+        },
+      },
       strategies = {
         chat = {
           adapter = {
             name = "copilot",
-            model = "claude-sonnet-4",
+            model = "claude-sonnet-4.5",
+            -- model = "claude-sonnet-4-5-20250929",
+            -- model = "gpt-5",
           },
           opts = {
             goto_file_action = "tabnew",

@@ -1,27 +1,27 @@
 return {
-  {
-    "copilotlsp-nvim/copilot-lsp",
-    init = function()
-      vim.g.copilot_nes_debounce = 500
-      vim.lsp.enable("copilot_ls")
-
-      vim.keymap.set("n", "<CR>", function()
-        -- Try to jump to the start of the suggestion edit.
-        -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
-        local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
-          or (require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit())
-          or vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
-      end, { desc = "Clear Copilot suggestion or fallback" })
-
-      vim.keymap.set("n", "<esc>", function()
-        if not require("copilot-lsp.nes").clear() then
-          -- fallback to other functionality
-          Snacks.notifier.hide()
-          vim.cmd("nohlsearch")
-        end
-      end)
-    end,
-  },
+  -- {
+  --   "copilotlsp-nvim/copilot-lsp",
+  --   init = function()
+  --     vim.g.copilot_nes_debounce = 500
+  --     vim.lsp.enable("copilot_ls")
+  --
+  --     vim.keymap.set("n", "<CR>", function()
+  --       -- Try to jump to the start of the suggestion edit.
+  --       -- If already at the start, then apply the pending suggestion and jump to the end of the edit.
+  --       local _ = require("copilot-lsp.nes").walk_cursor_start_edit()
+  --         or (require("copilot-lsp.nes").apply_pending_nes() and require("copilot-lsp.nes").walk_cursor_end_edit())
+  --         or vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "n", false)
+  --     end, { desc = "Clear Copilot suggestion or fallback" })
+  --
+  --     vim.keymap.set("n", "<esc>", function()
+  --       if not require("copilot-lsp.nes").clear() then
+  --         -- fallback to other functionality
+  --         Snacks.notifier.hide()
+  --         vim.cmd("nohlsearch")
+  --       end
+  --     end)
+  --   end,
+  -- },
   -- {
   --   "zeioth/garbage-day.nvim",
   --   dependencies = "neovim/nvim-lspconfig",

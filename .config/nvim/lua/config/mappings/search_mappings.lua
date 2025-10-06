@@ -81,11 +81,9 @@ vim.keymap.set("n", "n", "<CMD>set hlsearch<CR>n")
 vim.keymap.set("n", "N", "<CMD>set hlsearch<CR>N")
 -- vim.keymap.set("n", "<Esc>", "<CMD>noh<CR><Esc>")
 vim.keymap.set("n", "<Esc>", function()
-  if not require("copilot-lsp.nes").clear() then
-    -- fallback to other functionality
-    Snacks.notifier.hide()
-    vim.cmd("nohlsearch")
-  end
+  -- fallback to other functionality
+  Snacks.notifier.hide()
+  vim.cmd("nohlsearch")
 end)
 
 -- List search matches in current buffer
