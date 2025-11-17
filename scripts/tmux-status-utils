@@ -4,7 +4,7 @@ function omz_cmd_icon {
   local ICON=""
   local COLOR="#6d8086"
   case "$1" in
-  "npm" | "npx" | "create-react-app" | "n" | "nd")
+  "npm" | "npx" | "create-react-app" | "n" | "nd" | "nb")
     ICON=
     COLOR='#e8274b'
     ;;
@@ -56,7 +56,7 @@ function omz_cmd_icon {
     ICON=" "
     COLOR='#f14c28'
     ;;
-  "git" | "s" | "a" | "cm" | "gca" | "gd" | "gdc" | "gdmb" | "stash" | "pop" | "grs" | "show" | "lg" | "lgh" | "lgmb" | "push" | "co" | "com" | "cof" | "gmm" | "ba" | "baa")
+  "git" | "s" | "a" | "cm" | "gca" | "gd" | "gdc" | "gdmb" | "stash" | "pop" | "grs" | "show" | "lg" | "lgh" | "lgmb" | "push" | "co" | "com" | "cof" | "gmm" | "ba" | "baa" | "pu" | "puf")
     ICON=''
     COLOR='#f14c28'
     ;;
@@ -131,6 +131,10 @@ function omz_cmd_icon {
   "sleep")
     ICON=󰒲
     COLOR='#519aba'
+    ;;
+  "ns")
+    ICON=
+    COLOR='#ec5785'
     ;;
   *)
     local PATH="${1/\~/$HOME}"
