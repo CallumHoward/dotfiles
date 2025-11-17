@@ -18,6 +18,7 @@ return {
         },
       },
       tools = {
+        -- Does not seem to be respected
         claude = { cmd = { "~/.local/bin/claude" }, url = "https://github.com/anthropics/claude-code" },
       },
     },
@@ -45,9 +46,9 @@ return {
         chat = {
           adapter = {
             name = "copilot",
-            model = "claude-sonnet-4.5",
+            -- model = "claude-sonnet-4.5",
             -- model = "claude-sonnet-4-5-20250929",
-            -- model = "gpt-5",
+            model = "gpt-5",
           },
           opts = {
             goto_file_action = "tabnew",
@@ -93,27 +94,38 @@ return {
     },
   },
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    keys = {
-      { "<leader>aa", false },
-      {
-        "<leader>ch",
-        function()
-          local chat = require("CopilotChat")
-          chat.toggle()
-        end,
-        mode = { "n", "x" },
-        desc = "CopilotChat - Toggle",
-      },
-      {
-        "<leader>tch",
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.select_prompt").pick(actions.help_actions())
-        end,
-        mode = { "n", "x" },
-        desc = "CopilotChat - Help actions",
-      },
+    "coder/claudecode.nvim",
+    opts = {
+      -- terminal = {
+      --   provider = "none",
+      -- },
+      -- terminal_cmd = "~/.local/bin/claude",
+      auto_start = true,
     },
+    config = true,
   },
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   keys = {
+  --     { "<leader>aa", false },
+  --     {
+  --       "<leader>ch",
+  --       function()
+  --         local chat = require("CopilotChat")
+  --         chat.toggle()
+  --       end,
+  --       mode = { "n", "x" },
+  --       desc = "CopilotChat - Toggle",
+  --     },
+  --     {
+  --       "<leader>tch",
+  --       function()
+  --         local actions = require("CopilotChat.actions")
+  --         require("CopilotChat.select_prompt").pick(actions.help_actions())
+  --       end,
+  --       mode = { "n", "x" },
+  --       desc = "CopilotChat - Help actions",
+  --     },
+  --   },
+  -- },
 }
