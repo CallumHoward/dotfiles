@@ -126,3 +126,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # export REACT_EDITOR=launch-editor-script.sh
 # export REACT_EDITOR=echo
+
+# pnpm
+export PNPM_HOME="/Users/callumhoward/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -1,6 +1,7 @@
 return {
   {
     "ravitemer/mcphub.nvim",
+    enabled = true,
     lazy = true,
     cmd = "MCPHub",
     build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
@@ -10,6 +11,7 @@ return {
   },
   {
     "folke/sidekick.nvim",
+    enabled = false,
     opts = {
       cli = {
         mux = {
@@ -25,6 +27,7 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
+    enabled = true,
     lazy = true,
     keys = {
       { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", mode = "n", desc = "Code Companion Chat" },
@@ -95,6 +98,7 @@ return {
   },
   {
     "coder/claudecode.nvim",
+    enabled = false,
     opts = {
       -- terminal = {
       --   provider = "none",

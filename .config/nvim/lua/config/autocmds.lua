@@ -29,6 +29,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
   command = "setlocal filetype=markdown.mdx",
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = filetype_autogroup,
+  pattern = ".env.local",
+  command = "setlocal filetype=sh",
+})
+
 vim.api.nvim_create_autocmd("FileType", {
   group = filetype_autogroup,
   pattern = "qf",

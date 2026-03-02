@@ -53,6 +53,7 @@ typeset -Ag abbreviations
 abbreviations=(
   'cm' 'git commit -m "__CURSOR__"'
   'a' 'git add'
+  'clo' 'git clone --recursive -j4 git@github.com:__CURSOR__.git && cd *(/om[1])'
   'co' 'git checkout'
   'cob' 'git checkout -b'
   'com' 'git checkout master'

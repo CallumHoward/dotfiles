@@ -18,6 +18,15 @@ return {
     end,
   },
   {
+    "razak17/tailwind-fold.nvim",
+    opts = {},
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
+    keys = {
+      { "zT", "<cmd>TailwindFoldToggle<cr>", desc = "Toggle class folding" },
+    },
+  },
+  {
     "m00qek/baleia.nvim",
     cmd = { "BaleiaColorize" },
     config = function()

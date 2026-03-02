@@ -25,6 +25,7 @@ return {
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-neotest/neotest-jest",
+      "marilari88/neotest-vitest",
       "nvim-neotest/neotest-go",
     },
     -- stylua: ignore
@@ -67,6 +68,7 @@ return {
           jest_test_discovery = false,
         })
       )
+      table.insert(opts.adapters, require("neotest-vitest"))
     end,
     config = function(_, opts)
       vim.cmd("autocmd Filetype neotest-summary setl nowrap")

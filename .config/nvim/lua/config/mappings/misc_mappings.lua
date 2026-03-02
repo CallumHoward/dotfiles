@@ -1,8 +1,16 @@
 -- Copy buffer relative filepath
 vim.keymap.set("n", "<leader>y", function()
   vim.fn.setreg("+", vim.fn.expand("%"))
-  vim.notify(vim.fn.expand("%"), "info", { title = "Copied buffer path" })
+  vim.notify(vim.fn.expand("%"), vim.log.levels.INFO, { title = "Copied buffer path" })
 end, { desc = "Copy relative path" })
+
+vim.keymap.set("n", "<leader>Y", function()
+  local path = vim.fn.expand("%")
+  local lnum = vim.api.nvim_win_get_cursor(0)[1]
+  local text = string.format("%s:%d", path, lnum)
+  vim.fn.setreg("+", text)
+  vim.notify(text, vim.log.levels.INFO, { title = "Copied path:line" })
+end, { desc = "Copy relative path with line number" })
 
 -- Swap mark keys
 vim.keymap.set("n", "'", "`")
