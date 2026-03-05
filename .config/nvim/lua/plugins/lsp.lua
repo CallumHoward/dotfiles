@@ -156,7 +156,21 @@ return {
           opts.capabilities.textDocument.completion.completionItem.snippetSupport = false
         end,
         tailwindcss = function(_, opts)
-          opts.autostart = false
+          local util = require("lspconfig.util")
+          opts.root_dir = function(fname)
+            local root_files = {
+              "tailwind.config.js",
+              "tailwind.config.cjs",
+              "tailwind.config.mjs",
+              "tailwind.config.ts",
+              "postcss.config.js",
+              "postcss.config.cjs",
+              "postcss.config.mjs",
+              "postcss.config.ts",
+            }
+            root_files = util.insert_package_json(root_files, "tailwindcss", fname)
+            return util.root_pattern(unpack(root_files))(fname)
+          end
         end,
         coffeesense = function(_, opts)
           require("lspconfig").coffeesense.setup({ server = opts })
