@@ -62,6 +62,8 @@ plugins=( \
     H-S-MW \
 )
 
+zstyle ':omz:lib:directories' aliases no
+
 source $ZSH/oh-my-zsh.sh
 source ~/.shell_exports
 source ~/.shell_aliases

@@ -16,7 +16,7 @@
     dt = difftool
     # git change-commits GIT_COMMITTER_EMAIL "<email_old>" "<email_new>"
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
-    worktree-add-b = "!f() { git worktree add -b \"$1\" \"$1\"; }; f"
+    worktree-add-b = "!f() { git worktree add -b \"$1\" \"$1\" $(git symbolic-ref refs/remotes/origin/HEAD --short); }; f"
 [pager]
     #diff = diff-so-fancy | less --tabs=4 -RFX# --pattern '^(Date|added|deleted|modified): .*$'
     #diff = diff-so-fancy | menos --tabs=4 -iFMRSX --pattern='^(Date|added|deleted|modified): .*$'

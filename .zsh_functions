@@ -82,6 +82,16 @@ function clo() {
     git clone --recursive -j4 ${@} && cd *(/om[1])
 }
 
+function com() {
+    # If there is a branch name matching the directoy, check out that branch
+    local root_dir=$(git rev-parse --show-toplevel | xargs basename)
+    if git rev-parse --verify "$root_dir" >/dev/null 2>&1; then
+      git checkout "$root_dir"
+    else
+      git checkout "$(git_default_branch)"
+    fi
+}
+
 function sf() {
     if [ -f ~/.box-name ]; then
         local longhost=`hostname`
@@ -162,6 +172,22 @@ function g() {
     else
         \git $@
     fi
+}
+
+function git_default_branch() {
+  local branch
+  branch=$(git branch -rl '*/HEAD' 2>/dev/null | grep -o '[^/]*$')
+  if [[ -n "$branch" ]]; then
+    echo "$branch"
+    return
+  fi
+  for ref in refs/heads/{main,master}; do
+    if git show-ref -q --verify "$ref" 2>/dev/null; then
+      echo "${ref#refs/heads/}"
+      return
+    fi
+  done
+  echo master
 }
 
 function git_add() {
