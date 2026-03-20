@@ -55,8 +55,11 @@ abbreviations=(
   'a' 'git add'
   'clo' 'git clone --recursive -j4 git@github.com:__CURSOR__.git && cd *(/om[1])'
   # 'co' 'git checkout' # Use git switch or git restore
+  'gs' 'git switch -t origin/__CURSOR__'
+  'gr' 'git restore'
   'cob' 'git checkout -b'
-  'com' 'git checkout $(git_default_branch)'
+  # 'com' 'git checkout $(git_default_branch)'
+  'grm' 'git restore $(git_default_branch)'
   'gw' 'git worktree'
   'gwa' 'git worktree add'
   'gwb' 'git worktree-add-b'

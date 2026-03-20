@@ -82,13 +82,13 @@ function clo() {
     git clone --recursive -j4 ${@} && cd *(/om[1])
 }
 
-function com() {
+function gsm() {
     # If there is a branch name matching the directoy, check out that branch
     local root_dir=$(git rev-parse --show-toplevel | xargs basename)
     if git rev-parse --verify "$root_dir" >/dev/null 2>&1; then
-      git checkout "$root_dir"
+      git switch "$root_dir"
     else
-      git checkout "$(git_default_branch)"
+      git switch "$(git_default_branch)"
     fi
 }
 
