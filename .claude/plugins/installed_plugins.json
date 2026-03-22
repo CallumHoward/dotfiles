@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "plugins": {
+    "frontend-design@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/callumhoward/.claude/plugins/cache/claude-code-plugins/frontend-design/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-05T05:19:52.919Z",
+        "lastUpdated": "2026-01-05T05:19:52.919Z",
+        "gitCommitSha": "d213a74fc8e3b6efded52729196e0c2d4c3abb3e"
+      }
+    ],
+    "typescript-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/callumhoward/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-03-05T02:48:47.960Z",
+        "lastUpdated": "2026-03-05T02:48:47.960Z",
+        "gitCommitSha": "6d3752c000e2b3d0e6137bd7adb04895d6f40f14"
+      }
+    ]
+  }
+}
+
