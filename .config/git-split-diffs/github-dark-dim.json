@@ -1,0 +1,59 @@
+{
+  "SYNTAX_HIGHLIGHTING_THEME": "github-dark-dimmed",
+  "DEFAULT_COLOR": {
+    "color": "#768390",
+    "backgroundColor": "#222436"
+  },
+  "COMMIT_HEADER_COLOR": {
+    "color": "#adbac7",
+    "backgroundColor": "#1e2030"
+  },
+  "COMMIT_HEADER_LABEL_COLOR": {},
+  "COMMIT_SHA_COLOR": {},
+  "COMMIT_DATE_COLOR": {},
+  "COMMIT_AUTHOR_COLOR": {},
+  "COMMIT_MESSAGE_COLOR": {
+    "color": "#909dab",
+    "backgroundColor": "#222436"
+  },
+  "COMMIT_TITLE_COLOR": {
+    "color": "#c6e6ff",
+    "modifiers": ["bold"]
+  },
+  "BORDER_COLOR": {
+    "color": "#444c56",
+    "backgroundColor": "#222436"
+  },
+  "FILE_NAME_COLOR": {
+    "color": "#adbac7",
+    "backgroundColor": "#222436"
+  },
+  "HUNK_HEADER_COLOR": {
+    "backgroundColor": "#263441"
+  },
+  "DELETED_WORD_COLOR": {
+    "backgroundColor": "#c93c3733"
+  },
+  "INSERTED_WORD_COLOR": {
+    "backgroundColor": "#46954a33"
+  },
+  "DELETED_LINE_NO_COLOR": {
+    "color": "#e5534b",
+    "backgroundColor": "#c93c371a"
+  },
+  "INSERTED_LINE_NO_COLOR": {
+    "color": "#57ab5a",
+    "backgroundColor": "#252a3f1a"
+  },
+  "UNMODIFIED_LINE_NO_COLOR": {},
+  "DELETED_LINE_COLOR": {
+    "backgroundColor": "#442d30"
+  },
+  "INSERTED_LINE_COLOR": {
+    "backgroundColor": "#2a3c33"
+  },
+  "UNMODIFIED_LINE_COLOR": {},
+  "MISSING_LINE_COLOR": {
+    "backgroundColor": "#252a3f"
+  }
+}

@@ -1,0 +1,10 @@
+[flavor]
+use = "tokyo-night"
+# For Yazi 0.4 and above
+dark = "tokyo-night"
+
+[manager]
+hovered         = { reversed = false, bg = "#3b4261" }
+preview_hovered = { underline = false, bg = "#2f334d" }
+
+border_symbol = " "
