@@ -121,7 +121,7 @@ alias gwb="git worktree-add-b"
 alias gwr="git worktree remove"
 alias gwl="git worktree list"
 alias gwp="git worktree prune"
-alias cob="git checkout -b"
+alias cob="echo use gsc!"
 alias gcd='cd "`git rev-parse --show-toplevel 2>/dev/null | head -1`"'
 alias cdg="gcd"
 alias gd="git diff"
@@ -148,6 +148,7 @@ alias gdmbf='gdmb `gdmb --name-only | fzf -m --preview "git diff --color=always 
 alias gddmbf='gddmb `gdmb --name-only | fzf -m --preview "git diff --color=always $(git_default_branch)...HEAD {}"`'
 alias co="echo 'Use git switch or git restore!'"
 alias gs="git switch"
+alias gsc="git switch -c"
 alias gr="git restore"
 alias cof="ba | grep -v \$(git_default_branch) | fzf --preview='{ git diff --color=always --stat \$(git_default_branch)...{}; git diff --color=always \$(git_default_branch)...{}; } | ~/git/git-split-diffs/bin/git-split-diffs --color' | xargs git checkout"
 alias ba="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
@@ -179,7 +180,7 @@ alias nb="n build"
 alias na="n add"
 alias nu="n uninstall"
 alias ns="n storybook"
-alias nd="n dev"
+alias nd="n dev || n start"
 
 alias snatch="zou"
 alias translate="trans"
@@ -316,6 +317,7 @@ function cleanpipe() {
 }
 
 alias ls=ls_wrapper
+alias la="ls -lah"
 if command -v exa >/dev/null 2>&1; then
   alias tree="exa --tree --icons"
 elif command -v eza >/dev/null 2>&1; then
