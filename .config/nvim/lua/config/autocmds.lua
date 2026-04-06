@@ -96,10 +96,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
     end
   end,
 })
-vim.keymap.set("n", "<leader><C-Space>", function()
-  vim.g.numbertoggle = not vim.g.numbertoggle
-  vim.o.relativenumber = not vim.o.relativenumber
-end, { desc = "Toggle relative line numbers" })
 
 -- Resize splits if window got resized
 vim.api.nvim_del_augroup_by_name("lazyvim_resize_splits")
