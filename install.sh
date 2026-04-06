@@ -41,7 +41,8 @@ if ! [ -x "$(which brew)" ]; then
         fi
         echo -n "Install: tmux neovim ranger htop... [Y/n]? "
         if echo "$answer" | grep -viq "^n" ; then
-            brew install tmux neovim ranger htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan wget font-inconsolata-lgc-nerd-font
+            brew install tmux neovim htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan wget font-inconsolata-lgc-nerd-font
+            brew install --HEAD ranger
             brew install bat && bat cache --build
         fi
     fi
@@ -59,7 +60,9 @@ git update-index --skip-worktree .local_rc
 echo -n "Install ranger-devicons [Y/n]? "
 read answer
 if echo "$answer" | grep -viq "^n" ; then
-  pip install ansicolors
+  git submodule init .config/ranger/plugins/ranger_devicons
+  git submodule update .config/ranger/plugins/ranger_devicons
+  "$(brew --prefix ranger)/libexec/bin/python3" -m pip install ansicolors pynvim
 fi
 
 echo -n "Install oh-my-zsh [Y/n]? "
