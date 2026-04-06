@@ -43,7 +43,15 @@ if ! [ -x "$(which brew)" ]; then
         if echo "$answer" | grep -viq "^n" ; then
             brew install tmux neovim htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan wget font-inconsolata-lgc-nerd-font
             brew install --HEAD ranger
-            brew install bat && bat cache --build
+            brew install bat
+            mkdir -p "$(bat --config-dir)/themes"
+            pushd "$(bat --config-dir)/themes"
+            # Replace _night in the lines below with _day, _moon, or _storm if needed.
+            curl -O https://raw.githubusercontent.com/folke/tokyonight.nvim/main/extras/sublime/tokyonight_moon.tmTheme
+            bat cache --build
+            bat --list-themes | grep tokyo # should output "tokyonight_moon"
+            echo '--theme="tokyonight_moon"' >> "$(bat --config-dir)/config"
+            popd
         fi
     fi
 elif [ -x "$(which apt-get)" ]; then
