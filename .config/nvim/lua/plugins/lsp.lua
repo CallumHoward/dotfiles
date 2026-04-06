@@ -98,6 +98,7 @@ return {
         enabled = false,
       },
       servers = {
+        stylelint_lsp = {},
         coffeesense = {
           filetypes = { "coffee" },
         },
@@ -145,6 +146,53 @@ return {
         --   -- require("typescript").setup({ server = opts })
         --   return true
         -- end,
+        stylelint_lsp = function()
+          -- Add stylelint.config.ts to recognized config files
+          -- (upstream lsp/stylelint_lsp.lua only lists .js/.cjs/.mjs)
+          vim.lsp.config("stylelint_lsp", {
+            root_dir = function(bufnr, on_dir)
+              local util = require("lspconfig.util")
+              local config_files = {
+                ".stylelintrc",
+                ".stylelintrc.mjs",
+                ".stylelintrc.cjs",
+                ".stylelintrc.js",
+                ".stylelintrc.json",
+                ".stylelintrc.yaml",
+                ".stylelintrc.yml",
+                "stylelint.config.mjs",
+                "stylelint.config.cjs",
+                "stylelint.config.js",
+                "stylelint.config.ts", -- added
+              }
+
+              local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
+              root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers, { ".git" } }
+                or vim.list_extend(root_markers, { ".git" })
+
+              if vim.fs.root(bufnr, { "deno.json", "deno.jsonc", "deno.lock" }) then
+                return
+              end
+
+              local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
+
+              local filename = vim.api.nvim_buf_get_name(bufnr)
+              local config_files_with_pkg = util.insert_package_json(config_files, "stylelintConfig", filename)
+              local found = vim.fs.find(config_files_with_pkg, {
+                path = filename,
+                type = "file",
+                limit = 1,
+                upward = true,
+                stop = vim.fs.dirname(project_root),
+              })[1]
+              if not found then
+                return
+              end
+
+              on_dir(project_root)
+            end,
+          })
+        end,
         htmx = function(_, opts)
           opts.autostart = false
         end,
