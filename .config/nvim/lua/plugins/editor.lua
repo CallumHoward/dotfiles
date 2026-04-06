@@ -30,7 +30,7 @@ return {
           handle = function(mode, line, _)
             local ticket = require("gx.helper").find(line, mode, "(%u+-%d+)")
             if ticket and #ticket < 20 then
-              return "http://safetyculture.atlassian.net/browse/" .. ticket
+              return "http://checkbox.atlassian.net/browse/" .. ticket
             end
           end,
         },

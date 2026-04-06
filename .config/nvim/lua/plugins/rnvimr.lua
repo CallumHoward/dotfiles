@@ -15,6 +15,6 @@ return {
     vim.cmd("cabbrev tra" .. expr .. "'tabe \\| Ranger' : 'ra')<CR>")
 
     -- Causes visual glitch
-    -- vim.cmd([[ RnvimrStartBackground ]])
+    vim.cmd([[ RnvimrStartBackground ]])
   end,
 }
