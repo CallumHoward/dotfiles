@@ -21,7 +21,10 @@ return {
     end,
   },
   {
-    "nvim-neotest/neotest",
+    -- Pinned to fix branch until PR #594 merges (nvim 0.12 treesitter iter_matches compat)
+    -- TODO: revert to "nvim-neotest/neotest" once https://github.com/nvim-neotest/neotest/pull/594 is merged
+    "LiamCoop/neotest",
+    branch = "fix/590-treesitter-iter-matches-breaking-change",
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-neotest/neotest-jest",
@@ -36,6 +39,7 @@ return {
       { "<leader>jf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
     },
     opts = function(_, opts)
+      opts.adapters = opts.adapters or {}
       opts.summary = {
         mappings = {
           expand = { "l", "zo", "za" },
@@ -68,7 +72,49 @@ return {
           jest_test_discovery = false,
         })
       )
-      table.insert(opts.adapters, require("neotest-vitest"))
+      local vitest = require("neotest-vitest")({
+        vitestConfigFile = function(path)
+          local custom = vim.fn.findfile("vitest.unit.config.ts", path .. ";")
+          if custom ~= "" then
+            return custom
+          end
+          return vim.fn.findfile("vitest.config.ts", path .. ";")
+        end,
+      })
+      -- neotest-vitest wraps lib.files.read (nio async) in pcall inside
+      -- hasVitestDependency. LuaJIT cannot yield across a C-level pcall
+      -- boundary, so the yield attempt is caught as an error and
+      -- is_test_file always returns false. Fix: use sync IO instead.
+      vitest.is_test_file = function(file_path)
+        if not file_path then
+          return false
+        end
+        local is_test = file_path:match("__tests__") ~= nil
+        for _, pat in ipairs({ "e2e", "spec", "test" }) do
+          for _, ext in ipairs({ "js", "jsx", "coffee", "ts", "tsx" }) do
+            if file_path:match("%." .. pat .. "%." .. ext .. "$") then
+              is_test = true
+              break
+            end
+          end
+          if is_test then
+            break
+          end
+        end
+        if not is_test then
+          return false
+        end
+        local pkg = vim.fs.find("package.json", { path = vim.fs.dirname(file_path), upward = true })[1]
+        if not pkg then
+          return false
+        end
+        local lines = vim.fn.readfile(pkg)
+        local content = table.concat(lines, "")
+        return content:find('"vitest"') ~= nil or content:find('"@vitest/') ~= nil
+      end
+      table.insert(opts.adapters, vitest)
+      table.insert(opts.adapters, require("neotest-go")({}))
+
     end,
     config = function(_, opts)
       vim.cmd("autocmd Filetype neotest-summary setl nowrap")
