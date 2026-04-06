@@ -4,6 +4,15 @@ return {
   { "rhysd/vim-syntax-codeowners", ft = "codeowners" },
   -- { "norcalli/nvim-terminal.lua", opts = true },
   {
+    -- Remove ]c/[c treesitter class mappings — conflict with gitsigns hunk navigation
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    opts = function(_, opts)
+      opts.move.keys.goto_next_start["]c"] = nil
+      opts.move.keys.goto_previous_start["[c"] = nil
+      return opts
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       -- add tsx and treesitter
