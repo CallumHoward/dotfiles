@@ -35,10 +35,10 @@ return {
       { "<leader>aa", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "Code Companion Chat" },
     },
     cmd = { "Codecompanion", "CodeCompanionChat", "CodeCompanionActions", "CodecompanionCmd" },
-    init = function()
-      local spinner = require("plugins.extensions.codecompanion-spinner")
-      spinner:init()
-    end,
+    -- init = function()
+    --   local spinner = require("plugins.extensions.codecompanion-spinner")
+    --   spinner:init()
+    -- end,
     opts = {
       memory = {
         chat = {
@@ -98,12 +98,11 @@ return {
   },
   {
     "coder/claudecode.nvim",
-    enabled = false,
+    enabled = true,
     opts = {
-      -- terminal = {
-      --   provider = "none",
-      -- },
-      -- terminal_cmd = "~/.local/bin/claude",
+      terminal = {
+        provider = "none",
+      },
       auto_start = true,
     },
     config = true,
