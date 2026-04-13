@@ -41,7 +41,7 @@ if ! [ -x "$(which brew)" ]; then
         fi
         echo -n "Install: tmux neovim ranger htop... [Y/n]? "
         if echo "$answer" | grep -viq "^n" ; then
-            brew install tmux neovim htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow wakeonlan wget font-inconsolata-lgc-nerd-font
+            brew install tmux neovim htop ripgrep fd exa fzf highlight hub universal-ctags fasd glow expect wakeonlan wget font-inconsolata-lgc-nerd-font
             brew install --HEAD ranger
             brew install bat
             mkdir -p "$(bat --config-dir)/themes"
