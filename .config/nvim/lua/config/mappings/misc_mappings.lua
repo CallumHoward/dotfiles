@@ -1,13 +1,19 @@
 -- Copy buffer relative filepath
-vim.keymap.set("n", "<leader>y", function()
-  vim.fn.setreg("+", vim.fn.expand("%"))
-  vim.notify(vim.fn.expand("%"), vim.log.levels.INFO, { title = "Copied buffer path" })
+vim.keymap.set({ "n", "x" }, "<leader>y", function()
+  vim.fn.setreg("+", vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":."))
+  vim.notify(
+    vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":."),
+    vim.log.levels.INFO,
+    { title = "Copied buffer path" }
+  )
 end, { desc = "Copy relative path" })
 
-vim.keymap.set("n", "<leader>Y", function()
-  local path = vim.fn.expand("%")
-  local lnum = vim.api.nvim_win_get_cursor(0)[1]
-  local text = string.format("%s:%d", path, lnum)
+vim.keymap.set({ "n", "x" }, "<leader>Y", function()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+  local l1 = vim.fn.line("v")
+  local l2 = vim.fn.line(".")
+  local start, finish = math.min(l1, l2), math.max(l1, l2)
+  local text = start == finish and string.format("%s:%d", path, start) or string.format("%s:%d-%d", path, start, finish)
   vim.fn.setreg("+", text)
   vim.notify(text, vim.log.levels.INFO, { title = "Copied path:line" })
 end, { desc = "Copy relative path with line number" })
@@ -104,6 +110,12 @@ end, { desc = "Toggle Treesitter Highlight" })
 
 -- Treesitter incremental selection (native 0.12)
 vim.keymap.set("n", "<CR>", function()
+  -- Fall through to built-in <CR> in special buffers (quickfix, help,
+  -- terminal, nofile trees/neotest-summary, prompt, etc.)
+  if vim.bo.buftype ~= "" then
+    vim.api.nvim_feedkeys(vim.keycode("<CR>"), "n", false)
+    return
+  end
   vim.cmd.normal("v")
   require("vim.treesitter._select").select_child(vim.v.count1)
 end, { desc = "Select treesitter node" })
