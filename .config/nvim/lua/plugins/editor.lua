@@ -368,7 +368,7 @@ return {
     },
   },
   {
-    "sindrets/diffview.nvim",
+    "dlyongemallo/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
     lazy = true,
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
