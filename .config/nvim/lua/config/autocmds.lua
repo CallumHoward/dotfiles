@@ -114,9 +114,9 @@ function SetTmuxTitle()
   if string.find(title, "man") then
     -- Do nothing
   elseif title ~= "" then
-    vim.fn.system('tmux rename-window " ' .. title .. '"')
+    vim.fn.system('tmux rename-window " ' .. title .. '"')
   else
-    vim.fn.system('tmux rename-window " nvim"')
+    vim.fn.system('tmux rename-window " nvim"')
   end
 end
 

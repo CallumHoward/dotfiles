@@ -138,7 +138,7 @@ alias lg="git lg"
 alias lgs="git lg --stat"
 alias lgh="git lg -n10"
 alias lgh.="lgh ."
-alias lgl="lg origin/\$(git_default_branch)..HEAD"
+alias lgl="lg origin/\$(git_default_branch --no-worktree)..HEAD"
 #alias clo="git clone --recursive -j4 && cd *(/om[1])" # moved to .zsh_functions
 alias gsmu="git submodule update --init --recursive"
 alias gdmb="gd \$(git_default_branch)...HEAD"
@@ -149,8 +149,9 @@ alias gddmbf='gddmb `gdmb --name-only | fzf -m --preview "git diff --color=alway
 alias co="echo 'Use git switch or git restore!'"
 alias gs="git switch"
 alias gsc="git switch -c"
+alias gsm='git switch $(git_default_branch)'
 alias gr="git restore"
-alias cof="ba | grep -v \$(git_default_branch) | fzf --preview='{ git diff --color=always --stat \$(git_default_branch)...{}; git diff --color=always \$(git_default_branch)...{}; } | ~/git/git-split-diffs/bin/git-split-diffs --color' | xargs git checkout"
+alias cof="ba | grep -v \$(git_default_branch --no-worktree) | fzf --preview='{ git diff --color=always --stat \$(git_default_branch --no-worktree)...{}; git diff --color=always \$(git_default_branch --no-worktree)...{}; } | ~/git/git-split-diffs/bin/git-split-diffs --color' | xargs git checkout"
 alias ba="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
 alias baa="git branch -a"
 alias push="git push"
@@ -362,4 +363,8 @@ if command -v browsh >/dev/null 2>&1; then
   alias browse="browsh --startup-url"
 elif command -v w3m >/dev/null 2>&1; then
   alias browse="w3m"
+fi
+
+if command -v claude >/dev/null 2>&1; then
+  alias claude-update-plugins='claude plugin list --json | python3 -c "import sys,json; [print(p[\"id\"]) for p in json.load(sys.stdin) if p.get(\"enabled\")]" | xargs -n1 claude plugin update'
 fi

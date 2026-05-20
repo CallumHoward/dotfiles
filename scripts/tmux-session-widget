@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Renders the tmux session-indicator widget. Mirrors the pure-format
+# TB_SESSION_WIDGET in .tmux.conf; kept around in case we ever swap status-right
+# back to a #(...) shell-out.
+#
+# Priority (highest first):
+#   1. session_attached  -> white bold
+#   2. any window bell   -> yellow (alert override)
+#   3. otherwise         -> inactive grey
+#
+# All session state is gathered in ONE `list-sessions -F` call — no per-session
+# subprocess invocations, no git calls. Total runtime ~5-10ms regardless of N.
+
+set -u
+
+STATUS_BG='#1d202f'
+INACTIVE_FG='#737aa2'
+BELL_FG='#f1e05a'
+
+count=$(tmux list-sessions 2>/dev/null | wc -l | tr -d ' ')
+[ "${count:-0}" -le 1 ] && exit 0
+
+# session_alerts contains a "!" suffix for any window with the bell flag set.
+# Sort by session_id numeric so the order matches the picker (choose-tree -O index).
+tmux list-sessions -F '#{session_id}|#{session_name}|#{session_attached}|#{session_alerts}' 2>/dev/null | \
+  sort -t'|' -k1.2n | cut -d'|' -f2- | \
+while IFS='|' read -r session attached alerts; do
+  if [ "$attached" != "0" ]; then
+    fg="#[fg=white]#[bold]"
+  elif [[ "$alerts" == *!* ]]; then
+    fg="#[fg=${BELL_FG}]#[nobold]"
+  else
+    fg="#[fg=${INACTIVE_FG}]#[nobold]"
+  fi
+  printf '#[bg=%s]%s %s ' "$STATUS_BG" "$fg" "$session"
+done

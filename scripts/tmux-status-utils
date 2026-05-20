@@ -16,8 +16,12 @@ function omz_cmd_icon {
     ICON=
     COLOR='#e0af68'
     ;;
-  "vim" | "v" | "nvim" | "vi")
+  "vim" | "vi")
     ICON=
+    COLOR='#019833'
+    ;;
+  "v" | "nvim")
+    ICON=
     COLOR='#019833'
     ;;
   "python" | "python2" | "python3" | "pip" | "pip2" | "pip3" | "p" | "p3")
@@ -140,6 +144,9 @@ function omz_cmd_icon {
     local PATH="${1/\~/$HOME}"
     if [[ "$PATH" = "$HOME" ]]; then
       ICON=󱂵
+    elif [[ "$1" =~ "" ]]; then
+      ICON=
+      COLOR='#019833'
     elif [[ "$1" =~ "" ]]; then
       ICON=
       COLOR='#019833'

@@ -147,6 +147,23 @@ return {
     config = function()
       require("package-info").setup({
         hide_up_to_date = true,
+        -- Disable the plugin's built-in autostart. Its unconditional
+        -- `BufEnter package.json` autocmd calls show(), which spawns
+        -- `npm outdated` with cwd derived from the buffer path. Diffview's
+        -- virtual buffers (`diffview://...`) end in `package.json` but
+        -- their parent dirs don't exist on disk, so jobstart errors with
+        -- E475. The guarded autocmd below replaces it.
+        autostart = false,
+      })
+
+      vim.api.nvim_create_autocmd("BufEnter", {
+        group = vim.api.nvim_create_augroup("PackageInfoShowGuarded", { clear = true }),
+        pattern = "package.json",
+        callback = function(args)
+          if vim.bo[args.buf].buftype ~= "" then return end
+          if vim.fn.filereadable(args.file) ~= 1 then return end
+          require("package-info").show()
+        end,
       })
     end,
     keys = function()

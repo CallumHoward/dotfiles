@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Refreshes @branch and @branch-color on the first window of every tmux session
+# based on the first pane's git branch. Window-scoped because tmux user options
+# at session scope silently fall through to server (global) scope — only
+# window/pane scopes hold per-target values. Read back via
+#   #{W:#{?#{==:#{window_index},1},#{@branch},}}
+# (and likewise for @branch-color) in formats.
+#
+# @branch-color stores an ANSI base-color index (1-6 or 9-14); reference it as
+# colour${value} in a tmux #[fg=...] directive.
+#
+# Sessions are processed in parallel via background subshells — total runtime
+# ~15ms for ~10 sessions, dominated by tmux IPC.
+
+set -u
+
+. "$HOME/dotfiles/scripts/lib/hash-color.sh"
+
+tmux list-sessions -F '#{session_name}' 2>/dev/null | while read -r session; do
+  (
+    pane_path=$(tmux display-message -p -t "${session}:1.1" '#{pane_current_path}' 2>/dev/null) || pane_path=""
+    branch=""
+    dirname=""
+    color="8"  # fallback: brightblack/grey for sessions without a resolvable pane
+    if [ -n "$pane_path" ]; then
+      hash_key "$pane_path"
+      branch=$HASH_BRANCH
+      if [ "$pane_path" = "$HOME" ]; then
+        dirname="~"
+      else
+        dirname=${pane_path##*/}
+      fi
+      hash_color "$HASH_KEY"
+      color=$HASH_COLOR
+    fi
+    tmux set -wt "${session}:1" @branch "${branch}"
+    tmux set -wt "${session}:1" @branch-color "${color}"
+    tmux set -wt "${session}:1" @dirname "${dirname}"
+  ) &
+done
+wait

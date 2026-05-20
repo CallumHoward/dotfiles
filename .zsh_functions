@@ -82,16 +82,6 @@ function clo() {
     git clone --recursive -j4 ${@} && cd *(/om[1])
 }
 
-function gsm() {
-    # If there is a branch name matching the directoy, check out that branch
-    local root_dir=$(git rev-parse --show-toplevel | xargs basename)
-    if git rev-parse --verify "$root_dir" >/dev/null 2>&1; then
-      git switch "$root_dir"
-    else
-      git switch "$(git_default_branch)"
-    fi
-}
-
 function sf() {
     if [ -f ~/.box-name ]; then
         local longhost=`hostname`
@@ -175,6 +165,20 @@ function g() {
 }
 
 function git_default_branch() {
+  local check_worktree=1
+  if [[ "$1" == "--no-worktree" ]]; then
+    check_worktree=0
+  fi
+
+  # If a branch name matches the worktree directory, prefer it.
+  if (( check_worktree )); then
+    local root_dir=$(git rev-parse --show-toplevel 2>/dev/null | xargs basename 2>/dev/null)
+    if [[ -n "$root_dir" ]] && git rev-parse --verify "$root_dir" >/dev/null 2>&1; then
+      echo "$root_dir"
+      return
+    fi
+  fi
+
   local branch
   branch=$(git branch -rl '*/HEAD' 2>/dev/null | grep -o '[^/]*$')
   if [[ -n "$branch" ]]; then
