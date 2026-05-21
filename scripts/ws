@@ -9,12 +9,20 @@ fi
 for path in ./*; do
   if [ -d "$path" ]; then
     wt=$(basename "$path")
+    if tmux has-session -t="$wt" 2>/dev/null; then
+      continue
+    fi
     tmux new-session -d -s "$wt" -c "$path"
-    tmux split-window -v -p 30 -t "$wt" -c "$path"
-    tmux new-window -t "$wt" -c "$path"
-    tmux select-window -t "$wt:1"
+    tmux split-window -h -t "$wt:" -c "$path"
+    tmux select-layout -t "$wt:" even-horizontal
+    tmux select-pane -t "$wt:" -L
   fi
 done
 
 tmux set -g status on
-tmux attach
+
+if [ -n "$TMUX" ]; then
+  echo "Sessions appended (already inside tmux). Use prefix+s to switch."
+else
+  tmux attach
+fi
