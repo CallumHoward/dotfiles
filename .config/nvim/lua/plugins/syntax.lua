@@ -79,6 +79,7 @@ return {
         "ssh_config",
         "tmux",
         "editorconfig",
+        "comment",
       })
     end,
   },

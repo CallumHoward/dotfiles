@@ -98,6 +98,13 @@ return {
         enabled = false,
       },
       servers = {
+        eslint = {
+          settings = {
+            rulesCustomizations = {
+              { rule = "prettier/prettier", severity = "off" },
+            },
+          },
+        },
         stylelint_lsp = {},
         coffeesense = {
           filetypes = { "coffee" },
