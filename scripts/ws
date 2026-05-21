@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ ! -d .git ]; then
+  echo -e "Error: This script must be run from the root of a git repository."
+  exit 1
+fi
+
+# Start a tmux session in each numbered worktree dir of cbdev repo
+for path in ./*; do
+  if [ -d "$path" ]; then
+    wt=$(basename "$path")
+    tmux new-session -d -s "$wt" -c "$path"
+    tmux split-window -v -p 30 -t "$wt" -c "$path"
+    tmux new-window -t "$wt" -c "$path"
+    tmux select-window -t "$wt:1"
+  fi
+done
+
+tmux set -g status on
+tmux attach
