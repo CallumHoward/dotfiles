@@ -97,3 +97,6 @@ Desktop.ini
 .csettings
 
 # End of https://www.gitignore.io/api/openframeworks
+
+# Agents
+.claude-octopus

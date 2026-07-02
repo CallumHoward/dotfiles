@@ -9,6 +9,13 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
 })
 
+-- Let `gq` do native, textwidth-aware comment/prose wrapping
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.bo[args.buf].formatexpr = ""
+  end,
+})
+
 -- Filetype handling
 local filetype_autogroup = vim.api.nvim_create_augroup("FileTypeAutogroup", {})
 vim.api.nvim_create_autocmd("BufEnter", {
