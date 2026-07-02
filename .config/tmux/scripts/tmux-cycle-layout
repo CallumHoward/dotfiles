@@ -1,0 +1,17 @@
+#!/bin/bash
+# Cycle the current window through 3 layouts:
+#   0 = even-horizontal (equal left/right)
+#   1 = even-vertical   (equal top/bottom)
+#   2 = main-horizontal with bottom pane at 30% (top 70%)
+
+idx=$(tmux show-window-options -wv @layout-idx 2>/dev/null)
+idx=${idx:-2}
+next=$(( (idx + 1) % 3 ))
+tmux set-window-option -q @layout-idx "$next"
+
+case "$next" in
+  0) tmux select-layout even-horizontal ;;
+  1) tmux select-layout even-vertical ;;
+  2) tmux set-window-option -q main-pane-height "70%"
+     tmux select-layout main-horizontal ;;
+esac
