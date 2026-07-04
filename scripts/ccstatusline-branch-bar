@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# ccstatusline custom-command widget: prints a hash-colored bar prepended to
+# the status line, using the same branch->color hash as the tmux session
+# picker (tmux-refresh-session-branches) so the two match.
+#
+# Reads the standard Claude Code statusLine JSON on stdin and pulls
+# workspace.current_dir (falling back to cwd, then $PWD). Must be configured
+# with "preserveColors": true in .config/ccstatusline/settings.json since it
+# emits raw ANSI, not plain text.
+
+set -u
+
+. "$HOME/dotfiles/scripts/lib/hash-color.sh"
+
+input=$(cat)
+
+extract() {
+  printf '%s' "$input" | grep -o "\"$1\"[[:space:]]*:[[:space:]]*\"[^\"]*\"" | head -1 | sed -E 's/.*:[[:space:]]*"([^"]*)"/\1/'
+}
+
+cwd=$(extract current_dir)
+[ -z "$cwd" ] && cwd=$(extract cwd)
+[ -z "$cwd" ] && cwd="$PWD"
+
+hash_key "$cwd"
+hash_color "$HASH_KEY"
+
+printf '\033[38;5;%dm▌ \033[0m' "$HASH_COLOR"

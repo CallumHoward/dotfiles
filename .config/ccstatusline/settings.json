@@ -3,6 +3,13 @@
   "lines": [
     [
       {
+        "id": "a1b2c3d4-branch-bar-0000-000000000000",
+        "type": "custom-command",
+        "commandPath": "/Users/callum.howard/.local/bin/ccstatusline-branch-bar",
+        "preserveColors": true,
+        "timeout": 500
+      },
+      {
         "id": "1",
         "type": "model",
         "color": "brightBlack"
@@ -70,5 +77,9 @@
     "endCaps": [],
     "autoAlign": false,
     "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "auto-update",
+    "packageManager": "npm"
   }
 }
