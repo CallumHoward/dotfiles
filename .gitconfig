@@ -76,7 +76,7 @@
 	insteadOf = https://github.com/
 [split-diffs]
 	theme-name = github-dark-dim
-	theme-directory = /Users/callumhoward/.config/git-split-diffs
+	theme-directory = /Users/callum.howard/.config/git-split-diffs
 [pull]
 	rebase = true
 	ff = only

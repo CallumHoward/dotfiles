@@ -5,19 +5,21 @@ if [ ! -d .git ]; then
   exit 1
 fi
 
-# Start a tmux session in each numbered worktree dir of cbdev repo
-for path in ./*; do
-  if [ -d "$path" ]; then
-    wt=$(basename "$path")
-    if tmux has-session -t="$wt" 2>/dev/null; then
-      continue
-    fi
-    tmux new-session -d -s "$wt" -c "$path"
-    tmux split-window -h -t "$wt:" -c "$path"
-    tmux select-layout -t "$wt:" even-horizontal
-    tmux select-pane -t "$wt:" -L
+# Start a tmux session in each numbered worktree dir of cbdev repo.
+# Version sort so sessions are created 1,2,…,10; tmux lists them by session id,
+# i.e. creation order, and the plain glob would give the lexical 1,10,2.
+while IFS= read -r path; do
+  [ -d "$path" ] || continue
+  path=$(cd "$path" && pwd -P)
+  wt=$(basename "$path")
+  if tmux has-session -t="$wt" 2>/dev/null; then
+    continue
   fi
-done
+  tmux new-session -d -s "$wt" -c "$path"
+  tmux split-window -h -t "$wt:" -c "$path"
+  tmux select-layout -t "$wt:" even-horizontal
+  tmux select-pane -t "$wt:" -L
+done < <(printf '%s\n' ./* | sort -V)
 
 tmux set -g status on
 

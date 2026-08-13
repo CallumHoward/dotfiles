@@ -94,7 +94,11 @@ function sf() {
 
 # ring bell after given command
 function bo() {
-    $@;tput bel;
+    "$@"
+    local ret=$?
+    # bell goes to the terminal, not stdout, so $(...) capture stays clean
+    tput bel > /dev/tty 2> /dev/null
+    return $ret
 }
 
 # open applications, directories and files on macOS

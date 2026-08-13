@@ -219,7 +219,8 @@ brew "qcachegrind"
 brew "qrencode"
 brew "r"
 brew "ragel"
-brew "ranger"
+# HEAD required: colored devicons need ANSI parsing absent from stable 1.9.4
+brew "ranger", args: ["HEAD"]
 brew "reattach-to-user-namespace"
 brew "rsync"
 brew "rtags"

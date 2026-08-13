@@ -21,10 +21,7 @@ return {
     end,
   },
   {
-    -- Pinned to fix branch until PR #594 merges (nvim 0.12 treesitter iter_matches compat)
-    -- TODO: revert to "nvim-neotest/neotest" once https://github.com/nvim-neotest/neotest/pull/594 is merged
     "LiamCoop/neotest",
-    branch = "fix/590-treesitter-iter-matches-breaking-change",
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-neotest/neotest-jest",
@@ -114,7 +111,6 @@ return {
       end
       table.insert(opts.adapters, vitest)
       table.insert(opts.adapters, require("neotest-go")({}))
-
     end,
     config = function(_, opts)
       vim.cmd("autocmd Filetype neotest-summary setl nowrap")

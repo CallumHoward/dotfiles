@@ -100,3 +100,5 @@ Desktop.ini
 
 # Agents
 .claude-octopus
+
+**/.claude/settings.local.json

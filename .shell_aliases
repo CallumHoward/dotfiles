@@ -1,5 +1,8 @@
 # vim: ft=sh
 
+# aliases are only useful in interactive shells; skip entirely otherwise
+[[ $- == *i* ]] || return
+
 alias title="printf '\033]0;%s\007'"
 alias T="Terminal"
 alias e="ef"
@@ -289,7 +292,7 @@ function ls_wrapper() {
     args+=(--icons --group-directories-first)
   elif command -v eza >/dev/null 2>&1; then
     bin=eza
-    args+=(--icons --group-directories-first --hyperlink)
+    args+=(--icons --group-directories-first --hyperlink=auto)
   elif command -v lsd >/dev/null 2>&1; then
     bin=lsd
     args=(--icon=always --group-directories-first)
@@ -303,7 +306,7 @@ function ls_wrapper() {
 
   # test for if in interactive shell
   if [[ -t 0 || -p /dev/stdin ]]; then
-    $bin "${args[@]}" $@
+    "$bin" "${args[@]}" "$@"
   fi
 }
 
