@@ -44,6 +44,7 @@ plugins=( \
     # zsh-prompt-benchmark \ # enable when needed
     zsh-fzf-bindings \
     zsh-proxy-title \
+    p10k-live-git \
     pip \
     npm \
     yarn \
@@ -109,16 +110,6 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char forward-word)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Refresh the prompt periodically
-# TRAPALRM() {
-#   local f
-#   for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
-#     [[ "${+functions[$f]}" == 0 ]] || "$f" &>/dev/null || true
-#   done
-#   p10k display -r
-# }
-# TMOUT=30
 
 #zprof
 
