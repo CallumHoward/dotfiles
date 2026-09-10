@@ -40,3 +40,6 @@
 [submodule ".oh-my-zsh/custom/plugins/zsh-proxy-title"]
 	path = .oh-my-zsh/custom/plugins/zsh-proxy-title
 	url = git@github.com:CallumHoward/zsh-proxy-title.git
+[submodule ".local/lib/fasd"]
+	path = .local/lib/fasd
+	url = https://github.com/whjvenyl/fasd.git

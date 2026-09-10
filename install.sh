@@ -106,6 +106,10 @@ done
 ln -sv "$PWD/.config/ranger/scope.sh" ~/.local/bin/scope
 echo "Finished creating symlinks"
 
+# fasd doesn't bootstrap this file itself, and macOS awk errors on a missing input file
+mkdir -p ~/.cache
+touch ~/.cache/fasd
+
 echo "Downloading diff-so-fancy"
 wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" -O ~/.local/bin/diff-so-fancy
 chmod +x ~/.local/bin/diff-so-fancy

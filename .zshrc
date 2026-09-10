@@ -30,6 +30,7 @@ ENABLE_CORRECTION="true"
 
 # Required to be sourced before fasd plugin
 PATH=~/.local/bin:$PATH
+PATH=~/dotfiles/.local/lib/fasd:$PATH
 
 # Plugins to load (can be found in ~/.oh-my-zsh/plugins/*)
 # NOTE load autosuggestions after syntax highlighting
