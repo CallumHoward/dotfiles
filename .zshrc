@@ -66,6 +66,11 @@ plugins=( \
 
 zstyle ':omz:lib:directories' aliases no
 
+# OMZ rebuilds the compdump whenever fpath changes, so keep it identical across login and nested shells
+typeset -U fpath
+[[ -d /opt/homebrew/share/zsh/site-functions ]] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+typeset +x FPATH  # exported by `brew shellenv` in .zprofile, which leaks this shell's fpath into children
+
 source $ZSH/oh-my-zsh.sh
 source ~/.shell_exports
 source ~/.shell_aliases
