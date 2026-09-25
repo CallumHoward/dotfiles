@@ -1,5 +1,10 @@
 local space = "    "
 
+local function default_branch_name()
+  local res = vim.system({ "git", "rev-parse", "--verify", "main" }):wait()
+  return res.code == 0 and "main" or "master"
+end
+
 local function push_to_jumplist()
   -- Get the current cursor position
   local current_position = vim.api.nvim_win_get_cursor(0)
@@ -389,32 +394,27 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
     lazy = true,
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
-    keys = function()
-      local function get_default_branch_name()
-        local res = vim.system({ "git", "rev-parse", "--verify", "main" }, { capture_output = true }):wait()
-        return res.code == 0 and "main" or "master"
-      end
-
-      vim.keymap.set("n", "<leader>ggd", "<CMD>DiffviewOpen<CR>", { desc = "Diffview HEAD" })
-      vim.keymap.set("n", "<leader>ggb", function()
-        vim.cmd("DiffviewOpen " .. get_default_branch_name() .. "...HEAD")
-      end, { desc = "Diffview master" })
-      vim.keymap.set(
-        "n",
+    keys = {
+      { "<leader>ggd", "<CMD>DiffviewOpen<CR>", desc = "Diffview HEAD" },
+      {
+        "<leader>ggb",
+        function()
+          vim.cmd("DiffviewOpen " .. default_branch_name() .. "...HEAD")
+        end,
+        desc = "Diffview master",
+      },
+      {
         "<leader>gm",
-        "<CMD>DiffviewFileHistory " .. get_default_branch_name() .. "...HEAD %<CR>",
-        { desc = "Diffview File History master" }
-      )
-      vim.keymap.set("n", "<leader>gH", "<CMD>DiffviewFileHistory<CR>", { desc = "Diffview File History" })
-      vim.keymap.set("n", "<leader>gh", "<CMD>DiffviewFileHistory --follow %<CR>", { desc = "Diffview File History" })
-      vim.keymap.set(
-        "v",
-        "<leader>gh",
-        "<Esc><CMD>'<,'>DiffviewFileHistory --follow<CR>",
-        { desc = "Diffview Range History" }
-      )
-      vim.keymap.set("n", "<leader>gl", "<CMD>.DiffviewFileHistory --follow<CR>", { desc = "Diffview Line History" })
-    end,
+        function()
+          vim.cmd("DiffviewFileHistory " .. default_branch_name() .. "...HEAD %")
+        end,
+        desc = "Diffview File History master",
+      },
+      { "<leader>gH", "<CMD>DiffviewFileHistory<CR>", desc = "Diffview File History" },
+      { "<leader>gh", "<CMD>DiffviewFileHistory --follow %<CR>", desc = "Diffview File History" },
+      { "<leader>gh", "<Esc><CMD>'<,'>DiffviewFileHistory --follow<CR>", mode = "v", desc = "Diffview Range History" },
+      { "<leader>gl", "<CMD>.DiffviewFileHistory --follow<CR>", desc = "Diffview Line History" },
+    },
     opts = function(_, opts)
       local actions = require("diffview.actions")
       opts.enhanced_diff_hl = true

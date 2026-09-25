@@ -116,29 +116,32 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 })
 
 -- Name tmux windows
-function SetTmuxTitle()
+local function set_tmux_title()
   local title = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
   if string.find(title, "man") then
-    -- Do nothing
-  elseif title ~= "" then
-    vim.fn.system('tmux rename-window " ' .. title .. '"')
-  else
-    vim.fn.system('tmux rename-window " nvim"')
+    return
   end
+  vim.system({ "tmux", "rename-window", " " .. (title ~= "" and title or "nvim") })
 end
 
-if vim.fn.exists("$TMUX") then
+if vim.env.TMUX then
   local tmux_title_autogroup = vim.api.nvim_create_augroup("TmuxTitleAutogroup", {})
   vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "FocusGained", "CmdlineLeave" }, {
     group = tmux_title_autogroup,
     pattern = "*",
-    callback = SetTmuxTitle,
+    callback = set_tmux_title,
   })
   vim.api.nvim_create_autocmd({ "WinEnter" }, {
     group = tmux_title_autogroup,
     pattern = "*",
     callback = function()
-      vim.g.tmux_window_target = vim.fn.system("tmux display-message -p '#S:#I'")
+      vim.system({ "tmux", "display-message", "-p", "#S:#I" }, { text = true }, function(out)
+        if out.code == 0 then
+          vim.schedule(function()
+            vim.g.tmux_window_target = vim.trim(out.stdout)
+          end)
+        end
+      end)
     end,
   })
 end

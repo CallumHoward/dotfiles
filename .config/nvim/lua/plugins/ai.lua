@@ -99,6 +99,7 @@ return {
   {
     "coder/claudecode.nvim",
     enabled = true,
+    event = "VeryLazy",
     opts = {
       terminal = {
         provider = "none",
