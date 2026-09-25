@@ -3,7 +3,7 @@
     clean = git media clean %f
     smudge = git media smudge %f
 [user]
-    name = CallumHoward
+    name = Callum Howard
     email = callum.howard@checkbox.ai
     signingkey = F8B69FD25F52C60389BFAC5921799548E9235A59
 [push]
