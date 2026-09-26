@@ -11,6 +11,7 @@ return {
       vim.api.nvim_create_autocmd("ColorScheme", { callback = set_hl })
     end,
     opts = {
+      image = { enabled = true },
       indent = { enabled = true, animate = { enabled = false } },
       scroll = {
         animate = {
