@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "lines": [
     [
       {
@@ -32,21 +32,13 @@
       {
         "id": "3",
         "type": "context-percentage",
-        "color": "brightBlack"
+        "color": "brightBlack",
+        "rawValue": false
       },
       {
         "id": "504ff48c-e38f-48b0-b8df-75eaf888d296",
         "type": "separator",
         "character": " "
-      },
-      {
-        "id": "f881631c-6d76-4fc2-bdba-3f105333dad0",
-        "type": "cache-timer",
-        "color": "brightBlack",
-        "rawValue": false,
-        "metadata": {
-          "hideWhenEmpty": "false"
-        }
       },
       {
         "id": "c4887f77-c8ab-4436-9378-c7d3442aeb37",
@@ -58,7 +50,7 @@
         "type": "git-branch",
         "color": "brightBlue",
         "metadata": {
-          "hideNoGit": "true"
+          "hide": "no-git"
         }
       },
       {
@@ -102,6 +94,8 @@
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 20,
+  "terminalWidthCacheTtlSeconds": 5,
+  "customCommandCacheTtlSeconds": 0,
   "minimalistMode": true,
   "powerline": {
     "enabled": false,
