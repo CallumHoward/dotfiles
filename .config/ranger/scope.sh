@@ -70,11 +70,9 @@ handle_extension() {
   # Markdown
   md)
     #highlight --syntax=markdown --out-format=ansi "${FILE_PATH}" && exit 5
-    if [ -n "$NVIM" ]; then
-      CLICOLOR_FORCE=1 TERM=xterm-256color glow -s dark "${FILE_PATH}" && exit 5
-    else
-      unbuffer glow -s dark "${FILE_PATH}" | cat && exit 5
-    fi
+    # Strip OSC 8 hyperlinks, ranger's ANSI parser only understands SGR
+    CLICOLOR_FORCE=1 TERM=xterm-256color glow -s dark "${FILE_PATH}" </dev/null \
+      | perl -pe 's/\e\]8;[^\a\e]*(?:\a|\e\\)//g' && exit 5
     #bat "${FILE_PATH}" && exit 5
     exit 1
     ;;
