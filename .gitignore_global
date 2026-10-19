@@ -102,3 +102,4 @@ Desktop.ini
 .claude-octopus
 
 **/.claude/settings.local.json
+**/.claude/.headroom_*
