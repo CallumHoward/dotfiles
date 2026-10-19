@@ -3,13 +3,14 @@
 # idle. Event-driven, so idle cost is zero. Requires fswatch.
 
 (( $+commands[fswatch] )) || return 0
-zmodload zsh/zpty || return 0
+zmodload zsh/zpty zsh/datetime || return 0
 autoload -Uz add-zsh-hook
 
 typeset -g  _live_git_root=      # repo currently being watched
 typeset -g  _live_git_pwd=       # last PWD checked, to skip git when unchanged
 typeset -gi _live_git_fd=-1
-: ${LIVE_GIT_LATENCY:=0.5}
+: ${LIVE_GIT_QUIET:=0.3}         # refresh once changes go quiet for this long
+: ${LIVE_GIT_MAX_WAIT:=2}        # but at least this often under sustained churn
 
 _live_git_stop() {
   (( _live_git_fd >= 0 )) && zle -F $_live_git_fd 2>/dev/null
@@ -38,33 +39,77 @@ _live_git_on_event() {
   _live_git_refresh
 }
 
-_live_git_start() {
+# Sets REPLY to $1 escaped for use in an ERE.
+_live_git_ere() {
   setopt localoptions extendedglob
-  local root=$1 git_dir=$2 common_dir=$3
-  local -a paths=($root) excludes
-  local dir ere_special='(#m)[\[.^$*+?(){}|\\]'
+  local special='(#m)[\[.^$*+?(){}|\\]'
+  REPLY=${1//$~special/\\$MATCH}
+}
 
-  [[ $git_dir != $root/* ]] && paths+=($git_dir)
-  [[ $common_dir != $root/* && $common_dir != $git_dir ]] && paths+=($common_dir)
+# Emits one line per burst of events. A refresh landing while gitstatus is
+# still querying makes p10k repaint the segment as loading, hence the flicker.
+_live_git_debounce() {
+  local line
+  local -F deadline
+  while read -r line; do
+    (( deadline = EPOCHREALTIME + LIVE_GIT_MAX_WAIT ))
+    while (( EPOCHREALTIME < deadline )) && read -r -t $LIVE_GIT_QUIET line; do :; done
+    print
+  done
+}
 
-  # Skip git's own churn: objects, reflogs, fsmonitor, lock files.
+# Runs in the zpty child so the ignored-dir scan never blocks the prompt. Dirs
+# that become ignored later stay watched until the repo is re-entered.
+_live_git_watch() {
+  local root=$1 git_dir=$2 common_dir=$3 dir
+  local -a paths=($root) filters ignored
+
+  # Skip git's own churn: objects, reflogs, fsmonitor, lock files, no-op fetches.
   for dir in $git_dir ${common_dir:#$git_dir}; do
-    dir=${dir//$~ere_special/\\$MATCH}
-    excludes+=(
-      -e "^$dir/(objects|logs|fsmonitor--daemon)(/|$)"
-      -e "^$dir/fsmonitor--daemon\.ipc$"
-      -e "^$dir/.*\.lock$"
-      -e "^$dir/COMMIT_EDITMSG$"
+    _live_git_ere $dir
+    filters+=(
+      -e "^$REPLY/(objects|logs)(/|$)"
+      -e "^$REPLY/fsmonitor--daemon"
+      -e "^$REPLY/.*\.lock$"
+      -e "^$REPLY/(COMMIT_EDITMSG|FETCH_HEAD)$"
     )
   done
 
-  local -a opts=(--recursive --one-per-batch --extended --allow-overflow --latency $LIVE_GIT_LATENCY)
+  [[ $common_dir != $root/* ]] && paths+=($common_dir)
+  [[ $git_dir != ($root|$common_dir)(|/*) ]] && paths+=($git_dir)
+
+  if [[ $git_dir != $common_dir ]]; then
+    # Linked worktree: skip state owned by the main and sibling worktrees.
+    # An include overrides every exclude, so keep includes to plain files.
+    _live_git_ere $common_dir
+    filters+=(-e "^$REPLY/[^/]+$" -i "^$REPLY/(packed-refs|config)$")
+    for dir in $common_dir/worktrees/*(/N); do
+      [[ $dir == $git_dir ]] && continue
+      _live_git_ere $dir
+      filters+=(-e "^$REPLY(/|$)")
+    done
+  fi
+
+  ignored=(${(0)"$(command git -C $root ls-files -z -oi --exclude-standard --directory 2>/dev/null)"})
+  _live_git_ere $root
+  local base=$REPLY
+  for dir in ${(M)ignored:#*/}; do
+    _live_git_ere ${dir%/}
+    filters+=(-e "^$base/$REPLY(/|$)")
+  done
+
+  # Latency stays under LIVE_GIT_QUIET so batches coalesce in the debounce.
+  local -a opts=(--recursive --one-per-batch --extended --allow-overflow --latency 0.1)
   [[ $OSTYPE == darwin* ]] && opts+=(--monitor-property darwin.eventStream.noDefer=true)
 
-  # zpty gives fswatch a pty that dies with this shell, so no orphans on exit.
-  zpty -b live_git command fswatch "${(@q)opts}" "${(@q)excludes}" -- "${(@q)paths}" || return 1
+  command fswatch $opts $filters -- $paths | _live_git_debounce
+}
+
+_live_git_start() {
+  # zpty gives the watcher a pty that dies with this shell, so no orphans on exit.
+  zpty -b live_git _live_git_watch "${(@q)@}" || return 1
   _live_git_fd=$REPLY
-  _live_git_root=$root
+  _live_git_root=$1
   zle -F $_live_git_fd _live_git_on_event
 }
 
