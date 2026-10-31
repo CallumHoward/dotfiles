@@ -70,15 +70,6 @@ local toggle_diagnostic_virtual_text = function()
 end
 vim.keymap.set("n", "<leader>uv", toggle_diagnostic_virtual_text, { desc = "Toggle diagnostic virtual text" })
 
-local show_diagnostics_virtual_text_autogroup = vim.api.nvim_create_augroup("DiagnosticsVirtualTextAutogroup", {})
-vim.api.nvim_create_autocmd("CursorMoved", {
-  group = show_diagnostics_virtual_text_autogroup,
-  pattern = "*",
-  callback = function()
-    vim.diagnostic.config({ virtual_text = show_diagnostics_virtual_text })
-  end,
-})
-
 vim.keymap.set("n", "[d", function()
   vim.diagnostic.goto_prev({ float = false, desc = "Next Diagnostic" })
 end)
@@ -94,4 +85,10 @@ end)
 vim.keymap.set("n", "<leader>cd", function()
   vim.diagnostic.config({ virtual_text = false })
   vim.diagnostic.open_float(float_opts)
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    once = true,
+    callback = function()
+      vim.diagnostic.config({ virtual_text = show_diagnostics_virtual_text })
+    end,
+  })
 end)
